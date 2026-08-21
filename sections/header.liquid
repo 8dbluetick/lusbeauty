@@ -1,118 +1,103 @@
 <header class="lush-header-sticky" id="LushHeader">
   <div class="page-width header-container">
-    <!-- Mobile Hamburger Toggle -->
+    <!-- Mobile: Hamburger Menu Button -->
     <div class="header-mobile-toggle">
-      <button type="button" class="btn-hamburger" id="BtnMobileMenuToggle" aria-label="Toggle Navigation">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
+      <button type="button" class="btn-hamburger" id="BtnMobileMenuToggle" aria-label="Open Navigation">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
         </svg>
       </button>
     </div>
 
-    <!-- Brand Logo / Wordmark -->
+    <!-- LEFT: Brand Logo / Wordmark -->
     <div class="header-logo-wrap">
       <a href="/" class="header-brand-link">
-        <div class="brand-wordmark">
-          <span class="wordmark-bold">LUSH</span>
-          <span class="wordmark-light">BEAUTY MART</span>
-        </div>
-        <div class="brand-subtext">
-          <span class="brand-tagline">Where Beauty Meets Quality</span>
-          <span class="brand-city-badge">Nagpur</span>
-        </div>
+        <span class="brand-title">LUSH BEAUTY MART</span>
+        <span class="brand-tagline">WHERE BEAUTY MEETS QUALITY</span>
       </a>
     </div>
 
-    <!-- Desktop Navigation Links -->
+    <!-- CENTER: Main Navigation (8 items strictly) -->
     <nav class="header-desktop-nav" aria-label="Primary Navigation">
       <ul class="nav-links-list">
-        <li><a href="/" class="nav-item-link active">Home</a></li>
-        <li><a href="/collections/all" class="nav-item-link">Shop</a></li>
-        <li><a href="/collections/skincare" class="nav-item-link">Skincare</a></li>
-        <li><a href="/collections/cosmetics" class="nav-item-link">Cosmetics</a></li>
-        <li><a href="/collections/artificial-jewellery" class="nav-item-link">Jewellery</a></li>
-        <li><a href="/collections/handbags" class="nav-item-link">Handbags</a></li>
-        <li><a href="/collections/beauty-accessories" class="nav-item-link">Accessories</a></li>
-        <li><a href="#offers-section" class="nav-item-link link-offers"><span>✨ Offers</span></a></li>
-        <li><a href="#store-section" class="nav-item-link">Store Location</a></li>
-        <li><a href="/pages/contact" class="nav-item-link">Contact</a></li>
+        <li><a href="/" class="nav-item-link">HOME</a></li>
+        <li><a href="/collections/all" class="nav-item-link">SHOP</a></li>
+        <li><a href="/collections/skincare" class="nav-item-link">SKINCARE</a></li>
+        <li><a href="/collections/cosmetics" class="nav-item-link">COSMETICS</a></li>
+        <li><a href="/collections/artificial-jewellery" class="nav-item-link">JEWELLERY</a></li>
+        <li><a href="/collections/handbags" class="nav-item-link">HANDBAGS</a></li>
+        <li><a href="/collections/beauty-accessories" class="nav-item-link">ACCESSORIES</a></li>
+        <li><a href="#offers-section" class="nav-item-link nav-item-offers">OFFERS</a></li>
       </ul>
     </nav>
 
-    <!-- Header Right Quick Actions -->
+    <!-- RIGHT: Minimal Thin-Line Icons -->
     <div class="header-actions">
-      <!-- Search Trigger -->
-      <button type="button" class="header-action-btn" data-open-search title="Search Products" aria-label="Search">
-        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      <!-- Search -->
+      <button type="button" class="header-action-btn" data-open-search title="Search" aria-label="Search">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7.5"></circle>
+          <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
         </svg>
       </button>
 
-      <!-- Wishlist Counter -->
-      <button type="button" class="header-action-btn header-wishlist-link" data-open-wishlist title="Wishlist" aria-label="Wishlist">
-        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+      <!-- Wishlist -->
+      <button type="button" class="header-action-btn" data-open-wishlist title="Wishlist" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
         </svg>
         <span class="action-badge wishlist-badge" data-wishlist-count>0</span>
       </button>
 
-      <!-- Shopping Bag / Cart -->
-      <button type="button" class="header-action-btn header-cart-link" data-open-cart title="Shopping Bag" aria-label="Shopping Cart">
-        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+      <!-- Account -->
+      <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="header-action-btn" title="Account" aria-label="Account">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+
+      <!-- Cart -->
+      <button type="button" class="header-action-btn" data-open-cart title="Shopping Bag" aria-label="Cart">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
         <span class="action-badge cart-badge" data-cart-count>{{ cart.item_count }}</span>
       </button>
-
-      <!-- Account -->
-      <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="header-action-btn header-account-link" title="My Account" aria-label="Account">
-        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </a>
     </div>
   </div>
 
-  <!-- Mobile Drawer Menu -->
+  <!-- Mobile Navigation Drawer -->
   <div class="mobile-nav-drawer" id="MobileNavDrawer" aria-hidden="true">
     <div class="mobile-nav-backdrop" id="BtnCloseMobileMenu"></div>
     <div class="mobile-nav-panel">
       <div class="mobile-nav-header">
-        <div class="brand-wordmark">
-          <span class="wordmark-bold">LUSH</span>
-          <span class="wordmark-light">BEAUTY MART</span>
+        <div class="header-brand-link">
+          <span class="brand-title" style="font-size: 1.1rem;">LUSH BEAUTY MART</span>
+          <span class="brand-tagline" style="font-size: 0.55rem;">WHERE BEAUTY MEETS QUALITY</span>
         </div>
-        <button type="button" class="btn-close-mobile-nav" id="BtnCloseMobileNavX">&times;</button>
+        <button type="button" class="btn-close-mobile-nav" id="BtnCloseMobileNavX" aria-label="Close Navigation">&times;</button>
       </div>
 
       <div class="mobile-nav-body">
         <ul class="mobile-nav-links">
-          <li><a href="/">🏠 Home</a></li>
-          <li><a href="/collections/all">🛍️ All Shop</a></li>
-          <li><a href="/collections/skincare">✨ Skincare</a></li>
-          <li><a href="/collections/cosmetics">💄 Cosmetics</a></li>
-          <li><a href="/collections/artificial-jewellery">💎 Jewellery</a></li>
-          <li><a href="/collections/handbags">👜 Handbags</a></li>
-          <li><a href="/collections/beauty-accessories">🪄 Beauty Accessories</a></li>
-          <li><a href="/collections/fashion-accessories">🎀 Fashion Accessories</a></li>
-          <li><a href="#offers-section" class="mobile-offers-link">🎉 Grab Offers</a></li>
-          <li><a href="#store-section">📍 Nagpur Store Location</a></li>
-          <li><a href="/pages/contact">📞 Contact Us</a></li>
+          <li><a href="/">HOME</a></li>
+          <li><a href="/collections/all">SHOP</a></li>
+          <li><a href="/collections/skincare">SKINCARE</a></li>
+          <li><a href="/collections/cosmetics">COSMETICS</a></li>
+          <li><a href="/collections/artificial-jewellery">JEWELLERY</a></li>
+          <li><a href="/collections/handbags">HANDBAGS</a></li>
+          <li><a href="/collections/beauty-accessories">ACCESSORIES</a></li>
+          <li><a href="#offers-section" class="mobile-offers-link">OFFERS</a></li>
         </ul>
 
-        <div class="mobile-nav-ctas">
-          <button type="button" class="btn-mobile-wholesale" data-open-wholesale>
-            Wholesale B2B Enquiry
-          </button>
-          <a href="tel:{{ settings.store_phone | default: '9119595951' }}" class="btn-mobile-call">
-            📞 Call Store ({{ settings.store_phone | default: '9119595951' }})
-          </a>
+        <div class="mobile-nav-footer-info">
+          <p class="mobile-store-loc">📍 Nagpur Store • Lad Square, North Ambazari Rd</p>
+          <a href="tel:{{ settings.store_phone | default: '9119595951' }}" class="mobile-call-link">📞 {{ settings.store_phone | default: '9119595951' }}</a>
         </div>
       </div>
     </div>
@@ -122,13 +107,6 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Menu",
-      "default": "main-menu"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}
