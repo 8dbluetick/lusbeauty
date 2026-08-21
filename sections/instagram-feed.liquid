@@ -4,10 +4,16 @@
       <span class="section-badge">📸 SOCIAL GALLERY</span>
       <h2 class="section-title">Follow {{ settings.social_instagram_handle | default: "@lushbeautymart" }}</h2>
       <p class="section-subtitle">Real unboxings, store walkthroughs, and beauty updates straight from our Nagpur showroom.</p>
+      
+      <!-- Mobile Swipe Affordance -->
+      <div class="mobile-swipe-hint">
+        <span>Swipe Reels</span>
+        <span class="swipe-arrow">→</span>
+      </div>
     </div>
 
-    <!-- Real Uploaded Social Gallery Grid (3 items) -->
-    <div class="social-gallery-grid-3">
+    <!-- Real Uploaded Social Gallery Horizontal Swipe Track on Mobile / 3-Column on Desktop -->
+    <div class="social-gallery-grid-3 no-scrollbar">
       <!-- Item 1: Real Video Reel (@explore.with_shruti) -->
       <div class="social-post-card group" data-post-type="video">
         <a href="{{ settings.social_instagram_link | default: 'https://instagram.com/lushbeautymart' }}" target="_blank" rel="noopener noreferrer" class="social-post-link">
