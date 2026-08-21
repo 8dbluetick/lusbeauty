@@ -3735,35 +3735,7 @@ h1, h2, h3, h4, .font-serif {
   font-size: 0.85rem;
   color: var(--color-text-chocolate);
   line-height: 1.6;
-}
-
-.product-wholesale-box {
-  background: var(--color-accent-gold-light);
-  padding: 14px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(197, 160, 89, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.ws-text strong {
-  font-size: 0.8rem;
-  display: block;
-}
-
-.ws-text p {
-  font-size: 0.7rem;
-  color: var(--color-text-muted);
-}
-
-.btn-product-ws {
-  background: var(--color-text-chocolate);
-  color: #FFFDF9;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
+  margin: 2px 0 6px;
 }
 
 .variant-option-group {

@@ -59,15 +59,6 @@
           {{ product.description }}
         </div>
 
-        <!-- Wholesale Callout -->
-        <div class="product-wholesale-box">
-          <div class="ws-text">
-            <strong>Wholesale & Salon Bulk Pricing Available</strong>
-            <p>Special tier rates for boutiques, makeup artists & resellers.</p>
-          </div>
-          <button type="button" class="btn-product-ws" data-open-wholesale>Wholesale Quote</button>
-        </div>
-
         <!-- Form: Variants, Quantity & Actions -->
         {%- form 'product', product, id: 'MainProductForm', class: 'product-form' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="ProductVariantId">
