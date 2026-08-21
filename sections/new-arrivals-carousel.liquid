@@ -22,24 +22,6 @@
             {% render 'product-card', product: product %}
           </div>
         {%- endfor -%}
-      {%- else -%}
-        {%- for i in (1..6) -%}
-          <div class="carousel-item-slide">
-            <div class="lush-product-card">
-              <div class="card-media-wrapper">
-                {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
-              </div>
-              <div class="card-content">
-                <span class="card-category">New Arrival</span>
-                <h3 class="card-title"><a href="#">New Season Item {{ i }}</a></h3>
-                <div class="card-footer">
-                  <span class="price-current">₹899</span>
-                  <button type="button" class="btn-add-to-cart">+ Add</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        {%- endfor -%}
       {%- endif -%}
     </div>
 
