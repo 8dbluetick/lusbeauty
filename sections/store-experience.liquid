@@ -1,98 +1,128 @@
-<section id="store-section" class="lush-store-section">
-  <div class="page-width">
-    <div class="section-header-center">
-      <span class="section-badge">🏬 Flagship Experience Center</span>
-      <h2 class="section-title">{{ section.settings.heading | default: "Visit Lush Beauty Mart" }}</h2>
-      <p class="section-subtitle">{{ section.settings.text | default: "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place." }}</p>
-    </div>
-
-    <div class="store-experience-grid">
-      <!-- Left Column: Store Interior Visual Showcase -->
-      <div class="store-interior-card">
-        {%- if section.settings.store_image != blank -%}
-          <img src="{{ section.settings.store_image | image_url: width: 1000 }}" alt="Lush Beauty Mart Nagpur Store" class="store-interior-img" width="800" height="900">
-        {%- else -%}
-          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Lush Beauty Mart Store Interior" class="store-interior-img" width="800" height="900">
+{%- if section.settings.enable_section -%}
+  <section id="store-section" class="lush-store-section">
+    <div class="page-width">
+      <div class="section-header-center">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge">{{ section.settings.badge }}</span>
         {%- endif -%}
-        <div class="store-interior-overlay"></div>
-        <div class="store-interior-caption">
-          <span class="interior-pill">Nagpur Showroom & Testing Counter</span>
-          <h3 class="interior-headline">A True Beauty Sanctuary in Nagpur</h3>
-          <p class="interior-sub">Walk through our dedicated aisles for bridal jewellery, everyday cosmetics, dermatological skincare, and designer bags.</p>
-        </div>
+        <h2 class="section-title">{{ section.settings.heading | default: "Visit Lush Beauty Mart" }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="section-subtitle">{{ section.settings.text }}</p>
+        {%- endif -%}
       </div>
 
-      <!-- Right Column: Interactive Google Maps Location Card -->
-      <div class="store-location-card">
-        <div class="location-card-header">
-          <div>
-            <h3 class="location-brand-name">{{ settings.store_name | default: "Lush Beauty Mart" }}</h3>
-            <p class="location-area">Gandhi Nagar, North Ambazari Road, Nagpur</p>
-          </div>
-          <span class="pill-open-now">
-            <span class="pulse-green"></span>
-            Open Today (10:30 AM - 9:30 PM)
-          </span>
-        </div>
-
-        <div class="location-details-list">
-          <div class="location-detail-item">
-            <div class="detail-icon">📍</div>
-            <div class="detail-text">
-              <strong>Store Address:</strong>
-              <p>{{ settings.store_address | default: "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010" }}</p>
-            </div>
-          </div>
-
-          <div class="location-detail-item">
-            <div class="detail-icon">🚇</div>
-            <div class="detail-text">
-              <strong>Metro Landmark:</strong>
-              <p class="text-landmark">Directly opposite Metro Station Pillar No. 213 & 214</p>
-            </div>
-          </div>
-
-          <div class="location-detail-item">
-            <div class="detail-icon">⏰</div>
-            <div class="detail-text">
-              <strong>Store Timings:</strong>
-              <p>{{ settings.store_timings | default: "Monday to Sunday: 10:30 AM – 9:30 PM (All 7 Days Open)" }}</p>
-            </div>
+      <div class="store-experience-grid">
+        <!-- Left Column: Store Interior Visual Showcase -->
+        <div class="store-interior-card">
+          {%- if section.settings.store_image != blank -%}
+            <img src="{{ section.settings.store_image | image_url: width: 1000 }}" alt="Lush Beauty Mart Nagpur Store" class="store-interior-img" width="800" height="900">
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Lush Beauty Mart Store Interior" class="store-interior-img" width="800" height="900">
+          {%- endif -%}
+          <div class="store-interior-overlay"></div>
+          <div class="store-interior-caption">
+            {%- if section.settings.interior_pill != blank -%}
+              <span class="interior-pill">{{ section.settings.interior_pill }}</span>
+            {%- endif -%}
+            {%- if section.settings.interior_headline != blank -%}
+              <h3 class="interior-headline">{{ section.settings.interior_headline }}</h3>
+            {%- endif -%}
+            {%- if section.settings.interior_sub != blank -%}
+              <p class="interior-sub">{{ section.settings.interior_sub }}</p>
+            {%- endif -%}
           </div>
         </div>
 
-        <!-- Google Maps Visual Embed / Action Card -->
-        <a href="{{ settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="map-interactive-preview">
-          <div class="map-grid-pattern"></div>
-          <div class="map-pill-badge">
-            <span class="pin-bounce">📍</span>
-            <span>View on Google Maps (Lad Square) ↗</span>
+        <!-- Right Column: Interactive Google Maps Location Card -->
+        <div class="store-location-card">
+          <div class="location-card-header">
+            <div>
+              <h3 class="location-brand-name">{{ section.settings.store_name | default: settings.store_name | default: "Lush Beauty Mart" }}</h3>
+              <p class="location-area">{{ section.settings.area | default: "Gandhi Nagar, North Ambazari Road, Nagpur" }}</p>
+            </div>
+            {%- if section.settings.open_status != blank -%}
+              <span class="pill-open-now">
+                <span class="pulse-green"></span>
+                {{ section.settings.open_status }}
+              </span>
+            {%- endif -%}
           </div>
-        </a>
 
-        <!-- Action Buttons: Call, WhatsApp, Get Directions -->
-        <div class="store-action-buttons">
-          <a href="tel:{{ settings.store_phone | default: '9119595951' }}" class="btn-store-action btn-store-call">
-            <span>📞 Call Store</span>
+          <div class="location-details-list">
+            <div class="location-detail-item">
+              <div class="detail-icon">📍</div>
+              <div class="detail-text">
+                <strong>Store Address:</strong>
+                <p>{{ section.settings.address | default: settings.store_address | default: "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010" }}</p>
+              </div>
+            </div>
+
+            {%- if section.settings.landmark != blank -%}
+              <div class="location-detail-item">
+                <div class="detail-icon">🚇</div>
+                <div class="detail-text">
+                  <strong>Metro Landmark:</strong>
+                  <p class="text-landmark">{{ section.settings.landmark }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.timings != blank -%}
+              <div class="location-detail-item">
+                <div class="detail-icon">⏰</div>
+                <div class="detail-text">
+                  <strong>Store Timings:</strong>
+                  <p>{{ section.settings.timings }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <!-- Google Maps Visual Embed / Action Card -->
+          <a href="{{ section.settings.map_link | default: settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="map-interactive-preview">
+            <div class="map-grid-pattern"></div>
+            <div class="map-pill-badge">
+              <span class="pin-bounce">📍</span>
+              <span>View on Google Maps (Lad Square) ↗</span>
+            </div>
           </a>
 
-          <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ 'Hi Lush Beauty Mart! I want to visit your store at Lad Square today.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-wa">
-            <span>💬 WhatsApp Us</span>
-          </a>
+          <!-- Action Buttons: Call, WhatsApp, Get Directions -->
+          <div class="store-action-buttons">
+            <a href="tel:{{ section.settings.phone | default: settings.store_phone | default: '9119595951' }}" class="btn-store-action btn-store-call">
+              <span>{{ section.settings.call_btn_text | default: "📞 Call Store" }}</span>
+            </a>
 
-          <a href="{{ settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-dir">
-            <span>🧭 Get Directions</span>
-          </a>
+            <a href="https://wa.me/{{ section.settings.whatsapp | default: settings.store_whatsapp | default: '9191195951' }}?text={{ 'Hi Lush Beauty Mart! I want to visit your store at Lad Square today.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-wa">
+              <span>{{ section.settings.whatsapp_btn_text | default: "💬 WhatsApp Us" }}</span>
+            </a>
+
+            <a href="{{ section.settings.map_link | default: settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-dir">
+              <span>{{ section.settings.directions_btn_text | default: "🧭 Get Directions" }}</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Store Experience (Nagpur)",
+  "name": "Store Location",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "🏬 Flagship Experience Center"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -102,18 +132,107 @@
     {
       "type": "textarea",
       "id": "text",
-      "label": "Text",
+      "label": "Subheading",
       "default": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place."
     },
     {
       "type": "image_picker",
       "id": "store_image",
       "label": "Store Interior Image"
+    },
+    {
+      "type": "text",
+      "id": "interior_pill",
+      "label": "Interior Pill Tag",
+      "default": "Nagpur Showroom & Testing Counter"
+    },
+    {
+      "type": "text",
+      "id": "interior_headline",
+      "label": "Interior Headline",
+      "default": "A True Beauty Sanctuary in Nagpur"
+    },
+    {
+      "type": "textarea",
+      "id": "interior_sub",
+      "label": "Interior Description",
+      "default": "Walk through our dedicated aisles for bridal jewellery, everyday cosmetics, dermatological skincare, and designer bags."
+    },
+    {
+      "type": "text",
+      "id": "store_name",
+      "label": "Store Name",
+      "default": "Lush Beauty Mart"
+    },
+    {
+      "type": "text",
+      "id": "area",
+      "label": "Area / Locality",
+      "default": "Gandhi Nagar, North Ambazari Road, Nagpur"
+    },
+    {
+      "type": "text",
+      "id": "open_status",
+      "label": "Open Status Tag",
+      "default": "Open Today (10:30 AM - 9:30 PM)"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Full Address",
+      "default": "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010"
+    },
+    {
+      "type": "text",
+      "id": "landmark",
+      "label": "Landmark / Metro Note",
+      "default": "Directly opposite Metro Station Pillar No. 213 & 214"
+    },
+    {
+      "type": "text",
+      "id": "timings",
+      "label": "Store Timings",
+      "default": "Monday to Sunday: 10:30 AM – 9:30 PM (All 7 Days Open)"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Showroom Phone Number",
+      "default": "9119595951"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "Showroom WhatsApp Number",
+      "default": "9191195951"
+    },
+    {
+      "type": "url",
+      "id": "map_link",
+      "label": "Google Maps Link"
+    },
+    {
+      "type": "text",
+      "id": "call_btn_text",
+      "label": "Call Button Text",
+      "default": "📞 Call Store"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_btn_text",
+      "label": "WhatsApp Button Text",
+      "default": "💬 WhatsApp Us"
+    },
+    {
+      "type": "text",
+      "id": "directions_btn_text",
+      "label": "Directions Button Text",
+      "default": "🧭 Get Directions"
     }
   ],
   "presets": [
     {
-      "name": "Store Experience (Nagpur)"
+      "name": "Store Location"
     }
   ]
 }

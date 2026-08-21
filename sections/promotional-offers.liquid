@@ -1,101 +1,213 @@
-<section id="offers-section" class="lush-offers-section">
-  <div class="page-width">
-    <div class="section-header-center">
-      <span class="section-badge">🎁 Exclusive Store & Online Deals</span>
-      <h2 class="section-title">{{ section.settings.title | default: "Grab Our Best Offers" }}</h2>
-      <p class="section-subtitle">Save extra with active promotional coupons for both retail purchases and Nagpur in-store shopping.</p>
+{%- if section.settings.enable_section -%}
+  <section id="offers-section" class="lush-offers-section">
+    <div class="page-width">
+      <div class="section-header-center">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.title | default: "Special In-Store & Online Offers" }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="offers-grid-3">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <div class="offer-card group" {{ block.shopify_attributes }}>
+              <div class="offer-bg-media">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.title | escape }}" class="offer-bg-img" loading="lazy" width="600" height="400">
+                {%- else -%}
+                  <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop" alt="Special Offer" class="offer-bg-img" loading="lazy" width="600" height="400">
+                {%- endif -%}
+                <div class="offer-bg-overlay"></div>
+              </div>
+              <div class="offer-content">
+                <div class="offer-top">
+                  {%- if block.settings.offer_badge != blank -%}
+                    <span class="offer-badge">{{ block.settings.offer_badge }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.min_order != blank -%}
+                    <span class="offer-min">{{ block.settings.min_order }}</span>
+                  {%- endif -%}
+                </div>
+                <h3 class="offer-title">{{ block.settings.title }}</h3>
+                <p class="offer-desc">{{ block.settings.description }}</p>
+
+                <div class="offer-bottom">
+                  {%- if block.settings.coupon_code != blank -%}
+                    <div class="coupon-code-bar">
+                      <span class="code-text">{{ block.settings.coupon_code }}</span>
+                      <button type="button" class="btn-copy-code" data-coupon-code="{{ block.settings.coupon_code }}">Tap to Apply</button>
+                    </div>
+                  {%- endif -%}
+                  {%- if block.settings.btn_text != blank -%}
+                    <a href="{{ block.settings.btn_link | default: '/collections/all' }}" class="offer-link">{{ block.settings.btn_text }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default Offer 1 -->
+          <div class="offer-card group">
+            <div class="offer-bg-media">
+              <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop" alt="Flat 30% OFF" class="offer-bg-img" loading="lazy" width="600" height="400">
+              <div class="offer-bg-overlay"></div>
+            </div>
+            <div class="offer-content">
+              <div class="offer-top">
+                <span class="offer-badge">FLAT 30% OFF</span>
+                <span class="offer-min">Min Order: ₹999</span>
+              </div>
+              <h3 class="offer-title">Flat 30% OFF on Luxury Handbags</h3>
+              <p class="offer-desc">Elevate your style with handcrafted sling bags, totes, and party clutches.</p>
+              <div class="offer-bottom">
+                <div class="coupon-code-bar">
+                  <span class="code-text">LUSH30</span>
+                  <button type="button" class="btn-copy-code" data-coupon-code="LUSH30">Tap to Apply</button>
+                </div>
+                <a href="/collections/all" class="offer-link">Shop Handbags Collection →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Default Offer 2 -->
+          <div class="offer-card group">
+            <div class="offer-bg-media">
+              <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Buy 1 Get 1" class="offer-bg-img" loading="lazy" width="600" height="400">
+              <div class="offer-bg-overlay"></div>
+            </div>
+            <div class="offer-content">
+              <div class="offer-top">
+                <span class="offer-badge badge-bogo">BUY 1 GET 1</span>
+                <span class="offer-min">Min Order: ₹499</span>
+              </div>
+              <h3 class="offer-title">Buy 1 Get 1 on Selected Cosmetics</h3>
+              <p class="offer-desc">Add matching shades of lipsticks, glosses & eyeliners for double the glam.</p>
+              <div class="offer-bottom">
+                <div class="coupon-code-bar">
+                  <span class="code-text">BOGO</span>
+                  <button type="button" class="btn-copy-code" data-coupon-code="BOGO">Tap to Apply</button>
+                </div>
+                <a href="/collections/all" class="offer-link">Shop Cosmetics Deals →</a>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
     </div>
-
-    <div class="offers-grid-3">
-      <!-- Offer 1: Flat 30% OFF Handbags -->
-      <div class="offer-card group">
-        <div class="offer-bg-media">
-          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop" alt="Flat 30% OFF" class="offer-bg-img" loading="lazy" width="600" height="400">
-          <div class="offer-bg-overlay"></div>
-        </div>
-        <div class="offer-content">
-          <div class="offer-top">
-            <span class="offer-badge">FLAT 30% OFF</span>
-            <span class="offer-min">Min Order: ₹999</span>
-          </div>
-          <h3 class="offer-title">Flat 30% OFF on Luxury Handbags</h3>
-          <p class="offer-desc">Elevate your style with handcrafted sling bags, totes, and party clutches.</p>
-
-          <div class="offer-bottom">
-            <div class="coupon-code-bar">
-              <span class="code-text">LUSH30</span>
-              <button type="button" class="btn-copy-code" data-coupon-code="LUSH30">Tap to Apply</button>
-            </div>
-            <a href="/collections/handbags" class="offer-link">Shop Handbags Collection →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Offer 2: BOGO Cosmetics -->
-      <div class="offer-card group">
-        <div class="offer-bg-media">
-          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Buy 1 Get 1" class="offer-bg-img" loading="lazy" width="600" height="400">
-          <div class="offer-bg-overlay"></div>
-        </div>
-        <div class="offer-content">
-          <div class="offer-top">
-            <span class="offer-badge badge-bogo">BUY 1 GET 1</span>
-            <span class="offer-min">Min Order: ₹499</span>
-          </div>
-          <h3 class="offer-title">Buy 1 Get 1 on Selected Cosmetics</h3>
-          <p class="offer-desc">Add matching shades of lipsticks, glosses & eyeliners for double the glam.</p>
-
-          <div class="offer-bottom">
-            <div class="coupon-code-bar">
-              <span class="code-text">BOGO</span>
-              <button type="button" class="btn-copy-code" data-coupon-code="BOGO">Tap to Apply</button>
-            </div>
-            <a href="/collections/cosmetics" class="offer-link">Shop Cosmetics Deals →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Offer 3: Special Jewellery Offers -->
-      <div class="offer-card group">
-        <div class="offer-bg-media">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop" alt="Special Jewellery Offers" class="offer-bg-img" loading="lazy" width="600" height="400">
-          <div class="offer-bg-overlay"></div>
-        </div>
-        <div class="offer-content">
-          <div class="offer-top">
-            <span class="offer-badge badge-jewel">FESTIVE SPECIAL</span>
-            <span class="offer-min">Min Order: ₹799</span>
-          </div>
-          <h3 class="offer-title">Special Bridal & Festive Jewellery Deals</h3>
-          <p class="offer-desc">Up to 35% OFF on Kundan choker sets, AD rings, and temple jhumkas.</p>
-
-          <div class="offer-bottom">
-            <div class="coupon-code-bar">
-              <span class="code-text">JEWEL25</span>
-              <button type="button" class="btn-copy-code" data-coupon-code="JEWEL25">Tap to Apply</button>
-            </div>
-            <a href="/collections/artificial-jewellery" class="offer-link">Shop Jewellery Offers →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Promotional Offers",
+  "name": "Special Offers",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "🎁 Exclusive Deals"
+    },
     {
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Grab Our Best Offers"
+      "default": "Special In-Store & Online Offers"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Save extra with active promotional coupons for retail purchases and Nagpur in-store shopping."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "offer_card",
+      "name": "Offer Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "offer_badge",
+          "label": "Offer Tag / Badge",
+          "default": "FLAT 30% OFF"
+        },
+        {
+          "type": "text",
+          "id": "min_order",
+          "label": "Minimum Order Requirement",
+          "default": "Min Order: ₹999"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Offer Title",
+          "default": "Flat 30% OFF on Luxury Handbags"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Offer Description",
+          "default": "Elevate your style with handcrafted sling bags, totes, and party clutches."
+        },
+        {
+          "type": "text",
+          "id": "coupon_code",
+          "label": "Coupon Code (Optional)",
+          "default": "LUSH30"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Label",
+          "default": "Shop Collection →"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link",
+          "default": "/collections/all"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Promotional Offers"
+      "name": "Special Offers",
+      "blocks": [
+        {
+          "type": "offer_card",
+          "settings": {
+            "offer_badge": "FLAT 30% OFF",
+            "min_order": "Min Order: ₹999",
+            "title": "Flat 30% OFF on Luxury Handbags",
+            "coupon_code": "LUSH30"
+          }
+        },
+        {
+          "type": "offer_card",
+          "settings": {
+            "offer_badge": "BUY 1 GET 1",
+            "min_order": "Min Order: ₹499",
+            "title": "Buy 1 Get 1 on Selected Cosmetics",
+            "coupon_code": "BOGO"
+          }
+        }
+      ]
     }
   ]
 }

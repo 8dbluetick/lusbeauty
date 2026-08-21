@@ -1,101 +1,250 @@
-<section class="lush-instagram-section" id="social-gallery-section">
-  <div class="page-width">
-    <div class="section-header-center">
-      <span class="section-badge">📸 SOCIAL GALLERY</span>
-      <h2 class="section-title">Follow {{ settings.social_instagram_handle | default: "@lushbeautymart" }}</h2>
-      <p class="section-subtitle">Real unboxings, store walkthroughs, and beauty updates straight from our Nagpur showroom.</p>
-      
-      <!-- Mobile Swipe Affordance -->
-      <div class="mobile-swipe-hint">
-        <span>Swipe Reels</span>
-        <span class="swipe-arrow">→</span>
+{%- if section.settings.enable_section -%}
+  <section class="lush-instagram-section" id="social-gallery-section">
+    <div class="page-width">
+      <div class="section-header-center">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.heading | default: "Follow @lushbeautymart" }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-subtitle">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        
+        <!-- Mobile Swipe Affordance -->
+        <div class="mobile-swipe-hint">
+          <span>Swipe Reels</span>
+          <span class="swipe-arrow">→</span>
+        </div>
       </div>
-    </div>
 
-    <!-- Real Uploaded Social Gallery Horizontal Swipe Track on Mobile / 3-Column on Desktop -->
-    <div class="social-gallery-grid-3 no-scrollbar">
-      <!-- Item 1: Real Video Reel (@explore.with_shruti) -->
-      <div class="social-post-card group" data-post-type="video">
-        <a href="{{ settings.social_instagram_link | default: 'https://instagram.com/lushbeautymart' }}" target="_blank" rel="noopener noreferrer" class="social-post-link">
-          <div class="social-media-wrap">
-            <video
-              class="social-video-media"
-              src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4"
-              poster="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300602/lushbeautymart_14050530_135039469_kdl5zs.webp"
-              muted
-              loop
-              playsinline
-              autoplay
-            ></video>
-            <div class="social-post-overlay">
-              <span class="social-type-pill">▶ Reel</span>
-              <p class="social-caption">Store walkthrough & exclusive beauty shopping at Nagpur store ✨</p>
-              <span class="social-author">@explore.with_shruti × @lushbeautymart</span>
+      <!-- Social Gallery Horizontal Swipe Track on Mobile / 3-Column on Desktop -->
+      <div class="social-gallery-grid-3 no-scrollbar">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign item_link = block.settings.link | default: section.settings.instagram_link | default: 'https://instagram.com/lushbeautymart' -%}
+            <div class="social-post-card group" data-post-type="{{ block.settings.media_type }}" {{ block.shopify_attributes }}>
+              <a href="{{ item_link }}" target="_blank" rel="noopener noreferrer" class="social-post-link">
+                <div class="social-media-wrap">
+                  {%- if block.settings.media_type == 'video' and block.settings.video_url != blank -%}
+                    <video
+                      class="social-video-media"
+                      src="{{ block.settings.video_url }}"
+                      {% if block.settings.poster_image != blank %}poster="{{ block.settings.poster_image | image_url: width: 600 }}"{% endif %}
+                      muted
+                      loop
+                      playsinline
+                      autoplay
+                    ></video>
+                  {%- elsif block.settings.poster_image != blank -%}
+                    <img
+                      src="{{ block.settings.poster_image | image_url: width: 600 }}"
+                      alt="{{ block.settings.caption | escape | default: 'Lush Beauty Mart Post' }}"
+                      class="social-img-media"
+                      loading="lazy"
+                      width="600"
+                      height="600"
+                    >
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'social-placeholder-svg' }}
+                  {%- endif -%}
+
+                  <div class="social-post-overlay">
+                    {%- if block.settings.label != blank -%}
+                      <span class="social-type-pill">{{ block.settings.label }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.caption != blank -%}
+                      <p class="social-caption">{{ block.settings.caption }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.author != blank -%}
+                      <span class="social-author">{{ block.settings.author }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </a>
             </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default 3 Real Posts -->
+          <div class="social-post-card group" data-post-type="video">
+            <a href="https://instagram.com/lushbeautymart" target="_blank" rel="noopener noreferrer" class="social-post-link">
+              <div class="social-media-wrap">
+                <video class="social-video-media" src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4" poster="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300602/lushbeautymart_14050530_135039469_kdl5zs.webp" muted loop playsinline autoplay></video>
+                <div class="social-post-overlay">
+                  <span class="social-type-pill">▶ Reel</span>
+                  <p class="social-caption">Store walkthrough & exclusive beauty shopping at Nagpur store ✨</p>
+                  <span class="social-author">@explore.with_shruti × @lushbeautymart</span>
+                </div>
+              </div>
+            </a>
           </div>
-        </a>
+
+          <div class="social-post-card group" data-post-type="video">
+            <a href="https://instagram.com/lushbeautymart" target="_blank" rel="noopener noreferrer" class="social-post-link">
+              <div class="social-media-wrap">
+                <video class="social-video-media" src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787300962/angelpeterr__14050530_135035349_b9xjrn.mp4" poster="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300602/lushbeautymart_14050530_135039469_kdl5zs.webp" muted loop playsinline autoplay></video>
+                <div class="social-post-overlay">
+                  <span class="social-type-pill">▶ Reel</span>
+                  <p class="social-caption">Bridal jewellery & cosmetics glamour look 💫</p>
+                  <span class="social-author">@angelpeterr_ × @lushbeautymart</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="social-post-card group" data-post-type="image">
+            <a href="https://instagram.com/lushbeautymart" target="_blank" rel="noopener noreferrer" class="social-post-link">
+              <div class="social-media-wrap">
+                <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300602/lushbeautymart_14050530_135039469_kdl5zs.webp" alt="Lush Beauty Mart Real Post" class="social-img-media" loading="lazy" width="600" height="600">
+                <div class="social-post-overlay">
+                  <span class="social-type-pill">📷 Post</span>
+                  <p class="social-caption">Unboxing premium jewellery & cosmetics in-store 💎</p>
+                  <span class="social-author">@lushbeautymart</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        {%- endif -%}
       </div>
 
-      <!-- Item 2: Real Video Reel (@angelpeterr_) -->
-      <div class="social-post-card group" data-post-type="video">
-        <a href="{{ settings.social_instagram_link | default: 'https://instagram.com/lushbeautymart' }}" target="_blank" rel="noopener noreferrer" class="social-post-link">
-          <div class="social-media-wrap">
-            <video
-              class="social-video-media"
-              src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787300962/angelpeterr__14050530_135035349_b9xjrn.mp4"
-              poster="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300602/lushbeautymart_14050530_135039469_kdl5zs.webp"
-              muted
-              loop
-              playsinline
-              autoplay
-            ></video>
-            <div class="social-post-overlay">
-              <span class="social-type-pill">▶ Reel</span>
-              <p class="social-caption">Bridal jewellery & cosmetics glamour look 💫</p>
-              <span class="social-author">@angelpeterr_ × @lushbeautymart</span>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- Item 3: Real Photo Post (@lushbeautymart) -->
-      <div class="social-post-card group" data-post-type="image">
-        <a href="{{ settings.social_instagram_link | default: 'https://instagram.com/lushbeautymart' }}" target="_blank" rel="noopener noreferrer" class="social-post-link">
-          <div class="social-media-wrap">
-            <img
-              src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300602/lushbeautymart_14050530_135039469_kdl5zs.webp"
-              alt="Lush Beauty Mart Real Post"
-              class="social-img-media"
-              loading="lazy"
-              width="600"
-              height="600"
-            >
-            <div class="social-post-overlay">
-              <span class="social-type-pill">📷 Post</span>
-              <p class="social-caption">Unboxing premium jewellery & cosmetics in-store 💎</p>
-              <span class="social-author">@lushbeautymart</span>
-            </div>
-          </div>
-        </a>
-      </div>
+      {%- if section.settings.follow_btn_text != blank -%}
+        <div class="section-footer-center">
+          <a href="{{ section.settings.instagram_link | default: 'https://instagram.com/lushbeautymart' }}" target="_blank" rel="noopener noreferrer" class="btn-follow-instagram">
+            <span>{{ section.settings.follow_btn_text }}</span>
+            <span class="btn-arrow">↗</span>
+          </a>
+        </div>
+      {%- endif -%}
     </div>
-
-    <div class="section-footer-center">
-      <a href="{{ settings.social_instagram_link | default: 'https://instagram.com/lushbeautymart' }}" target="_blank" rel="noopener noreferrer" class="btn-follow-instagram">
-        <span>Follow @lushbeautymart on Instagram</span>
-        <span class="btn-arrow">↗</span>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Social Gallery",
-  "settings": [],
+  "name": "Social Gallery / Reels",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "📸 SOCIAL GALLERY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow @lushbeautymart"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Real unboxings, store walkthroughs, and beauty updates straight from our Nagpur showroom."
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram Profile Link"
+    },
+    {
+      "type": "text",
+      "id": "follow_btn_text",
+      "label": "Follow Button Label",
+      "default": "Follow @lushbeautymart on Instagram"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel_item",
+      "name": "Reel / Story Post",
+      "settings": [
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "Media Type",
+          "options": [
+            { "value": "video", "label": "Video Reel" },
+            { "value": "image", "label": "Photo Post" }
+          ],
+          "default": "video"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video Direct URL (MP4 / Cloudinary)",
+          "default": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_image",
+          "label": "Poster / Cover Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Badge Label",
+          "default": "▶ Reel"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Post Caption",
+          "default": "Store walkthrough & exclusive beauty shopping at Nagpur store ✨"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Creator / Author Handle",
+          "default": "@lushbeautymart"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Post URL"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Social Gallery"
+      "name": "Social Gallery / Reels",
+      "blocks": [
+        {
+          "type": "reel_item",
+          "settings": {
+            "media_type": "video",
+            "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4",
+            "label": "▶ Reel",
+            "caption": "Store walkthrough & exclusive beauty shopping at Nagpur store ✨",
+            "author": "@explore.with_shruti × @lushbeautymart"
+          }
+        },
+        {
+          "type": "reel_item",
+          "settings": {
+            "media_type": "video",
+            "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787300962/angelpeterr__14050530_135035349_b9xjrn.mp4",
+            "label": "▶ Reel",
+            "caption": "Bridal jewellery & cosmetics glamour look 💫",
+            "author": "@angelpeterr_ × @lushbeautymart"
+          }
+        },
+        {
+          "type": "reel_item",
+          "settings": {
+            "media_type": "image",
+            "video_url": "",
+            "label": "📷 Post",
+            "caption": "Unboxing premium jewellery & cosmetics in-store 💎",
+            "author": "@lushbeautymart"
+          }
+        }
+      ]
     }
   ]
 }

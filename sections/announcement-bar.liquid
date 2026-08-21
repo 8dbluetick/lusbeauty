@@ -1,18 +1,61 @@
-<div class="lush-announcement-bar">
-  <div class="page-width announcement-container">
-    <div class="announcement-messages">
-      <span class="announcement-item">FREE DELIVERY IN NAGPUR ON ₹499+</span>
-      <span class="announcement-sep">•</span>
-      <span class="announcement-item">100% GENUINE BRANDS</span>
-      <span class="announcement-sep desktop-only-sep">•</span>
-      <span class="announcement-item desktop-only-item">NAGPUR STORE • LAD SQUARE</span>
+{%- if section.settings.show_announcement -%}
+  <div class="lush-announcement-bar" style="background-color: {{ section.settings.bg_color | default: '#1F1610' }}; color: {{ section.settings.text_color | default: '#F7EFE1' }};">
+    <div class="page-width announcement-container">
+      <div class="announcement-messages">
+        <span class="announcement-item">{{ section.settings.text_1 | default: "FREE DELIVERY IN NAGPUR ON ₹499+" }}</span>
+        {%- if section.settings.text_2 != blank -%}
+          <span class="announcement-sep">•</span>
+          <span class="announcement-item">{{ section.settings.text_2 }}</span>
+        {%- endif -%}
+        {%- if section.settings.text_3_desktop != blank -%}
+          <span class="announcement-sep desktop-only-sep">•</span>
+          <span class="announcement-item desktop-only-item">{{ section.settings.text_3_desktop }}</span>
+        {%- endif -%}
+      </div>
     </div>
   </div>
-</div>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Announcement Bar",
-  "settings": []
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Enable Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Primary Message",
+      "default": "FREE DELIVERY IN NAGPUR ON ₹499+"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Secondary Message",
+      "default": "100% GENUINE BRANDS"
+    },
+    {
+      "type": "text",
+      "id": "text_3_desktop",
+      "label": "Desktop Extra Message",
+      "default": "NAGPUR STORE • LAD SQUARE"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1F1610"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#F7EFE1"
+    }
+  ]
 }
 {% endschema %}

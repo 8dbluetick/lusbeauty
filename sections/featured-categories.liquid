@@ -1,131 +1,190 @@
-<section class="lush-categories-section">
-  <div class="page-width">
-    <div class="section-header-center">
-      <span class="section-badge">✨ Curated Collections</span>
-      <h2 class="section-title">{{ section.settings.title | default: "Shop By Category" }}</h2>
-      <p class="section-subtitle">Explore our handpicked categories in-store in Nagpur or browse and order online.</p>
+{%- if section.settings.enable_section -%}
+  <section class="lush-categories-section">
+    <div class="page-width">
+      <div class="section-header-center">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.title | default: "Shop By Category" }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="categories-grid-6">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign coll = collections[block.settings.collection] -%}
+            {%- assign card_url = block.settings.link | default: coll.url | default: '/collections/all' -%}
+            {%- assign card_title = block.settings.title | default: coll.title | default: 'Category' -%}
+            {%- assign card_img = block.settings.image | default: coll.featured_image -%}
+
+            <a href="{{ card_url }}" class="category-card group" {{ block.shopify_attributes }}>
+              <div class="cat-image-wrapper">
+                {%- if card_img != blank -%}
+                  <img src="{{ card_img | image_url: width: 800 }}" alt="{{ card_title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'cat-placeholder-svg' }}
+                {%- endif -%}
+                <div class="cat-overlay"></div>
+                <div class="cat-content">
+                  {%- if block.settings.super_title != blank -%}
+                    <span class="cat-super">{{ block.settings.super_title }}</span>
+                  {%- endif -%}
+                  <h3 class="cat-name">{{ card_title }}</h3>
+                  {%- if block.settings.description != blank -%}
+                    <p class="cat-desc">{{ block.settings.description }}</p>
+                  {%- endif -%}
+                  <div class="cat-cta">
+                    <span>Explore Collection</span>
+                    <span class="cat-arrow">→</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default collections -->
+          <a href="/collections/all" class="category-card group">
+            <div class="cat-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Skincare" class="cat-img" loading="lazy" width="600" height="750">
+              <div class="cat-overlay"></div>
+              <div class="cat-content">
+                <span class="cat-super">LUSH SKINCARE</span>
+                <h3 class="cat-name">Skincare</h3>
+                <p class="cat-desc">Serums, Sunscreens, Moisturizers & Cleansers</p>
+                <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
+              </div>
+            </div>
+          </a>
+          <a href="/collections/all" class="category-card group">
+            <div class="cat-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Cosmetics" class="cat-img" loading="lazy" width="600" height="750">
+              <div class="cat-overlay"></div>
+              <div class="cat-content">
+                <span class="cat-super">LUSH COSMETICS</span>
+                <h3 class="cat-name">Cosmetics</h3>
+                <p class="cat-desc">Lipsticks, Foundations, Kajal & Eyeliners</p>
+                <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
+              </div>
+            </div>
+          </a>
+          <a href="/collections/all" class="category-card group">
+            <div class="cat-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop" alt="Artificial Jewellery" class="cat-img" loading="lazy" width="600" height="750">
+              <div class="cat-overlay"></div>
+              <div class="cat-content">
+                <span class="cat-super">ROYAL JEWELLERY</span>
+                <h3 class="cat-name">Artificial Jewellery</h3>
+                <p class="cat-desc">Kundan Sets, AD Rings, Jhumkas & Bangles</p>
+                <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
+              </div>
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
     </div>
-
-    <div class="categories-grid-6">
-      <!-- 1. Skincare -->
-      <a href="/collections/skincare" class="category-card group">
-        <div class="cat-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Skincare" class="cat-img" loading="lazy" width="600" height="750">
-          <div class="cat-overlay"></div>
-          <div class="cat-content">
-            <span class="cat-super">LUSH SKINCARE</span>
-            <h3 class="cat-name">Skincare</h3>
-            <p class="cat-desc">Serums, Sunscreens, Moisturizers & Cleansers</p>
-            <div class="cat-cta">
-              <span>Explore Collection</span>
-              <span class="cat-arrow">→</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <!-- 2. Cosmetics -->
-      <a href="/collections/cosmetics" class="category-card group">
-        <div class="cat-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Cosmetics" class="cat-img" loading="lazy" width="600" height="750">
-          <div class="cat-overlay"></div>
-          <div class="cat-content">
-            <span class="cat-super">LUSH COSMETICS</span>
-            <h3 class="cat-name">Cosmetics</h3>
-            <p class="cat-desc">Lipsticks, Foundations, Kajal, Eyeliners & Mascaras</p>
-            <div class="cat-cta">
-              <span>Explore Collection</span>
-              <span class="cat-arrow">→</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <!-- 3. Artificial Jewellery -->
-      <a href="/collections/artificial-jewellery" class="category-card group">
-        <div class="cat-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop" alt="Artificial Jewellery" class="cat-img" loading="lazy" width="600" height="750">
-          <div class="cat-overlay"></div>
-          <div class="cat-content">
-            <span class="cat-super">ROYAL JEWELLERY</span>
-            <h3 class="cat-name">Artificial Jewellery</h3>
-            <p class="cat-desc">Kundan Sets, AD Rings, Jhumkas, Bangles & Tikka</p>
-            <div class="cat-cta">
-              <span>Explore Collection</span>
-              <span class="cat-arrow">→</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <!-- 4. Handbags -->
-      <a href="/collections/handbags" class="category-card group">
-        <div class="cat-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop" alt="Handbags" class="cat-img" loading="lazy" width="600" height="750">
-          <div class="cat-overlay"></div>
-          <div class="cat-content">
-            <span class="cat-super">LUXURY BAGS</span>
-            <h3 class="cat-name">Handbags & Slings</h3>
-            <p class="cat-desc">Structured Totes, Quilted Slings & Baguette Bags</p>
-            <div class="cat-cta">
-              <span>Explore Collection</span>
-              <span class="cat-arrow">→</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <!-- 5. Beauty Accessories -->
-      <a href="/collections/beauty-accessories" class="category-card group">
-        <div class="cat-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800&auto=format&fit=crop" alt="Beauty Accessories" class="cat-img" loading="lazy" width="600" height="750">
-          <div class="cat-overlay"></div>
-          <div class="cat-content">
-            <span class="cat-super">BEAUTY TOOLS</span>
-            <h3 class="cat-name">Beauty Accessories</h3>
-            <p class="cat-desc">Pro Makeup Brushes, Jade Rollers & Blenders</p>
-            <div class="cat-cta">
-              <span>Explore Collection</span>
-              <span class="cat-arrow">→</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <!-- 6. Fashion Accessories -->
-      <a href="/collections/fashion-accessories" class="category-card group">
-        <div class="cat-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1590548784585-643d2b9f2925?q=80&w=800&auto=format&fit=crop" alt="Fashion Accessories" class="cat-img" loading="lazy" width="600" height="750">
-          <div class="cat-overlay"></div>
-          <div class="cat-content">
-            <span class="cat-super">STYLE ACCENTS</span>
-            <h3 class="cat-name">Fashion Accessories</h3>
-            <p class="cat-desc">Pearl Headbands, Saree Brooches & Gift Hampers</p>
-            <div class="cat-cta">
-              <span>Explore Collection</span>
-              <span class="cat-arrow">→</span>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Shop By Category Grid",
+  "name": "Shop By Category",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Section Badge",
+      "default": "✨ Curated Collections"
+    },
     {
       "type": "text",
       "id": "title",
       "label": "Heading",
       "default": "Shop By Category"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Explore our handpicked categories in-store in Nagpur or browse and order online."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Shopify Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "super_title",
+          "label": "Super Tag",
+          "default": "LUSH COLLECTION"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Explore our collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom Link (Optional)"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Shop By Category Grid"
+      "name": "Shop By Category",
+      "blocks": [
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "LUSH SKINCARE",
+            "title": "Skincare",
+            "description": "Serums, Sunscreens, Moisturizers & Cleansers"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "LUSH COSMETICS",
+            "title": "Cosmetics",
+            "description": "Lipsticks, Foundations, Kajal, Eyeliners & Mascaras"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "ROYAL JEWELLERY",
+            "title": "Artificial Jewellery",
+            "description": "Kundan Sets, AD Rings, Jhumkas, Bangles & Tikka"
+          }
+        }
+      ]
     }
   ]
 }

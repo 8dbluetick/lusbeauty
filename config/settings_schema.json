@@ -73,7 +73,7 @@
         "type": "text",
         "id": "store_whatsapp",
         "label": "WhatsApp Number (with country code, no +)",
-        "default": "919119595951"
+        "default": "9191195951"
       },
       {
         "type": "text",

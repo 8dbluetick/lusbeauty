@@ -1,44 +1,70 @@
-<section class="lush-trending-section">
-  <div class="page-width">
-    <div class="section-header-split">
-      <div>
-        <span class="section-badge">🔥 Most Loved in Nagpur</span>
-        <h2 class="section-title">{{ section.settings.title | default: "Trending Now" }}</h2>
-        <p class="section-subtitle">Top rated skincare, beauty essentials, luxury handbags & sparkling jewellery.</p>
+{%- if section.settings.enable_section -%}
+  <section class="lush-trending-section">
+    <div class="page-width">
+      <div class="section-header-split">
+        <div>
+          {%- if section.settings.badge != blank -%}
+            <span class="section-badge">{{ section.settings.badge }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.title | default: "Trending Now" }}</h2>
+          {%- if section.settings.subtitle != blank -%}
+            <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.show_filters -%}
+          <div class="category-filter-pills" id="TrendingCategoryFilters">
+            <button type="button" class="filter-pill active" data-category-filter="all">All Picks</button>
+            <button type="button" class="filter-pill" data-category-filter="skincare">Skincare</button>
+            <button type="button" class="filter-pill" data-category-filter="cosmetics">Cosmetics</button>
+            <button type="button" class="filter-pill" data-category-filter="jewel">Jewellery</button>
+            <button type="button" class="filter-pill" data-category-filter="handbag">Handbags</button>
+          </div>
+        {%- endif -%}
       </div>
 
-      <div class="category-filter-pills" id="TrendingCategoryFilters">
-        <button type="button" class="filter-pill active" data-category-filter="all">All Picks</button>
-        <button type="button" class="filter-pill" data-category-filter="skincare">Skincare</button>
-        <button type="button" class="filter-pill" data-category-filter="cosmetics">Cosmetics</button>
-        <button type="button" class="filter-pill" data-category-filter="jewel">Jewellery</button>
-        <button type="button" class="filter-pill" data-category-filter="handbag">Handbags</button>
+      <!-- Product Grid -->
+      <div class="products-grid-4">
+        {%- assign featured_collection = collections[section.settings.collection] | default: collections.all -%}
+        {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+          {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        {%- else -%}
+          <div class="no-products-message">
+            <p>No products found in this collection. Please select a collection in the theme editor.</p>
+          </div>
+        {%- endif -%}
       </div>
-    </div>
 
-    <!-- Product Grid -->
-    <div class="products-grid-4">
-      {%- assign featured_collection = collections[section.settings.collection] | default: collections.all -%}
-      {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
-        {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
-          {% render 'product-card', product: product %}
-        {%- endfor -%}
+      {%- if section.settings.btn_text != blank -%}
+        <div class="section-footer-center">
+          <a href="{{ section.settings.view_all_link | default: '/collections/all' }}" class="btn-view-all-shop">
+            <span>{{ section.settings.btn_text }}</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
       {%- endif -%}
     </div>
-
-    <div class="section-footer-center">
-      <a href="{{ section.settings.view_all_link | default: '/collections/all' }}" class="btn-view-all-shop">
-        <span>Explore Full 200+ Products Collection</span>
-        <span class="btn-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Trending Products Grid",
+  "name": "Trending Products",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Section Badge",
+      "default": "🔥 Most Loved in Nagpur"
+    },
     {
       "type": "text",
       "id": "title",
@@ -46,28 +72,47 @@
       "default": "Trending Now"
     },
     {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Top rated skincare, beauty essentials, luxury handbags & sparkling jewellery."
+    },
+    {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "Shopify Collection"
     },
     {
       "type": "range",
       "id": "products_to_show",
       "min": 4,
-      "max": 16,
+      "max": 24,
       "step": 4,
       "default": 8,
-      "label": "Number of products to show"
+      "label": "Number of Products to Show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show Category Filter Buttons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "Explore Full Collection"
     },
     {
       "type": "url",
       "id": "view_all_link",
-      "label": "View all link"
+      "label": "Button Link",
+      "default": "/collections/all"
     }
   ],
   "presets": [
     {
-      "name": "Trending Products Grid"
+      "name": "Trending Products"
     }
   ]
 }

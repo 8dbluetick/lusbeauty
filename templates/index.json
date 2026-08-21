@@ -2,30 +2,122 @@
   "sections": {
     "hero_banner": {
       "type": "hero-banner",
+      "blocks": {
+        "badge_1": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "🛡️",
+            "title": "100% Genuine Brands"
+          }
+        },
+        "badge_2": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "📍",
+            "title": "Nagpur Store"
+          }
+        },
+        "badge_3": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "🚇",
+            "title": "Near Metro Pillar 213–214"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ],
       "settings": {
+        "badge_text": "📍 Nagpur Premier Store • Gandhi Nagar (Near Lad Sq.)",
         "heading": "Beauty, Style & Everything You Love.",
         "subheading": "Discover skincare, cosmetics, jewellery, handbags and accessories — all under one roof.",
         "primary_cta_text": "Shop Collection",
-        "primary_cta_link": "/collections/all"
+        "primary_cta_link": "/collections/all",
+        "secondary_cta_text": "📍 Visit Nagpur Store",
+        "secondary_cta_link": "#store-section"
       }
     },
     "trending_products": {
       "type": "trending-products",
       "settings": {
+        "enable_section": true,
+        "badge": "🔥 Most Loved in Nagpur",
         "title": "Trending Now",
+        "subtitle": "Top rated skincare, beauty essentials, luxury handbags & sparkling jewellery.",
         "products_to_show": 8,
+        "show_filters": true,
+        "btn_text": "Explore Full Collection",
         "view_all_link": "/collections/all"
       }
     },
     "instagram_feed": {
       "type": "instagram-feed",
-      "settings": {}
+      "blocks": {
+        "reel_1": {
+          "type": "reel_item",
+          "settings": {
+            "media_type": "video",
+            "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4",
+            "label": "▶ Reel",
+            "caption": "Store walkthrough & exclusive beauty shopping at Nagpur store ✨",
+            "author": "@explore.with_shruti × @lushbeautymart"
+          }
+        },
+        "reel_2": {
+          "type": "reel_item",
+          "settings": {
+            "media_type": "video",
+            "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787300962/angelpeterr__14050530_135035349_b9xjrn.mp4",
+            "label": "▶ Reel",
+            "caption": "Bridal jewellery & cosmetics glamour look 💫",
+            "author": "@angelpeterr_ × @lushbeautymart"
+          }
+        },
+        "reel_3": {
+          "type": "reel_item",
+          "settings": {
+            "media_type": "image",
+            "video_url": "",
+            "label": "📷 Post",
+            "caption": "Unboxing premium jewellery & cosmetics in-store 💎",
+            "author": "@lushbeautymart"
+          }
+        }
+      },
+      "block_order": [
+        "reel_1",
+        "reel_2",
+        "reel_3"
+      ],
+      "settings": {
+        "enable_section": true,
+        "badge": "📸 SOCIAL GALLERY",
+        "heading": "Follow @lushbeautymart",
+        "subheading": "Real unboxings, store walkthroughs, and beauty updates straight from our Nagpur showroom.",
+        "follow_btn_text": "Follow @lushbeautymart on Instagram"
+      }
     },
     "store_experience": {
       "type": "store-experience",
       "settings": {
+        "enable_section": true,
+        "badge": "🏬 Flagship Experience Center",
         "heading": "Visit Lush Beauty Mart",
-        "text": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place."
+        "text": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place.",
+        "store_name": "Lush Beauty Mart",
+        "area": "Gandhi Nagar, North Ambazari Road, Nagpur",
+        "open_status": "Open Today (10:30 AM - 9:30 PM)",
+        "address": "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010",
+        "landmark": "Directly opposite Metro Station Pillar No. 213 & 214",
+        "timings": "Monday to Sunday: 10:30 AM – 9:30 PM (All 7 Days Open)",
+        "phone": "9119595951",
+        "whatsapp": "9191195951",
+        "call_btn_text": "📞 Call Store",
+        "whatsapp_btn_text": "💬 WhatsApp Us",
+        "directions_btn_text": "🧭 Get Directions"
       }
     }
   },
