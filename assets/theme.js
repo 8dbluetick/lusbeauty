@@ -101,29 +101,18 @@ function initCartDrawer() {
     }
   });
 
-  // WhatsApp 1-Click Order Button
+  // WhatsApp 1-Click Smart Order Summary Button
   const btnWaOrder = document.getElementById('BtnWhatsAppOrder');
   if (btnWaOrder) {
     btnWaOrder.addEventListener('click', async () => {
       try {
         const res = await fetch('/cart.js');
         const cartData = await res.json();
-        const waNum = '919119595951';
-
-        if (!cartData.items || cartData.items.length === 0) return;
-
-        const itemsText = cartData.items
-          .map((item, idx) => {
-            const vText = item.variant_title && item.variant_title !== 'Default Title' ? ` (${item.variant_title})` : '';
-            return `${idx + 1}. *${item.product_title || item.title}*${vText} x ${item.quantity} = ₹${(item.final_line_price / 100).toFixed(0)}`;
-          })
-          .join('\n');
-
-        const totalFormatted = (cartData.total_price / 100).toFixed(0);
-        const msg = `*Namaste Lush Beauty Mart Nagpur!* 🛍️\n\nI would like to place an order from my bag:\n\n${itemsText}\n\n*Total Amount:* *₹${totalFormatted}*\n\nPlease confirm availability and store pickup/delivery details at Lad Square. Thank you!`;
-
-        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
-      } catch (e) {}
+        const waUrl = generateWhatsAppOrderUrl(cartData);
+        window.open(waUrl, '_blank');
+      } catch (e) {
+        window.open('https://wa.me/919119595951', '_blank');
+      }
     });
   }
 }
@@ -525,6 +514,29 @@ function initProductPage() {
       if (variantId) {
         window.location.href = `/cart/${variantId}:${qty}`;
       }
+    });
+  }
+
+  // Dynamic PDP WhatsApp Enquiry with live variant & quantity
+  const pdpWaBtn = document.querySelector('.btn-product-whatsapp-enquire');
+  if (pdpWaBtn) {
+    pdpWaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = document.querySelector('.product-page-title')?.textContent?.trim() || 'Exclusive Product';
+      const price = document.querySelector('.price-big')?.textContent?.trim() || '';
+      const qty = document.getElementById('ProductQuantityInput')?.value || 1;
+      const selectedVariant = document.querySelector('.variant-radio:checked')?.value || '';
+      const variantText = selectedVariant ? ` _(${selectedVariant})_` : '';
+
+      const msg = `🌸 *NAMASTE LUSH BEAUTY MART NAGPUR!* 🌸\n\n` +
+        `I would like to order / inquire about:\n\n` +
+        `✨ *Product:* ${title}${variantText}\n` +
+        `📦 *Quantity:* ${qty}\n` +
+        `💰 *Price:* ${price}\n\n` +
+        `📍 *Showroom:* Below Hotel Maitrayee, Near Lad Square, North Ambazari Rd, Nagpur\n\n` +
+        `Is this in stock for immediate showroom pickup / delivery? Please share UPI payment details! ✨`;
+
+      window.open(`https://wa.me/919119595951?text=${encodeURIComponent(msg)}`, '_blank');
     });
   }
 }
@@ -1044,5 +1056,61 @@ function initScrollProgressAndBackToTop() {
     });
   }
 }
+
+/* --------------------------------------------------------------------------
+   18. Helper: Smart Pre-filled WhatsApp Order Summary Generator
+   -------------------------------------------------------------------------- */
+function generateWhatsAppOrderUrl(cartData) {
+  const waNum = '919119595951';
+  if (!cartData || !cartData.items || cartData.items.length === 0) {
+    return `https://wa.me/${waNum}?text=${encodeURIComponent('Namaste Lush Beauty Mart Nagpur! 🌸 I would like to inquire about beauty & jewellery products at your Lad Square showroom.')}`;
+  }
+
+  const itemsList = cartData.items.map((item, idx) => {
+    const vText = item.variant_title && item.variant_title !== 'Default Title' ? ` _(${item.variant_title})_` : '';
+    const linePrice = (item.final_line_price / 100).toFixed(0);
+    return `${idx + 1}. ✨ *${item.product_title || item.title}*${vText}\n   ▫️ Qty: ${item.quantity}  |  Price: ₹${linePrice}`;
+  }).join('\n\n');
+
+  const subtotal = (cartData.total_price / 100).toFixed(0);
+  const isFreeDelivery = cartData.total_price >= 99900;
+  const deliveryStatus = isFreeDelivery
+    ? '🎉 FREE EXPRESS DELIVERY UNLOCKED (Nagpur)!'
+    : '₹50 Standard Delivery (Free on ₹999+)';
+
+  const message = `🌸 *NAMASTE LUSH BEAUTY MART NAGPUR!* 🌸\n` +
+    `I would like to place an instant order for the following items:\n\n` +
+    `🛒 *ORDER SUMMARY:*\n` +
+    `──────────────────────\n` +
+    `${itemsList}\n` +
+    `──────────────────────\n` +
+    `💰 *Bag Subtotal:* ₹${subtotal}\n` +
+    `🚚 *Nagpur Delivery:* ${deliveryStatus}\n` +
+    `💎 *Grand Total:* *₹${subtotal}*\n` +
+    `──────────────────────\n\n` +
+    `📍 *Showroom:* Below Hotel Maitrayee, Near Lad Square, North Ambazari Rd, Nagpur\n` +
+    `💳 *Payment Preference:* UPI / GPay / PhonePe / Cash on Delivery\n\n` +
+    `Please confirm stock availability at your Lad Square showroom & share UPI payment details! ✨`;
+
+  return `https://wa.me/${waNum}?text=${encodeURIComponent(message)}`;
+}
+
+// Bind WhatsApp instant checkout buttons on Cart Page
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-whatsapp-instant-checkout').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        const res = await fetch('/cart.js');
+        const cartData = await res.json();
+        const waUrl = generateWhatsAppOrderUrl(cartData);
+        window.open(waUrl, '_blank');
+      } catch (err) {
+        window.open('https://wa.me/919119595951', '_blank');
+      }
+    });
+  });
+});
+
 
 
