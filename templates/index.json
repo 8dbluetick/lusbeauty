@@ -6,15 +6,7 @@
         "heading": "Beauty, Style & Everything You Love.",
         "subheading": "Discover skincare, cosmetics, jewellery, handbags and accessories — all under one roof.",
         "primary_cta_text": "Shop Collection",
-        "primary_cta_link": "/collections/all",
-        "secondary_cta_text": "View Offers",
-        "secondary_cta_link": "#offers-section"
-      }
-    },
-    "featured_categories": {
-      "type": "featured-categories",
-      "settings": {
-        "title": "Shop By Category"
+        "primary_cta_link": "/collections/all"
       }
     },
     "trending_products": {
@@ -25,25 +17,9 @@
         "view_all_link": "/collections/all"
       }
     },
-    "instagram_reels": {
-      "type": "instagram-reels",
-      "settings": {
-        "heading": "Trending Reels & Video Stories",
-        "subheading": "Real unboxings, bridal makeovers, and showroom tours straight from our Nagpur store."
-      }
-    },
-    "promotional_offers": {
-      "type": "promotional-offers",
-      "settings": {
-        "title": "Grab Our Best Offers"
-      }
-    },
-    "new_arrivals": {
-      "type": "new-arrivals-carousel",
-      "settings": {
-        "title": "Just Arrived ✨",
-        "explore_link": "/collections/all"
-      }
+    "instagram_feed": {
+      "type": "instagram-feed",
+      "settings": {}
     },
     "store_experience": {
       "type": "store-experience",
@@ -51,25 +27,12 @@
         "heading": "Visit Lush Beauty Mart",
         "text": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place."
       }
-    },
-    "wholesale_banner": {
-      "type": "wholesale-banner",
-      "settings": {}
-    },
-    "instagram_feed": {
-      "type": "instagram-feed",
-      "settings": {}
     }
   },
   "order": [
     "hero_banner",
-    "featured_categories",
     "trending_products",
-    "instagram_reels",
-    "promotional_offers",
-    "new_arrivals",
-    "store_experience",
-    "wholesale_banner",
-    "instagram_feed"
+    "instagram_feed",
+    "store_experience"
   ]
 }
