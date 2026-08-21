@@ -12,13 +12,35 @@
       </div>
 
       <div class="store-experience-grid">
-        <!-- Left Column: Store Interior Visual Showcase -->
+        <!-- Left Column: Store Interior Visual Showcase (Instagram Story Video / Image) -->
         <div class="store-interior-card">
-          {%- if section.settings.store_image != blank -%}
-            <img src="{{ section.settings.store_image | image_url: width: 1000 }}" alt="Lush Beauty Mart Nagpur Store" class="store-interior-img" width="800" height="900">
-          {%- else -%}
-            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Lush Beauty Mart Store Interior" class="store-interior-img" width="800" height="900">
+          {%- assign show_video = false -%}
+          {%- if section.settings.media_type == 'video' or section.settings.media_type == blank -%}
+            {%- if section.settings.video_url != blank -%}
+              {%- assign show_video = true -%}
+            {%- endif -%}
           {%- endif -%}
+
+          {%- if show_video -%}
+            <div class="store-video-wrapper">
+              <video
+                class="store-interior-video"
+                src="{{ section.settings.video_url | default: 'https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov' }}"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+            </div>
+          {%- else -%}
+            {%- if section.settings.store_image != blank -%}
+              <img src="{{ section.settings.store_image | image_url: width: 1000 }}" alt="Lush Beauty Mart Nagpur Store" class="store-interior-img" width="800" height="900">
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Lush Beauty Mart Store Interior" class="store-interior-img" width="800" height="900">
+            {%- endif -%}
+          {%- endif -%}
+
           <div class="store-interior-overlay"></div>
           <div class="store-interior-caption">
             {%- if section.settings.interior_pill != blank -%}
@@ -136,9 +158,29 @@
       "default": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place."
     },
     {
+      "type": "header",
+      "content": "Showroom Visual Media (Story Video / Image)"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Media Type",
+      "options": [
+        { "value": "video", "label": "Vertical Story Video" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Store Walkthrough Video URL",
+      "default": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov"
+    },
+    {
       "type": "image_picker",
       "id": "store_image",
-      "label": "Store Interior Image"
+      "label": "Fallback Store Interior Image"
     },
     {
       "type": "text",
@@ -157,6 +199,10 @@
       "id": "interior_sub",
       "label": "Interior Description",
       "default": "Walk through our dedicated aisles for bridal jewellery, everyday cosmetics, dermatological skincare, and designer bags."
+    },
+    {
+      "type": "header",
+      "content": "Location Details"
     },
     {
       "type": "text",

@@ -1642,52 +1642,102 @@ h1, h2, h3, h4, .font-serif {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-card);
-  min-height: 400px;
+  box-shadow: 0 16px 40px rgba(44, 29, 17, 0.14);
+  border: 2px solid rgba(197, 160, 89, 0.45);
+  background: #0C0704;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.store-interior-img {
+@media (max-width: 767px) {
+  .store-interior-card {
+    min-height: 440px;
+    border-radius: 20px;
+  }
+}
+
+.store-video-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.store-interior-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.store-interior-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .store-interior-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(26, 15, 8, 0.2) 0%, rgba(26, 15, 8, 0.95) 100%);
+  background: linear-gradient(180deg, rgba(12, 7, 4, 0.1) 0%, rgba(12, 7, 4, 0.4) 45%, rgba(12, 7, 4, 0.95) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .store-interior-caption {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  right: 24px;
+  position: relative;
+  padding: 24px;
   color: #FFFDF9;
   z-index: 2;
 }
 
+@media (min-width: 768px) {
+  .store-interior-caption {
+    padding: 30px;
+  }
+}
+
 .interior-pill {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 800;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
   background: var(--color-accent-gold);
   color: var(--color-text-chocolate-dark);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
   display: inline-block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .interior-headline {
-  font-size: 1.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 800;
   color: #FFFDF9;
-  margin-bottom: 6px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+  .interior-headline {
+    font-size: 1.85rem;
+  }
 }
 
 .interior-sub {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
   color: #E8DFD5;
+  margin: 0;
 }
 
 .store-location-card {
