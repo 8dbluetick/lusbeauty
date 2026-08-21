@@ -28,17 +28,28 @@
       </a>
     </div>
 
-    <!-- CENTER: Main Navigation (8 items strictly) -->
+    <!-- CENTER: Main Navigation (Dynamic with graceful 404 fallback) -->
     <nav class="header-desktop-nav" aria-label="Primary Navigation">
       <ul class="nav-links-list">
-        <li><a href="/" class="nav-item-link">HOME</a></li>
-        <li><a href="/collections/all" class="nav-item-link">SHOP</a></li>
-        <li><a href="/collections/skincare" class="nav-item-link">SKINCARE</a></li>
-        <li><a href="/collections/cosmetics" class="nav-item-link">COSMETICS</a></li>
-        <li><a href="/collections/artificial-jewellery" class="nav-item-link">JEWELLERY</a></li>
-        <li><a href="/collections/handbags" class="nav-item-link">HANDBAGS</a></li>
-        <li><a href="/collections/beauty-accessories" class="nav-item-link">ACCESSORIES</a></li>
-        <li><a href="/collections/all" class="nav-item-link nav-item-offers">OFFERS</a></li>
+        {%- assign nav_menu = linklists[section.settings.menu | default: 'main-menu'] -%}
+        {%- if nav_menu != blank and nav_menu.links.size > 0 -%}
+          {%- for link in nav_menu.links -%}
+            <li>
+              <a href="{{ link.url }}" class="nav-item-link{% if link.active %} active{% endif %}">
+                {{ link.title | upcase }}
+              </a>
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a href="/" class="nav-item-link">HOME</a></li>
+          <li><a href="/collections/all" class="nav-item-link">SHOP</a></li>
+          <li><a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">SKINCARE</a></li>
+          <li><a href="{% if collections['cosmetics'] != blank %}{{ collections['cosmetics'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">COSMETICS</a></li>
+          <li><a href="{% if collections['artificial-jewellery'] != blank %}{{ collections['artificial-jewellery'].url }}{% elsif collections['jewellery'] != blank %}{{ collections['jewellery'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">JEWELLERY</a></li>
+          <li><a href="{% if collections['handbags'] != blank %}{{ collections['handbags'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">HANDBAGS</a></li>
+          <li><a href="{% if collections['beauty-accessories'] != blank %}{{ collections['beauty-accessories'].url }}{% elsif collections['accessories'] != blank %}{{ collections['accessories'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">ACCESSORIES</a></li>
+          <li><a href="/collections/all" class="nav-item-link nav-item-offers">OFFERS</a></li>
+        {%- endif -%}
       </ul>
     </nav>
 
@@ -103,14 +114,25 @@
 
       <div class="mobile-nav-body">
         <ul class="mobile-nav-links">
-          <li><a href="/">HOME</a></li>
-          <li><a href="/collections/all">SHOP</a></li>
-          <li><a href="/collections/skincare">SKINCARE</a></li>
-          <li><a href="/collections/cosmetics">COSMETICS</a></li>
-          <li><a href="/collections/artificial-jewellery">JEWELLERY</a></li>
-          <li><a href="/collections/handbags">HANDBAGS</a></li>
-          <li><a href="/collections/beauty-accessories">ACCESSORIES</a></li>
-          <li><a href="/collections/all" class="mobile-offers-link">OFFERS</a></li>
+          {%- assign nav_menu = linklists[section.settings.menu | default: 'main-menu'] -%}
+          {%- if nav_menu != blank and nav_menu.links.size > 0 -%}
+            {%- for link in nav_menu.links -%}
+              <li>
+                <a href="{{ link.url }}">
+                  {{ link.title | upcase }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a href="/">HOME</a></li>
+            <li><a href="/collections/all">SHOP</a></li>
+            <li><a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}">SKINCARE</a></li>
+            <li><a href="{% if collections['cosmetics'] != blank %}{{ collections['cosmetics'].url }}{% else %}/collections/all{% endif %}">COSMETICS</a></li>
+            <li><a href="{% if collections['artificial-jewellery'] != blank %}{{ collections['artificial-jewellery'].url }}{% elsif collections['jewellery'] != blank %}{{ collections['jewellery'].url }}{% else %}/collections/all{% endif %}">JEWELLERY</a></li>
+            <li><a href="{% if collections['handbags'] != blank %}{{ collections['handbags'].url }}{% else %}/collections/all{% endif %}">HANDBAGS</a></li>
+            <li><a href="{% if collections['beauty-accessories'] != blank %}{{ collections['beauty-accessories'].url }}{% elsif collections['accessories'] != blank %}{{ collections['accessories'].url }}{% else %}/collections/all{% endif %}">ACCESSORIES</a></li>
+            <li><a href="/collections/all" class="mobile-offers-link">OFFERS</a></li>
+          {%- endif -%}
         </ul>
 
         <div class="mobile-nav-footer-info">
@@ -125,6 +147,13 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
 }
 {% endschema %}

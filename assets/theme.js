@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhatsAppWidget();
   initWholesaleModal();
   initQuickViewModal();
+  initTrendingCategoryFilters();
   initCarousels();
   initReels();
   initCouponCopy();
@@ -502,6 +503,35 @@ function initReels() {
           <img src="${imageSrc}" alt="${caption}" style="width: 100%; height: 100%; object-fit: contain; background: #000;">
         `;
       }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   10. Instant Trending Category Filters
+   -------------------------------------------------------------------------- */
+function initTrendingCategoryFilters() {
+  const filterContainer = document.getElementById('TrendingCategoryFilters');
+  if (!filterContainer) return;
+
+  const buttons = filterContainer.querySelectorAll('[data-category-filter]');
+  const cards = document.querySelectorAll('.lush-trending-section .lush-product-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.categoryFilter.toLowerCase();
+
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      cards.forEach(card => {
+        const cat = (card.dataset.category || '').toLowerCase();
+        if (filter === 'all' || cat.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     });
   });
 }

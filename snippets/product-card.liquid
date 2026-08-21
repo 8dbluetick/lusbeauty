@@ -5,7 +5,7 @@
   - show_vendor: {Boolean} Show the product vendor (optional)
 {% endcomment %}
 
-<div class="lush-product-card group" data-product-id="{{ product.id }}">
+<div class="lush-product-card group" data-product-id="{{ product.id }}" data-category="{{ product.type | downcase }} {{ product.tags | join: ' ' | downcase }}">
   <div class="card-media-wrapper">
     <a href="{{ product.url }}" class="card-image-link">
       {%- if product.featured_media -%}
