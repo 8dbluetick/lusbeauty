@@ -1,0 +1,157 @@
+{%- if section.settings.enable_section -%}
+  <section class="lush-partner-section" style="background: linear-gradient(135deg, {{ section.settings.bg_color | default: '#0C1E35' }} 0%, #162E4E 100%); color: #FFFFFF;">
+    <div class="page-width">
+      <div class="partner-card-layout">
+        <!-- Left: Venture Info -->
+        <div class="partner-text-col">
+          <div class="partner-badge-pill">
+            <span class="pulse-emerald"></span>
+            <span>{{ section.settings.badge | default: "🏥 OUR HEALTHCARE & PHARMACY VENTURE" }}</span>
+          </div>
+
+          <h2 class="partner-title">{{ section.settings.title | default: "Seva Surgicals & Drugs" }}</h2>
+          <p class="partner-tagline">{{ section.settings.tagline | default: "Nagpur’s Trusted Medical, Surgical & Pharmacy Destination" }}</p>
+
+          <p class="partner-desc">
+            {{ section.settings.description | default: "Looking for authentic prescription medicines, surgical instruments, hospital equipment, healthcare devices, or diagnostic supplies in Nagpur? Visit our dedicated pharmacy and surgical supply store in Dhantoli, Nagpur." }}
+          </p>
+
+          <!-- Feature Bullets -->
+          <div class="partner-perks-row">
+            <div class="partner-perk">
+              <span class="perk-icon">💊</span>
+              <span>1500+ Genuine Medicines</span>
+            </div>
+            <div class="partner-perk">
+              <span class="perk-icon">🩺</span>
+              <span>Surgical & Hospital Equipment</span>
+            </div>
+            <div class="partner-perk">
+              <span class="perk-icon">🚚</span>
+              <span>Same-Day Nagpur Delivery</span>
+            </div>
+            <div class="partner-perk">
+              <span class="perk-icon">📍</span>
+              <span>Dhantoli, Nagpur</span>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="partner-cta-group">
+            <a href="{{ section.settings.website_url | default: 'https://sevasurgicalsanddrugs.vercel.app/' }}" target="_blank" rel="noopener noreferrer" class="btn-partner-primary">
+              <span>{{ section.settings.btn_text | default: "Visit Seva Surgicals Website" }}</span>
+              <span class="arrow-icon">↗</span>
+            </a>
+
+            <a href="https://wa.me/{{ section.settings.whatsapp_number | default: '919119595951' }}?text={{ 'Hi Seva Surgicals Nagpur! I would like to inquire about medicines/surgical supplies.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-partner-whatsapp">
+              <span>💬 WhatsApp Order (Medicines)</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Visual Feature Showcase -->
+        <div class="partner-visual-col">
+          <div class="partner-glass-card">
+            <div class="glass-card-header">
+              <div class="pharmacy-icon-box">
+                <span class="cross-icon">➕</span>
+              </div>
+              <div>
+                <h4 class="card-brand-name">SEVA SURGICALS & DRUGS</h4>
+                <p class="card-brand-sub">Retail & Wholesale Pharmacy • Dhantoli, Nagpur</p>
+              </div>
+            </div>
+
+            <div class="glass-card-body">
+              <div class="glass-stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Verified Authentic Drugs</span>
+              </div>
+              <div class="glass-stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">WhatsApp Helpline</span>
+              </div>
+              <div class="glass-stat-item">
+                <span class="stat-number">Fast</span>
+                <span class="stat-label">Doorstep Delivery</span>
+              </div>
+            </div>
+
+            <div class="glass-card-footer">
+              <a href="{{ section.settings.website_url | default: 'https://sevasurgicalsanddrugs.vercel.app/' }}" target="_blank" rel="noopener noreferrer" class="glass-link-btn">
+                <span>Explore Medicines & Surgical Catalogue →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Sister Venture (Healthcare)",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Pill",
+      "default": "🏥 OUR HEALTHCARE & PHARMACY VENTURE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Venture Title",
+      "default": "Seva Surgicals & Drugs"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Nagpur’s Trusted Medical, Surgical & Pharmacy Destination"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Looking for authentic prescription medicines, surgical instruments, hospital equipment, healthcare devices, or diagnostic supplies in Nagpur? Visit our dedicated pharmacy and surgical supply store in Dhantoli, Nagpur."
+    },
+    {
+      "type": "url",
+      "id": "website_url",
+      "label": "Website URL",
+      "default": "https://sevasurgicalsanddrugs.vercel.app/"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "Visit Seva Surgicals Website"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "Pharmacy WhatsApp Number",
+      "default": "919119595951"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#0C1E35"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sister Venture (Healthcare)"
+    }
+  ]
+}
+{% endschema %}

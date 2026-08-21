@@ -5019,3 +5019,226 @@ h1, h2, h3, h4, .font-serif {
   border-top: 1px solid #EFEAE2;
 }
 
+/* --------------------------------------------------------------------------
+   Healthcare Partner / Seva Surgicals Section
+   -------------------------------------------------------------------------- */
+.lush-partner-section {
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-card-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .partner-card-layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 50px;
+  }
+}
+
+.partner-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #34D399;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.pulse-emerald {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: pulse-ring 2s infinite;
+}
+
+.partner-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+  .partner-title {
+    font-size: 2.6rem;
+  }
+}
+
+.partner-tagline {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #38BDF8;
+  margin-bottom: 14px;
+}
+
+.partner-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #CBD5E1;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.partner-perks-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 500px) {
+  .partner-perks-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.partner-perk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #F1F5F9;
+}
+
+.partner-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-partner-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #10B981;
+  color: #064E3B;
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-partner-primary:hover {
+  background: #34D399;
+  transform: translateY(-2px);
+}
+
+.btn-partner-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.btn-partner-whatsapp:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.partner-glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pharmacy-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #10B981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.card-brand-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.card-brand-sub {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  margin: 2px 0 0;
+}
+
+.glass-card-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.glass-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #38BDF8;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: #CBD5E1;
+  margin-top: 2px;
+}
+
+.glass-card-footer {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.glass-link-btn {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #34D399;
+  text-decoration: underline;
+}
+
+
