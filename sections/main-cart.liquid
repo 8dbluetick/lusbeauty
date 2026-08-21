@@ -1,75 +1,229 @@
-<section class="lush-main-cart-page">
+<section class="lush-main-cart-page" id="LushMainCartPage">
   <div class="page-width">
+    <!-- Header -->
     <div class="cart-page-header">
-      <h1 class="cart-page-title">Your Shopping Bag</h1>
-      <p class="cart-page-count">{{ cart.item_count }} items</p>
+      <div class="cart-header-left">
+        <span class="cart-pill-badge">SHOPPING BAG</span>
+        <h1 class="cart-page-title">Review Your Cart</h1>
+      </div>
+      <div class="cart-header-right">
+        <span class="cart-item-count-pill" id="CartPageCountBadge">{{ cart.item_count }} {% if cart.item_count == 1 %}Item{% else %}Items{% endif %}</span>
+      </div>
     </div>
 
     {%- if cart.item_count == 0 -%}
-      <div class="cart-page-empty">
-        <div class="empty-icon">🛍️</div>
-        <h2>Your shopping bag is empty</h2>
-        <p>Explore our luxury skincare, cosmetics, artificial jewellery and handbags collections.</p>
-        <a href="/collections/all" class="btn-hero-primary">Start Shopping</a>
+      <div class="cart-page-empty-card">
+        <div class="empty-bag-animation">
+          <div class="empty-icon-circle">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </div>
+        </div>
+        <h2 class="empty-headline">Your Shopping Bag is Empty</h2>
+        <p class="empty-subtitle">Discover premium skincare, high-definition cosmetics, authentic artificial jewellery and designer handbags from our Nagpur showroom.</p>
+        <a href="/collections/all" class="btn-start-shopping">
+          <span>Explore All Collections</span>
+          <span class="btn-arrow">→</span>
+        </a>
       </div>
     {%- else -%}
+      <!-- Free Shipping Animated Progress Bar -->
+      {%- assign threshold = 49900 -%}
+      {%- assign current_total = cart.total_price -%}
+      {%- assign progress_percent = current_total | times: 100.0 | divided_by: threshold | at_most: 100 -%}
+      <div class="cart-free-shipping-card">
+        <div class="shipping-progress-header">
+          <div class="shipping-msg-wrap">
+            <span class="shipping-truck-icon">🚚</span>
+            <span class="shipping-msg-text">
+              {%- if current_total >= threshold -%}
+                <strong class="text-unlocked">🎉 Congratulations! You qualify for FREE Express Delivery in Nagpur & PAN India!</strong>
+              {%- else -%}
+                {%- assign remaining = threshold | minus: current_total -%}
+                <span>Add <strong>{{ remaining | money }}</strong> more for <strong>FREE Express Delivery</strong></span>
+              {%- endif -%}
+            </span>
+          </div>
+          <span class="shipping-target-pill">Target: ₹499</span>
+        </div>
+        <div class="shipping-progress-track">
+          <div class="shipping-progress-bar" style="width: {{ progress_percent }}%;"></div>
+        </div>
+      </div>
+
+      <!-- Main Cart Layout Grid -->
       <div class="cart-page-grid">
-        <!-- Cart Items List -->
+        <!-- Left: Cart Items List -->
         <div class="cart-page-items-col">
-          <form action="/cart" method="post" id="CartPageForm">
-            {%- for item in cart.items -%}
-              <div class="cart-page-row" data-line-key="{{ item.key }}">
-                <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" class="cart-page-img" width="100" height="100">
-                <div class="cart-page-item-info">
-                  <div class="cart-page-item-top">
-                    <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
-                    <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-page-remove">Remove</a>
+          <div class="cart-items-card-panel">
+            <div class="cart-items-panel-header">
+              <span>Item Details</span>
+              <span class="text-right">Price</span>
+            </div>
+
+            <div class="cart-page-items-list" id="CartPageItemsList">
+              {%- for item in cart.items -%}
+                <div class="cart-page-item-row" data-line-key="{{ item.key }}" style="animation-delay: {{ forloop.index | times: 0.08 }}s;">
+                  <div class="item-img-box">
+                    <a href="{{ item.url }}">
+                      {%- if item.image -%}
+                        <img
+                          src="{{ item.image | image_url: width: 220 }}"
+                          alt="{{ item.title | escape }}"
+                          class="cart-row-img"
+                          loading="lazy"
+                          width="110"
+                          height="110"
+                        >
+                      {%- else -%}
+                        {{ 'product-1' | placeholder_svg_tag: 'cart-placeholder-svg' }}
+                      {%- endif -%}
+                    </a>
                   </div>
-                  {%- unless item.product.has_only_default_variant -%}
-                    <span class="cart-page-variant">{{ item.variant.title }}</span>
-                  {%- endunless -%}
-                  <div class="cart-page-item-bottom">
-                    <div class="qty-stepper">
-                      <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" class="qty-btn">-</a>
-                      <span class="qty-num">{{ item.quantity }}</span>
-                      <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" class="qty-btn">+</a>
+
+                  <div class="item-details-box">
+                    <div class="item-title-row">
+                      <h3 class="item-title">
+                        <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      </h3>
+                      <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="btn-remove-item" title="Remove item" aria-label="Remove item">
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.8" fill="none">
+                          <polyline points="3 6 5 6 21 6"></polyline>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                      </a>
                     </div>
-                    <span class="cart-page-price">{{ item.final_line_price | money }}</span>
+
+                    {%- unless item.product.has_only_default_variant -%}
+                      <span class="item-variant-tag">{{ item.variant.title }}</span>
+                    {%- endunless -%}
+
+                    <div class="item-controls-row">
+                      <!-- Animated Stepper -->
+                      <div class="cart-qty-stepper">
+                        <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" class="btn-qty-step" aria-label="Decrease quantity">−</a>
+                        <span class="qty-display">{{ item.quantity }}</span>
+                        <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" class="btn-qty-step" aria-label="Increase quantity">+</a>
+                      </div>
+
+                      <div class="item-price-wrap">
+                        <span class="item-final-price">{{ item.final_line_price | money }}</span>
+                        {%- if item.original_line_price > item.final_line_price -%}
+                          <span class="item-original-price">{{ item.original_line_price | money }}</span>
+                        {%- endif -%}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            {%- endfor -%}
-          </form>
+              {%- endfor -%}
+            </div>
+
+            <!-- Order Note / Special Instructions -->
+            <div class="cart-order-note-wrap">
+              <label for="CartOrderNote" class="order-note-label">📝 Order Notes / Gift Message (Optional):</label>
+              <textarea id="CartOrderNote" name="note" class="order-note-input" placeholder="Special delivery instructions or custom packaging note...">{{ cart.note }}</textarea>
+            </div>
+          </div>
         </div>
 
-        <!-- Order Summary Box -->
+        <!-- Right: Animated Luxury Order Summary & Checkout -->
         <div class="cart-page-summary-col">
-          <div class="summary-card">
-            <h3>Order Summary</h3>
-            <div class="summary-row">
-              <span>Bag Subtotal</span>
-              <strong>{{ cart.total_price | money }}</strong>
-            </div>
-            <div class="summary-row">
-              <span>Delivery (Nagpur & PAN India)</span>
-              <span>{% if cart.total_price >= 49900 %}<strong class="text-free">FREE</strong>{% else %}₹50{% endif %}</span>
-            </div>
-            <div class="summary-total-row">
-              <span>Total Amount</span>
-              <span class="total-price-val">{{ cart.total_price | money }}</span>
+          <div class="cart-summary-card">
+            <h3 class="summary-card-title">Order Summary</h3>
+
+            <!-- Promo Coupon Bar -->
+            <div class="cart-promo-box">
+              <div class="promo-input-group">
+                <input type="text" id="CartPageCouponInput" placeholder="Discount Code (e.g. LUSH10)" class="promo-input">
+                <button type="button" id="BtnApplyCartPageCoupon" class="btn-apply-promo">Apply</button>
+              </div>
+              <p class="promo-hint-text">✨ Extra discounts calculated at checkout</p>
             </div>
 
-            <div class="summary-actions">
+            <div class="summary-line-items">
+              <div class="summary-row">
+                <span>Bag Subtotal</span>
+                <strong>{{ cart.total_price | money }}</strong>
+              </div>
+              <div class="summary-row">
+                <span>Nagpur Delivery</span>
+                <span>
+                  {%- if cart.total_price >= threshold -%}
+                    <strong class="text-unlocked-badge">FREE</strong>
+                  {%- else -%}
+                    ₹50
+                  {%- endif -%}
+                </span>
+              </div>
+              <div class="summary-row">
+                <span>Taxes & Packaging</span>
+                <span class="text-muted">Included</span>
+              </div>
+
+              <div class="summary-divider"></div>
+
+              <div class="summary-total-row">
+                <div class="total-label-box">
+                  <span class="total-title">Total Amount</span>
+                  <span class="total-sub">Includes all taxes</span>
+                </div>
+                <span class="total-amount-val">{{ cart.total_price | money }}</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="checkout-action-group">
+              <!-- Shopify Native Secure Checkout -->
               <form action="/checkout" method="post">
-                <button type="submit" class="btn-page-checkout">
-                  <span>Proceed to Checkout →</span>
+                <button type="submit" class="btn-shimmer-checkout" name="checkout">
+                  <span class="btn-text">Proceed to Checkout</span>
+                  <span class="btn-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14"></path>
+                      <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                  </span>
                 </button>
               </form>
 
-              {%- assign wa_order_text = 'Namaste Lush Beauty Mart Nagpur! 🛍️ I would like to place an order from my bag. Total: ' | append: cart.total_price | money | append: '. Please confirm availability!' -%}
-              <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ wa_order_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-page-whatsapp">
-                <span>Order via WhatsApp (Nagpur Store)</span>
+              <!-- Quick 1-Click WhatsApp Order -->
+              {%- capture wa_msg -%}
+Namaste Lush Beauty Mart! 🛍️
+I want to order the following items from my shopping cart:
+{% for item in cart.items %}
+• {{ item.product.title }}{% unless item.product.has_only_default_variant %} ({{ item.variant.title }}){% endunless %} x {{ item.quantity }} = {{ item.final_line_price | money }}
+{% endfor %}
+Total Bag Amount: {{ cart.total_price | money }}
+Please confirm store availability & payment instructions!
+              {%- endcapture -%}
+
+              <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ wa_msg | strip | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-instant-checkout">
+                <span class="wa-icon-glow">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+                  </svg>
+                </span>
+                <span>Instant 1-Click WhatsApp Order</span>
               </a>
+            </div>
+
+            <!-- Trust & Security Strip -->
+            <div class="cart-trust-badges-strip">
+              <div class="cart-trust-item">
+                <span class="trust-icon">🔒</span>
+                <span>256-Bit Encrypted Secure Checkout</span>
+              </div>
+              <div class="cart-trust-item">
+                <span class="trust-icon">⚡</span>
+                <span>UPI, Cards, Net Banking & COD</span>
+              </div>
+              <div class="cart-trust-item">
+                <span class="trust-icon">📍</span>
+                <span>In-Store Pickup Available at Nagpur Store</span>
+              </div>
             </div>
           </div>
         </div>

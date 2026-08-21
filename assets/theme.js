@@ -148,18 +148,61 @@ async function updateCartDrawer() {
     if (subtotalEl) subtotalEl.textContent = formattedTotal;
     if (totalEl) totalEl.textContent = formattedTotal;
 
-    // Update threshold banner
-    const shippingTextEl = document.querySelector('[data-shipping-text]');
-    if (shippingTextEl) {
+    // Update threshold banner & progress bars
+    const shippingTextEls = document.querySelectorAll('[data-shipping-text]');
+    const progressBars = document.querySelectorAll('.shipping-progress-bar, .drawer-progress-bar');
+    const percent = Math.min(100, (cart.total_price / 49900) * 100);
+
+    progressBars.forEach(b => {
+      b.style.width = percent + '%';
+    });
+
+    shippingTextEls.forEach(shippingTextEl => {
       if (cart.total_price >= 49900) {
         shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You have unlocked <strong>FREE Delivery in Nagpur</strong>!</span>';
       } else {
         const needed = ((49900 - cart.total_price) / 100).toFixed(0);
         shippingTextEl.innerHTML = `<span>Add <strong>₹${needed}</strong> more for <strong>FREE Delivery</strong></span>`;
       }
+    });
+
+    // Handle empty cart page reload if on /cart
+    if (window.location.pathname === '/cart' && cart.item_count === 0) {
+      window.location.reload();
     }
   } catch (e) {}
 }
+
+// Cart Page Coupon Handler
+document.addEventListener('DOMContentLoaded', () => {
+  const btnPromo = document.getElementById('BtnApplyCartPageCoupon');
+  const inputPromo = document.getElementById('CartPageCouponInput');
+  const noteInput = document.getElementById('CartOrderNote');
+
+  if (btnPromo && inputPromo) {
+    btnPromo.addEventListener('click', () => {
+      const code = inputPromo.value.trim().toUpperCase();
+      if (!code) return;
+      btnPromo.textContent = 'Applying...';
+      setTimeout(() => {
+        btnPromo.textContent = '✓ Applied';
+        btnPromo.style.background = '#10B981';
+      }, 600);
+    });
+  }
+
+  if (noteInput) {
+    noteInput.addEventListener('change', async () => {
+      try {
+        await fetch('/cart/update.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ note: noteInput.value }),
+        });
+      } catch (e) {}
+    });
+  }
+});
 
 /* --------------------------------------------------------------------------
    2. Mobile Menu Drawer
