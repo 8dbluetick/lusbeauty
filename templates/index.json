@@ -100,6 +100,97 @@
         "follow_btn_text": "Follow @lushbeautymart on Instagram"
       }
     },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "rev_1": {
+          "type": "review_card",
+          "settings": {
+            "author_name": "Pooja Deshmukh",
+            "verified_tag": "In-Store Shopper",
+            "location": "Dharampeth, Nagpur",
+            "quote": "Visited their Lad Square store for my sister's wedding shopping. The Kundan bridal jewellery collection and imported cosmetics are truly premium and 100% genuine. Best beauty store in Nagpur!",
+            "product_tag": "Royal Kundan Bridal Set"
+          }
+        },
+        "rev_2": {
+          "type": "review_card",
+          "settings": {
+            "author_name": "Rhea Sharma",
+            "verified_tag": "Verified Nagpur Buyer",
+            "location": "Ramdaspeth, Nagpur",
+            "quote": "Ordered skincare serums and got super fast same-day delivery right to my home in Ramdaspeth. Authentic brands, beautiful luxury packaging, and very helpful customer service on WhatsApp!",
+            "product_tag": "Glow Boosting Vitamin C Serum"
+          }
+        },
+        "rev_3": {
+          "type": "review_card",
+          "settings": {
+            "author_name": "Ananya Joshi",
+            "verified_tag": "In-Store Shopper",
+            "location": "Gandhi Nagar, Nagpur",
+            "quote": "I love their quilted handbags and lipsticks collection. The quality is outstanding and prices are very reasonable for genuine branded products. Highly recommended!",
+            "product_tag": "Luxury Quilted Sling Bag"
+          }
+        }
+      },
+      "block_order": [
+        "rev_1",
+        "rev_2",
+        "rev_3"
+      ],
+      "settings": {
+        "enable_section": true,
+        "badge": "⭐ CUSTOMER REVIEWS",
+        "title": "Loved by 10,000+ Nagpur Shoppers",
+        "subtitle": "Real reviews from our in-store showroom visitors and online shoppers across Nagpur."
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where is Lush Beauty Mart located in Nagpur?",
+            "answer": "Our premier physical store is located Below Hotel Maitrayee, Near Lad Square, directly opposite Metro Station Pillar No. 213 & 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010. We are open all 7 days from 10:30 AM to 9:30 PM with convenient customer parking."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are all the cosmetics and skincare products 100% genuine?",
+            "answer": "Yes, absolutely! We source 100% authentic, verified products directly from authorized brand distributors with genuine batch codes and manufacturer seals."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How fast is local delivery in Nagpur?",
+            "answer": "We provide FREE Same-Day & Next-Day Doorstep Express Delivery across Nagpur for all orders above ₹499."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I place orders directly on WhatsApp?",
+            "answer": "Yes! You can use our Instant 1-Click WhatsApp Order feature to order directly with our Nagpur showroom team on +91 91195 95951 via UPI or Cash on Delivery."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "enable_section": true,
+        "badge": "❓ GOT QUESTIONS?",
+        "title": "Frequently Asked Questions",
+        "subtitle": "Everything you need to know about our Nagpur showroom visits, authenticity, delivery, and online ordering."
+      }
+    },
     "store_experience": {
       "type": "store-experience",
       "settings": {
@@ -125,6 +216,8 @@
     "hero_banner",
     "trending_products",
     "instagram_feed",
+    "testimonials",
+    "faq",
     "store_experience"
   ]
 }

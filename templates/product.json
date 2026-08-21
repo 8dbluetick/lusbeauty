@@ -4,6 +4,16 @@
       "type": "main-product",
       "settings": {}
     },
+    "related_products": {
+      "type": "related-products",
+      "settings": {
+        "enable_section": true,
+        "badge": "✨ CURATED PAIRINGS",
+        "title": "You May Also Love",
+        "subtitle": "Complementary beauty picks, trending jewellery and luxury accessories.",
+        "products_to_show": 4
+      }
+    },
     "store_experience": {
       "type": "store-experience",
       "settings": {}
@@ -11,6 +21,7 @@
   },
   "order": [
     "main_product",
+    "related_products",
     "store_experience"
   ]
 }

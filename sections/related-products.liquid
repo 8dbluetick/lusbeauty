@@ -1,0 +1,73 @@
+{%- if section.settings.enable_section -%}
+  <section class="lush-related-products-section">
+    <div class="page-width">
+      <div class="section-header-center">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.title | default: "You May Also Love" }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="products-grid-4">
+        {%- assign current_id = product.id -%}
+        {%- assign collection_to_use = product.collections.first | default: collections.all -%}
+        {%- assign count = 0 -%}
+        {%- for rel_product in collection_to_use.products -%}
+          {%- if rel_product.id != current_id and count < section.settings.products_to_show -%}
+            {% render 'product-card', product: rel_product %}
+            {%- assign count = count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "✨ CURATED PAIRINGS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "You May Also Love"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Complementary beauty picks, trending jewellery and luxury accessories."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 2,
+      "default": 4,
+      "label": "Number of Related Products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related Products"
+    }
+  ]
+}
+{% endschema %}

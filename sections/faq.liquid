@@ -1,0 +1,168 @@
+{%- if section.settings.enable_section -%}
+  <section class="lush-faq-section" style="background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};">
+    <div class="page-width page-width-narrow">
+      <div class="section-header-center">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.title | default: "Frequently Asked Questions" }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="faq-accordion-container" id="FaqAccordion">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <div class="faq-accordion-item" {{ block.shopify_attributes }}>
+              <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+                <span class="faq-question-text">{{ block.settings.question }}</span>
+                <span class="faq-toggle-icon">+</span>
+              </button>
+              <div class="faq-accordion-body" hidden>
+                <p>{{ block.settings.answer }}</p>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default FAQ Item 1 -->
+          <div class="faq-accordion-item">
+            <button type="button" class="faq-accordion-trigger" aria-expanded="true">
+              <span class="faq-question-text">Where is Lush Beauty Mart located in Nagpur?</span>
+              <span class="faq-toggle-icon">−</span>
+            </button>
+            <div class="faq-accordion-body">
+              <p>Our premier physical store is located <strong>Below Hotel Maitrayee, Near Lad Square, directly opposite Metro Station Pillar No. 213 & 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010</strong>. We are open all 7 days from 10:30 AM to 9:30 PM with convenient customer parking.</p>
+            </div>
+          </div>
+
+          <!-- Default FAQ Item 2 -->
+          <div class="faq-accordion-item">
+            <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+              <span class="faq-question-text">Are all the cosmetics and skincare products 100% genuine?</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-accordion-body" hidden>
+              <p>Yes, absolutely! We source 100% authentic, verified products directly from authorized brand distributors with genuine batch codes and manufacturer seals.</p>
+            </div>
+          </div>
+
+          <!-- Default FAQ Item 3 -->
+          <div class="faq-accordion-item">
+            <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+              <span class="faq-question-text">How fast is local delivery in Nagpur?</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-accordion-body" hidden>
+              <p>We provide <strong>FREE Same-Day & Next-Day Doorstep Express Delivery</strong> across Nagpur for all orders above ₹499. Orders below ₹499 have a nominal delivery charge of just ₹50.</p>
+            </div>
+          </div>
+
+          <!-- Default FAQ Item 4 -->
+          <div class="faq-accordion-item">
+            <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+              <span class="faq-question-text">Can I place orders directly on WhatsApp?</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-accordion-body" hidden>
+              <p>Yes! You can use our <strong>Instant 1-Click WhatsApp Order</strong> feature on any product card, cart drawer, or checkout page to order directly with our Nagpur showroom team on <strong>+91 91195 95951</strong> via UPI or Cash on Delivery.</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "❓ GOT QUESTIONS?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Everything you need to know about our Nagpur showroom visits, authenticity, delivery, and online ordering."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Where is Lush Beauty Mart located in Nagpur?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Our premier store is located Below Hotel Maitrayee, Near Lad Square, directly opposite Metro Station Pillar No. 213 & 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where is Lush Beauty Mart located in Nagpur?",
+            "answer": "Our premier physical store is located Below Hotel Maitrayee, Near Lad Square, directly opposite Metro Station Pillar No. 213 & 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010. We are open all 7 days from 10:30 AM to 9:30 PM with convenient customer parking."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are all the cosmetics and skincare products 100% genuine?",
+            "answer": "Yes, absolutely! We source 100% authentic, verified products directly from authorized brand distributors with genuine batch codes and manufacturer seals."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How fast is local delivery in Nagpur?",
+            "answer": "We provide FREE Same-Day & Next-Day Doorstep Express Delivery across Nagpur for all orders above ₹499."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I place orders directly on WhatsApp?",
+            "answer": "Yes! You can use our Instant 1-Click WhatsApp Order feature to order directly with our Nagpur showroom team on +91 91195 95951 via UPI or Cash on Delivery."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

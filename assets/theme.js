@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initCartDrawer();
   initMobileMenu();
   initWhatsAppWidget();
-  initWholesaleModal();
   initQuickViewModal();
+  initSearchModal();
+  initFaqAccordion();
+  initProductAccordions();
+  initPincodeChecker();
+  initStickyMobileBar();
   initTrendingCategoryFilters();
   initCarousels();
   initReels();
@@ -664,3 +668,257 @@ function initTrendingCategoryFilters() {
     });
   });
 }
+
+/* --------------------------------------------------------------------------
+   11. Live Predictive AJAX Search Modal
+   -------------------------------------------------------------------------- */
+function initSearchModal() {
+  const modal = document.getElementById('LushSearchModal');
+  const input = document.getElementById('LiveSearchInput');
+  const clearBtn = document.getElementById('BtnClearSearch');
+  const resultsContainer = document.getElementById('SearchResultsArea');
+  const quickTags = document.getElementById('SearchQuickTags');
+
+  if (!modal || !input) return;
+
+  const openSearch = () => {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 100);
+  };
+
+  const closeSearch = () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll('[data-open-search]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSearch();
+    });
+  });
+
+  modal.querySelectorAll('[data-close-search]').forEach(el => {
+    el.addEventListener('click', closeSearch);
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      input.focus();
+      renderInitialSearchState();
+    });
+  }
+
+  // Quick tag clicks
+  if (quickTags) {
+    quickTags.querySelectorAll('.search-tag-btn').forEach(tag => {
+      tag.addEventListener('click', () => {
+        const term = tag.dataset.searchTerm;
+        input.value = term;
+        performSearch(term);
+      });
+    });
+  }
+
+  // Live input debounce
+  let debounceTimer;
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    const query = input.value.trim();
+    if (!query) {
+      renderInitialSearchState();
+      return;
+    }
+
+    debounceTimer = setTimeout(() => {
+      performSearch(query);
+    }, 250);
+  });
+
+  function renderInitialSearchState() {
+    if (resultsContainer) {
+      resultsContainer.innerHTML = `
+        <div class="search-initial-state">
+          <p>Type to search 200+ beauty products, authentic brands & accessories</p>
+        </div>
+      `;
+    }
+  }
+
+  async function performSearch(query) {
+    if (!resultsContainer) return;
+    resultsContainer.innerHTML = '<div class="search-loading-state"><p>Searching products...</p></div>';
+
+    try {
+      const res = await fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6`);
+      const data = await res.json();
+      const products = data.resources?.results?.products || [];
+
+      if (products.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="search-no-results">
+            <p>No products found for "<strong>${query}</strong>"</p>
+            <a href="/collections/all" class="btn-search-explore" data-close-search>Browse All Products →</a>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '<div class="search-results-grid">';
+      products.forEach(prod => {
+        const priceFormatted = '₹' + (parseFloat(prod.price) || 0).toFixed(0);
+        html += `
+          <a href="${prod.url}" class="search-result-item">
+            <img src="${prod.image || 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=200'}" alt="${prod.title}" class="search-item-thumb">
+            <div class="search-item-meta">
+              <span class="search-item-title">${prod.title}</span>
+              <span class="search-item-price">${priceFormatted}</span>
+            </div>
+          </a>
+        `;
+      });
+      html += `
+        <div class="search-view-all-row">
+          <a href="/search?q=${encodeURIComponent(query)}" class="search-view-all-link">View all results for "${query}" →</a>
+        </div>
+      `;
+      html += '</div>';
+      resultsContainer.innerHTML = html;
+    } catch (e) {
+      resultsContainer.innerHTML = `
+        <div class="search-no-results">
+          <a href="/search?q=${encodeURIComponent(query)}" class="btn-search-explore">Search for "${query}" →</a>
+        </div>
+      `;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. FAQ Accordions System
+   -------------------------------------------------------------------------- */
+function initFaqAccordion() {
+  const container = document.getElementById('FaqAccordion');
+  if (!container) return;
+
+  container.querySelectorAll('.faq-accordion-item').forEach(item => {
+    const trigger = item.querySelector('.faq-accordion-trigger');
+    const body = item.querySelector('.faq-accordion-body');
+    const icon = item.querySelector('.faq-toggle-icon');
+
+    if (trigger && body) {
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Close other open accordions in the section
+        container.querySelectorAll('.faq-accordion-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            const otherTrigger = otherItem.querySelector('.faq-accordion-trigger');
+            const otherBody = otherItem.querySelector('.faq-accordion-body');
+            const otherIcon = otherItem.querySelector('.faq-toggle-icon');
+            if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+            if (otherBody) otherBody.hidden = true;
+            if (otherIcon) otherIcon.textContent = '+';
+          }
+        });
+
+        // Toggle current
+        trigger.setAttribute('aria-expanded', !isExpanded);
+        body.hidden = isExpanded;
+        if (icon) icon.textContent = isExpanded ? '+' : '−';
+      });
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   13. Product PDP Accordions / Tabs
+   -------------------------------------------------------------------------- */
+function initProductAccordions() {
+  document.querySelectorAll('.product-acc-item').forEach(item => {
+    const header = item.querySelector('.product-acc-header');
+    const content = item.querySelector('.product-acc-content');
+    const arrow = item.querySelector('.acc-arrow');
+
+    if (header && content) {
+      header.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        item.classList.toggle('active', !isActive);
+        header.setAttribute('aria-expanded', !isActive);
+        content.style.display = isActive ? 'none' : 'block';
+        if (arrow) arrow.textContent = isActive ? '+' : '−';
+      });
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   14. Nagpur Pin Code & Express Delivery Estimator
+   -------------------------------------------------------------------------- */
+function initPincodeChecker() {
+  const input = document.getElementById('DeliveryPincodeInput');
+  const btn = document.getElementById('BtnCheckPincode');
+  const result = document.getElementById('PincodeResult');
+
+  if (!input || !btn || !result) return;
+
+  btn.addEventListener('click', () => {
+    const code = input.value.trim();
+    if (!/^\d{6}$/.test(code)) {
+      result.style.display = 'block';
+      result.className = 'pincode-result-msg error';
+      result.innerHTML = '⚠️ Please enter a valid 6-digit pin code.';
+      return;
+    }
+
+    result.style.display = 'block';
+    // Nagpur pincodes typically start with 440
+    if (code.startsWith('440') || code.startsWith('441')) {
+      result.className = 'pincode-result-msg success';
+      result.innerHTML = '⚡ <strong>Nagpur Express Delivery:</strong> FREE Same-Day / Next-Day Delivery available for pin code ' + code + '! Also available for immediate pickup at Lad Square showroom.';
+    } else {
+      result.className = 'pincode-result-msg info';
+      result.innerHTML = '📦 <strong>Standard Delivery:</strong> 3–5 working days tracked courier delivery available for pin code ' + code + '.';
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   15. Sticky Mobile Add to Bag Bar on Product Page
+   -------------------------------------------------------------------------- */
+function initStickyMobileBar() {
+  const bar = document.getElementById('StickyMobilePdpBar');
+  const triggerRow = document.getElementById('ProductMainCtaRow');
+  const stickyBtn = document.getElementById('BtnStickyAddBag');
+  const mainForm = document.getElementById('MainProductForm');
+
+  if (!bar || !triggerRow) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth >= 768) {
+      bar.classList.remove('active');
+      return;
+    }
+
+    const rect = triggerRow.getBoundingClientRect();
+    if (rect.bottom < 0) {
+      bar.classList.add('active');
+    } else {
+      bar.classList.remove('active');
+    }
+  }, { passive: true });
+
+  if (stickyBtn && mainForm) {
+    stickyBtn.addEventListener('click', () => {
+      const submitBtn = mainForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.click();
+      } else {
+        mainForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    });
+  }
+}
+

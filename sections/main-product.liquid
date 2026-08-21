@@ -92,7 +92,7 @@
           </div>
 
           <!-- Buttons: Add to Bag, Buy Now, WhatsApp Enquiry -->
-          <div class="product-cta-buttons">
+          <div class="product-cta-buttons" id="ProductMainCtaRow">
             <button type="submit" name="add" class="btn-add-bag" {% unless product.available %}disabled{% endunless %}>
               <span>{% if product.available %}Add to Shopping Bag{% else %}Sold Out{% endif %}</span>
             </button>
@@ -109,8 +109,73 @@
             <span>💬 Enquire Product on WhatsApp (+91 91195 95951)</span>
           </a>
         {%- endform -%}
+
+        <!-- Interactive Pin Code Delivery Checker -->
+        <div class="pincode-checker-box">
+          <label for="DeliveryPincodeInput" class="pincode-label">
+            <span>📍 Check Delivery Time & Nagpur Availability:</span>
+          </label>
+          <div class="pincode-input-row">
+            <input type="text" id="DeliveryPincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode (e.g. 440010)" class="pincode-input">
+            <button type="button" id="BtnCheckPincode" class="btn-pincode-check">Check</button>
+          </div>
+          <div id="PincodeResult" class="pincode-result-msg" style="display: none;"></div>
+        </div>
+
+        <!-- Collapsible Product Details & Care Tabs -->
+        <div class="product-accordions-group">
+          <!-- Accordion 1: Highlights & Features -->
+          <div class="product-acc-item active">
+            <button type="button" class="product-acc-header" aria-expanded="true">
+              <span>🌿 Highlights & Authenticity</span>
+              <span class="acc-arrow">−</span>
+            </button>
+            <div class="product-acc-content">
+              <ul class="acc-bullets-list">
+                <li><strong>100% Genuine Branded Product</strong> sourced directly with manufacturer batch seal.</li>
+                <li>Dermatologist & beauty stylist recommended formulations & designs.</li>
+                <li>In-stock and available for immediate pickup at our <strong>Lad Square, Nagpur</strong> showroom.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Accordion 2: Care & Usage Instructions -->
+          <div class="product-acc-item">
+            <button type="button" class="product-acc-header" aria-expanded="false">
+              <span>✨ Care, Material & Usage Guide</span>
+              <span class="acc-arrow">+</span>
+            </button>
+            <div class="product-acc-content" style="display: none;">
+              <p>For skincare & makeup, store in a cool, dry place away from direct sunlight. For artificial jewellery and luxury handbags, store in soft zip pouches and avoid direct moisture or perfume contact to retain lasting lustre.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 3: Nagpur Express Delivery & Store Pickup -->
+          <div class="product-acc-item">
+            <button type="button" class="product-acc-header" aria-expanded="false">
+              <span>🚚 Delivery & In-Store Showroom Pickup</span>
+              <span class="acc-arrow">+</span>
+            </button>
+            <div class="product-acc-content" style="display: none;">
+              <p>• <strong>Nagpur Doorstep Delivery:</strong> Free Same-Day / Next-Day Delivery on orders above ₹499.<br>
+              • <strong>Showroom Pickup:</strong> Instant pickup available at Below Hotel Maitrayee, Near Lad Square (Metro Pillar 213–214), North Ambazari Road, Nagpur.<br>
+              • <strong>Pan India:</strong> 3–5 working days tracked courier delivery.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- Sticky Mobile Add to Bag Bar -->
+  <div class="sticky-mobile-pdp-bar" id="StickyMobilePdpBar">
+    <div class="sticky-bar-info">
+      <span class="sticky-bar-title">{{ product.title | truncate: 25 }}</span>
+      <span class="sticky-bar-price">{{ product.price | money }}</span>
+    </div>
+    <button type="button" class="btn-sticky-add-bag" id="BtnStickyAddBag">
+      <span>+ Add to Bag</span>
+    </button>
   </div>
 </section>
 

@@ -1,0 +1,44 @@
+<div id="LushSearchModal" class="search-modal-overlay" aria-hidden="true">
+  <div class="search-modal-backdrop" data-close-search></div>
+  <div class="search-modal-container">
+    <div class="search-modal-header">
+      <div class="search-input-wrapper">
+        <svg class="search-input-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="search"
+          id="LiveSearchInput"
+          placeholder="Search skincare, cosmetics, jewellery, bags..."
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          class="live-search-input"
+        >
+        <button type="button" class="btn-clear-search" id="BtnClearSearch" aria-label="Clear input">&times;</button>
+      </div>
+      <button type="button" class="btn-close-search" data-close-search aria-label="Close search">&times;</button>
+    </div>
+
+    <!-- Quick Trending Search Tags -->
+    <div class="search-quick-tags" id="SearchQuickTags">
+      <span class="tags-label">Trending Searches:</span>
+      <div class="tags-row">
+        <button type="button" class="search-tag-btn" data-search-term="Serum">✨ Serums</button>
+        <button type="button" class="search-tag-btn" data-search-term="Lipstick">💄 Lipsticks</button>
+        <button type="button" class="search-tag-btn" data-search-term="Kundan">👑 Kundan Sets</button>
+        <button type="button" class="search-tag-btn" data-search-term="Handbag">👜 Handbags</button>
+        <button type="button" class="search-tag-btn" data-search-term="Sunscreen">☀️ Sunscreens</button>
+      </div>
+    </div>
+
+    <!-- Live Search Results Container -->
+    <div class="search-results-area" id="SearchResultsArea">
+      <div class="search-initial-state">
+        <p>Type to search 200+ beauty products, authentic brands & accessories</p>
+      </div>
+    </div>
+  </div>
+</div>

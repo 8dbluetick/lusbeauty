@@ -1,0 +1,248 @@
+{%- if section.settings.enable_section -%}
+  <section class="lush-testimonials-section" style="background-color: {{ section.settings.bg_color | default: '#FAF7F2' }};">
+    <div class="page-width">
+      <div class="section-header-center">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.title | default: "Loved by 10,000+ Nagpur Shoppers" }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="testimonials-grid-3">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <div class="testimonial-card" {{ block.shopify_attributes }}>
+              <div class="testimonial-rating-stars">
+                {%- assign rating = block.settings.rating | default: 5 -%}
+                {%- for i in (1..rating) -%}
+                  <span class="star-gold">★</span>
+                {%- endfor -%}
+              </div>
+
+              <blockquote class="testimonial-quote">
+                “{{ block.settings.quote }}”
+              </blockquote>
+
+              <div class="testimonial-author-row">
+                <div class="author-avatar-circle">
+                  {{ block.settings.author_name | slice: 0, 1 | upcase }}
+                </div>
+                <div class="author-details">
+                  <div class="author-name-wrap">
+                    <strong class="author-name">{{ block.settings.author_name }}</strong>
+                    {%- if block.settings.verified_tag != blank -%}
+                      <span class="badge-verified-buyer">✓ {{ block.settings.verified_tag }}</span>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.location != blank -%}
+                    <span class="author-location">📍 {{ block.settings.location }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+
+              {%- if block.settings.product_tag != blank -%}
+                <div class="testimonial-product-pill">
+                  <span>Purchased: <strong>{{ block.settings.product_tag }}</strong></span>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default Testimonial 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-rating-stars">
+              <span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              “Visited their Lad Square store for my sister's wedding shopping. The Kundan bridal jewellery collection and imported cosmetics are truly premium and 100% genuine. Best beauty store in Nagpur!”
+            </blockquote>
+            <div class="testimonial-author-row">
+              <div class="author-avatar-circle">P</div>
+              <div class="author-details">
+                <div class="author-name-wrap">
+                  <strong class="author-name">Pooja Deshmukh</strong>
+                  <span class="badge-verified-buyer">✓ In-Store Shopper</span>
+                </div>
+                <span class="author-location">📍 Dharampeth, Nagpur</span>
+              </div>
+            </div>
+            <div class="testimonial-product-pill">
+              <span>Purchased: <strong>Royal Kundan Bridal Set</strong></span>
+            </div>
+          </div>
+
+          <!-- Default Testimonial 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-rating-stars">
+              <span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              “Ordered skincare serums and got super fast same-day delivery right to my home in Ramdaspeth. Authentic brands, beautiful luxury packaging, and very helpful customer service on WhatsApp!”
+            </blockquote>
+            <div class="testimonial-author-row">
+              <div class="author-avatar-circle">R</div>
+              <div class="author-details">
+                <div class="author-name-wrap">
+                  <strong class="author-name">Rhea Sharma</strong>
+                  <span class="badge-verified-buyer">✓ Verified Nagpur Buyer</span>
+                </div>
+                <span class="author-location">📍 Ramdaspeth, Nagpur</span>
+              </div>
+            </div>
+            <div class="testimonial-product-pill">
+              <span>Purchased: <strong>Glow Boosting Vitamin C Serum</strong></span>
+            </div>
+          </div>
+
+          <!-- Default Testimonial 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-rating-stars">
+              <span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              “I love their quilted handbags and lipsticks collection. The quality is outstanding and prices are very reasonable for genuine branded products. Highly recommended!”
+            </blockquote>
+            <div class="testimonial-author-row">
+              <div class="author-avatar-circle">A</div>
+              <div class="author-details">
+                <div class="author-name-wrap">
+                  <strong class="author-name">Ananya Joshi</strong>
+                  <span class="badge-verified-buyer">✓ In-Store Shopper</span>
+                </div>
+                <span class="author-location">📍 Gandhi Nagar, Nagpur</span>
+              </div>
+            </div>
+            <div class="testimonial-product-pill">
+              <span>Purchased: <strong>Luxury Quilted Sling Bag</strong></span>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Customer Testimonials",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "⭐ CUSTOMER REVIEWS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Loved by 10,000+ Nagpur Shoppers"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Real reviews from our in-store showroom visitors and online shoppers across Nagpur."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FAF7F2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 4,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review Quote",
+          "default": "Visited their Lad Square store for my sister's wedding shopping. The Kundan bridal jewellery collection and imported cosmetics are truly premium and 100% genuine. Best beauty store in Nagpur!"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Customer Name",
+          "default": "Pooja Deshmukh"
+        },
+        {
+          "type": "text",
+          "id": "verified_tag",
+          "label": "Verification Badge",
+          "default": "Verified Nagpur Buyer"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location / Area",
+          "default": "Dharampeth, Nagpur"
+        },
+        {
+          "type": "text",
+          "id": "product_tag",
+          "label": "Purchased Product Tag",
+          "default": "Royal Kundan Bridal Set"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Testimonials",
+      "blocks": [
+        {
+          "type": "review_card",
+          "settings": {
+            "author_name": "Pooja Deshmukh",
+            "verified_tag": "In-Store Shopper",
+            "location": "Dharampeth, Nagpur",
+            "quote": "Visited their Lad Square store for my sister's wedding shopping. The Kundan bridal jewellery collection and imported cosmetics are truly premium and 100% genuine. Best beauty store in Nagpur!",
+            "product_tag": "Royal Kundan Bridal Set"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "author_name": "Rhea Sharma",
+            "verified_tag": "Verified Nagpur Buyer",
+            "location": "Ramdaspeth, Nagpur",
+            "quote": "Ordered skincare serums and got super fast same-day delivery right to my home in Ramdaspeth. Authentic brands, beautiful luxury packaging, and very helpful customer service on WhatsApp!",
+            "product_tag": "Glow Boosting Vitamin C Serum"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "author_name": "Ananya Joshi",
+            "verified_tag": "In-Store Shopper",
+            "location": "Gandhi Nagar, Nagpur",
+            "quote": "I love their quilted handbags and lipsticks collection. The quality is outstanding and prices are very reasonable for genuine branded products. Highly recommended!",
+            "product_tag": "Luxury Quilted Sling Bag"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
