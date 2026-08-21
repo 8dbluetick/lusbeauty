@@ -1,0 +1,123 @@
+<section class="lush-hero-section">
+  <div class="hero-bg-glow"></div>
+  <div class="page-width hero-container">
+    <div class="hero-grid">
+      <!-- Left Column: Typography & CTAs -->
+      <div class="hero-content">
+        <!-- Nagpur Store Pill -->
+        <div class="hero-store-pill">
+          <span class="pulse-dot"></span>
+          <span class="pill-text">📍 Nagpur Premier Store • Gandhi Nagar (Near Lad Sq.)</span>
+        </div>
+
+        <h1 class="hero-headline">
+          {{ section.settings.heading | default: "Beauty, Style & Everything You Love." }}
+        </h1>
+
+        <p class="hero-subheading">
+          {{ section.settings.subheading | default: "Discover skincare, cosmetics, jewellery, handbags and accessories — all under one roof." }}
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="btn-hero-primary">
+            <span>{{ section.settings.primary_cta_text | default: "Shop Collection" }}</span>
+            <span class="btn-arrow">→</span>
+          </a>
+
+          <a href="{{ section.settings.secondary_cta_link | default: '#offers-section' }}" class="btn-hero-secondary">
+            <span>✨ {{ section.settings.secondary_cta_text | default: "View Offers" }}</span>
+          </a>
+
+          <a href="#store-section" class="btn-hero-tertiary">
+            <span>📍 Visit Store</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges Strip -->
+        <div class="hero-trust-badges">
+          <div class="trust-badge-item">
+            <span class="badge-icon">🛡️</span>
+            <span class="badge-text">100% Genuine Brands</span>
+          </div>
+          <div class="trust-badge-item">
+            <span class="badge-icon">🤝</span>
+            <span class="badge-text">Retail & Wholesale</span>
+          </div>
+          <div class="trust-badge-item">
+            <span class="badge-icon">🚇</span>
+            <span class="badge-text">Pillar 213-214 Metro</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Premium Lifestyle Product Imagery Composition -->
+      <div class="hero-media">
+        <div class="hero-image-card">
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.heading | escape }}" class="hero-img-main" width="800" height="1000">
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1000&auto=format&fit=crop" alt="Lush Beauty Mart Collection" class="hero-img-main" width="800" height="1000">
+          {%- endif -%}
+
+          <div class="hero-floating-caption">
+            <span class="caption-tag">NAGPUR FLAGSHIP STORE</span>
+            <h4 class="caption-title">Skincare • Makeup • Jewellery • Bags</h4>
+            <p class="caption-sub">Retail & Wholesale Available Daily</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Lifestyle Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Headline",
+      "default": "Beauty, Style & Everything You Love."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Discover skincare, cosmetics, jewellery, handbags and accessories — all under one roof."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Lifestyle Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary Button Label",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary Button Label",
+      "default": "View Offers"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Lifestyle Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{
+  "general": {
+    "store_name": "Lush Beauty Mart",
+    "tagline": "Where Beauty Meets Quality",
+    "nagpur_store": "Nagpur Store • Lad Square",
+    "search": "Search skincare, cosmetics, jewellery, handbags...",
+    "view_all": "View All",
+    "shop_now": "Shop Collection",
+    "view_offers": "View Offers",
+    "quick_view": "Quick View",
+    "add_to_cart": "Add to Bag",
+    "buy_now": "Buy Now",
+    "sold_out": "Sold Out",
+    "in_stock": "In Stock",
+    "save": "Save",
+    "off": "OFF",
+    "mrp": "MRP"
+  },
+  "cart": {
+    "title": "Your Shopping Bag",
+    "empty": "Your shopping bag is empty",
+    "subtotal": "Bag Subtotal",
+    "savings": "Coupon Savings",
+    "shipping": "Delivery (Nagpur & PAN India)",
+    "free_shipping_unlocked": "Congratulations! You have unlocked FREE Delivery in Nagpur!",
+    "free_shipping_needed": "Add {{ amount }} more for FREE Nagpur Delivery",
+    "checkout": "Proceed to Checkout",
+    "order_via_whatsapp": "Order via WhatsApp (Nagpur Store)"
+  },
+  "sections": {
+    "trending": "Trending Now",
+    "categories": "Shop By Category",
+    "new_arrivals": "Just Arrived ✨",
+    "offers": "Grab Our Best Offers",
+    "store_experience": "Visit Lush Beauty Mart",
+    "wholesale": "Retail & Wholesale Available",
+    "instagram": "Follow @lushbeautymart"
+  }
+}

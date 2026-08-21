@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "contact_form": {
+      "type": "contact-form",
+      "settings": {}
+    },
+    "store_experience": {
+      "type": "store-experience",
+      "settings": {}
+    }
+  },
+  "order": [
+    "contact_form",
+    "store_experience"
+  ]
+}

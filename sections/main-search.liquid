@@ -1,0 +1,35 @@
+<section class="lush-search-section">
+  <div class="page-width">
+    <div class="search-header-wrap">
+      <h1 class="search-title">Search Products</h1>
+      <form action="/search" method="get" class="search-form-full">
+        <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search skincare, cosmetics, jewellery, handbags..." class="search-input-full">
+        <button type="submit" class="btn-search-submit">Search</button>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      {%- if search.results_count == 0 -%}
+        <div class="search-empty-state">
+          <p>No results found for "{{ search.terms }}". Try searching for "Serum", "Lipstick", "Kundan", or "Bag".</p>
+        </div>
+      {%- else -%}
+        <p class="search-count-text">Found {{ search.results_count }} results for "{{ search.terms }}"</p>
+        <div class="products-grid-4">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item %}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Search",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Lush Beauty Mart",
+    "theme_version": "1.0.0",
+    "theme_author": "Lush Beauty Mart Nagpur",
+    "theme_documentation_url": "https://github.com/8dbluetick/lusbeauty",
+    "theme_support_url": "https://lushbeautymart.in"
+  },
+  {
+    "name": "Brand Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg_cream",
+        "label": "Background Cream / Ivory",
+        "default": "#FAF7F2"
+      },
+      {
+        "type": "color",
+        "id": "color_text_chocolate",
+        "label": "Primary Text (Dark Chocolate)",
+        "default": "#2C1D11"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_gold",
+        "label": "Accent Gold",
+        "default": "#C5A059"
+      },
+      {
+        "type": "color",
+        "id": "color_card_beige",
+        "label": "Card Background (Soft Beige)",
+        "default": "#F4EFEA"
+      },
+      {
+        "type": "color",
+        "id": "color_card_white",
+        "label": "Surface Pure White",
+        "default": "#FFFFFF"
+      }
+    ]
+  },
+  {
+    "name": "Nagpur Physical Store Details",
+    "settings": [
+      {
+        "type": "text",
+        "id": "store_name",
+        "label": "Store Name",
+        "default": "Lush Beauty Mart"
+      },
+      {
+        "type": "text",
+        "id": "store_tagline",
+        "label": "Tagline",
+        "default": "Where Beauty Meets Quality"
+      },
+      {
+        "type": "textarea",
+        "id": "store_address",
+        "label": "Address",
+        "default": "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010"
+      },
+      {
+        "type": "text",
+        "id": "store_phone",
+        "label": "Phone Number",
+        "default": "9119595951"
+      },
+      {
+        "type": "text",
+        "id": "store_whatsapp",
+        "label": "WhatsApp Number (with country code, no +)",
+        "default": "919119595951"
+      },
+      {
+        "type": "text",
+        "id": "store_timings",
+        "label": "Store Hours",
+        "default": "Monday - Sunday: 10:30 AM to 9:30 PM"
+      },
+      {
+        "type": "url",
+        "id": "store_map_link",
+        "label": "Google Maps Location Link"
+      }
+    ]
+  },
+  {
+    "name": "Social Media Links",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram_handle",
+        "label": "Instagram Handle",
+        "default": "@lushbeautymart"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook URL"
+      }
+    ]
+  }
+]

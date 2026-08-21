@@ -1,0 +1,46 @@
+<div class="lush-whatsapp-widget" id="LushWhatsAppWidget">
+  <!-- Interactive Chat Card Popup -->
+  <div class="wa-popup-card" id="WaPopupCard" aria-hidden="true">
+    <div class="wa-popup-header">
+      <div class="wa-avatar-wrap">
+        <div class="wa-avatar">L</div>
+        <span class="wa-online-dot"></span>
+      </div>
+      <div class="wa-header-info">
+        <h5>Lush Beauty Mart</h5>
+        <p>Nagpur Store • Online (Replies in mins)</p>
+      </div>
+      <button type="button" class="wa-close-btn" id="BtnCloseWaPopup">&times;</button>
+    </div>
+
+    <div class="wa-popup-body">
+      <div class="wa-msg-bubble">
+        <p class="font-bold">Namaste! 🙏 Welcome to Lush Beauty Mart Nagpur.</p>
+        <p>How can we assist you today? Choose a quick question or message us directly:</p>
+      </div>
+
+      <div class="wa-quick-options">
+        <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ 'Hi Lush Beauty Mart! I want to visit your store at Lad Square, Nagpur. Can you share the exact location and timings?' | url_encode }}" target="_blank" rel="noopener noreferrer" class="wa-option-btn">
+          <span class="wa-option-icon">📍</span>
+          <span>Store Location & Timings</span>
+        </a>
+        <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ 'Hi! I am interested in wholesale/bulk purchases of cosmetics and artificial jewellery. Please share your wholesale catalogue and price list.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="wa-option-btn">
+          <span class="wa-option-icon">📦</span>
+          <span>Wholesale B2B Bulk Enquiry</span>
+        </a>
+        <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ 'Hi Lush Beauty Mart! I would like to know more about your current store offers and product availability.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="wa-option-btn">
+          <span class="wa-option-icon">✨</span>
+          <span>Product Availability & Offers</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trigger Button -->
+  <button type="button" class="wa-floating-btn" id="BtnToggleWaPopup" aria-label="Chat with Nagpur Store on WhatsApp">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+    </svg>
+    <span class="wa-btn-label">Chat with Nagpur Store</span>
+  </button>
+</div>

@@ -1,0 +1,121 @@
+<div id="LushCartDrawer" class="cart-drawer-overlay" aria-hidden="true">
+  <div class="cart-drawer-backdrop" data-close-cart></div>
+  <div class="cart-drawer-panel">
+    <!-- Header -->
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title-wrap">
+        <svg class="cart-icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <h3 class="cart-drawer-heading">Your Shopping Bag</h3>
+        <span class="cart-count-badge-drawer" data-cart-count>{{ cart.item_count }}</span>
+      </div>
+      <button type="button" class="cart-drawer-close" data-close-cart aria-label="Close cart">
+        &times;
+      </button>
+    </div>
+
+    <!-- Free Delivery Threshold Banner (Nagpur & PAN India) -->
+    <div class="cart-shipping-banner">
+      <div class="shipping-icon">🚚</div>
+      <div class="shipping-text" data-shipping-text>
+        {%- assign threshold = 49900 -%}
+        {%- if cart.total_price >= threshold -%}
+          <span class="shipping-unlocked">🎉 You have unlocked <strong>FREE Delivery in Nagpur</strong>!</span>
+        {%- else -%}
+          {%- assign needed = threshold | minus: cart.total_price -%}
+          <span>Add <strong>{{ needed | money }}</strong> more for <strong>FREE Delivery</strong></span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Cart Items Area -->
+    <div class="cart-drawer-items" data-cart-items-container>
+      {%- if cart.item_count == 0 -%}
+        <div class="cart-empty-state">
+          <div class="empty-cart-icon">🛍️</div>
+          <h4>Your shopping bag is empty</h4>
+          <p>Explore our luxury skincare, cosmetics, artificial jewellery and handbags.</p>
+          <a href="/collections/all" class="btn-shop-collection" data-close-cart>
+            Start Shopping
+          </a>
+        </div>
+      {%- else -%}
+        <form action="/cart" method="post" id="CartDrawerForm">
+          <div class="cart-item-list">
+            {%- for item in cart.items -%}
+              <div class="cart-drawer-item" data-line-key="{{ item.key }}">
+                <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" class="cart-item-img" width="80" height="80">
+                <div class="cart-item-info">
+                  <div class="cart-item-top">
+                    <h5 class="cart-item-title"><a href="{{ item.url }}">{{ item.product.title }}</a></h5>
+                    <button type="button" class="cart-item-remove" data-remove-item="{{ item.key }}">&times;</button>
+                  </div>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <span class="cart-item-variant">{{ item.variant.title }}</span>
+                  {%- endunless -%}
+                  <div class="cart-item-bottom">
+                    <div class="qty-stepper">
+                      <button type="button" class="qty-btn" data-qty-change="minus" data-key="{{ item.key }}">-</button>
+                      <span class="qty-num">{{ item.quantity }}</span>
+                      <button type="button" class="qty-btn" data-qty-change="plus" data-key="{{ item.key }}">+</button>
+                    </div>
+                    <span class="cart-item-price">{{ item.final_line_price | money }}</span>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </form>
+      {%- endif -%}
+    </div>
+
+    <!-- Footer Summary & Checkout -->
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-drawer-footer">
+        <!-- Coupon input -->
+        <div class="cart-coupon-box">
+          <input type="text" id="CartCouponInput" placeholder="Enter Promo Code (e.g. LUSH30)" class="coupon-input">
+          <button type="button" id="CartCouponBtn" class="coupon-btn">Apply</button>
+        </div>
+
+        <div class="cart-subtotal-row">
+          <span>Bag Subtotal</span>
+          <span class="cart-subtotal-val" data-cart-subtotal>{{ cart.total_price | money }}</span>
+        </div>
+
+        <div class="cart-shipping-row">
+          <span>Nagpur & PAN India Delivery</span>
+          <span class="cart-shipping-val">
+            {%- if cart.total_price >= 49900 -%}
+              <strong class="text-free">FREE</strong>
+            {%- else -%}
+              ₹50
+            {%- endif -%}
+          </span>
+        </div>
+
+        <div class="cart-total-row">
+          <span>Estimated Total</span>
+          <span class="cart-total-val" data-cart-total>{{ cart.total_price | money }}</span>
+        </div>
+
+        <!-- Checkout CTAs -->
+        <div class="cart-checkout-actions">
+          <form action="/checkout" method="post">
+            <button type="submit" class="btn-drawer-checkout">
+              <span>Proceed to Checkout</span>
+              <span class="arrow-icon">→</span>
+            </button>
+          </form>
+
+          <button type="button" id="BtnWhatsAppOrder" class="btn-drawer-whatsapp">
+            <span>Order via WhatsApp (Nagpur Store)</span>
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "Beauty, Style & Everything You Love.",
+        "subheading": "Discover skincare, cosmetics, jewellery, handbags and accessories — all under one roof.",
+        "primary_cta_text": "Shop Collection",
+        "primary_cta_link": "/collections/all",
+        "secondary_cta_text": "View Offers",
+        "secondary_cta_link": "#offers-section"
+      }
+    },
+    "featured_categories": {
+      "type": "featured-categories",
+      "settings": {
+        "title": "Shop By Category"
+      }
+    },
+    "trending_products": {
+      "type": "trending-products",
+      "settings": {
+        "title": "Trending Now",
+        "products_to_show": 8,
+        "view_all_link": "/collections/all"
+      }
+    },
+    "promotional_offers": {
+      "type": "promotional-offers",
+      "settings": {
+        "title": "Grab Our Best Offers"
+      }
+    },
+    "new_arrivals": {
+      "type": "new-arrivals-carousel",
+      "settings": {
+        "title": "Just Arrived ✨",
+        "explore_link": "/collections/all"
+      }
+    },
+    "store_experience": {
+      "type": "store-experience",
+      "settings": {
+        "heading": "Visit Lush Beauty Mart",
+        "text": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place."
+      }
+    },
+    "wholesale_banner": {
+      "type": "wholesale-banner",
+      "settings": {}
+    },
+    "instagram_feed": {
+      "type": "instagram-feed",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero_banner",
+    "featured_categories",
+    "trending_products",
+    "promotional_offers",
+    "new_arrivals",
+    "store_experience",
+    "wholesale_banner",
+    "instagram_feed"
+  ]
+}

@@ -1,0 +1,71 @@
+<div id="LushWholesaleModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-card wholesale-modal-card">
+    <button type="button" class="modal-close-btn" data-close-modal aria-label="Close modal">&times;</button>
+    <div class="wholesale-modal-header">
+      <span class="wholesale-pill">B2B & Salon Supply Portal</span>
+      <h3 class="wholesale-title">Wholesale & Bulk Order Enquiry</h3>
+      <p class="wholesale-sub">Lush Beauty Mart supplies beauty salons, boutiques, and resellers across Maharashtra and Central India.</p>
+    </div>
+
+    <form id="WholesaleForm" class="wholesale-form">
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" name="name" required placeholder="e.g. Rahul Patil" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Business / Salon Name *</label>
+          <input type="text" name="business" required placeholder="e.g. Glamour Salon" class="form-input">
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Phone / WhatsApp Number *</label>
+          <input type="tel" name="phone" required placeholder="e.g. 9119595951" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>City / Town *</label>
+          <input type="text" name="city" required placeholder="e.g. Nagpur, Wardha, Amravati" class="form-input">
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Category of Interest</label>
+          <select name="category" class="form-select">
+            <option>All / Multiple Categories</option>
+            <option>Artificial Jewellery (Kundan, AD, Jhumkas)</option>
+            <option>Cosmetics (Lipsticks, Foundations, Kajal)</option>
+            <option>Skincare (Serums, Sunscreens, Lotions)</option>
+            <option>Handbags & Sling Bags</option>
+            <option>Beauty Tools & Makeup Brushes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Estimated Quantity Tier</label>
+          <select name="quantity" class="form-select">
+            <option>10 - 25 units (Sample / Small Tier)</option>
+            <option>25 - 100 units (Standard Bulk)</option>
+            <option>100 - 500+ units (Master Carton Tier)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Specific Requirements or Message</label>
+        <textarea name="message" rows="3" placeholder="Tell us about specific items, target pricing, or urgent delivery dates..." class="form-textarea"></textarea>
+      </div>
+
+      <div class="wholesale-actions">
+        <button type="submit" class="btn-wholesale-submit">
+          <span>Submit Wholesale Request</span>
+        </button>
+        <button type="button" id="BtnWholesaleWhatsApp" class="btn-wholesale-whatsapp">
+          <span>WhatsApp Wholesale Manager</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

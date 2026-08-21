@@ -1,0 +1,47 @@
+<div class="lush-announcement-bar">
+  <div class="page-width announcement-container">
+    <!-- Left: Physical Store Landmark in Nagpur -->
+    <div class="announcement-left">
+      <span class="pill-nagpur-store">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Nagpur Store
+      </span>
+      <span class="announcement-landmark">Near Lad Sq., Metro Pillar 213-214, North Ambazari Rd</span>
+      <a href="tel:{{ settings.store_phone | default: '9119595951' }}" class="announcement-phone">📞 {{ settings.store_phone | default: '9119595951' }}</a>
+    </div>
+
+    <!-- Center: Free Shipping & Perks -->
+    <div class="announcement-center">
+      <span>🚚 Free Delivery in Nagpur on ₹499+</span>
+      <span class="divider-dot">•</span>
+      <span>✨ 100% Genuine Brands</span>
+    </div>
+
+    <!-- Right: Wholesale CTA -->
+    <div class="announcement-right">
+      <button type="button" class="btn-announcement-wholesale" data-open-wholesale>
+        Wholesale Pricing
+      </button>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "Free Delivery in Nagpur on ₹499+ | Retail & Wholesale Available"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,127 @@
+<section class="lush-contact-section">
+  <div class="page-width">
+    <div class="section-header-center">
+      <span class="section-badge">📞 Connect With Our Team</span>
+      <h2 class="section-title">{{ section.settings.heading | default: "Contact Lush Beauty Mart" }}</h2>
+      <p class="section-subtitle">Have questions about a product, bridal jewellery sets, or store availability in Nagpur? We’re always here to assist.</p>
+    </div>
+
+    <div class="contact-grid-2">
+      <!-- Left Column: Store Details Box -->
+      <div class="contact-info-panel">
+        <span class="panel-tag">NAGPUR FLAGSHIP STORE</span>
+        <h3 class="panel-brand">{{ settings.store_name | default: "Lush Beauty Mart" }}</h3>
+        <p class="panel-tagline">“Where Beauty Meets Quality”</p>
+
+        <div class="panel-details">
+          <div class="panel-item">
+            <span class="item-icon">📍</span>
+            <div>
+              <strong>Store Address:</strong>
+              <p>{{ settings.store_address | default: "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010" }}</p>
+            </div>
+          </div>
+
+          <div class="panel-item">
+            <span class="item-icon">📞</span>
+            <div>
+              <strong>Direct Store Call:</strong>
+              <p><a href="tel:{{ settings.store_phone | default: '9119595951' }}">+91 {{ settings.store_phone | default: '9119595951' }}</a></p>
+            </div>
+          </div>
+
+          <div class="panel-item">
+            <span class="item-icon">⏰</span>
+            <div>
+              <strong>Working Hours:</strong>
+              <p>{{ settings.store_timings | default: "Monday - Sunday: 10:30 AM to 9:30 PM" }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-buttons">
+          <a href="tel:{{ settings.store_phone | default: '9119595951' }}" class="btn-panel-call">
+            <span>📞 Call Store ({{ settings.store_phone | default: '9119595951' }})</span>
+          </a>
+
+          <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ 'Hi Lush Beauty Mart! I am contacting you from your website.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-panel-wa">
+            <span>💬 WhatsApp Us</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Contact Form -->
+      <div class="contact-form-panel">
+        {%- form 'contact', id: 'ContactForm', class: 'lush-form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="form-status form-status-success">
+              <h4>Message Sent Successfully!</h4>
+              <p>Thank you for reaching out. Our customer care executive will connect with you promptly.</p>
+            </div>
+          {%- elsif form.errors -%}
+            <div class="form-status form-status-error">
+              <p>{{ form.errors | default_errors }}</p>
+            </div>
+          {%- endif -%}
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="ContactForm-name">Full Name *</label>
+              <input type="text" id="ContactForm-name" name="contact[Name]" required placeholder="e.g. Sneha Deshmukh" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label for="ContactForm-phone">Phone Number *</label>
+              <input type="tel" id="ContactForm-phone" name="contact[Phone]" required placeholder="e.g. 9823456789" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ContactForm-email">Email Address</label>
+            <input type="email" id="ContactForm-email" name="contact[email]" placeholder="e.g. sneha@example.com" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="ContactForm-subject">Subject</label>
+            <select id="ContactForm-subject" name="contact[Subject]" class="form-select">
+              <option>General Enquiry / Store Info</option>
+              <option>Product Stock Availability</option>
+              <option>Bridal Jewellery Consultation</option>
+              <option>Wholesale / B2B Bulk Order</option>
+              <option>Order Status</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="ContactForm-body">Message *</label>
+            <textarea id="ContactForm-body" name="contact[body]" rows="4" required placeholder="How can we help you today? Write your query here..." class="form-textarea"></textarea>
+          </div>
+
+          <button type="submit" class="btn-form-submit">
+            <span>Send Enquiry</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Form Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact Lush Beauty Mart"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form Section"
+    }
+  ]
+}
+{% endschema %}

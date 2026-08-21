@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main_product": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "store_experience": {
+      "type": "store-experience",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main_product",
+    "store_experience"
+  ]
+}

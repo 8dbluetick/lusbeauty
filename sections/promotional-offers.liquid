@@ -1,0 +1,102 @@
+<section id="offers-section" class="lush-offers-section">
+  <div class="page-width">
+    <div class="section-header-center">
+      <span class="section-badge">🎁 Exclusive Store & Online Deals</span>
+      <h2 class="section-title">{{ section.settings.title | default: "Grab Our Best Offers" }}</h2>
+      <p class="section-subtitle">Save extra with active promotional coupons for both retail purchases and Nagpur in-store shopping.</p>
+    </div>
+
+    <div class="offers-grid-3">
+      <!-- Offer 1: Flat 30% OFF Handbags -->
+      <div class="offer-card group">
+        <div class="offer-bg-media">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop" alt="Flat 30% OFF" class="offer-bg-img" loading="lazy" width="600" height="400">
+          <div class="offer-bg-overlay"></div>
+        </div>
+        <div class="offer-content">
+          <div class="offer-top">
+            <span class="offer-badge">FLAT 30% OFF</span>
+            <span class="offer-min">Min Order: ₹999</span>
+          </div>
+          <h3 class="offer-title">Flat 30% OFF on Luxury Handbags</h3>
+          <p class="offer-desc">Elevate your style with handcrafted sling bags, totes, and party clutches.</p>
+
+          <div class="offer-bottom">
+            <div class="coupon-code-bar">
+              <span class="code-text">LUSH30</span>
+              <button type="button" class="btn-copy-code" data-coupon-code="LUSH30">Tap to Apply</button>
+            </div>
+            <a href="/collections/handbags" class="offer-link">Shop Handbags Collection →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offer 2: BOGO Cosmetics -->
+      <div class="offer-card group">
+        <div class="offer-bg-media">
+          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Buy 1 Get 1" class="offer-bg-img" loading="lazy" width="600" height="400">
+          <div class="offer-bg-overlay"></div>
+        </div>
+        <div class="offer-content">
+          <div class="offer-top">
+            <span class="offer-badge badge-bogo">BUY 1 GET 1</span>
+            <span class="offer-min">Min Order: ₹499</span>
+          </div>
+          <h3 class="offer-title">Buy 1 Get 1 on Selected Cosmetics</h3>
+          <p class="offer-desc">Add matching shades of lipsticks, glosses & eyeliners for double the glam.</p>
+
+          <div class="offer-bottom">
+            <div class="coupon-code-bar">
+              <span class="code-text">BOGO</span>
+              <button type="button" class="btn-copy-code" data-coupon-code="BOGO">Tap to Apply</button>
+            </div>
+            <a href="/collections/cosmetics" class="offer-link">Shop Cosmetics Deals →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offer 3: Special Jewellery Offers -->
+      <div class="offer-card group">
+        <div class="offer-bg-media">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop" alt="Special Jewellery Offers" class="offer-bg-img" loading="lazy" width="600" height="400">
+          <div class="offer-bg-overlay"></div>
+        </div>
+        <div class="offer-content">
+          <div class="offer-top">
+            <span class="offer-badge badge-jewel">FESTIVE SPECIAL</span>
+            <span class="offer-min">Min Order: ₹799</span>
+          </div>
+          <h3 class="offer-title">Special Bridal & Festive Jewellery Deals</h3>
+          <p class="offer-desc">Up to 35% OFF on Kundan choker sets, AD rings, and temple jhumkas.</p>
+
+          <div class="offer-bottom">
+            <div class="coupon-code-bar">
+              <span class="code-text">JEWEL25</span>
+              <button type="button" class="btn-copy-code" data-coupon-code="JEWEL25">Tap to Apply</button>
+            </div>
+            <a href="/collections/artificial-jewellery" class="offer-link">Shop Jewellery Offers →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promotional Offers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Grab Our Best Offers"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotional Offers"
+    }
+  ]
+}
+{% endschema %}

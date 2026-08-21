@@ -1,0 +1,86 @@
+<section class="lush-main-cart-page">
+  <div class="page-width">
+    <div class="cart-page-header">
+      <h1 class="cart-page-title">Your Shopping Bag</h1>
+      <p class="cart-page-count">{{ cart.item_count }} items</p>
+    </div>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-page-empty">
+        <div class="empty-icon">🛍️</div>
+        <h2>Your shopping bag is empty</h2>
+        <p>Explore our luxury skincare, cosmetics, artificial jewellery and handbags collections.</p>
+        <a href="/collections/all" class="btn-hero-primary">Start Shopping</a>
+      </div>
+    {%- else -%}
+      <div class="cart-page-grid">
+        <!-- Cart Items List -->
+        <div class="cart-page-items-col">
+          <form action="/cart" method="post" id="CartPageForm">
+            {%- for item in cart.items -%}
+              <div class="cart-page-row" data-line-key="{{ item.key }}">
+                <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" class="cart-page-img" width="100" height="100">
+                <div class="cart-page-item-info">
+                  <div class="cart-page-item-top">
+                    <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
+                    <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-page-remove">Remove</a>
+                  </div>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <span class="cart-page-variant">{{ item.variant.title }}</span>
+                  {%- endunless -%}
+                  <div class="cart-page-item-bottom">
+                    <div class="qty-stepper">
+                      <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" class="qty-btn">-</a>
+                      <span class="qty-num">{{ item.quantity }}</span>
+                      <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" class="qty-btn">+</a>
+                    </div>
+                    <span class="cart-page-price">{{ item.final_line_price | money }}</span>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </form>
+        </div>
+
+        <!-- Order Summary Box -->
+        <div class="cart-page-summary-col">
+          <div class="summary-card">
+            <h3>Order Summary</h3>
+            <div class="summary-row">
+              <span>Bag Subtotal</span>
+              <strong>{{ cart.total_price | money }}</strong>
+            </div>
+            <div class="summary-row">
+              <span>Delivery (Nagpur & PAN India)</span>
+              <span>{% if cart.total_price >= 49900 %}<strong class="text-free">FREE</strong>{% else %}₹50{% endif %}</span>
+            </div>
+            <div class="summary-total-row">
+              <span>Total Amount</span>
+              <span class="total-price-val">{{ cart.total_price | money }}</span>
+            </div>
+
+            <div class="summary-actions">
+              <form action="/checkout" method="post">
+                <button type="submit" class="btn-page-checkout">
+                  <span>Proceed to Checkout →</span>
+                </button>
+              </form>
+
+              {%- assign wa_order_text = 'Namaste Lush Beauty Mart Nagpur! 🛍️ I would like to place an order from my bag. Total: ' | append: cart.total_price | money | append: '. Please confirm availability!' -%}
+              <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ wa_order_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-page-whatsapp">
+                <span>Order via WhatsApp (Nagpur Store)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Cart",
+  "settings": []
+}
+{% endschema %}

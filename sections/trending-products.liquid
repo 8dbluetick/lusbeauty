@@ -1,0 +1,90 @@
+<section class="lush-trending-section">
+  <div class="page-width">
+    <div class="section-header-split">
+      <div>
+        <span class="section-badge">🔥 Most Loved in Nagpur</span>
+        <h2 class="section-title">{{ section.settings.title | default: "Trending Now" }}</h2>
+        <p class="section-subtitle">Top rated skincare, beauty essentials, luxury handbags & sparkling jewellery.</p>
+      </div>
+
+      <div class="category-filter-pills">
+        <a href="/collections/all" class="filter-pill active">All Picks</a>
+        <a href="/collections/skincare" class="filter-pill">Skincare</a>
+        <a href="/collections/cosmetics" class="filter-pill">Cosmetics</a>
+        <a href="/collections/artificial-jewellery" class="filter-pill">Jewellery</a>
+        <a href="/collections/handbags" class="filter-pill">Handbags</a>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="products-grid-4">
+      {%- assign featured_collection = collections[section.settings.collection] | default: collections.all -%}
+      {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+        {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..8) -%}
+          <div class="lush-product-card">
+            <div class="card-media-wrapper">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="card-content">
+              <span class="card-category">Lush Collection</span>
+              <h3 class="card-title"><a href="#">Sample Premium Product {{ i }}</a></h3>
+              <div class="card-footer">
+                <span class="price-current">₹799</span>
+                <button type="button" class="btn-add-to-cart">+ Add</button>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <div class="section-footer-center">
+      <a href="{{ section.settings.view_all_link | default: '/collections/all' }}" class="btn-view-all-shop">
+        <span>Explore Full 200+ Products Collection</span>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trending Products Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Trending Now"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "default": 8,
+      "label": "Number of products to show"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trending Products Grid"
+    }
+  ]
+}
+{% endschema %}

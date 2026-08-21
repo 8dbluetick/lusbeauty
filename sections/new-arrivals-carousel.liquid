@@ -1,0 +1,82 @@
+<section class="lush-new-arrivals-section">
+  <div class="page-width">
+    <div class="section-header-split">
+      <div>
+        <span class="section-badge">✨ Fresh Unboxings This Week</span>
+        <h2 class="section-title">{{ section.settings.title | default: "Just Arrived ✨" }}</h2>
+        <p class="section-subtitle">Be the first to explore our newest designer handbags, bridal jewellery, and skincare launches.</p>
+      </div>
+
+      <div class="carousel-nav-controls">
+        <button type="button" class="btn-carousel-nav btn-carousel-prev" data-carousel-prev aria-label="Previous">←</button>
+        <button type="button" class="btn-carousel-nav btn-carousel-next" data-carousel-next aria-label="Next">→</button>
+      </div>
+    </div>
+
+    <!-- Horizontal Product Carousel -->
+    <div class="new-arrivals-carousel-track no-scrollbar" data-carousel-track>
+      {%- assign new_collection = collections[section.settings.collection] | default: collections.all -%}
+      {%- if new_collection != blank and new_collection.products_count > 0 -%}
+        {%- for product in new_collection.products limit: 10 -%}
+          <div class="carousel-item-slide">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..6) -%}
+          <div class="carousel-item-slide">
+            <div class="lush-product-card">
+              <div class="card-media-wrapper">
+                {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="card-content">
+                <span class="card-category">New Arrival</span>
+                <h3 class="card-title"><a href="#">New Season Item {{ i }}</a></h3>
+                <div class="card-footer">
+                  <span class="price-current">₹899</span>
+                  <button type="button" class="btn-add-to-cart">+ Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <div class="section-footer-center">
+      <a href="{{ section.settings.explore_link | default: '/collections/all' }}" class="btn-explore-arrivals">
+        <span>Explore All New Arrivals In Store</span>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "New Arrivals Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Just Arrived ✨"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "explore_link",
+      "label": "Explore Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Arrivals Carousel"
+    }
+  ]
+}
+{% endschema %}

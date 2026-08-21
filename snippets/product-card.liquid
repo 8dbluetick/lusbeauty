@@ -1,0 +1,126 @@
+{% comment %}
+  Renders a luxury product card
+  Accepts:
+  - product: {Object} Product Liquid object
+  - show_vendor: {Boolean} Show the product vendor (optional)
+{% endcomment %}
+
+<div class="lush-product-card group" data-product-id="{{ product.id }}">
+  <div class="card-media-wrapper">
+    <a href="{{ product.url }}" class="card-image-link">
+      {%- if product.featured_media -%}
+        <img
+          src="{{ product.featured_media | image_url: width: 600 }}"
+          alt="{{ product.featured_media.alt | escape | default: product.title }}"
+          class="card-primary-image"
+          loading="lazy"
+          width="600"
+          height="600"
+        >
+        {%- if product.media[1] != nil -%}
+          <img
+            src="{{ product.media[1] | image_url: width: 600 }}"
+            alt="{{ product.title | escape }}"
+            class="card-secondary-image"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </a>
+
+    <!-- Promotional Badges -->
+    <div class="card-badges">
+      {%- if product.compare_at_price > product.price -%}
+        {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+        <span class="badge badge-discount">{{ discount }}% OFF</span>
+      {%- endif -%}
+      {%- if product.tags contains 'Bestseller' or product.tags contains 'Best Seller' -%}
+        <span class="badge badge-bestseller">★ Best Seller</span>
+      {%- endif -%}
+      {%- if product.tags contains 'New' or product.tags contains 'New Arrival' -%}
+        <span class="badge badge-new">Just In</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Top Action Icons -->
+    <div class="card-top-actions">
+      <button
+        type="button"
+        class="card-action-btn card-wishlist-btn"
+        data-wishlist-toggle="{{ product.id }}"
+        title="Add to Wishlist"
+        aria-label="Wishlist"
+      >
+        <svg class="icon-heart" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </button>
+
+      {%- assign whatsapp_msg = 'Hi Lush Beauty Mart Nagpur! I am interested in ' | append: product.title | append: ' (Price: ' | append: product.price | money | append: '). Is this available at your store?' -%}
+      <a
+        href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ whatsapp_msg | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="card-action-btn card-whatsapp-btn"
+        title="Enquire on WhatsApp"
+        aria-label="WhatsApp Enquiry"
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Quick View Trigger -->
+    <div class="card-quick-view-overlay">
+      <button
+        type="button"
+        class="btn-quick-view"
+        data-quick-view-handle="{{ product.handle }}"
+      >
+        <span>Quick View</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Card Details -->
+  <div class="card-content">
+    <div class="card-category-rating">
+      <span class="card-category">{{ product.type | default: product.collections.first.title | default: 'Lush Collection' }}</span>
+      <div class="card-rating">
+        <span class="star-icon">★</span>
+        <span class="rating-val">4.9</span>
+      </div>
+    </div>
+
+    <h3 class="card-title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="card-footer">
+      <div class="card-price-block">
+        <span class="price-current">{{ product.price | money }}</span>
+        {%- if product.compare_at_price > product.price -%}
+          <span class="price-mrp">{{ product.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if product.available -%}
+        <form method="post" action="/cart/add" class="card-form">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="btn-add-to-cart" aria-label="Add to Bag">
+            <span>+ Add</span>
+          </button>
+        </form>
+      {%- else -%}
+        <button type="button" class="btn-add-to-cart btn-sold-out" disabled>
+          <span>Sold</span>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
