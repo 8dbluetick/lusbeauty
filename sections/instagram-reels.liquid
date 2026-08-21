@@ -13,7 +13,7 @@
           <span>WATCH ON INSTAGRAM</span>
         </div>
         <h2 class="section-title">{{ section.settings.heading | default: "Trending Reels & Video Stories" }}</h2>
-        <p class="section-subtitle">{{ section.settings.subheading | default: "Real unboxings, bridal makeovers, and showroom tours straight from our Nagpur store." }}</p>
+        <p class="section-subtitle">{{ section.settings.subheading | default: "Real unboxings, store walkthroughs, and bridal makeovers straight from our Nagpur showroom." }}</p>
       </div>
 
       <div class="reels-header-right">
@@ -34,7 +34,61 @@
 
     <!-- Reels Track Carousel -->
     <div class="reels-carousel-track no-scrollbar" id="ReelsTrack" data-reels-track>
-      <!-- Reel 1: Live Video Story (Cloudinary Video) -->
+      <!-- Reel 1: Explore with Shruti Store Walkthrough (New Video) -->
+      <div class="reel-card-item group" data-reel-type="video" data-video-src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4" data-caption="Store Tour & Shopping Experience at Lush Beauty Mart Nagpur with @explore.with_shruti ✨" data-product="Nagpur Showroom Tour">
+        <div class="reel-media-wrapper">
+          <video
+            class="reel-video-element"
+            src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4"
+            poster="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300623/lushbeautymart_14050530_135102335_bdtk3h.jpg"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+          <div class="reel-gradient-overlay"></div>
+
+          <!-- Top Reel Badges -->
+          <div class="reel-top-badges">
+            <span class="badge-reel-live">
+              <span class="sound-wave-bars">
+                <span></span><span></span><span></span>
+              </span>
+              <span>VIRAL REEL</span>
+            </span>
+            <button type="button" class="btn-reel-sound-toggle" aria-label="Toggle sound">
+              <span class="icon-sound-muted">🔇</span>
+              <span class="icon-sound-on">🔊</span>
+            </button>
+          </div>
+
+          <!-- Play Center Hover Button -->
+          <div class="reel-play-center">
+            <div class="reel-play-btn-circle">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="#FFFFFF">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Reel Bottom Details -->
+          <div class="reel-bottom-info">
+            <div class="reel-handle-tag">
+              <span class="tag-dot"></span>
+              <span>@explore.with_shruti × @lushbeautymart</span>
+            </div>
+            <p class="reel-caption-text">Shopping tour & exclusive finds at Nagpur's biggest beauty hub 🏬</p>
+            <div class="reel-action-bar">
+              <span class="reel-shop-pill">
+                <span>Watch Reel & Visit</span>
+                <span class="arrow-right">→</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel 2: Angel Peter Glamour Video -->
       <div class="reel-card-item group" data-reel-type="video" data-video-src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787300962/angelpeterr__14050530_135035349_b9xjrn.mp4" data-caption="Luxury Beauty & Jewellery Glamour at Lush Beauty Mart Nagpur ✨" data-product="Bridal Jewellery & Cosmetics">
         <div class="reel-media-wrapper">
           <video
@@ -75,7 +129,7 @@
           <div class="reel-bottom-info">
             <div class="reel-handle-tag">
               <span class="tag-dot"></span>
-              <span>@lushbeautymart</span>
+              <span>@angelpeterr_ × @lushbeautymart</span>
             </div>
             <p class="reel-caption-text">Bridal glamour & luxury beauty picks in-store in Nagpur 💫</p>
             <div class="reel-action-bar">
@@ -88,7 +142,7 @@
         </div>
       </div>
 
-      <!-- Reel 2: Cloudinary WebP Visual Story -->
+      <!-- Reel 3: Cloudinary WebP Visual Story -->
       <div class="reel-card-item group" data-reel-type="image" data-image-src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300602/lushbeautymart_14050530_135039469_kdl5zs.webp" data-caption="Trending Jewellery & Cosmetics Spotlight ✨" data-product="Kundan Necklace & Lipsticks">
         <div class="reel-media-wrapper">
           <img
@@ -131,7 +185,7 @@
         </div>
       </div>
 
-      <!-- Reel 3: Cloudinary JPG Visual Story -->
+      <!-- Reel 4: Cloudinary JPG Visual Story -->
       <div class="reel-card-item group" data-reel-type="image" data-image-src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300623/lushbeautymart_14050530_135102335_bdtk3h.jpg" data-caption="Nagpur Showroom Walkthrough & New Arrivals 🌸" data-product="Luxury Handbags & Accessories">
         <div class="reel-media-wrapper">
           <img
@@ -164,49 +218,6 @@
               <span>@lushbeautymart</span>
             </div>
             <p class="reel-caption-text">Designer Handbags & accessories styling in Nagpur 👜</p>
-            <div class="reel-action-bar">
-              <span class="reel-shop-pill">
-                <span>View Story</span>
-                <span class="arrow-right">→</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reel 4: Nagpur Showroom Festive Feature -->
-      <div class="reel-card-item group" data-reel-type="image" data-image-src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop" data-caption="Royal Kundan & AD Jewellery Collections ✨" data-product="Bridal Kundan Set">
-        <div class="reel-media-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop"
-            alt="Jewellery Reel"
-            class="reel-image-element"
-            loading="lazy"
-            width="450"
-            height="800"
-          >
-          <div class="reel-gradient-overlay"></div>
-
-          <div class="reel-top-badges">
-            <span class="badge-reel-story">
-              <span>💎 BRIDAL</span>
-            </span>
-          </div>
-
-          <div class="reel-play-center">
-            <div class="reel-play-btn-circle">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="#FFFFFF">
-                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-              </svg>
-            </div>
-          </div>
-
-          <div class="reel-bottom-info">
-            <div class="reel-handle-tag">
-              <span class="tag-dot"></span>
-              <span>@lushbeautymart</span>
-            </div>
-            <p class="reel-caption-text">Royal choker sets & jhumkas ready for wedding season 💍</p>
             <div class="reel-action-bar">
               <span class="reel-shop-pill">
                 <span>View Story</span>
@@ -277,7 +288,7 @@
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Real unboxings, bridal makeovers, and showroom tours straight from our Nagpur store."
+      "default": "Real unboxings, store walkthroughs, and bridal makeovers straight from our Nagpur showroom."
     }
   ],
   "presets": [
