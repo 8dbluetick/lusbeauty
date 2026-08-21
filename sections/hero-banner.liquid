@@ -67,24 +67,36 @@
         </div>
       </div>
 
-      <!-- Right Column: Premium Lifestyle Product Imagery Composition -->
+      <!-- Right Column: Premium 9:16 Vertical Story Video Hero Media -->
       <div class="hero-media">
-        <div class="hero-image-card">
-          {%- if section.settings.image != blank -%}
-            <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.heading | escape }}" class="hero-img-main" width="800" height="1000">
-          {%- else -%}
-            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1000&auto=format&fit=crop" alt="Lush Beauty Mart Collection" class="hero-img-main" width="800" height="1000">
+        {%- assign show_video = false -%}
+        {%- if section.settings.media_type == 'video' or section.settings.media_type == blank -%}
+          {%- if section.settings.video_url != blank -%}
+            {%- assign show_video = true -%}
           {%- endif -%}
+        {%- endif -%}
 
-          {%- if section.settings.floating_caption_title != blank -%}
-            <div class="hero-floating-caption">
-              {%- if section.settings.floating_caption_tag != blank -%}
-                <span class="caption-tag">{{ section.settings.floating_caption_tag }}</span>
-              {%- endif -%}
-              <h4 class="caption-title">{{ section.settings.floating_caption_title }}</h4>
-            </div>
-          {%- endif -%}
-        </div>
+        {%- if show_video -%}
+          <div class="hero-video-card">
+            <video
+              class="hero-video-media"
+              src="{{ section.settings.video_url | default: 'https://res.cloudinary.com/dsqxboxoc/video/upload/v1787312722/angelpeterr__14050530_171336862_qanvrp.mp4' }}"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            ></video>
+          </div>
+        {%- else -%}
+          <div class="hero-image-card">
+            {%- if section.settings.image != blank -%}
+              <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.heading | escape }}" class="hero-img-main" width="800" height="1000">
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1000&auto=format&fit=crop" alt="Lush Beauty Mart Collection" class="hero-img-main" width="800" height="1000">
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -136,21 +148,29 @@
       "label": "Secondary Button Link"
     },
     {
+      "type": "header",
+      "content": "Hero Media (9:16 Video / Image)"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Media Type",
+      "options": [
+        { "value": "video", "label": "Vertical 9:16 Video" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Hero Video URL (MP4 / Cloudinary)",
+      "default": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787312722/angelpeterr__14050530_171336862_qanvrp.mp4"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Hero Lifestyle Image"
-    },
-    {
-      "type": "text",
-      "id": "floating_caption_tag",
-      "label": "Floating Tag",
-      "default": "NAGPUR FLAGSHIP STORE"
-    },
-    {
-      "type": "text",
-      "id": "floating_caption_title",
-      "label": "Floating Title",
-      "default": "Skincare • Makeup • Jewellery • Bags"
+      "label": "Fallback Hero Image"
     },
     {
       "type": "color",

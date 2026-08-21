@@ -37,7 +37,9 @@
         "primary_cta_text": "Shop Collection",
         "primary_cta_link": "/collections/all",
         "secondary_cta_text": "📍 Visit Nagpur Store",
-        "secondary_cta_link": "#store-section"
+        "secondary_cta_link": "#store-section",
+        "media_type": "video",
+        "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787312722/angelpeterr__14050530_171336862_qanvrp.mp4"
       }
     },
     "trending_products": {
