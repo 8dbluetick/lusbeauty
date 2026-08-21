@@ -121,57 +121,76 @@ h1, h2, h3, h4, .font-serif {
 .lush-announcement-bar {
   background: #1F1610;
   color: #F7EFE1;
-  height: 32px;
+  height: 34px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.35);
   position: relative;
   z-index: 1005;
   overflow: hidden;
+  user-select: none;
 }
 
-.announcement-container {
+.announcement-marquee-track {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 0 12px;
+  width: max-content;
+  will-change: transform;
+  animation: lushMarqueeScroll 28s linear infinite;
 }
 
-.announcement-messages {
+.lush-announcement-bar:hover .announcement-marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-content {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   white-space: nowrap;
-  gap: 8px;
+  gap: 20px;
+  padding-right: 20px;
+  flex-shrink: 0;
 }
 
-.announcement-item {
+.marquee-item {
   display: inline-flex;
   align-items: center;
-  white-space: nowrap;
+  gap: 7px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: inherit;
 }
 
-.announcement-sep {
-  color: rgba(197, 160, 89, 0.5);
+.marquee-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.marquee-link:hover {
+  color: var(--color-accent-gold);
+}
+
+.marquee-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.marquee-sep {
+  color: var(--color-accent-gold);
   font-size: 0.6rem;
+  opacity: 0.85;
 }
 
-.desktop-only-sep, .desktop-only-item {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .desktop-only-sep, .desktop-only-item {
-    display: inline;
+@keyframes lushMarqueeScroll {
+  0% {
+    transform: translateX(0);
   }
-  .announcement-messages {
-    font-size: 0.68rem;
-    gap: 12px;
+  100% {
+    transform: translateX(-50%);
   }
 }
 
