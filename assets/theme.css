@@ -218,13 +218,29 @@ h1, h2, h3, h4, .font-serif {
 
 .header-brand-link {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   text-decoration: none;
+}
+
+.header-logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid #EBE5DF;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  flex-shrink: 0;
+}
+
+.header-brand-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .brand-title {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   color: #1F1610;
@@ -233,12 +249,28 @@ h1, h2, h3, h4, .font-serif {
 
 .brand-tagline {
   font-family: var(--font-sans);
-  font-size: 0.52rem;
+  font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   color: #8A7363;
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 3px;
+}
+
+.footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.footer-logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  flex-shrink: 0;
 }
 
 /* Center: Main Navigation (8 items) */
