@@ -38,11 +38,6 @@
       <div class="product-info-panel">
         <div class="product-category-rating-row">
           <span class="product-type-pill">{{ product.type | default: "Lush Exclusive" }}</span>
-          <div class="product-rating-box">
-            <span class="star-gold">★</span>
-            <span class="rating-num">4.9</span>
-            <span class="review-count">({{ product.id | modulo: 120 | plus: 35 }} reviews)</span>
-          </div>
         </div>
 
         <h1 class="product-page-title">{{ product.title }}</h1>
