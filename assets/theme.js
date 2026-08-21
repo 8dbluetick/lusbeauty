@@ -231,7 +231,7 @@ async function updateCartDrawer() {
     if (subtotalEl) subtotalEl.textContent = formattedTotal;
     if (totalEl) totalEl.textContent = formattedTotal;
     if (shippingValEl) {
-      if (cart.total_price >= 49900) {
+      if (cart.total_price >= 99900) {
         shippingValEl.innerHTML = '<strong class="text-unlocked-badge">FREE</strong>';
       } else {
         shippingValEl.textContent = '₹50';
@@ -241,17 +241,17 @@ async function updateCartDrawer() {
     // 4. Update threshold banner & progress bars
     const shippingTextEls = document.querySelectorAll('[data-shipping-text]');
     const progressBars = document.querySelectorAll('.shipping-progress-bar, .drawer-progress-bar');
-    const percent = Math.min(100, (cart.total_price / 49900) * 100);
+    const percent = Math.min(100, (cart.total_price / 99900) * 100);
 
     progressBars.forEach(b => {
       b.style.width = percent + '%';
     });
 
     shippingTextEls.forEach(shippingTextEl => {
-      if (cart.total_price >= 49900) {
+      if (cart.total_price >= 99900) {
         shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You have unlocked <strong>FREE Delivery in Nagpur</strong>!</span>';
       } else {
-        const needed = ((49900 - cart.total_price) / 100).toFixed(0);
+        const needed = ((99900 - cart.total_price) / 100).toFixed(0);
         shippingTextEl.innerHTML = `<span>Add <strong>₹${needed}</strong> more for <strong>FREE Delivery</strong></span>`;
       }
     });

@@ -2,7 +2,7 @@
   <div class="lush-announcement-bar" style="background-color: {{ section.settings.bg_color | default: '#1F1610' }}; color: {{ section.settings.text_color | default: '#F7EFE1' }};">
     <div class="page-width announcement-container">
       <div class="announcement-messages">
-        <span class="announcement-item">{{ section.settings.text_1 | default: "FREE DELIVERY IN NAGPUR ON ₹499+" }}</span>
+        <span class="announcement-item">{{ section.settings.text_1 | default: "FREE DELIVERY IN NAGPUR ON ₹999+" }}</span>
         {%- if section.settings.text_2 != blank -%}
           <span class="announcement-sep">•</span>
           <span class="announcement-item">{{ section.settings.text_2 }}</span>
@@ -30,7 +30,7 @@
       "type": "text",
       "id": "text_1",
       "label": "Primary Message",
-      "default": "FREE DELIVERY IN NAGPUR ON ₹499+"
+      "default": "FREE DELIVERY IN NAGPUR ON ₹999+"
     },
     {
       "type": "text",

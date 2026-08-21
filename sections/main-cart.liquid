@@ -31,7 +31,7 @@
       </div>
     {%- else -%}
       <!-- Free Shipping Animated Progress Bar -->
-      {%- assign threshold = 49900 -%}
+      {%- assign threshold = 99900 -%}
       {%- assign current_total = cart.total_price -%}
       {%- assign progress_percent = current_total | times: 100.0 | divided_by: threshold | at_most: 100 -%}
       <div class="cart-free-shipping-card">
@@ -47,7 +47,7 @@
               {%- endif -%}
             </span>
           </div>
-          <span class="shipping-target-pill">Target: ₹499</span>
+          <span class="shipping-target-pill">Target: ₹999</span>
         </div>
         <div class="shipping-progress-track">
           <div class="shipping-progress-bar" style="width: {{ progress_percent }}%;"></div>
