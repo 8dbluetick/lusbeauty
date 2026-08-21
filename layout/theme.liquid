@@ -104,8 +104,15 @@
     <!-- Floating Interactive WhatsApp Widget -->
     {% render 'whatsapp-widget' %}
 
-    <!-- Mobile Bottom Navigation -->
-    {% render 'mobile-bottom-nav' %}
+    <!-- Top Reading/Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="ScrollProgressBar" aria-hidden="true"></div>
+
+    <!-- Floating Back-to-Top Button -->
+    <button type="button" class="btn-back-to-top" id="BackToTopBtn" title="Back to top" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
 
     <!-- Theme JavaScript -->
     {{ 'theme.js' | asset_url | script_tag }}

@@ -4,6 +4,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initScrollAnimations();
+  initScrollProgressAndBackToTop();
   initCartDrawer();
   initMobileMenu();
   initWhatsAppWidget();
@@ -921,4 +923,126 @@ function initStickyMobileBar() {
     });
   }
 }
+
+/* --------------------------------------------------------------------------
+   16. Luxury Scroll Reveal Animations (Intersection Observer)
+   -------------------------------------------------------------------------- */
+function initScrollAnimations() {
+  if (!('IntersectionObserver' in window)) {
+    // Fallback if browser doesn't support IntersectionObserver
+    document.querySelectorAll('.lush-reveal, .section-header-center, .lush-product-card, .testimonial-card, .faq-accordion-item, .category-card, .reel-card-item, .store-experience-card, .partner-card-layout').forEach(el => {
+      el.classList.add('is-revealed');
+    });
+    return;
+  }
+
+  const revealTargets = [
+    '.section-header-center',
+    '.hero-content',
+    '.hero-media',
+    '.lush-product-card',
+    '.testimonial-card',
+    '.faq-accordion-item',
+    '.category-card',
+    '.reel-card-item',
+    '.store-experience-card',
+    '.partner-card-layout',
+    '.promotional-offer-card',
+    '.lush-reveal'
+  ];
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60px 0px',
+    threshold: 0.12
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll(revealTargets.join(', ')).forEach((el, index) => {
+    el.classList.add('lush-reveal');
+    
+    // Add staggered delay to child cards in grids
+    const parentGrid = el.closest('.products-grid-4, .testimonials-grid-3, .categories-grid-4, .reels-grid-track');
+    if (parentGrid) {
+      const siblings = Array.from(parentGrid.children);
+      const childIndex = siblings.indexOf(el);
+      if (childIndex >= 0) {
+        el.style.transitionDelay = `${childIndex * 0.08}s`;
+      }
+    }
+    
+    revealObserver.observe(el);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   17. Scroll Progress Bar & Floating Back-To-Top Button
+   -------------------------------------------------------------------------- */
+function initScrollProgressAndBackToTop() {
+  const progressBar = document.getElementById('ScrollProgressBar');
+  const backToTopBtn = document.getElementById('BackToTopBtn');
+  const header = document.querySelector('.lush-sticky-header');
+
+  let ticking = false;
+
+  const onScroll = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    // 1. Reading / Scroll Progress Bar
+    if (progressBar && scrollHeight > 0) {
+      const progressPercent = Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100));
+      progressBar.style.width = progressPercent + '%';
+    }
+
+    // 2. Header elevation on scroll
+    if (header) {
+      if (scrollTop > 30) {
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+      }
+    }
+
+    // 3. Floating Back-to-Top Button
+    if (backToTopBtn) {
+      if (scrollTop > 350) {
+        backToTopBtn.classList.add('is-visible');
+      } else {
+        backToTopBtn.classList.remove('is-visible');
+      }
+    }
+
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial check
+  onScroll();
+
+  // Back to Top click with smooth physics
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+}
+
 
