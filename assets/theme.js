@@ -1111,25 +1111,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Cross-browser video codec recovery (handles Apple QuickTime .MOV / HEVC gracefully)
-  document.querySelectorAll('video[data-fallback-video]').forEach(video => {
-    video.addEventListener('error', () => {
-      const fallback = video.dataset.fallbackVideo;
-      if (fallback && video.src !== fallback) {
-        video.src = fallback;
-        video.load();
-        video.play().catch(() => {});
-      }
-    });
+  // Universal Autoplay Enforcer (ensures muted story videos play reliably across Chrome, Safari, Android & iOS)
+  document.querySelectorAll('video').forEach(video => {
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
 
-    // If browser cannot decode HEVC and stalls at readyState 0
-    setTimeout(() => {
-      if (video.readyState === 0 && video.dataset.fallbackVideo) {
-        video.src = video.dataset.fallbackVideo;
-        video.load();
-        video.play().catch(() => {});
+    const playVideo = () => {
+      const p = video.play();
+      if (p !== undefined) {
+        p.catch(() => {});
       }
-    }, 2000);
+    };
+
+    playVideo();
+    ['scroll', 'touchstart', 'click'].forEach(evt => {
+      window.addEventListener(evt, playVideo, { once: true, passive: true });
+    });
   });
 });
 
