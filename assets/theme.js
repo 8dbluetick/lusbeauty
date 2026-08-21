@@ -1110,7 +1110,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Cross-browser video codec recovery (handles Apple QuickTime .MOV / HEVC gracefully)
+  document.querySelectorAll('video[data-fallback-video]').forEach(video => {
+    video.addEventListener('error', () => {
+      const fallback = video.dataset.fallbackVideo;
+      if (fallback && video.src !== fallback) {
+        video.src = fallback;
+        video.load();
+        video.play().catch(() => {});
+      }
+    });
+
+    // If browser cannot decode HEVC and stalls at readyState 0
+    setTimeout(() => {
+      if (video.readyState === 0 && video.dataset.fallbackVideo) {
+        video.src = video.dataset.fallbackVideo;
+        video.load();
+        video.play().catch(() => {});
+      }
+    }, 2000);
+  });
 });
+
 
 
 
