@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWholesaleModal();
   initQuickViewModal();
   initCarousels();
+  initReels();
   initCouponCopy();
   initProductPage();
 });
@@ -390,4 +391,117 @@ function initProductPage() {
       }
     });
   }
+}
+
+/* --------------------------------------------------------------------------
+   9. Instagram Reels & Video Stories Interactive System
+   -------------------------------------------------------------------------- */
+function initReels() {
+  const track = document.getElementById('ReelsTrack');
+  const prevBtn = document.querySelector('[data-reel-prev]');
+  const nextBtn = document.querySelector('[data-reel-next]');
+
+  // Track scrolling
+  if (track) {
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -280, behavior: 'smooth' });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: 280, behavior: 'smooth' });
+      });
+    }
+  }
+
+  // Video Autoplay & Sound Toggle in Cards
+  document.querySelectorAll('.reel-card-item').forEach(card => {
+    const video = card.querySelector('video');
+    const soundBtn = card.querySelector('.btn-reel-sound-toggle');
+
+    if (video) {
+      // Auto play on hover / visibility
+      card.addEventListener('mouseenter', () => {
+        video.play().catch(() => {});
+      });
+
+      // Play on intersection observer
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.5 });
+        observer.observe(card);
+      }
+
+      // Sound button
+      if (soundBtn) {
+        soundBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          video.muted = !video.muted;
+          soundBtn.classList.toggle('unmuted', !video.muted);
+        });
+      }
+    }
+  });
+
+  // Reel Full-Screen Modal Viewer
+  const modal = document.getElementById('ReelModalOverlay');
+  const mediaHolder = document.getElementById('ReelModalMediaHolder');
+  const captionEl = document.getElementById('ReelModalCaption');
+  const productEl = document.getElementById('ReelModalProduct');
+  const closeBackdrop = document.getElementById('BtnCloseReelModal');
+  const closeX = document.getElementById('BtnCloseReelModalX');
+
+  if (!modal || !mediaHolder) return;
+
+  const closeReelModal = () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    const modalVideo = mediaHolder.querySelector('video');
+    if (modalVideo) {
+      modalVideo.pause();
+    }
+    mediaHolder.innerHTML = '';
+  };
+
+  if (closeBackdrop) closeBackdrop.addEventListener('click', closeReelModal);
+  if (closeX) closeX.addEventListener('click', closeReelModal);
+
+  document.querySelectorAll('.reel-card-item').forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Ignore if clicking sound toggle
+      if (e.target.closest('.btn-reel-sound-toggle')) return;
+
+      const type = card.dataset.reelType;
+      const videoSrc = card.dataset.videoSrc;
+      const imageSrc = card.dataset.imageSrc;
+      const caption = card.dataset.caption || 'Lush Beauty Mart Nagpur Reel';
+      const product = card.dataset.product || 'Exclusive Store Collection';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      if (captionEl) captionEl.textContent = caption;
+      if (productEl) productEl.textContent = product;
+
+      if (type === 'video' && videoSrc) {
+        mediaHolder.innerHTML = `
+          <video src="${videoSrc}" controls autoplay loop playsinline style="width: 100%; height: 100%; object-fit: contain; background: #000;"></video>
+        `;
+        const v = mediaHolder.querySelector('video');
+        if (v) v.play().catch(() => {});
+      } else if (imageSrc) {
+        mediaHolder.innerHTML = `
+          <img src="${imageSrc}" alt="${caption}" style="width: 100%; height: 100%; object-fit: contain; background: #000;">
+        `;
+      }
+    });
+  });
 }

@@ -25,6 +25,13 @@
         "view_all_link": "/collections/all"
       }
     },
+    "instagram_reels": {
+      "type": "instagram-reels",
+      "settings": {
+        "heading": "Trending Reels & Video Stories",
+        "subheading": "Real unboxings, bridal makeovers, and showroom tours straight from our Nagpur store."
+      }
+    },
     "promotional_offers": {
       "type": "promotional-offers",
       "settings": {
@@ -58,6 +65,7 @@
     "hero_banner",
     "featured_categories",
     "trending_products",
+    "instagram_reels",
     "promotional_offers",
     "new_arrivals",
     "store_experience",
