@@ -62,7 +62,7 @@
 
       {%- assign whatsapp_msg = 'Hi Lush Beauty Mart Nagpur! I am interested in ' | append: product.title | append: ' (Price: ' | append: product.price | money | append: '). Is this available at your store?' -%}
       <a
-        href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ whatsapp_msg | url_encode }}"
+        href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ whatsapp_msg | url_encode }}"
         target="_blank"
         rel="noopener noreferrer"
         class="card-action-btn card-whatsapp-btn"

@@ -102,7 +102,7 @@ function initCartDrawer() {
       try {
         const res = await fetch('/cart.js');
         const cartData = await res.json();
-        const waNum = '9191195951';
+        const waNum = '919119595951';
 
         if (!cartData.items || cartData.items.length === 0) return;
 
@@ -367,7 +367,7 @@ function initWholesaleModal() {
       const biz = form.elements['business']?.value || 'Salon/Boutique';
       const cat = form.elements['category']?.value || 'General';
       const msg = `*Namaste Lush Beauty Mart!* 🏢\n\n*Wholesale B2B Inquiry:*\nName: ${name}\nBusiness: ${biz}\nCategory: ${cat}\n\nPlease send your wholesale price catalogue.`;
-      window.open(`https://wa.me/9191195951?text=${encodeURIComponent(msg)}`, '_blank');
+      window.open(`https://wa.me/919119595951?text=${encodeURIComponent(msg)}`, '_blank');
     });
   }
 }
