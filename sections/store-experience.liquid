@@ -12,53 +12,35 @@
       </div>
 
       <div class="store-experience-grid">
-        <!-- Left Column: Store Interior Visual Showcase (Instagram Story Video / Image) -->
-        <div class="store-interior-card">
-          {%- assign show_video = false -%}
-          {%- if section.settings.media_type == 'video' or section.settings.media_type == blank -%}
-            {%- if section.settings.video_url != blank -%}
-              {%- assign show_video = true -%}
-            {%- endif -%}
-          {%- endif -%}
-
-          {%- if show_video -%}
-            <div class="store-video-wrapper">
+        <!-- Left Column: 9:16 Portrait Story Video / Image Showcase -->
+        <div class="store-media-column">
+          {%- if section.settings.video_url != blank -%}
+            <div class="store-video-container">
               <video
-                class="store-interior-video"
+                class="store-story-video"
                 autoplay
                 muted
                 loop
                 playsinline
                 preload="auto"
                 poster="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop"
-                data-primary-video="{{ section.settings.video_url | default: 'https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov' }}"
+                data-primary-video="{{ section.settings.video_url }}"
                 data-fallback-video="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4"
               >
-                <source src="{{ section.settings.video_url | default: 'https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov' }}" type="video/quicktime">
-                <source src="{{ section.settings.video_url | default: 'https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov' }}" type="video/mp4">
+                <source src="{{ section.settings.video_url }}" type="video/quicktime">
+                <source src="{{ section.settings.video_url }}" type="video/mp4">
                 <source src="https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4" type="video/mp4">
               </video>
             </div>
           {%- else -%}
-            {%- if section.settings.store_image != blank -%}
-              <img src="{{ section.settings.store_image | image_url: width: 1000 }}" alt="Lush Beauty Mart Nagpur Store" class="store-interior-img" width="800" height="900">
-            {%- else -%}
-              <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Lush Beauty Mart Store Interior" class="store-interior-img" width="800" height="900">
-            {%- endif -%}
+            <div class="store-image-container">
+              {%- if section.settings.store_image != blank -%}
+                <img src="{{ section.settings.store_image | image_url: width: 1000 }}" alt="Lush Beauty Mart Nagpur Store" class="store-interior-img" width="800" height="900">
+              {%- else -%}
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Lush Beauty Mart Store Interior" class="store-interior-img" width="800" height="900">
+              {%- endif -%}
+            </div>
           {%- endif -%}
-
-          <div class="store-interior-overlay"></div>
-          <div class="store-interior-caption">
-            {%- if section.settings.interior_pill != blank -%}
-              <span class="interior-pill">{{ section.settings.interior_pill }}</span>
-            {%- endif -%}
-            {%- if section.settings.interior_headline != blank -%}
-              <h3 class="interior-headline">{{ section.settings.interior_headline }}</h3>
-            {%- endif -%}
-            {%- if section.settings.interior_sub != blank -%}
-              <p class="interior-sub">{{ section.settings.interior_sub }}</p>
-            {%- endif -%}
-          </div>
         </div>
 
         <!-- Right Column: Interactive Google Maps Location Card -->
@@ -165,46 +147,19 @@
     },
     {
       "type": "header",
-      "content": "Showroom Visual Media (Story Video / Image)"
-    },
-    {
-      "type": "select",
-      "id": "media_type",
-      "label": "Media Type",
-      "options": [
-        { "value": "video", "label": "Vertical Story Video" },
-        { "value": "image", "label": "Image" }
-      ],
-      "default": "video"
+      "content": "Store Video / Media (9:16 Instagram Story)"
     },
     {
       "type": "text",
       "id": "video_url",
-      "label": "Store Walkthrough Video URL",
-      "default": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov"
+      "label": "Store Section Video URL",
+      "default": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov",
+      "info": "Paste the Instagram Story video URL. If left empty, fallback image is shown."
     },
     {
       "type": "image_picker",
       "id": "store_image",
       "label": "Fallback Store Interior Image"
-    },
-    {
-      "type": "text",
-      "id": "interior_pill",
-      "label": "Interior Pill Tag",
-      "default": "Nagpur Showroom & Testing Counter"
-    },
-    {
-      "type": "text",
-      "id": "interior_headline",
-      "label": "Interior Headline",
-      "default": "A True Beauty Sanctuary in Nagpur"
-    },
-    {
-      "type": "textarea",
-      "id": "interior_sub",
-      "label": "Interior Description",
-      "default": "Walk through our dedicated aisles for bridal jewellery, everyday cosmetics, dermatological skincare, and designer bags."
     },
     {
       "type": "header",
