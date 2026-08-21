@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   1. AJAX Cart Drawer
+   1. AJAX Cart Drawer & Dynamic Real-Time Update
    -------------------------------------------------------------------------- */
 function initCartDrawer() {
   const drawer = document.getElementById('LushCartDrawer');
@@ -41,9 +41,15 @@ function initCartDrawer() {
     const form = e.target;
     if (form.matches('.card-form, .product-form') || form.getAttribute('action') === '/cart/add') {
       e.preventDefault();
-      const formData = new FormData(form);
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Adding...</span>';
+      }
 
       try {
+        const formData = new FormData(form);
         const response = await fetch('/cart/add.js', {
           method: 'POST',
           body: formData,
@@ -53,10 +59,16 @@ function initCartDrawer() {
           await updateCartDrawer();
           openCartDrawer();
         } else {
-          form.submit(); // fallback
+          const errData = await response.json();
+          alert(errData.description || 'Could not add product to cart.');
         }
       } catch (err) {
         form.submit();
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
       }
     }
   });
@@ -67,14 +79,17 @@ function initCartDrawer() {
     const removeBtn = e.target.closest('[data-remove-item]');
 
     if (qtyBtn) {
+      e.preventDefault();
       const lineKey = qtyBtn.dataset.key;
       const action = qtyBtn.dataset.qtyChange;
-      const currentQty = parseInt(qtyBtn.parentElement.querySelector('.qty-num').textContent, 10);
+      const qtyDisplay = qtyBtn.parentElement.querySelector('.qty-num');
+      const currentQty = parseInt(qtyDisplay.textContent, 10);
       const newQty = action === 'plus' ? currentQty + 1 : currentQty - 1;
       await changeCartQuantity(lineKey, newQty);
     }
 
     if (removeBtn) {
+      e.preventDefault();
       const lineKey = removeBtn.dataset.removeItem;
       await changeCartQuantity(lineKey, 0);
     }
@@ -89,10 +104,13 @@ function initCartDrawer() {
         const cartData = await res.json();
         const waNum = '9191195951';
 
-        if (cartData.items.length === 0) return;
+        if (!cartData.items || cartData.items.length === 0) return;
 
         const itemsText = cartData.items
-          .map((item, idx) => `${idx + 1}. *${item.title}* (Qty: ${item.quantity}) - ₹${(item.final_line_price / 100).toFixed(0)}`)
+          .map((item, idx) => {
+            const vText = item.variant_title && item.variant_title !== 'Default Title' ? ` (${item.variant_title})` : '';
+            return `${idx + 1}. *${item.product_title || item.title}*${vText} x ${item.quantity} = ₹${(item.final_line_price / 100).toFixed(0)}`;
+          })
           .join('\n');
 
         const totalFormatted = (cartData.total_price / 100).toFixed(0);
@@ -136,19 +154,87 @@ async function updateCartDrawer() {
     const res = await fetch('/cart.js');
     const cart = await res.json();
 
-    // Update count badges
+    // 1. Update count badges across entire page
     document.querySelectorAll('[data-cart-count]').forEach(el => {
       el.textContent = cart.item_count;
     });
 
-    // Update drawer total
+    const itemsContainer = document.querySelector('[data-cart-items-container]');
+    const footerEl = document.getElementById('CartDrawerFooter');
+
+    // 2. Render Items HTML
+    if (itemsContainer) {
+      if (cart.item_count === 0) {
+        itemsContainer.innerHTML = `
+          <div class="cart-empty-state">
+            <div class="empty-cart-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 2L3 6v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </div>
+            <h4>Your bag is currently empty</h4>
+            <p>Explore luxury skincare, cosmetics, artificial jewellery and handbags from our showroom.</p>
+            <a href="/collections/all" class="btn-shop-collection" data-close-cart>
+              <span>Start Shopping</span>
+              <span>→</span>
+            </a>
+          </div>
+        `;
+        if (footerEl) footerEl.style.display = 'none';
+      } else {
+        let itemsHtml = '<div class="cart-item-list">';
+        cart.items.forEach((item, index) => {
+          const imgUrl = item.image || (item.featured_image ? item.featured_image.url : '');
+          const variantTitle = item.variant_title && item.variant_title !== 'Default Title' ? `<span class="cart-item-variant">${item.variant_title}</span>` : '';
+          const itemPrice = '₹' + (item.final_line_price / 100).toFixed(0);
+
+          itemsHtml += `
+            <div class="cart-drawer-item" data-line-key="${item.key}" style="animation-delay: ${index * 0.05}s;">
+              <a href="${item.url}" class="drawer-item-img-link">
+                ${imgUrl ? `<img src="${imgUrl}" alt="${item.title}" class="cart-item-img" width="80" height="80">` : `<div class="cart-item-img" style="background:#FAF7F2;display:flex;align-items:center;justify-content:center;">🛍️</div>`}
+              </a>
+              <div class="cart-item-info">
+                <div class="cart-item-top">
+                  <h5 class="cart-item-title"><a href="${item.url}">${item.product_title || item.title}</a></h5>
+                  <button type="button" class="cart-item-remove" data-remove-item="${item.key}" aria-label="Remove item">&times;</button>
+                </div>
+                ${variantTitle}
+                <div class="cart-item-bottom">
+                  <div class="qty-stepper">
+                    <button type="button" class="qty-btn" data-qty-change="minus" data-key="${item.key}">−</button>
+                    <span class="qty-num">${item.quantity}</span>
+                    <button type="button" class="qty-btn" data-qty-change="plus" data-key="${item.key}">+</button>
+                  </div>
+                  <span class="cart-item-price">${itemPrice}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        itemsHtml += '</div>';
+        itemsContainer.innerHTML = itemsHtml;
+        if (footerEl) footerEl.style.display = 'flex';
+      }
+    }
+
+    // 3. Update drawer totals & subtotal
     const subtotalEl = document.querySelector('[data-cart-subtotal]');
     const totalEl = document.querySelector('[data-cart-total]');
+    const shippingValEl = document.querySelector('.cart-shipping-val');
     const formattedTotal = '₹' + (cart.total_price / 100).toFixed(0);
     if (subtotalEl) subtotalEl.textContent = formattedTotal;
     if (totalEl) totalEl.textContent = formattedTotal;
+    if (shippingValEl) {
+      if (cart.total_price >= 49900) {
+        shippingValEl.innerHTML = '<strong class="text-unlocked-badge">FREE</strong>';
+      } else {
+        shippingValEl.textContent = '₹50';
+      }
+    }
 
-    // Update threshold banner & progress bars
+    // 4. Update threshold banner & progress bars
     const shippingTextEls = document.querySelectorAll('[data-shipping-text]');
     const progressBars = document.querySelectorAll('.shipping-progress-bar, .drawer-progress-bar');
     const percent = Math.min(100, (cart.total_price / 49900) * 100);
@@ -166,7 +252,7 @@ async function updateCartDrawer() {
       }
     });
 
-    // Handle empty cart page reload if on /cart
+    // 5. Handle empty cart page reload if on /cart
     if (window.location.pathname === '/cart' && cart.item_count === 0) {
       window.location.reload();
     }

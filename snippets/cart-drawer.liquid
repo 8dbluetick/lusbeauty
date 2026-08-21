@@ -88,58 +88,46 @@
       {%- endif -%}
     </div>
 
-    <!-- Footer Summary & Checkout Actions -->
-    {%- if cart.item_count > 0 -%}
-      <div class="cart-drawer-footer">
-        <div class="cart-subtotal-row">
-          <span>Bag Subtotal</span>
-          <span class="cart-subtotal-val" data-cart-subtotal>{{ cart.total_price | money }}</span>
-        </div>
-
-        <div class="cart-shipping-row">
-          <span>Delivery</span>
-          <span class="cart-shipping-val">
-            {%- if cart.total_price >= threshold -%}
-              <strong class="text-unlocked-badge">FREE</strong>
-            {%- else -%}
-              ₹50
-            {%- endif -%}
-          </span>
-        </div>
-
-        <div class="cart-total-row">
-          <span>Estimated Total</span>
-          <span class="cart-total-val" data-cart-total>{{ cart.total_price | money }}</span>
-        </div>
-
-        <!-- Checkout CTAs -->
-        <div class="cart-checkout-actions">
-          <form action="/checkout" method="post">
-            <button type="submit" class="btn-drawer-checkout" name="checkout">
-              <span>Proceed to Checkout</span>
-              <span class="arrow-icon">→</span>
-            </button>
-          </form>
-
-          {%- capture wa_drawer_msg -%}
-Namaste Lush Beauty Mart! 🛍️
-I want to order from my cart:
-{% for item in cart.items %}
-• {{ item.product.title }}{% unless item.product.has_only_default_variant %} ({{ item.variant.title }}){% endunless %} x {{ item.quantity }} = {{ item.final_line_price | money }}
-{% endfor %}
-Total: {{ cart.total_price | money }}
-Please confirm store availability!
-          {%- endcapture -%}
-
-          <a href="https://wa.me/{{ settings.store_whatsapp | default: '9191195951' }}?text={{ wa_drawer_msg | strip | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-drawer-whatsapp">
-            <span>Instant 1-Click WhatsApp Order</span>
-          </a>
-
-          <a href="/cart" class="link-view-full-cart" data-close-cart>
-            <span>View Full Shopping Bag Page →</span>
-          </a>
-        </div>
+    <!-- Footer Summary & Checkout Actions (Always present in DOM, toggled via style) -->
+    <div class="cart-drawer-footer" id="CartDrawerFooter" style="{% if cart.item_count == 0 %}display: none;{% else %}display: flex;{% endif %}">
+      <div class="cart-subtotal-row">
+        <span>Bag Subtotal</span>
+        <span class="cart-subtotal-val" data-cart-subtotal>{{ cart.total_price | money }}</span>
       </div>
-    {%- endif -%}
+
+      <div class="cart-shipping-row">
+        <span>Delivery</span>
+        <span class="cart-shipping-val">
+          {%- if cart.total_price >= threshold -%}
+            <strong class="text-unlocked-badge">FREE</strong>
+          {%- else -%}
+            ₹50
+          {%- endif -%}
+        </span>
+      </div>
+
+      <div class="cart-total-row">
+        <span>Estimated Total</span>
+        <span class="cart-total-val" data-cart-total>{{ cart.total_price | money }}</span>
+      </div>
+
+      <!-- Checkout CTAs -->
+      <div class="cart-checkout-actions">
+        <form action="/checkout" method="post">
+          <button type="submit" class="btn-drawer-checkout" name="checkout">
+            <span>Proceed to Checkout</span>
+            <span class="arrow-icon">→</span>
+          </button>
+        </form>
+
+        <button type="button" id="BtnWhatsAppOrder" class="btn-drawer-whatsapp">
+          <span>Instant 1-Click WhatsApp Order</span>
+        </button>
+
+        <a href="/cart" class="link-view-full-cart" data-close-cart>
+          <span>View Full Shopping Bag Page →</span>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
