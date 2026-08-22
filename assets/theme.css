@@ -195,35 +195,12 @@ h1, h2, h3, h4, .font-serif {
 }
 
 /* ==========================================================================
-   CLEAN LUXURY MAIN HEADER (MOBILE & DESKTOP)
-   ========================================================================== */
-.lush-header-sticky {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #FFFFFF;
-  border-bottom: 1px solid #EBE5DF;
-  padding: 0;
-  height: 62px;
-  display: flex;
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .lush-header-sticky {
-    height: 72px;
-  }
-}
-
-.header-container {
-  display: flex;
-/* ==========================================================================
    2-TIER LUXURY HEADER ARCHITECTURE
    ========================================================================== */
 .lush-header-sticky {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   background: #FFFFFF;
   border-bottom: 1px solid #EBE5DF;
   box-shadow: 0 4px 18px rgba(31, 22, 16, 0.05);
@@ -655,15 +632,23 @@ h1, h2, h3, h4, .font-serif {
 .mobile-nav-drawer {
   position: fixed;
   inset: 0;
-  z-index: 120;
+  z-index: 9999;
   visibility: hidden;
   opacity: 0;
-  transition: var(--transition);
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .mobile-nav-drawer {
+    display: none !important;
+  }
 }
 
 .mobile-nav-drawer.active {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .mobile-nav-backdrop {
