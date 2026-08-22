@@ -490,34 +490,40 @@ h1, h2, h3, h4, .font-serif {
 .header-dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  min-width: 220px;
+  left: 0;
+  transform: translateY(6px);
+  min-width: 250px;
   background: #FFFFFF;
   border-radius: var(--radius-md, 12px);
-  border: 1px solid rgba(197, 160, 89, 0.3);
-  box-shadow: 0 12px 35px rgba(31, 22, 16, 0.14);
-  padding: 8px 0;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: 0 14px 40px rgba(31, 22, 16, 0.16);
+  padding: 10px 0;
   list-style: none;
   margin: 0;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1020;
 }
 
 .nav-item-wrap:hover .header-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
+}
+
+/* Right-align dropdowns for items on the right side of the nav bar */
+.nav-item-wrap:nth-last-child(-n+3) .header-dropdown-menu {
+  left: auto;
+  right: 0;
 }
 
 .header-dropdown-link {
   display: block;
-  padding: 9px 20px;
-  font-size: 0.74rem;
+  padding: 9px 22px;
+  font-size: 0.76rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   color: #1F1610;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -527,7 +533,7 @@ h1, h2, h3, h4, .font-serif {
 .header-dropdown-link:hover {
   background: #FAF7F2;
   color: var(--color-accent-gold-hover, #B38C44);
-  padding-left: 24px;
+  padding-left: 26px;
 }
 
 .mobile-sublinks {
