@@ -63,6 +63,8 @@ function initCartDrawer() {
         });
 
         if (response.ok) {
+          const addedItem = await response.json();
+          showAddToCartToast(addedItem);
           await updateCartDrawer();
           openCartDrawer();
         } else {
@@ -115,6 +117,63 @@ function initCartDrawer() {
         window.open('https://wa.me/919119595951', '_blank');
       }
     });
+  }
+}
+
+let toastTimeout = null;
+
+function showAddToCartToast(item) {
+  const toastContainer = document.getElementById('LushToastContainer');
+  const toast = document.getElementById('LushAddToCartToast');
+  if (!toastContainer || !toast || !item) return;
+
+  const img = document.getElementById('ToastProductImg');
+  const title = document.getElementById('ToastProductTitle');
+  const variant = document.getElementById('ToastProductVariant');
+  const price = document.getElementById('ToastProductPrice');
+
+  if (img) {
+    const imgSrc = item.featured_image ? (item.featured_image.url || item.featured_image) : (item.image || '');
+    if (imgSrc) {
+      img.src = imgSrc;
+      img.style.display = 'block';
+    } else {
+      img.style.display = 'none';
+    }
+    img.alt = item.title || 'Product';
+  }
+
+  if (title) {
+    title.textContent = item.product_title || item.title || 'Product added';
+  }
+
+  if (variant) {
+    if (item.variant_title && item.variant_title !== 'Default Title') {
+      variant.textContent = item.variant_title;
+      variant.style.display = 'inline-block';
+    } else {
+      variant.style.display = 'none';
+    }
+  }
+
+  if (price) {
+    const rawPrice = item.final_line_price || item.price || item.original_price || 0;
+    price.textContent = formatMoney(rawPrice);
+  }
+
+  if (toastTimeout) clearTimeout(toastTimeout);
+  toastContainer.classList.add('active');
+
+  toastTimeout = setTimeout(() => {
+    toastContainer.classList.remove('active');
+  }, 4500);
+
+  const closeBtn = document.getElementById('BtnCloseToast');
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastContainer.classList.remove('active');
+    };
   }
 }
 

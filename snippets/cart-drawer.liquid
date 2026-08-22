@@ -24,10 +24,10 @@
         <span class="shipping-icon">🚚</span>
         <div class="shipping-text" data-shipping-text>
           {%- if current_total >= threshold -%}
-            <span class="shipping-unlocked">🎉 You unlocked <strong>FREE Express Delivery</strong>!</span>
+            <span class="shipping-unlocked">🎉 <strong>FREE Express Nagpur Delivery</strong> Unlocked!</span>
           {%- else -%}
             {%- assign needed = threshold | minus: current_total -%}
-            <span>Add <strong>{{ needed | money }}</strong> more for <strong>FREE Delivery</strong></span>
+            <span>Add <strong>{{ needed | money }}</strong> more for <strong>FREE Nagpur Express Delivery</strong></span>
           {%- endif -%}
         </div>
       </div>
@@ -41,26 +41,26 @@
       {%- if cart.item_count == 0 -%}
         <div class="cart-empty-state">
           <div class="empty-cart-icon">
-            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.4">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <path d="M16 10a4 4 0 0 1-8 0"></path>
             </svg>
           </div>
-          <h4>Your bag is currently empty</h4>
-          <p>Explore luxury skincare, cosmetics, designer handbags and fragrances from our showroom.</p>
+          <h4>Your beauty bag is empty</h4>
+          <p>Explore luxury skincare, cosmetics, designer fragrances and viral drinkware from our Nagpur showroom.</p>
           <a href="/collections/all" class="btn-shop-collection" data-close-cart>
-            <span>Start Shopping</span>
+            <span>Explore Bestsellers</span>
             <span>→</span>
           </a>
         </div>
       {%- else -%}
         <div class="cart-item-list">
           {%- for item in cart.items -%}
-            <div class="cart-drawer-item" data-line-key="{{ item.key }}" style="animation-delay: {{ forloop.index | times: 0.05 }}s;">
+            <div class="cart-drawer-item" data-line-key="{{ item.key }}">
               <a href="{{ item.url }}" class="drawer-item-img-link">
                 {%- if item.image -%}
-                  <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" class="cart-item-img" width="80" height="80">
+                  <img src="{{ item.image | image_url: width: 180 }}" alt="{{ item.title | escape }}" class="cart-item-img" width="80" height="100" loading="lazy">
                 {%- else -%}
                   {{ 'product-1' | placeholder_svg_tag: 'cart-placeholder-svg' }}
                 {%- endif -%}
@@ -75,9 +75,9 @@
                 {%- endunless -%}
                 <div class="cart-item-bottom">
                   <div class="qty-stepper">
-                    <button type="button" class="qty-btn" data-qty-change="minus" data-key="{{ item.key }}">−</button>
+                    <button type="button" class="qty-btn" data-qty-change="minus" data-key="{{ item.key }}" aria-label="Decrease quantity">−</button>
                     <span class="qty-num">{{ item.quantity }}</span>
-                    <button type="button" class="qty-btn" data-qty-change="plus" data-key="{{ item.key }}">+</button>
+                    <button type="button" class="qty-btn" data-qty-change="plus" data-key="{{ item.key }}" aria-label="Increase quantity">+</button>
                   </div>
                   <span class="cart-item-price">{{ item.final_line_price | money }}</span>
                 </div>
@@ -88,7 +88,7 @@
       {%- endif -%}
     </div>
 
-    <!-- Footer Summary & Checkout Actions (Always present in DOM, toggled via style) -->
+    <!-- Footer Summary & Checkout Actions -->
     <div class="cart-drawer-footer" id="CartDrawerFooter" style="{% if cart.item_count == 0 %}display: none;{% else %}display: flex;{% endif %}">
       <div class="cart-subtotal-row">
         <span>Bag Subtotal</span>
@@ -96,12 +96,12 @@
       </div>
 
       <div class="cart-shipping-row">
-        <span>Delivery</span>
+        <span>Nagpur Delivery</span>
         <span class="cart-shipping-val">
           {%- if cart.total_price >= threshold -%}
             <strong class="text-unlocked-badge">FREE</strong>
           {%- else -%}
-            ₹50
+            ₹50 (Free on ₹999+)
           {%- endif -%}
         </span>
       </div>
@@ -121,12 +121,25 @@
         </form>
 
         <button type="button" id="BtnWhatsAppOrder" class="btn-drawer-whatsapp">
-          <span>Instant 1-Click WhatsApp Order</span>
+          <span>💬 Instant 1-Click WhatsApp Order</span>
         </button>
 
         <a href="/cart" class="link-view-full-cart" data-close-cart>
           <span>View Full Shopping Bag Page →</span>
         </a>
+      </div>
+
+      <!-- Trust Badges Strip in Drawer -->
+      <div class="cart-drawer-trust-strip">
+        <div class="trust-badge-item">
+          <span>🛡️ 100% Genuine Branded</span>
+        </div>
+        <div class="trust-badge-item">
+          <span>⚡ Same-Day Nagpur Delivery</span>
+        </div>
+        <div class="trust-badge-item">
+          <span>🏬 Showroom Pickup at Lad Sq.</span>
+        </div>
       </div>
     </div>
   </div>
