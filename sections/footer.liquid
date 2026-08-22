@@ -97,20 +97,30 @@
 
       <!-- Col 2: Categories -->
       <div class="footer-links-col">
-        <h4 class="footer-col-title">Categories</h4>
+        <h4 class="footer-col-title">Collections</h4>
         <ul class="footer-links-list">
           {%- assign cat_menu = linklists[section.settings.menu_categories] -%}
           {%- if cat_menu != blank and cat_menu.links.size > 0 -%}
             {%- for link in cat_menu.links -%}
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {%- endfor -%}
+          {%- elsif collections.size > 0 -%}
+            {%- assign coll_count = 0 -%}
+            {%- for col in collections -%}
+              {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
+                {%- assign coll_count = coll_count | plus: 1 -%}
+                {%- if coll_count <= 5 -%}
+                  <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+                {%- endif -%}
+              {%- endunless -%}
+            {%- endfor -%}
+            <li><a href="/collections/all" class="text-gold">✨ All Collections →</a></li>
           {%- else -%}
-            <li><a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}">Skincare & Serums</a></li>
-            <li><a href="{% if collections['cosmetics'] != blank %}{{ collections['cosmetics'].url }}{% else %}/collections/all{% endif %}">Cosmetics & Makeup</a></li>
-            <li><a href="{% if collections['artificial-jewellery'] != blank %}{{ collections['artificial-jewellery'].url }}{% elsif collections['jewellery'] != blank %}{{ collections['jewellery'].url }}{% else %}/collections/all{% endif %}">Artificial Jewellery</a></li>
-            <li><a href="{% if collections['handbags'] != blank %}{{ collections['handbags'].url }}{% else %}/collections/all{% endif %}">Handbags & Slings</a></li>
-            <li><a href="{% if collections['beauty-accessories'] != blank %}{{ collections['beauty-accessories'].url }}{% elsif collections['accessories'] != blank %}{{ collections['accessories'].url }}{% else %}/collections/all{% endif %}">Beauty Accessories</a></li>
-            <li><a href="/collections/all" class="text-gold">✨ All Collections</a></li>
+            <li><a href="/collections/all">Skincare & Serums</a></li>
+            <li><a href="/collections/all">Cosmetics & Makeup</a></li>
+            <li><a href="/collections/all">Handbags & Slings</a></li>
+            <li><a href="/collections/all">Hair Care Rituals</a></li>
+            <li><a href="/collections/all" class="text-gold">✨ All Collections →</a></li>
           {%- endif -%}
         </ul>
       </div>
@@ -199,7 +209,7 @@
       "type": "textarea",
       "id": "description",
       "label": "Store Description",
-      "default": "Nagpur’s premier luxury destination for genuine skincare, high-definition cosmetics, authentic artificial jewellery, designer handbags, and beauty accessories."
+      "default": "Nagpur’s premier luxury destination for genuine dermatological skincare, cosmetics, designer handbags, fragrances, and beauty accessories."
     },
     {
       "type": "textarea",

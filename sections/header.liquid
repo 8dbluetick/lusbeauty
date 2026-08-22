@@ -41,26 +41,39 @@
       </a>
     </div>
 
-    <!-- CENTER: Main Navigation (Dynamic with graceful 404 fallback) -->
+    <!-- CENTER: Main Navigation (Dynamic Shopify Collections & Custom Menu with Dropdowns) -->
     <nav class="header-desktop-nav" aria-label="Primary Navigation">
       <ul class="nav-links-list">
         {%- assign nav_menu = linklists[section.settings.menu | default: 'main-menu'] -%}
         {%- if nav_menu != blank and nav_menu.links.size > 0 -%}
           {%- for link in nav_menu.links -%}
-            <li>
+            <li class="nav-item-wrap{% if link.links != blank %} has-dropdown{% endif %}">
               <a href="{{ link.url }}" class="nav-item-link{% if link.active %} active{% endif %}" style="color: {{ section.settings.text_color | default: '#2C1D11' }};">
-                {{ link.title | upcase }}
+                <span>{{ link.title | upcase }}</span>
+                {%- if link.links != blank -%}<span class="dropdown-chevron">▾</span>{%- endif -%}
               </a>
+              {%- if link.links != blank -%}
+                <ul class="header-dropdown-menu">
+                  {%- for child_link in link.links -%}
+                    <li>
+                      <a href="{{ child_link.url }}" class="header-dropdown-link{% if child_link.active %} active{% endif %}">
+                        {{ child_link.title }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
             </li>
           {%- endfor -%}
         {%- else -%}
+          <!-- Auto-fetch actual Shopify store collections dynamically -->
           <li><a href="/" class="nav-item-link">HOME</a></li>
-          <li><a href="/collections/all" class="nav-item-link">SHOP</a></li>
-          <li><a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">SKINCARE</a></li>
-          <li><a href="{% if collections['cosmetics'] != blank %}{{ collections['cosmetics'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">COSMETICS</a></li>
-          <li><a href="{% if collections['artificial-jewellery'] != blank %}{{ collections['artificial-jewellery'].url }}{% elsif collections['jewellery'] != blank %}{{ collections['jewellery'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">JEWELLERY</a></li>
-          <li><a href="{% if collections['handbags'] != blank %}{{ collections['handbags'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">HANDBAGS</a></li>
-          <li><a href="{% if collections['beauty-accessories'] != blank %}{{ collections['beauty-accessories'].url }}{% elsif collections['accessories'] != blank %}{{ collections['accessories'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">ACCESSORIES</a></li>
+          <li><a href="/collections/all" class="nav-item-link">SHOP ALL</a></li>
+          {%- for col in collections -%}
+            {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
+              <li><a href="{{ col.url }}" class="nav-item-link">{{ col.title | upcase }}</a></li>
+            {%- endunless -%}
+          {%- endfor -%}
           <li><a href="/collections/all" class="nav-item-link nav-item-offers">OFFERS</a></li>
           <li><a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-item-link nav-item-partner" style="color: #0F7A42; font-weight: 800;">🏥 SEVA SURGICALS ↗</a></li>
         {%- endif -%}
@@ -149,22 +162,32 @@
           {%- assign nav_menu = linklists[section.settings.menu | default: 'main-menu'] -%}
           {%- if nav_menu != blank and nav_menu.links.size > 0 -%}
             {%- for link in nav_menu.links -%}
-              <li>
-                <a href="{{ link.url }}">
+              <li class="mobile-nav-item">
+                <a href="{{ link.url }}" class="mobile-nav-link">
                   {{ link.title | upcase }}
                 </a>
+                {%- if link.links != blank -%}
+                  <ul class="mobile-sublinks">
+                    {%- for child_link in link.links -%}
+                      <li>
+                        <a href="{{ child_link.url }}" class="mobile-sublink">{{ child_link.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
               </li>
             {%- endfor -%}
           {%- else -%}
-            <li><a href="/">HOME</a></li>
-            <li><a href="/collections/all">SHOP</a></li>
-            <li><a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}">SKINCARE</a></li>
-            <li><a href="{% if collections['cosmetics'] != blank %}{{ collections['cosmetics'].url }}{% else %}/collections/all{% endif %}">COSMETICS</a></li>
-            <li><a href="{% if collections['artificial-jewellery'] != blank %}{{ collections['artificial-jewellery'].url }}{% elsif collections['jewellery'] != blank %}{{ collections['jewellery'].url }}{% else %}/collections/all{% endif %}">JEWELLERY</a></li>
-            <li><a href="{% if collections['handbags'] != blank %}{{ collections['handbags'].url }}{% else %}/collections/all{% endif %}">HANDBAGS</a></li>
-            <li><a href="{% if collections['beauty-accessories'] != blank %}{{ collections['beauty-accessories'].url }}{% elsif collections['accessories'] != blank %}{{ collections['accessories'].url }}{% else %}/collections/all{% endif %}">ACCESSORIES</a></li>
-            <li><a href="/collections/all" class="mobile-offers-link">OFFERS</a></li>
-            <li><a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: #0F7A42; font-weight: 800;">🏥 SEVA SURGICALS & PHARMACY ↗</a></li>
+            <!-- Dynamic Shopify collections in mobile nav -->
+            <li><a href="/" class="mobile-nav-link">HOME</a></li>
+            <li><a href="/collections/all" class="mobile-nav-link">SHOP ALL</a></li>
+            {%- for col in collections -%}
+              {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
+                <li><a href="{{ col.url }}" class="mobile-nav-link">{{ col.title | upcase }}</a></li>
+              {%- endunless -%}
+            {%- endfor -%}
+            <li><a href="/collections/all" class="mobile-nav-link mobile-offers-link">OFFERS</a></li>
+            <li><a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color: #0F7A42; font-weight: 800;">🏥 SEVA SURGICALS & PHARMACY ↗</a></li>
           {%- endif -%}
         </ul>
 
@@ -212,7 +235,8 @@
       "type": "link_list",
       "id": "menu",
       "label": "Navigation Menu",
-      "default": "main-menu"
+      "default": "main-menu",
+      "info": "Select the menu configured in Online Store -> Navigation. If empty, all active collections from Shopify will be listed automatically."
     },
     {
       "type": "header",
@@ -221,25 +245,25 @@
     {
       "type": "checkbox",
       "id": "show_search",
-      "label": "Show Search Icon",
+      "label": "Show Live Search",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_wishlist",
-      "label": "Show Wishlist Icon",
+      "label": "Show Wishlist",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_account",
-      "label": "Show Account Icon",
+      "label": "Show Account Link",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_cart",
-      "label": "Show Cart Icon",
+      "label": "Show Shopping Bag",
       "default": true
     },
     {
@@ -249,7 +273,7 @@
     {
       "type": "color",
       "id": "bg_color",
-      "label": "Header Background Color",
+      "label": "Header Background",
       "default": "#FFFFFF"
     },
     {

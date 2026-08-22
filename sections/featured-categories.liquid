@@ -5,7 +5,7 @@
         {%- if section.settings.badge != blank -%}
           <span class="section-badge">{{ section.settings.badge }}</span>
         {%- endif -%}
-        <h2 class="section-title">{{ section.settings.title | default: "Shop By Category" }}</h2>
+        <h2 class="section-title">{{ section.settings.title | default: "Shop By Collection" }}</h2>
         {%- if section.settings.subtitle != blank -%}
           <p class="section-subtitle">{{ section.settings.subtitle }}</p>
         {%- endif -%}
@@ -16,19 +16,21 @@
           {%- for block in section.blocks -%}
             {%- assign coll = collections[block.settings.collection] -%}
             {%- assign card_url = block.settings.link | default: coll.url | default: '/collections/all' -%}
-            {%- assign card_title = block.settings.title | default: coll.title | default: 'Category' -%}
+            {%- assign card_title = block.settings.title | default: coll.title | default: 'Collection' -%}
+            {%- assign card_img = block.settings.image | default: coll.featured_image | default: coll.products.first.featured_image -%}
+
             {%- assign default_img = 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop' -%}
             {%- case forloop.index -%}
               {%- when 2 -%}
                 {%- assign default_img = 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop' -%}
               {%- when 3 -%}
-                {%- assign default_img = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop' -%}
-              {%- when 4 -%}
                 {%- assign default_img = 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop' -%}
-              {%- when 5 -%}
+              {%- when 4 -%}
                 {%- assign default_img = 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800&auto=format&fit=crop' -%}
-              {%- when 6 -%}
+              {%- when 5 -%}
                 {%- assign default_img = 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop' -%}
+              {%- when 6 -%}
+                {%- assign default_img = 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800&auto=format&fit=crop' -%}
             {%- endcase -%}
 
             <a href="{{ card_url }}" class="category-card group lush-reveal" {{ block.shopify_attributes }}>
@@ -39,6 +41,9 @@
                   <img src="{{ default_img }}" alt="{{ card_title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
                 {%- endif -%}
                 <div class="cat-overlay"></div>
+                {%- if coll.products_count != blank and coll.products_count > 0 -%}
+                  <span class="cat-count-pill">{{ coll.products_count }} Items</span>
+                {%- endif -%}
                 <div class="cat-content">
                   {%- if block.settings.super_title != blank -%}
                     <span class="cat-super">{{ block.settings.super_title }}</span>
@@ -56,43 +61,37 @@
             </a>
           {%- endfor -%}
         {%- else -%}
-          <!-- Default collections -->
-          <a href="/collections/all" class="category-card group">
-            <div class="cat-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Skincare" class="cat-img" loading="lazy" width="600" height="750">
-              <div class="cat-overlay"></div>
-              <div class="cat-content">
-                <span class="cat-super">LUSH SKINCARE</span>
-                <h3 class="cat-name">Skincare</h3>
-                <p class="cat-desc">Serums, Sunscreens, Moisturizers & Cleansers</p>
-                <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-              </div>
-            </div>
-          </a>
-          <a href="/collections/all" class="category-card group">
-            <div class="cat-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Cosmetics" class="cat-img" loading="lazy" width="600" height="750">
-              <div class="cat-overlay"></div>
-              <div class="cat-content">
-                <span class="cat-super">LUSH COSMETICS</span>
-                <h3 class="cat-name">Cosmetics</h3>
-                <p class="cat-desc">Lipsticks, Foundations, Kajal & Eyeliners</p>
-                <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-              </div>
-            </div>
-          </a>
-          <a href="/collections/all" class="category-card group">
-            <div class="cat-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop" alt="Artificial Jewellery" class="cat-img" loading="lazy" width="600" height="750">
-              <div class="cat-overlay"></div>
-              <div class="cat-content">
-                <span class="cat-super">ROYAL JEWELLERY</span>
-                <h3 class="cat-name">Artificial Jewellery</h3>
-                <p class="cat-desc">Kundan Sets, AD Rings, Jhumkas & Bangles</p>
-                <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-              </div>
-            </div>
-          </a>
+          <!-- Auto-fetch actual Shopify store collections dynamically -->
+          {%- assign coll_count = 0 -%}
+          {%- for col in collections -%}
+            {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
+              {%- assign coll_count = coll_count | plus: 1 -%}
+              {%- if coll_count <= 6 -%}
+                {%- assign col_img = col.featured_image | default: col.products.first.featured_image -%}
+                <a href="{{ col.url }}" class="category-card group lush-reveal">
+                  <div class="cat-image-wrapper">
+                    {%- if col_img != blank -%}
+                      <img src="{{ col_img | image_url: width: 800 }}" alt="{{ col.title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
+                    {%- else -%}
+                      <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="{{ col.title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
+                    {%- endif -%}
+                    <div class="cat-overlay"></div>
+                    {%- if col.products_count > 0 -%}
+                      <span class="cat-count-pill">{{ col.products_count }} Items</span>
+                    {%- endif -%}
+                    <div class="cat-content">
+                      <span class="cat-super">LUSH COLLECTION</span>
+                      <h3 class="cat-name">{{ col.title }}</h3>
+                      {%- if col.description != blank -%}
+                        <p class="cat-desc">{{ col.description | strip_html | truncate: 75 }}</p>
+                      {%- endif -%}
+                      <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
+                    </div>
+                  </div>
+                </a>
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endfor -%}
         {%- endif -%}
       </div>
     </div>
@@ -119,7 +118,7 @@
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Shop By Category"
+      "default": "Shop By Collection"
     },
     {
       "type": "textarea",
@@ -131,17 +130,17 @@
   "blocks": [
     {
       "type": "category_card",
-      "name": "Category Card",
+      "name": "Collection Block",
       "settings": [
         {
           "type": "collection",
           "id": "collection",
-          "label": "Shopify Collection"
+          "label": "Select Shopify Collection"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Custom Image (Optional)"
+          "label": "Custom Cover Image (Optional)"
         },
         {
           "type": "text",
@@ -176,7 +175,7 @@
           "type": "category_card",
           "settings": {
             "super_title": "LUSH SKINCARE",
-            "title": "Skincare",
+            "title": "Skincare & Dermal Care",
             "description": "Serums, Sunscreens, Moisturizers & Cleansers"
           }
         },
@@ -184,16 +183,32 @@
           "type": "category_card",
           "settings": {
             "super_title": "LUSH COSMETICS",
-            "title": "Cosmetics",
+            "title": "Cosmetics & Makeup",
             "description": "Lipsticks, Foundations, Kajal, Eyeliners & Mascaras"
           }
         },
         {
           "type": "category_card",
           "settings": {
-            "super_title": "ROYAL JEWELLERY",
-            "title": "Artificial Jewellery",
-            "description": "Kundan Sets, AD Rings, Jhumkas, Bangles & Tikka"
+            "super_title": "EXCLUSIVE BAGS",
+            "title": "Designer Handbags & Clutches",
+            "description": "Totes, Shoulder Bags, Clutches & Sling Bags"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "HAIR RITUALS",
+            "title": "Hair Care & Styling",
+            "description": "Premium Hair Oils, Styling Serums, Spa Masks & Clips"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "SIGNATURE SCENTS",
+            "title": "Perfumes & Fragrances",
+            "description": "French & Arabic Perfumes, Deodorants & Body Mists"
           }
         }
       ]

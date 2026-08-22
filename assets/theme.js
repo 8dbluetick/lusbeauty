@@ -170,7 +170,7 @@ async function updateCartDrawer() {
               </svg>
             </div>
             <h4>Your bag is currently empty</h4>
-            <p>Explore luxury skincare, cosmetics, artificial jewellery and handbags from our showroom.</p>
+            <p>Explore luxury skincare, cosmetics, designer handbags and fragrances from our showroom.</p>
             <a href="/collections/all" class="btn-shop-collection" data-close-cart>
               <span>Start Shopping</span>
               <span>→</span>
@@ -1063,7 +1063,7 @@ function initScrollProgressAndBackToTop() {
 function generateWhatsAppOrderUrl(cartData) {
   const waNum = '919119595951';
   if (!cartData || !cartData.items || cartData.items.length === 0) {
-    return `https://wa.me/${waNum}?text=${encodeURIComponent('Namaste Lush Beauty Mart Nagpur! 🌸 I would like to inquire about beauty & jewellery products at your Lad Square showroom.')}`;
+    return `https://wa.me/${waNum}?text=${encodeURIComponent('Namaste Lush Beauty Mart Nagpur! 🌸 I would like to inquire about beauty, skincare & cosmetics products at your Lad Square showroom.')}`;
   }
 
   const itemsList = cartData.items.map((item, idx) => {
