@@ -668,13 +668,68 @@ h1, h2, h3, h4, .font-serif {
   line-height: 1;
 }
 
+/* Mobile Featured Badges */
+.mobile-featured-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 12px 0 8px;
+  scrollbar-width: none;
+}
+
+.mobile-featured-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-badge-pill {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--color-bg-cream, #FAF7F2);
+  color: #1F1610;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  text-decoration: none;
+}
+
+.mobile-badge-pill.pill-sale {
+  background: #FFF1F0;
+  color: #B43422;
+  border-color: rgba(180, 52, 34, 0.3);
+}
+
 .mobile-nav-links {
   list-style: none;
-  padding: 20px 0;
+  padding: 12px 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   margin: 0;
+}
+
+.mobile-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mobile-accordion-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-accent-gold, #C5A059);
+  padding: 4px 12px;
+  cursor: pointer;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-item.open .mobile-accordion-toggle {
+  transform: rotate(45deg);
 }
 
 .mobile-nav-links li a {
@@ -695,6 +750,13 @@ h1, h2, h3, h4, .font-serif {
 
 .mobile-nav-links li a.mobile-offers-link {
   color: #B43422;
+}
+
+.header-dropdown-all {
+  font-weight: 800 !important;
+  color: var(--color-accent-gold, #C5A059) !important;
+  border-bottom: 1px dashed rgba(197, 160, 89, 0.3);
+  margin-bottom: 4px;
 }
 
 .mobile-nav-footer-info {

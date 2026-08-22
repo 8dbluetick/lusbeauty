@@ -41,7 +41,7 @@
       </a>
     </div>
 
-    <!-- CENTER: Main Navigation (Dynamic Shopify Collections & Custom Menu with Dropdowns) -->
+    <!-- CENTER: Main Navigation (Multi-Level Mega Menu & Dropdowns) -->
     <nav class="header-desktop-nav" aria-label="Primary Navigation">
       <ul class="nav-links-list">
         {%- assign nav_menu = linklists[section.settings.menu | default: 'main-menu'] -%}
@@ -55,10 +55,22 @@
               {%- if link.links != blank -%}
                 <ul class="header-dropdown-menu">
                   {%- for child_link in link.links -%}
-                    <li>
+                    <li class="{% if child_link.links != blank %}has-sub-dropdown{% endif %}">
                       <a href="{{ child_link.url }}" class="header-dropdown-link{% if child_link.active %} active{% endif %}">
                         {{ child_link.title }}
+                        {%- if child_link.links != blank -%}<span class="sub-dropdown-chevron">›</span>{%- endif -%}
                       </a>
+                      {%- if child_link.links != blank -%}
+                        <ul class="header-sub-dropdown-menu">
+                          {%- for grand_link in child_link.links -%}
+                            <li>
+                              <a href="{{ grand_link.url }}" class="header-sub-dropdown-link">
+                                {{ grand_link.title }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
                     </li>
                   {%- endfor -%}
                 </ul>
@@ -66,16 +78,115 @@
             </li>
           {%- endfor -%}
         {%- else -%}
-          <!-- Auto-fetch actual Shopify store collections dynamically -->
-          <li><a href="/" class="nav-item-link">HOME</a></li>
-          <li><a href="/collections/all" class="nav-item-link">SHOP ALL</a></li>
-          {%- for col in collections -%}
-            {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
-              <li><a href="{{ col.url }}" class="nav-item-link">{{ col.title | upcase }}</a></li>
-            {%- endunless -%}
-          {%- endfor -%}
-          <li><a href="/collections/all" class="nav-item-link nav-item-offers">OFFERS</a></li>
-          <li><a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-item-link nav-item-partner" style="color: #0F7A42; font-weight: 800;">🏥 SEVA SURGICALS ↗</a></li>
+          <!-- Clean Default Hierarchy for Lush Beauty Mart Catalog -->
+          <!-- 1. Skincare Dropdown -->
+          <li class="nav-item-wrap has-dropdown">
+            <a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">
+              <span>SKINCARE</span>
+              <span class="dropdown-chevron">▾</span>
+            </a>
+            <ul class="header-dropdown-menu">
+              <li><a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link header-dropdown-all">✨ View All Skincare</a></li>
+              <li><a href="{% if collections['face-wash-cleansers'] != blank %}{{ collections['face-wash-cleansers'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Face Wash & Cleansers</a></li>
+              <li><a href="{% if collections['face-serums'] != blank %}{{ collections['face-serums'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Face Serums</a></li>
+              <li><a href="{% if collections['moisturizers-face-creams'] != blank %}{{ collections['moisturizers-face-creams'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Moisturizers & Face Creams</a></li>
+              <li><a href="{% if collections['sunscreens'] != blank %}{{ collections['sunscreens'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Sunscreens</a></li>
+              <li><a href="{% if collections['toners'] != blank %}{{ collections['toners'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Toners</a></li>
+              <li><a href="{% if collections['face-masks'] != blank %}{{ collections['face-masks'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Face Masks</a></li>
+              <li><a href="{% if collections['acne-blemish-care'] != blank %}{{ collections['acne-blemish-care'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Acne & Blemish Care</a></li>
+              <li><a href="{% if collections['brightening-vitamin-c'] != blank %}{{ collections['brightening-vitamin-c'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Brightening & Vitamin C</a></li>
+              <li><a href="{% if collections['korean-skincare'] != blank %}{{ collections['korean-skincare'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link text-gold">🌿 Korean Skincare</a></li>
+            </ul>
+          </li>
+
+          <!-- 2. Makeup Dropdown -->
+          <li class="nav-item-wrap has-dropdown">
+            <a href="{% if collections['makeup'] != blank %}{{ collections['makeup'].url }}{% elsif collections['cosmetics'] != blank %}{{ collections['cosmetics'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">
+              <span>MAKEUP</span>
+              <span class="dropdown-chevron">▾</span>
+            </a>
+            <ul class="header-dropdown-menu">
+              <li><a href="{% if collections['makeup'] != blank %}{{ collections['makeup'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link header-dropdown-all">✨ View All Makeup</a></li>
+              <li><a href="{% if collections['lipsticks'] != blank %}{{ collections['lipsticks'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Lipsticks</a></li>
+              <li><a href="{% if collections['lip-care'] != blank %}{{ collections['lip-care'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Lip Care</a></li>
+              <li><a href="{% if collections['foundation-base-makeup'] != blank %}{{ collections['foundation-base-makeup'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Foundation & Base Makeup</a></li>
+              <li><a href="{% if collections['concealers'] != blank %}{{ collections['concealers'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Concealers</a></li>
+              <li><a href="{% if collections['bb-cc-cream'] != blank %}{{ collections['bb-cc-cream'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">BB / CC Cream</a></li>
+              <li><a href="{% if collections['blush-bronzer-highlighter'] != blank %}{{ collections['blush-bronzer-highlighter'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Blush, Bronzer & Highlighter</a></li>
+              <li><a href="{% if collections['eye-makeup'] != blank %}{{ collections['eye-makeup'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Eye Makeup (Kajal & Liners)</a></li>
+            </ul>
+          </li>
+
+          <!-- 3. Haircare Dropdown -->
+          <li class="nav-item-wrap has-dropdown">
+            <a href="{% if collections['haircare'] != blank %}{{ collections['haircare'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">
+              <span>HAIRCARE</span>
+              <span class="dropdown-chevron">▾</span>
+            </a>
+            <ul class="header-dropdown-menu">
+              <li><a href="{% if collections['haircare'] != blank %}{{ collections['haircare'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link header-dropdown-all">✨ View All Haircare</a></li>
+              <li><a href="{% if collections['shampoos'] != blank %}{{ collections['shampoos'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Shampoos</a></li>
+              <li><a href="{% if collections['conditioners'] != blank %}{{ collections['conditioners'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Conditioners</a></li>
+              <li><a href="{% if collections['hair-masks'] != blank %}{{ collections['hair-masks'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Hair Masks & Spas</a></li>
+              <li><a href="{% if collections['hair-serums'] != blank %}{{ collections['hair-serums'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Hair Serums</a></li>
+              <li><a href="{% if collections['hair-oils'] != blank %}{{ collections['hair-oils'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Hair Oils</a></li>
+              <li><a href="{% if collections['hair-growth-anti-hair-fall'] != blank %}{{ collections['hair-growth-anti-hair-fall'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Hair Growth & Anti-Hair Fall</a></li>
+            </ul>
+          </li>
+
+          <!-- 4. Bodycare Dropdown -->
+          <li class="nav-item-wrap has-dropdown">
+            <a href="{% if collections['bodycare'] != blank %}{{ collections['bodycare'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">
+              <span>BODYCARE</span>
+              <span class="dropdown-chevron">▾</span>
+            </a>
+            <ul class="header-dropdown-menu">
+              <li><a href="{% if collections['bodycare'] != blank %}{{ collections['bodycare'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link header-dropdown-all">✨ View All Bodycare</a></li>
+              <li><a href="{% if collections['body-wash-shower-gel'] != blank %}{{ collections['body-wash-shower-gel'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Body Wash & Shower Gel</a></li>
+              <li><a href="{% if collections['body-lotions'] != blank %}{{ collections['body-lotions'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Body Lotions</a></li>
+              <li><a href="{% if collections['body-creams'] != blank %}{{ collections['body-creams'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Body Creams & Butters</a></li>
+              <li><a href="{% if collections['body-scrubs'] != blank %}{{ collections['body-scrubs'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Body Scrubs & Exfoliators</a></li>
+              <li><a href="{% if collections['talc-body-powder'] != blank %}{{ collections['talc-body-powder'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Talc & Body Powder</a></li>
+            </ul>
+          </li>
+
+          <!-- 5. Fragrance Dropdown -->
+          <li class="nav-item-wrap has-dropdown">
+            <a href="{% if collections['fragrance'] != blank %}{{ collections['fragrance'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">
+              <span>FRAGRANCE</span>
+              <span class="dropdown-chevron">▾</span>
+            </a>
+            <ul class="header-dropdown-menu">
+              <li><a href="{% if collections['fragrance'] != blank %}{{ collections['fragrance'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link header-dropdown-all">✨ View All Fragrances</a></li>
+              <li><a href="{% if collections['perfumes-for-men'] != blank %}{{ collections['perfumes-for-men'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Perfumes for Men</a></li>
+              <li><a href="{% if collections['perfumes-for-women'] != blank %}{{ collections['perfumes-for-women'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Perfumes for Women</a></li>
+              <li><a href="{% if collections['unisex-perfumes'] != blank %}{{ collections['unisex-perfumes'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Unisex Perfumes</a></li>
+              <li><a href="{% if collections['eau-de-parfum'] != blank %}{{ collections['eau-de-parfum'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Eau de Parfum (EDP)</a></li>
+              <li><a href="{% if collections['eau-de-toilette'] != blank %}{{ collections['eau-de-toilette'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link">Eau de Toilette (EDT)</a></li>
+              <li><a href="{% if collections['premium-fragrances'] != blank %}{{ collections['premium-fragrances'].url }}{% else %}/collections/all{% endif %}" class="header-dropdown-link text-gold">👑 Premium Fragrances</a></li>
+            </ul>
+          </li>
+
+          <!-- 6. Tumblers & Drinkware -->
+          <li>
+            <a href="{% if collections['tumblers-drinkware'] != blank %}{{ collections['tumblers-drinkware'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link">
+              <span>DRINKWARE</span>
+            </a>
+          </li>
+
+          <!-- 7. Offers & Deals -->
+          <li>
+            <a href="{% if collections['offers-deals'] != blank %}{{ collections['offers-deals'].url }}{% elsif collections['sale'] != blank %}{{ collections['sale'].url }}{% else %}/collections/all{% endif %}" class="nav-item-link nav-item-offers">
+              <span>OFFERS 🏷️</span>
+            </a>
+          </li>
+
+          <!-- 8. Partner Venture -->
+          <li>
+            <a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-item-link nav-item-partner" style="color: #0F7A42; font-weight: 800;">
+              <span>🏥 SEVA SURGICALS ↗</span>
+            </a>
+          </li>
         {%- endif -%}
       </ul>
     </nav>
@@ -126,7 +237,7 @@
     </div>
   </div>
 
-  <!-- Mobile Navigation Drawer -->
+  <!-- Mobile Navigation Drawer with Smooth Accordion Collapsibles -->
   <div class="mobile-nav-drawer" id="MobileNavDrawer" aria-hidden="true">
     <div class="mobile-nav-backdrop" id="BtnCloseMobileMenu"></div>
     <div class="mobile-nav-panel">
@@ -158,16 +269,29 @@
       </div>
 
       <div class="mobile-nav-body">
+        <!-- Quick Featured Badges Row on Mobile -->
+        <div class="mobile-featured-pills">
+          <a href="{% if collections['bestsellers'] != blank %}{{ collections['bestsellers'].url }}{% else %}/collections/all{% endif %}" class="mobile-badge-pill">🔥 Bestsellers</a>
+          <a href="{% if collections['trending'] != blank %}{{ collections['trending'].url }}{% else %}/collections/all{% endif %}" class="mobile-badge-pill">✨ Trending</a>
+          <a href="{% if collections['new-arrivals'] != blank %}{{ collections['new-arrivals'].url }}{% else %}/collections/all{% endif %}" class="mobile-badge-pill">⭐ New</a>
+          <a href="{% if collections['offers-deals'] != blank %}{{ collections['offers-deals'].url }}{% elsif collections['sale'] != blank %}{{ collections['sale'].url }}{% else %}/collections/all{% endif %}" class="mobile-badge-pill pill-sale">🏷️ Sale</a>
+        </div>
+
         <ul class="mobile-nav-links">
           {%- assign nav_menu = linklists[section.settings.menu | default: 'main-menu'] -%}
           {%- if nav_menu != blank and nav_menu.links.size > 0 -%}
             {%- for link in nav_menu.links -%}
-              <li class="mobile-nav-item">
-                <a href="{{ link.url }}" class="mobile-nav-link">
-                  {{ link.title | upcase }}
-                </a>
+              <li class="mobile-nav-item{% if link.links != blank %} has-accordion{% endif %}">
+                <div class="mobile-nav-row">
+                  <a href="{{ link.url }}" class="mobile-nav-link">
+                    {{ link.title | upcase }}
+                  </a>
+                  {%- if link.links != blank -%}
+                    <button type="button" class="mobile-accordion-toggle" aria-label="Toggle Submenu">+</button>
+                  {%- endif -%}
+                </div>
                 {%- if link.links != blank -%}
-                  <ul class="mobile-sublinks">
+                  <ul class="mobile-sublinks" style="display: none;">
                     {%- for child_link in link.links -%}
                       <li>
                         <a href="{{ child_link.url }}" class="mobile-sublink">{{ child_link.title }}</a>
@@ -178,16 +302,108 @@
               </li>
             {%- endfor -%}
           {%- else -%}
-            <!-- Dynamic Shopify collections in mobile nav -->
-            <li><a href="/" class="mobile-nav-link">HOME</a></li>
-            <li><a href="/collections/all" class="mobile-nav-link">SHOP ALL</a></li>
-            {%- for col in collections -%}
-              {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
-                <li><a href="{{ col.url }}" class="mobile-nav-link">{{ col.title | upcase }}</a></li>
-              {%- endunless -%}
-            {%- endfor -%}
-            <li><a href="/collections/all" class="mobile-nav-link mobile-offers-link">OFFERS</a></li>
-            <li><a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color: #0F7A42; font-weight: 800;">🏥 SEVA SURGICALS & PHARMACY ↗</a></li>
+            <!-- 1. Mobile Skincare Accordion -->
+            <li class="mobile-nav-item has-accordion">
+              <div class="mobile-nav-row">
+                <a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="mobile-nav-link">SKINCARE</a>
+                <button type="button" class="mobile-accordion-toggle" aria-label="Toggle Submenu">+</button>
+              </div>
+              <ul class="mobile-sublinks" style="display: none;">
+                <li><a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink font-bold text-gold">✨ View All Skincare</a></li>
+                <li><a href="{% if collections['face-wash-cleansers'] != blank %}{{ collections['face-wash-cleansers'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Face Wash & Cleansers</a></li>
+                <li><a href="{% if collections['face-serums'] != blank %}{{ collections['face-serums'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Face Serums</a></li>
+                <li><a href="{% if collections['moisturizers-face-creams'] != blank %}{{ collections['moisturizers-face-creams'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Moisturizers & Face Creams</a></li>
+                <li><a href="{% if collections['sunscreens'] != blank %}{{ collections['sunscreens'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Sunscreens</a></li>
+                <li><a href="{% if collections['toners'] != blank %}{{ collections['toners'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Toners</a></li>
+                <li><a href="{% if collections['face-masks'] != blank %}{{ collections['face-masks'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Face Masks</a></li>
+                <li><a href="{% if collections['acne-blemish-care'] != blank %}{{ collections['acne-blemish-care'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Acne & Blemish Care</a></li>
+                <li><a href="{% if collections['brightening-vitamin-c'] != blank %}{{ collections['brightening-vitamin-c'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Brightening & Vitamin C</a></li>
+                <li><a href="{% if collections['korean-skincare'] != blank %}{{ collections['korean-skincare'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink text-gold">🌿 Korean Skincare</a></li>
+              </ul>
+            </li>
+
+            <!-- 2. Mobile Makeup Accordion -->
+            <li class="mobile-nav-item has-accordion">
+              <div class="mobile-nav-row">
+                <a href="{% if collections['makeup'] != blank %}{{ collections['makeup'].url }}{% else %}/collections/all{% endif %}" class="mobile-nav-link">MAKEUP</a>
+                <button type="button" class="mobile-accordion-toggle" aria-label="Toggle Submenu">+</button>
+              </div>
+              <ul class="mobile-sublinks" style="display: none;">
+                <li><a href="{% if collections['makeup'] != blank %}{{ collections['makeup'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink font-bold text-gold">✨ View All Makeup</a></li>
+                <li><a href="{% if collections['lipsticks'] != blank %}{{ collections['lipsticks'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Lipsticks</a></li>
+                <li><a href="{% if collections['lip-care'] != blank %}{{ collections['lip-care'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Lip Care</a></li>
+                <li><a href="{% if collections['foundation-base-makeup'] != blank %}{{ collections['foundation-base-makeup'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Foundation & Base Makeup</a></li>
+                <li><a href="{% if collections['concealers'] != blank %}{{ collections['concealers'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Concealers</a></li>
+                <li><a href="{% if collections['bb-cc-cream'] != blank %}{{ collections['bb-cc-cream'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">BB / CC Cream</a></li>
+                <li><a href="{% if collections['blush-bronzer-highlighter'] != blank %}{{ collections['blush-bronzer-highlighter'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Blush, Bronzer & Highlighter</a></li>
+                <li><a href="{% if collections['eye-makeup'] != blank %}{{ collections['eye-makeup'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Eye Makeup (Kajal & Liners)</a></li>
+              </ul>
+            </li>
+
+            <!-- 3. Mobile Haircare Accordion -->
+            <li class="mobile-nav-item has-accordion">
+              <div class="mobile-nav-row">
+                <a href="{% if collections['haircare'] != blank %}{{ collections['haircare'].url }}{% else %}/collections/all{% endif %}" class="mobile-nav-link">HAIRCARE</a>
+                <button type="button" class="mobile-accordion-toggle" aria-label="Toggle Submenu">+</button>
+              </div>
+              <ul class="mobile-sublinks" style="display: none;">
+                <li><a href="{% if collections['haircare'] != blank %}{{ collections['haircare'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink font-bold text-gold">✨ View All Haircare</a></li>
+                <li><a href="{% if collections['shampoos'] != blank %}{{ collections['shampoos'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Shampoos</a></li>
+                <li><a href="{% if collections['conditioners'] != blank %}{{ collections['conditioners'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Conditioners</a></li>
+                <li><a href="{% if collections['hair-masks'] != blank %}{{ collections['hair-masks'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Hair Masks & Spas</a></li>
+                <li><a href="{% if collections['hair-serums'] != blank %}{{ collections['hair-serums'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Hair Serums</a></li>
+                <li><a href="{% if collections['hair-oils'] != blank %}{{ collections['hair-oils'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Hair Oils</a></li>
+                <li><a href="{% if collections['hair-growth-anti-hair-fall'] != blank %}{{ collections['hair-growth-anti-hair-fall'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Hair Growth & Anti-Hair Fall</a></li>
+              </ul>
+            </li>
+
+            <!-- 4. Mobile Bodycare Accordion -->
+            <li class="mobile-nav-item has-accordion">
+              <div class="mobile-nav-row">
+                <a href="{% if collections['bodycare'] != blank %}{{ collections['bodycare'].url }}{% else %}/collections/all{% endif %}" class="mobile-nav-link">BODYCARE</a>
+                <button type="button" class="mobile-accordion-toggle" aria-label="Toggle Submenu">+</button>
+              </div>
+              <ul class="mobile-sublinks" style="display: none;">
+                <li><a href="{% if collections['bodycare'] != blank %}{{ collections['bodycare'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink font-bold text-gold">✨ View All Bodycare</a></li>
+                <li><a href="{% if collections['body-wash-shower-gel'] != blank %}{{ collections['body-wash-shower-gel'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Body Wash & Shower Gel</a></li>
+                <li><a href="{% if collections['body-lotions'] != blank %}{{ collections['body-lotions'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Body Lotions</a></li>
+                <li><a href="{% if collections['body-creams'] != blank %}{{ collections['body-creams'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Body Creams & Butters</a></li>
+                <li><a href="{% if collections['body-scrubs'] != blank %}{{ collections['body-scrubs'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Body Scrubs & Exfoliators</a></li>
+                <li><a href="{% if collections['talc-body-powder'] != blank %}{{ collections['talc-body-powder'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Talc & Body Powder</a></li>
+              </ul>
+            </li>
+
+            <!-- 5. Mobile Fragrance Accordion -->
+            <li class="mobile-nav-item has-accordion">
+              <div class="mobile-nav-row">
+                <a href="{% if collections['fragrance'] != blank %}{{ collections['fragrance'].url }}{% else %}/collections/all{% endif %}" class="mobile-nav-link">FRAGRANCE</a>
+                <button type="button" class="mobile-accordion-toggle" aria-label="Toggle Submenu">+</button>
+              </div>
+              <ul class="mobile-sublinks" style="display: none;">
+                <li><a href="{% if collections['fragrance'] != blank %}{{ collections['fragrance'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink font-bold text-gold">✨ View All Fragrances</a></li>
+                <li><a href="{% if collections['perfumes-for-men'] != blank %}{{ collections['perfumes-for-men'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Perfumes for Men</a></li>
+                <li><a href="{% if collections['perfumes-for-women'] != blank %}{{ collections['perfumes-for-women'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Perfumes for Women</a></li>
+                <li><a href="{% if collections['unisex-perfumes'] != blank %}{{ collections['unisex-perfumes'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Unisex Perfumes</a></li>
+                <li><a href="{% if collections['eau-de-parfum'] != blank %}{{ collections['eau-de-parfum'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Eau de Parfum (EDP)</a></li>
+                <li><a href="{% if collections['eau-de-toilette'] != blank %}{{ collections['eau-de-toilette'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink">Eau de Toilette (EDT)</a></li>
+                <li><a href="{% if collections['premium-fragrances'] != blank %}{{ collections['premium-fragrances'].url }}{% else %}/collections/all{% endif %}" class="mobile-sublink text-gold">👑 Premium Fragrances</a></li>
+              </ul>
+            </li>
+
+            <!-- 6. Mobile Tumblers & Drinkware -->
+            <li class="mobile-nav-item">
+              <a href="{% if collections['tumblers-drinkware'] != blank %}{{ collections['tumblers-drinkware'].url }}{% else %}/collections/all{% endif %}" class="mobile-nav-link">TUMBLERS & DRINKWARE</a>
+            </li>
+
+            <!-- 7. Mobile Offers -->
+            <li class="mobile-nav-item">
+              <a href="{% if collections['offers-deals'] != blank %}{{ collections['offers-deals'].url }}{% elsif collections['sale'] != blank %}{{ collections['sale'].url }}{% else %}/collections/all{% endif %}" class="mobile-nav-link mobile-offers-link" style="color: #B43422; font-weight: 800;">OFFERS & DEALS 🏷️</a>
+            </li>
+
+            <!-- 8. Mobile Partner Venture -->
+            <li class="mobile-nav-item">
+              <a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color: #0F7A42; font-weight: 800;">🏥 SEVA SURGICALS & PHARMACY ↗</a>
+            </li>
           {%- endif -%}
         </ul>
 
