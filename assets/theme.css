@@ -4437,12 +4437,29 @@ h1, h2, h3, h4, .font-serif {
   margin-bottom: 12px;
 }
 
-.variant-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
+.variant-option-group {
+  margin-bottom: 14px;
+}
+
+.variant-label-row {
+  display: flex;
+  align-items: center;
   margin-bottom: 6px;
+}
+
+.variant-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8A7363;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   display: block;
+}
+
+.selected-option-value {
+  color: #1F1610;
+  font-weight: 800;
+  margin-left: 2px;
 }
 
 .variant-pill-row {
@@ -4457,19 +4474,28 @@ h1, h2, h3, h4, .font-serif {
 
 .variant-pill-btn {
   display: inline-block;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #EAE3DA;
   background: #FFFFFF;
-  font-size: 0.75rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #1F1610;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.variant-pill-btn:hover {
+  border-color: var(--color-accent-gold, #C5A059);
+  background: #FAF7F2;
 }
 
 .variant-radio:checked + .variant-pill-btn {
-  border-color: var(--color-text-chocolate);
-  background: var(--color-text-chocolate);
-  color: #FFFDF9;
+  border-color: #1F1610;
+  background: #1F1610;
+  color: #FFFFFF;
   font-weight: 700;
+  box-shadow: 0 3px 8px rgba(31, 22, 16, 0.15);
 }
 
 .quantity-row {

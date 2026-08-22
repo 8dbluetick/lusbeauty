@@ -69,6 +69,11 @@
 
     {{ content_for_header }}
 
+    <script>
+      window.theme = window.theme || {};
+      window.theme.moneyFormat = {{ shop.money_format | json }};
+    </script>
+
     <!-- Theme Stylesheet -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
   </head>

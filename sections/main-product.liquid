@@ -1,9 +1,12 @@
-<section class="lush-main-product-section" data-product-id="{{ product.id }}">
+<section class="lush-main-product-section" data-product-id="{{ product.id }}" id="ProductSection-{{ product.id }}">
   <div class="page-width">
     <!-- Breadcrumbs -->
     <div class="product-breadcrumbs">
       <a href="/">Home</a> <span>/</span>
       <a href="/collections/all">Shop</a> <span>/</span>
+      {%- if product.collections.first -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a> <span>/</span>
+      {%- endif -%}
       <span>{{ product.title }}</span>
     </div>
 
@@ -11,23 +14,27 @@
       <!-- Left Column: Product Gallery -->
       <div class="product-gallery-panel">
         <div class="main-image-viewport">
-          {%- if product.featured_media -%}
-            <img id="ProductMainImg" src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.featured_media.alt | escape | default: product.title }}" class="product-stage-img" width="800" height="800">
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+          {%- assign featured_img = current_variant.featured_image | default: product.featured_media -%}
+          {%- if featured_img -%}
+            <img id="ProductMainImg" src="{{ featured_img | image_url: width: 900 }}" alt="{{ featured_img.alt | escape | default: product.title }}" class="product-stage-img" width="800" height="800">
           {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-stage-img' }}
           {%- endif -%}
 
-          {%- if product.compare_at_price > product.price -%}
-            {%- assign disc = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-            <span class="badge-stage-discount">{{ disc }}% OFF</span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            {%- assign disc = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
+            <span class="badge-stage-discount" data-stage-discount>{{ disc }}% OFF</span>
+          {%- else -%}
+            <span class="badge-stage-discount" data-stage-discount style="display: none;"></span>
           {%- endif -%}
         </div>
 
         {%- if product.media.size > 1 -%}
           <div class="thumbnail-strip">
             {%- for media in product.media -%}
-              <button type="button" class="thumb-btn {% if forloop.first %}active{% endif %}" data-thumb-src="{{ media | image_url: width: 900 }}">
-                <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" width="80" height="80">
+              <button type="button" class="thumb-btn {% if forloop.first %}active{% endif %}" data-thumb-src="{{ media | image_url: width: 900 }}" data-media-id="{{ media.id }}" aria-label="View media {{ forloop.index }}">
+                <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | default: product.title | escape }}" width="80" height="80" loading="lazy">
               </button>
             {%- endfor -%}
           </div>
@@ -37,41 +44,62 @@
       <!-- Right Column: Product Purchasing Form & Details -->
       <div class="product-info-panel">
         <div class="product-category-rating-row">
-          <span class="product-type-pill">{{ product.type | default: "Lush Exclusive" }}</span>
+          <span class="product-type-pill">{{ product.type | default: product.vendor | default: "LUSH EXCLUSIVE" | upcase }}</span>
+          {%- if product.vendor != blank and product.vendor != shop.name -%}
+            <span class="product-brand-tag">{{ product.vendor | upcase }}</span>
+          {%- endif -%}
         </div>
 
         <h1 class="product-page-title">{{ product.title }}</h1>
 
-        <!-- Price Box -->
-        <div class="product-price-card">
+        <!-- Price Card with Live Variant Binding -->
+        <div class="product-price-card" data-price-card>
           <div class="price-row-main">
-            <span class="price-big">{{ product.price | money }}</span>
-            {%- if product.compare_at_price > product.price -%}
-              <span class="price-mrp-big">{{ product.compare_at_price | money }}</span>
-              <span class="badge-saved">Save {{ product.compare_at_price | minus: product.price | money }}</span>
-            {%- endif -%}
+            <span class="price-big" data-product-price>{{ current_variant.price | money }}</span>
+            <span class="price-mrp-big" data-compare-price {% unless current_variant.compare_at_price > current_variant.price %}style="display: none;"{% endunless %}>
+              {{ current_variant.compare_at_price | money }}
+            </span>
+            <span class="badge-saved" data-save-badge {% unless current_variant.compare_at_price > current_variant.price %}style="display: none;"{% endunless %}>
+              {%- if current_variant.compare_at_price > current_variant.price -%}
+                Save {{ current_variant.compare_at_price | minus: current_variant.price | money }}
+              {%- endif -%}
+            </span>
           </div>
-          <p class="tax-shipping-note">Inclusive of all taxes. Free delivery in Nagpur on orders above ₹999.</p>
+          <p class="tax-shipping-note">Inclusive of all taxes. Free express delivery in Nagpur on orders above ₹999.</p>
         </div>
 
-        <!-- Description -->
-        <div class="product-description-rte">
-          {{ product.description }}
-        </div>
+        <!-- Short Description -->
+        {%- if product.description != blank -%}
+          <div class="product-description-rte">
+            {{ product.description }}
+          </div>
+        {%- endif -%}
 
         <!-- Form: Variants, Quantity & Actions -->
         {%- form 'product', product, id: 'MainProductForm', class: 'product-form' -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="ProductVariantId">
+          <input type="hidden" name="id" value="{{ current_variant.id }}" id="ProductVariantId">
 
           {%- unless product.has_only_default_variant -%}
-            <div class="product-variants-wrap">
+            <div class="product-variants-wrap" data-variant-selectors>
               {%- for option in product.options_with_values -%}
-                <div class="variant-option-group">
-                  <label class="variant-label">{{ option.name }}:</label>
+                <div class="variant-option-group" data-option-group="{{ option.position }}">
+                  <div class="variant-label-row">
+                    <label class="variant-label" for="Option-{{ option.position }}">
+                      {{ option.name }}: <strong class="selected-option-value" data-selected-val-for="{{ option.position }}">{{ option.selected_value }}</strong>
+                    </label>
+                  </div>
                   <div class="variant-pill-row">
                     {%- for value in option.values -%}
                       <label class="variant-pill-label">
-                        <input type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %} class="variant-radio">
+                        <input
+                          type="radio"
+                          name="option-{{ option.position }}"
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}checked{% endif %}
+                          class="variant-radio"
+                          data-option-position="{{ option.position }}"
+                          data-option-name="{{ option.name | escape }}"
+                        >
                         <span class="variant-pill-btn">{{ value }}</span>
                       </label>
                     {%- endfor -%}
@@ -83,28 +111,26 @@
 
           <!-- Quantity Stepper -->
           <div class="quantity-row">
-            <label class="qty-title">Quantity:</label>
+            <label class="qty-title" for="ProductQuantityInput">Quantity:</label>
             <div class="qty-selector">
-              <button type="button" class="qty-btn" id="BtnQtyMinus">-</button>
-              <input type="number" name="quantity" id="ProductQuantityInput" value="1" min="1" class="qty-input">
-              <button type="button" class="qty-btn" id="BtnQtyPlus">+</button>
+              <button type="button" class="qty-btn" id="BtnQtyMinus" aria-label="Decrease quantity">−</button>
+              <input type="number" name="quantity" id="ProductQuantityInput" value="1" min="1" class="qty-input" aria-label="Quantity">
+              <button type="button" class="qty-btn" id="BtnQtyPlus" aria-label="Increase quantity">+</button>
             </div>
           </div>
 
           <!-- Buttons: Add to Bag, Buy Now, WhatsApp Enquiry -->
           <div class="product-cta-buttons" id="ProductMainCtaRow">
-            <button type="submit" name="add" class="btn-add-bag" {% unless product.available %}disabled{% endunless %}>
-              <span>{% if product.available %}Add to Shopping Bag{% else %}Sold Out{% endif %}</span>
+            <button type="submit" name="add" class="btn-add-bag" id="BtnAddBag" {% unless current_variant.available %}disabled{% endunless %}>
+              <span data-add-to-cart-text>{% if current_variant.available %}Add to Shopping Bag{% else %}Sold Out{% endif %}</span>
             </button>
 
-            {% if product.available %}
-              <button type="button" class="btn-buy-now" id="BtnBuyNow">
-                <span>Buy Now</span>
-              </button>
-            {% endif %}
+            <button type="button" class="btn-buy-now" id="BtnBuyNow" {% unless current_variant.available %}style="display: none;"{% endunless %}>
+              <span>Buy Now</span>
+            </button>
           </div>
 
-          {%- assign wa_enquiry_text = 'Namaste Lush Beauty Mart Nagpur! 🌸 I am interested in: ' | append: product.title | append: ' (' | append: product.price | money | append: '). Is this in stock at your Lad Square store?' -%}
+          {%- assign wa_enquiry_text = 'Namaste Lush Beauty Mart Nagpur! 🌸 I am interested in: ' | append: product.title | append: ' (' | append: current_variant.price | money | append: '). Is this in stock at your Lad Square store?' -%}
           <a href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ wa_enquiry_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-product-whatsapp-enquire">
             <span>💬 Enquire Product on WhatsApp (+91 91195 95951)</span>
           </a>
@@ -124,7 +150,7 @@
 
         <!-- Collapsible Product Details & Care Tabs -->
         <div class="product-accordions-group">
-          <!-- Accordion 1: Highlights & Features -->
+          <!-- Accordion 1: Highlights & Authenticity -->
           <div class="product-acc-item active">
             <button type="button" class="product-acc-header" aria-expanded="true">
               <span>🌿 Highlights & Authenticity</span>
@@ -146,7 +172,7 @@
               <span class="acc-arrow">+</span>
             </button>
             <div class="product-acc-content" style="display: none;">
-              <p>For skincare & makeup, store in a cool, dry place away from direct sunlight. For luxury handbags and accessories, store in dust bags and avoid direct moisture or perfume contact to retain lasting lustre.</p>
+              <p>For skincare & cosmetics, store in a cool, dry place away from direct sunlight. For luxury accessories, store in dust bags and avoid direct moisture or perfume contact to retain lasting lustre.</p>
             </div>
           </div>
 
@@ -171,12 +197,17 @@
   <div class="sticky-mobile-pdp-bar" id="StickyMobilePdpBar">
     <div class="sticky-bar-info">
       <span class="sticky-bar-title">{{ product.title | truncate: 25 }}</span>
-      <span class="sticky-bar-price">{{ product.price | money }}</span>
+      <span class="sticky-bar-price" data-sticky-price>{{ current_variant.price | money }}</span>
     </div>
-    <button type="button" class="btn-sticky-add-bag" id="BtnStickyAddBag">
-      <span>+ Add to Bag</span>
+    <button type="button" class="btn-sticky-add-bag" id="BtnStickyAddBag" {% unless current_variant.available %}disabled{% endunless %}>
+      <span data-sticky-add-text>{% if current_variant.available %}+ Add to Bag{% else %}Sold Out{% endif %}</span>
     </button>
   </div>
+
+  <!-- Product JSON data for real-time variant synchronization -->
+  <script type="application/json" id="ProductJson-{{ product.id }}">
+    {{ product | json }}
+  </script>
 </section>
 
 {% schema %}

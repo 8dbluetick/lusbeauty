@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReels();
   initCouponCopy();
   initProductPage();
+  initProductVariantSelector();
 });
 
 /* --------------------------------------------------------------------------
@@ -401,32 +402,120 @@ function initQuickViewModal() {
       const res = await fetch(`/products/${handle}.js`);
       const prod = await res.json();
 
-      const priceFormatted = '₹' + (prod.price / 100).toFixed(0);
-      const compareFormatted = prod.compare_at_price ? '₹' + (prod.compare_at_price / 100).toFixed(0) : '';
+      const initialVariant = prod.variants[0];
+      const initialPrice = formatMoney(initialVariant.price);
+      const initialCompare = initialVariant.compare_at_price > initialVariant.price ? formatMoney(initialVariant.compare_at_price) : '';
+
+      // Build options HTML if product has variants
+      let variantsHtml = '';
+      if (prod.options && prod.options.length > 0 && prod.variants.length > 1) {
+        variantsHtml = '<div class="qv-variants-wrap" style="margin: 12px 0; display: flex; flex-direction: column; gap: 8px;">';
+        prod.options.forEach((opt, optIdx) => {
+          variantsHtml += `
+            <div class="qv-option-group">
+              <label style="font-size: 0.72rem; font-weight: 700; color: #8A7363; text-transform: uppercase; margin-bottom: 4px; display: block;">${opt.name}:</label>
+              <div class="qv-pill-row" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                ${opt.values.map((val, valIdx) => `
+                  <label class="qv-pill-label" style="cursor: pointer;">
+                    <input type="radio" name="qv-opt-${optIdx + 1}" value="${val}" ${valIdx === 0 ? 'checked' : ''} class="qv-variant-radio" data-opt-pos="${optIdx + 1}" style="display: none;">
+                    <span class="qv-pill-btn ${valIdx === 0 ? 'active' : ''}" style="display: inline-block; padding: 5px 12px; border-radius: 999px; border: 1px solid #EAE3DA; font-size: 0.72rem; font-weight: 600; background: ${valIdx === 0 ? '#1F1610' : '#FFFFFF'}; color: ${valIdx === 0 ? '#FFFFFF' : '#1F1610'};">${val}</span>
+                  </label>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        });
+        variantsHtml += '</div>';
+      }
 
       content.innerHTML = `
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
           <div>
-            <img src="${prod.featured_image}" alt="${prod.title}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 12px;">
+            <img id="QvMainImg" src="${initialVariant.featured_image ? initialVariant.featured_image.src : prod.featured_image}" alt="${prod.title}" style="width: 100%; aspect-ratio: 4/5; object-fit: contain; background: #FAF7F2; padding: 12px; border-radius: 12px; border: 1px solid #EAE3DA;">
           </div>
           <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 12px;">
             <div>
-              <span style="font-size: 0.65rem; font-weight: 800; color: #B38C44; text-transform: uppercase;">${prod.type || 'Lush Exclusive'}</span>
-              <h2 style="font-size: 1.3rem; margin: 4px 0;">${prod.title}</h2>
+              <span style="font-size: 0.65rem; font-weight: 800; color: #C5A059; text-transform: uppercase; letter-spacing: 0.08em;">${prod.type || prod.vendor || 'LUSH EXCLUSIVE'}</span>
+              <h2 style="font-size: 1.25rem; font-weight: 800; margin: 4px 0 8px; color: #1F1610; line-height: 1.2;">${prod.title}</h2>
               <div style="display: flex; align-items: baseline; gap: 8px; margin: 8px 0;">
-                <span style="font-size: 1.3rem; font-weight: 800;">${priceFormatted}</span>
-                ${compareFormatted ? `<span style="font-size: 0.85rem; color: #999; text-decoration: line-through;">${compareFormatted}</span>` : ''}
+                <span id="QvPrice" style="font-size: 1.3rem; font-weight: 800; color: #1F1610;">${initialPrice}</span>
+                <span id="QvCompare" style="font-size: 0.85rem; color: #8A7363; text-decoration: line-through; ${initialCompare ? '' : 'display: none;'}">${initialCompare}</span>
               </div>
-              <p style="font-size: 0.8rem; color: #555;">${prod.description ? prod.description.replace(/<[^>]*>?/gm, '').slice(0, 150) + '...' : ''}</p>
+              ${variantsHtml}
+              <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.45;">${prod.description ? prod.description.replace(/<[^>]*>?/gm, '').slice(0, 150) + '...' : ''}</p>
             </div>
-            <form action="/cart/add" method="post" class="card-form" style="display: flex; flex-direction: column; gap: 8px;">
-              <input type="hidden" name="id" value="${prod.variants[0].id}">
-              <button type="submit" class="btn-buy-now" style="width: 100%; padding: 12px; border-radius: 10px; background: #2C1D11; color: #FFF; font-weight: 700; font-size: 0.8rem;">Add to Shopping Bag</button>
-              <a href="${prod.url}" style="text-align: center; font-size: 0.75rem; font-weight: 700; color: #B38C44; margin-top: 4px;">View Full Details Page →</a>
+            <form action="/cart/add" method="post" class="card-form" id="QvForm" style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+              <input type="hidden" name="id" value="${initialVariant.id}" id="QvVariantId">
+              <button type="submit" id="QvSubmitBtn" class="btn-buy-now" style="width: 100%; padding: 11px; border-radius: 8px; background: #1F1610; color: #FFF; font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em;">${initialVariant.available ? 'Add to Shopping Bag' : 'Sold Out'}</button>
+              <a href="${prod.url}" style="text-align: center; font-size: 0.75rem; font-weight: 700; color: #C5A059; margin-top: 4px; text-decoration: none;">View Full Details Page →</a>
             </form>
           </div>
         </div>
       `;
+
+      // Bind Quick View variant selection
+      const qvRadios = content.querySelectorAll('.qv-variant-radio');
+      if (qvRadios.length) {
+        qvRadios.forEach(radio => {
+          radio.addEventListener('change', () => {
+            // Update button styles
+            const parentGroup = radio.closest('.qv-option-group');
+            if (parentGroup) {
+              parentGroup.querySelectorAll('.qv-pill-btn').forEach(btn => {
+                btn.style.background = '#FFFFFF';
+                btn.style.color = '#1F1610';
+              });
+              const activeBtn = radio.parentElement.querySelector('.qv-pill-btn');
+              if (activeBtn) {
+                activeBtn.style.background = '#1F1610';
+                activeBtn.style.color = '#FFFFFF';
+              }
+            }
+
+            // Get selected values
+            const selectedOpts = [];
+            content.querySelectorAll('.qv-variant-radio:checked').forEach(r => {
+              const pos = parseInt(r.getAttribute('data-opt-pos') || 1, 10);
+              selectedOpts[pos - 1] = r.value;
+            });
+
+            // Find variant
+            const matchedVar = prod.variants.find(v => {
+              let match = true;
+              if (selectedOpts[0] && v.option1 !== selectedOpts[0]) match = false;
+              if (selectedOpts[1] && v.option2 !== selectedOpts[1]) match = false;
+              if (selectedOpts[2] && v.option3 !== selectedOpts[2]) match = false;
+              return match;
+            });
+
+            if (matchedVar) {
+              const qvVarInput = document.getElementById('QvVariantId');
+              const qvPrice = document.getElementById('QvPrice');
+              const qvCompare = document.getElementById('QvCompare');
+              const qvSubmit = document.getElementById('QvSubmitBtn');
+              const qvImg = document.getElementById('QvMainImg');
+
+              if (qvVarInput) qvVarInput.value = matchedVar.id;
+              if (qvPrice) qvPrice.textContent = formatMoney(matchedVar.price);
+              if (qvCompare) {
+                if (matchedVar.compare_at_price > matchedVar.price) {
+                  qvCompare.textContent = formatMoney(matchedVar.compare_at_price);
+                  qvCompare.style.display = '';
+                } else {
+                  qvCompare.style.display = 'none';
+                }
+              }
+              if (qvSubmit) {
+                qvSubmit.disabled = !matchedVar.available;
+                qvSubmit.textContent = matchedVar.available ? 'Add to Shopping Bag' : 'Sold Out';
+              }
+              if (matchedVar.featured_image && matchedVar.featured_image.src && qvImg) {
+                qvImg.src = matchedVar.featured_image.src;
+              }
+            }
+          });
+        });
+      }
     } catch (err) {
       content.innerHTML = '<p>Unable to load quick view. Please click on the product to view details.</p>';
     }
@@ -489,7 +578,296 @@ function initCouponCopy() {
 }
 
 /* --------------------------------------------------------------------------
-   8. Main Product Page Helpers
+   8. Money Formatting Helper
+   -------------------------------------------------------------------------- */
+function formatMoney(cents, format) {
+  if (typeof cents === 'string') {
+    cents = cents.replace('.', '');
+  }
+  let value = '';
+  const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  const formatString = format || (window.theme && window.theme.moneyFormat) || '₹{{amount}}';
+
+  function defaultOption(opt, def) {
+    return (typeof opt === 'undefined' ? def : opt);
+  }
+
+  function formatWithDelimiters(number, precision, thousands, decimal) {
+    precision = defaultOption(precision, 2);
+    thousands = defaultOption(thousands, ',');
+    decimal = defaultOption(decimal, '.');
+
+    if (isNaN(number) || number == null) {
+      return 0;
+    }
+
+    number = (number / 100.0).toFixed(precision);
+
+    const parts = number.split('.');
+    const dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
+    const centsVal = parts[1] ? (decimal + parts[1]) : '';
+
+    return dollars + centsVal;
+  }
+
+  const match = formatString.match(placeholderRegex);
+  if (match) {
+    switch (match[1]) {
+      case 'amount':
+        value = formatWithDelimiters(cents, 2);
+        if (value.endsWith('.00')) {
+          value = value.slice(0, -3);
+        }
+        break;
+      case 'amount_no_decimals':
+        value = formatWithDelimiters(cents, 0);
+        break;
+      case 'amount_with_comma_separator':
+        value = formatWithDelimiters(cents, 2, '.', ',');
+        break;
+      case 'amount_no_decimals_with_comma_separator':
+        value = formatWithDelimiters(cents, 0, '.', ',');
+        break;
+      default:
+        value = formatWithDelimiters(cents, 2);
+    }
+    return formatString.replace(placeholderRegex, value);
+  }
+
+  const num = (cents / 100.0);
+  const formattedNum = (num % 1 === 0) ? num.toFixed(0) : num.toFixed(2);
+  return '₹' + formattedNum;
+}
+
+/* --------------------------------------------------------------------------
+   9. Real-Time Product Variant Price & Selector Synchronization
+   -------------------------------------------------------------------------- */
+function initProductVariantSelector() {
+  const productSections = document.querySelectorAll('.lush-main-product-section');
+  if (!productSections.length) return;
+
+  productSections.forEach(section => {
+    const productId = section.getAttribute('data-product-id');
+    const jsonScript = document.getElementById(`ProductJson-${productId}`);
+    if (!jsonScript) return;
+
+    let productData;
+    try {
+      productData = JSON.parse(jsonScript.textContent);
+    } catch (e) {
+      console.error('Failed to parse product JSON for variant selector', e);
+      return;
+    }
+
+    if (!productData || !productData.variants || productData.variants.length === 0) return;
+
+    const variantIdInput = section.querySelector('#ProductVariantId');
+    const priceEl = section.querySelector('[data-product-price]');
+    const comparePriceEl = section.querySelector('[data-compare-price]');
+    const saveBadgeEl = section.querySelector('[data-save-badge]');
+    const stageDiscountEl = section.querySelector('[data-stage-discount]');
+    const stickyPriceEl = section.querySelector('[data-sticky-price]');
+    const addBagBtn = section.querySelector('#BtnAddBag');
+    const addBagText = section.querySelector('[data-add-to-cart-text]');
+    const buyNowBtn = section.querySelector('#BtnBuyNow');
+    const stickyAddBagBtn = section.querySelector('#BtnStickyAddBag');
+    const stickyAddText = section.querySelector('[data-sticky-add-text]');
+    const mainImg = section.querySelector('#ProductMainImg');
+
+    function getSelectedOptions() {
+      const options = [];
+      section.querySelectorAll('.variant-radio:checked').forEach(radio => {
+        const pos = parseInt(radio.getAttribute('data-option-position') || 1, 10);
+        options[pos - 1] = radio.value;
+      });
+      section.querySelectorAll('select.variant-select').forEach(select => {
+        const pos = parseInt(select.getAttribute('data-option-position') || 1, 10);
+        options[pos - 1] = select.value;
+      });
+      return options;
+    }
+
+    function findMatchingVariant(selectedOptions) {
+      return productData.variants.find(variant => {
+        let match = true;
+        if (selectedOptions[0] && variant.option1 !== selectedOptions[0]) match = false;
+        if (selectedOptions[1] && variant.option2 !== selectedOptions[1]) match = false;
+        if (selectedOptions[2] && variant.option3 !== selectedOptions[2]) match = false;
+        return match;
+      });
+    }
+
+    function updateVariantUI(variant) {
+      if (!variant) {
+        if (addBagBtn) {
+          addBagBtn.disabled = true;
+          if (addBagText) addBagText.textContent = 'Unavailable';
+        }
+        if (buyNowBtn) buyNowBtn.style.display = 'none';
+        if (stickyAddBagBtn) {
+          stickyAddBagBtn.disabled = true;
+          if (stickyAddText) stickyAddText.textContent = 'Unavailable';
+        }
+        return;
+      }
+
+      // 1. Update Variant ID in form
+      if (variantIdInput) {
+        variantIdInput.value = variant.id;
+      }
+
+      // 2. Update Main Price
+      const formattedPrice = formatMoney(variant.price);
+      if (priceEl) {
+        priceEl.textContent = formattedPrice;
+      }
+
+      // 3. Update Sticky Mobile Price
+      if (stickyPriceEl) {
+        stickyPriceEl.textContent = formattedPrice;
+      }
+
+      // 4. Update Compare-at Price, Savings & Discount %
+      if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+        const formattedCompare = formatMoney(variant.compare_at_price);
+        const savingsAmount = variant.compare_at_price - variant.price;
+        const formattedSavings = formatMoney(savingsAmount);
+        const discountPercent = Math.round((savingsAmount / variant.compare_at_price) * 100);
+
+        if (comparePriceEl) {
+          comparePriceEl.textContent = formattedCompare;
+          comparePriceEl.style.display = '';
+        }
+
+        if (saveBadgeEl) {
+          saveBadgeEl.textContent = `Save ${formattedSavings}`;
+          saveBadgeEl.style.display = '';
+        }
+
+        if (stageDiscountEl) {
+          stageDiscountEl.textContent = `${discountPercent}% OFF`;
+          stageDiscountEl.style.display = '';
+        }
+      } else {
+        if (comparePriceEl) comparePriceEl.style.display = 'none';
+        if (saveBadgeEl) saveBadgeEl.style.display = 'none';
+        if (stageDiscountEl) stageDiscountEl.style.display = 'none';
+      }
+
+      // 5. Update Availability & Buttons
+      if (variant.available) {
+        if (addBagBtn) {
+          addBagBtn.disabled = false;
+          if (addBagText) addBagText.textContent = 'Add to Shopping Bag';
+        }
+        if (buyNowBtn) {
+          buyNowBtn.style.display = '';
+        }
+        if (stickyAddBagBtn) {
+          stickyAddBagBtn.disabled = false;
+          if (stickyAddText) stickyAddText.textContent = '+ Add to Bag';
+        }
+      } else {
+        if (addBagBtn) {
+          addBagBtn.disabled = true;
+          if (addBagText) addBagText.textContent = 'Sold Out';
+        }
+        if (buyNowBtn) {
+          buyNowBtn.style.display = 'none';
+        }
+        if (stickyAddBagBtn) {
+          stickyAddBagBtn.disabled = true;
+          if (stickyAddText) stickyAddText.textContent = 'Sold Out';
+        }
+      }
+
+      // 6. Update Variant Image if available
+      if (variant.featured_image && variant.featured_image.src && mainImg) {
+        mainImg.src = variant.featured_image.src;
+        section.querySelectorAll('.thumb-btn').forEach(thumb => {
+          if (thumb.getAttribute('data-thumb-src')?.includes(variant.featured_image.id) || thumb.getAttribute('data-media-id') == variant.featured_image.id) {
+            section.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+            thumb.classList.add('active');
+          }
+        });
+      }
+
+      // 7. Update URL without page reload
+      if (window.history && window.history.replaceState) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('variant', variant.id);
+        window.history.replaceState({ path: url.href }, '', url.href);
+      }
+    }
+
+    // Bind event listeners to radio options
+    section.querySelectorAll('.variant-radio').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const pos = radio.getAttribute('data-option-position');
+        const selectedValLabel = section.querySelector(`[data-selected-val-for="${pos}"]`);
+        if (selectedValLabel) {
+          selectedValLabel.textContent = radio.value;
+        }
+
+        const selectedOptions = getSelectedOptions();
+        const matched = findMatchingVariant(selectedOptions);
+        updateVariantUI(matched);
+      });
+    });
+
+    // Bind event listeners to select dropdown options
+    section.querySelectorAll('select.variant-select').forEach(select => {
+      select.addEventListener('change', () => {
+        const pos = select.getAttribute('data-option-position');
+        const selectedValLabel = section.querySelector(`[data-selected-val-for="${pos}"]`);
+        if (selectedValLabel) {
+          selectedValLabel.textContent = select.value;
+        }
+
+        const selectedOptions = getSelectedOptions();
+        const matched = findMatchingVariant(selectedOptions);
+        updateVariantUI(matched);
+      });
+    });
+
+    // Check if URL contains ?variant= on initial load
+    const urlParams = new URLSearchParams(window.location.search);
+    const variantParam = urlParams.get('variant');
+    if (variantParam) {
+      const initialVariant = productData.variants.find(v => String(v.id) === String(variantParam));
+      if (initialVariant) {
+        if (initialVariant.option1) {
+          const r1 = section.querySelector(`.variant-radio[data-option-position="1"][value="${CSS.escape(initialVariant.option1)}"]`);
+          if (r1) { r1.checked = true; }
+          const l1 = section.querySelector(`[data-selected-val-for="1"]`);
+          if (l1) l1.textContent = initialVariant.option1;
+        }
+        if (initialVariant.option2) {
+          const r2 = section.querySelector(`.variant-radio[data-option-position="2"][value="${CSS.escape(initialVariant.option2)}"]`);
+          if (r2) { r2.checked = true; }
+          const l2 = section.querySelector(`[data-selected-val-for="2"]`);
+          if (l2) l2.textContent = initialVariant.option2;
+        }
+        if (initialVariant.option3) {
+          const r3 = section.querySelector(`.variant-radio[data-option-position="3"][value="${CSS.escape(initialVariant.option3)}"]`);
+          if (r3) { r3.checked = true; }
+          const l3 = section.querySelector(`[data-selected-val-for="3"]`);
+          if (l3) l3.textContent = initialVariant.option3;
+        }
+        updateVariantUI(initialVariant);
+      }
+    } else {
+      const initialOptions = getSelectedOptions();
+      if (initialOptions.length) {
+        const initialMatched = findMatchingVariant(initialOptions);
+        if (initialMatched) updateVariantUI(initialMatched);
+      }
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   10. Main Product Page Helpers
    -------------------------------------------------------------------------- */
 function initProductPage() {
   // Thumbnail switch
@@ -537,7 +915,7 @@ function initProductPage() {
     pdpWaBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const title = document.querySelector('.product-page-title')?.textContent?.trim() || 'Exclusive Product';
-      const price = document.querySelector('.price-big')?.textContent?.trim() || '';
+      const price = document.querySelector('[data-product-price]')?.textContent?.trim() || document.querySelector('.price-big')?.textContent?.trim() || '';
       const qty = document.getElementById('ProductQuantityInput')?.value || 1;
       const selectedVariant = document.querySelector('.variant-radio:checked')?.value || '';
       const variantText = selectedVariant ? ` _(${selectedVariant})_` : '';
