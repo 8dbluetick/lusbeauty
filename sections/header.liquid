@@ -1,55 +1,117 @@
 <header class="lush-header-sticky" id="LushHeader" style="background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};">
-  <div class="page-width header-container">
-    <!-- Mobile: Hamburger Menu Button -->
-    <div class="header-mobile-toggle">
-      <button type="button" class="btn-hamburger" id="BtnMobileMenuToggle" aria-label="Open Navigation" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round">
-          <line x1="4" y1="7" x2="20" y2="7"></line>
-          <line x1="4" y1="12" x2="20" y2="12"></line>
-          <line x1="4" y1="17" x2="20" y2="17"></line>
-        </svg>
-      </button>
-    </div>
+  <!-- TOP TIER: Main Branding & Actions Header Row -->
+  <div class="header-main-row">
+    <div class="page-width header-container">
+      <!-- Mobile: Hamburger Menu Button -->
+      <div class="header-mobile-toggle">
+        <button type="button" class="btn-hamburger" id="BtnMobileMenuToggle" aria-label="Open Navigation" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="17" x2="20" y2="17"></line>
+          </svg>
+        </button>
+      </div>
 
-    <!-- LEFT: Brand Logo / Wordmark -->
-    <div class="header-logo-wrap">
-      <a href="/" class="header-brand-link">
-        {%- if section.settings.logo != blank -%}
-          <img
-            src="{{ section.settings.logo | image_url: width: 160 }}"
-            alt="{{ section.settings.store_title | default: shop.name | escape }}"
-            class="header-logo-img"
-            style="width: {{ section.settings.logo_width | default: 36 }}px; height: auto;"
-            width="{{ section.settings.logo_width | default: 36 }}"
-            height="{{ section.settings.logo_width | default: 36 }}"
-          >
-        {%- else -%}
-          <img
-            src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300623/lushbeautymart_14050530_135102335_bdtk3h.jpg"
-            alt="{{ section.settings.store_title | default: 'Lush Beauty Mart' }}"
-            class="header-logo-img"
-            width="36"
-            height="36"
-          >
-        {%- endif -%}
-        <div class="header-brand-text">
-          <span class="brand-title" style="color: {{ section.settings.text_color | default: '#1F1610' }};">{{ section.settings.store_title | default: "LUSH BEAUTY MART" }}</span>
-          {%- if section.settings.store_tagline != blank -%}
-            <span class="brand-tagline">{{ section.settings.store_tagline }}</span>
+      <!-- LEFT: Brand Logo / Wordmark -->
+      <div class="header-logo-wrap">
+        <a href="/" class="header-brand-link">
+          {%- if section.settings.logo != blank -%}
+            <img
+              src="{{ section.settings.logo | image_url: width: 160 }}"
+              alt="{{ section.settings.store_title | default: shop.name | escape }}"
+              class="header-logo-img"
+              style="width: {{ section.settings.logo_width | default: 42 }}px; height: auto;"
+              width="{{ section.settings.logo_width | default: 42 }}"
+              height="{{ section.settings.logo_width | default: 42 }}"
+            >
+          {%- else -%}
+            <img
+              src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300623/lushbeautymart_14050530_135102335_bdtk3h.jpg"
+              alt="{{ section.settings.store_title | default: 'Lush Beauty Mart' }}"
+              class="header-logo-img"
+              width="42"
+              height="42"
+            >
           {%- endif -%}
-        </div>
-      </a>
-    </div>
+          <div class="header-brand-text">
+            <span class="brand-title" style="color: {{ section.settings.text_color | default: '#1F1610' }};">{{ section.settings.store_title | default: "LUSH BEAUTY MART" }}</span>
+            {%- if section.settings.store_tagline != blank -%}
+              <span class="brand-tagline">{{ section.settings.store_tagline }}</span>
+            {%- endif -%}
+          </div>
+        </a>
+      </div>
 
-    <!-- CENTER: Main Navigation (Multi-Level Mega Menu & Dropdowns) -->
-    <nav class="header-desktop-nav" aria-label="Primary Navigation">
+      <!-- CENTER: Luxury Live Search Bar (Desktop) -->
+      <div class="header-search-bar-wrap" data-open-search role="button" tabindex="0" aria-label="Open Product Search">
+        <div class="header-search-input-mock">
+          <svg class="mock-search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="1.8" fill="none">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+          <span class="mock-search-placeholder">Search skincare, lipsticks, fragrances, K-Beauty...</span>
+          <span class="mock-search-btn">SEARCH</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Action Icons -->
+      <div class="header-actions">
+        <!-- Search Icon (Mobile Only) -->
+        {%- if section.settings.show_search -%}
+          <button type="button" class="header-action-btn mobile-search-trigger" data-open-search title="Search" aria-label="Search" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7.5"></circle>
+              <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+            </svg>
+          </button>
+        {%- endif -%}
+
+        <!-- Wishlist -->
+        {%- if section.settings.show_wishlist -%}
+          <button type="button" class="header-action-btn" data-open-wishlist title="Wishlist" aria-label="Wishlist" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="action-badge wishlist-badge" data-wishlist-count>0</span>
+          </button>
+        {%- endif -%}
+
+        <!-- Account -->
+        {%- if section.settings.show_account -%}
+          <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="header-action-btn" title="Account" aria-label="Account" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        <!-- Cart -->
+        {%- if section.settings.show_cart -%}
+          <button type="button" class="header-action-btn" data-open-cart title="Shopping Bag" aria-label="Cart" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="action-badge cart-badge" data-cart-count>{{ cart.item_count }}</span>
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM TIER: Dedicated Full-Width Collection Navigation Bar ("Neche Block") -->
+  <nav class="header-bottom-nav-bar" aria-label="Primary Collections Navigation">
+    <div class="page-width header-bottom-nav-container">
       <ul class="nav-links-list">
         {%- assign use_custom_menu = section.settings.use_custom_menu -%}
         {%- assign nav_menu = linklists[section.settings.menu] -%}
         {%- if use_custom_menu and nav_menu != blank and nav_menu.links.size > 0 -%}
           {%- for link in nav_menu.links -%}
             <li class="nav-item-wrap{% if link.links != blank %} has-dropdown{% endif %}">
-              <a href="{{ link.url }}" class="nav-item-link{% if link.active %} active{% endif %}" style="color: {{ section.settings.text_color | default: '#2C1D11' }};">
+              <a href="{{ link.url }}" class="nav-item-link{% if link.active %} active{% endif %}">
                 <span>{{ link.title | upcase }}</span>
                 {%- if link.links != blank -%}<span class="dropdown-chevron">▾</span>{%- endif -%}
               </a>
@@ -74,16 +136,16 @@
               <span class="dropdown-chevron">▾</span>
             </a>
             <ul class="header-dropdown-menu">
-              <li><a href="/collections/skincare" class="header-dropdown-link header-dropdown-all">✨ View All Skincare (160+)</a></li>
-              <li><a href="/collections/face-wash-cleansers" class="header-dropdown-link">Face Wash & Cleansers</a></li>
-              <li><a href="/collections/face-serums" class="header-dropdown-link">Face Serums</a></li>
-              <li><a href="/collections/moisturizers-face-creams" class="header-dropdown-link">Moisturizers & Face Creams</a></li>
-              <li><a href="/collections/sunscreens" class="header-dropdown-link">Sunscreens (SPF 50+)</a></li>
-              <li><a href="/collections/toners" class="header-dropdown-link">Toners & Mists</a></li>
-              <li><a href="/collections/face-masks" class="header-dropdown-link">Face Masks</a></li>
-              <li><a href="/collections/acne-blemish-care" class="header-dropdown-link">Acne & Blemish Care</a></li>
-              <li><a href="/collections/brightening-vitamin-c" class="header-dropdown-link">Brightening & Vitamin C</a></li>
-              <li><a href="/collections/korean-skincare" class="header-dropdown-link text-gold">🌿 Korean Skincare (K-Beauty)</a></li>
+              <li><a href="/collections/skincare" class="header-dropdown-link header-dropdown-all">✨ View All Skincare (162)</a></li>
+              <li><a href="/collections/face-wash-cleansers" class="header-dropdown-link">Face Wash & Cleansers (53)</a></li>
+              <li><a href="/collections/face-serums" class="header-dropdown-link">Face Serums (38)</a></li>
+              <li><a href="/collections/moisturizers-face-creams" class="header-dropdown-link">Moisturizers & Face Creams (28)</a></li>
+              <li><a href="/collections/sunscreens" class="header-dropdown-link">Sunscreens SPF 50+ (51)</a></li>
+              <li><a href="/collections/toners" class="header-dropdown-link">Toners & Mists (11)</a></li>
+              <li><a href="/collections/face-masks" class="header-dropdown-link">Face Masks (4)</a></li>
+              <li><a href="/collections/acne-blemish-care" class="header-dropdown-link">Acne & Blemish Care (33)</a></li>
+              <li><a href="/collections/brightening-vitamin-c" class="header-dropdown-link">Brightening & Vitamin C (64)</a></li>
+              <li><a href="/collections/korean-skincare" class="header-dropdown-link text-gold">🌿 Korean Skincare (36)</a></li>
             </ul>
           </li>
 
@@ -94,14 +156,14 @@
               <span class="dropdown-chevron">▾</span>
             </a>
             <ul class="header-dropdown-menu">
-              <li><a href="/collections/makeup" class="header-dropdown-link header-dropdown-all">✨ View All Makeup (67+)</a></li>
-              <li><a href="/collections/lipsticks" class="header-dropdown-link">Lipsticks</a></li>
-              <li><a href="/collections/lip-care" class="header-dropdown-link">Lip Care & Glosses</a></li>
-              <li><a href="/collections/foundation-base-makeup" class="header-dropdown-link">Foundation & Base Makeup</a></li>
-              <li><a href="/collections/concealers" class="header-dropdown-link">Concealers</a></li>
-              <li><a href="/collections/bb-cc-cream" class="header-dropdown-link">BB / CC Cream</a></li>
-              <li><a href="/collections/blush-bronzer-highlighter" class="header-dropdown-link">Blush, Bronzer & Highlighter</a></li>
-              <li><a href="/collections/eye-makeup" class="header-dropdown-link">Eye Makeup (Kajal & Liners)</a></li>
+              <li><a href="/collections/makeup" class="header-dropdown-link header-dropdown-all">✨ View All Makeup (67)</a></li>
+              <li><a href="/collections/lipsticks" class="header-dropdown-link">Lipsticks (30)</a></li>
+              <li><a href="/collections/lip-care" class="header-dropdown-link">Lip Care & Balms (15)</a></li>
+              <li><a href="/collections/foundation-base-makeup" class="header-dropdown-link">Foundation & Base Makeup (9)</a></li>
+              <li><a href="/collections/concealers" class="header-dropdown-link">Concealers (1)</a></li>
+              <li><a href="/collections/bb-cc-cream" class="header-dropdown-link">BB / CC Cream (1)</a></li>
+              <li><a href="/collections/blush-bronzer-highlighter" class="header-dropdown-link">Blush, Bronzer & Highlighter (1)</a></li>
+              <li><a href="/collections/eye-makeup" class="header-dropdown-link">Eye Makeup & Kajal (10)</a></li>
             </ul>
           </li>
 
@@ -112,13 +174,13 @@
               <span class="dropdown-chevron">▾</span>
             </a>
             <ul class="header-dropdown-menu">
-              <li><a href="/collections/haircare" class="header-dropdown-link header-dropdown-all">✨ View All Haircare (35+)</a></li>
-              <li><a href="/collections/shampoos" class="header-dropdown-link">Shampoos</a></li>
-              <li><a href="/collections/conditioners" class="header-dropdown-link">Conditioners</a></li>
-              <li><a href="/collections/hair-masks" class="header-dropdown-link">Hair Masks & Spas</a></li>
-              <li><a href="/collections/hair-serums" class="header-dropdown-link">Hair Serums</a></li>
-              <li><a href="/collections/hair-oils" class="header-dropdown-link">Hair Oils</a></li>
-              <li><a href="/collections/hair-growth-anti-hair-fall" class="header-dropdown-link">Hair Growth & Anti-Hair Fall</a></li>
+              <li><a href="/collections/haircare" class="header-dropdown-link header-dropdown-all">✨ View All Haircare (35)</a></li>
+              <li><a href="/collections/shampoos" class="header-dropdown-link">Shampoos (26)</a></li>
+              <li><a href="/collections/conditioners" class="header-dropdown-link">Conditioners (1)</a></li>
+              <li><a href="/collections/hair-masks" class="header-dropdown-link">Hair Masks & Spas (1)</a></li>
+              <li><a href="/collections/hair-serums" class="header-dropdown-link">Hair Serums (3)</a></li>
+              <li><a href="/collections/hair-oils" class="header-dropdown-link">Hair Oils (2)</a></li>
+              <li><a href="/collections/hair-growth-anti-hair-fall" class="header-dropdown-link">Hair Growth & Anti-Fall (4)</a></li>
             </ul>
           </li>
 
@@ -129,11 +191,11 @@
               <span class="dropdown-chevron">▾</span>
             </a>
             <ul class="header-dropdown-menu">
-              <li><a href="/collections/bodycare" class="header-dropdown-link header-dropdown-all">✨ View All Bodycare (70+)</a></li>
-              <li><a href="/collections/body-wash-shower-gel" class="header-dropdown-link">Body Wash & Shower Gel</a></li>
-              <li><a href="/collections/body-lotions" class="header-dropdown-link">Body Lotions</a></li>
-              <li><a href="/collections/body-creams" class="header-dropdown-link">Body Creams & Butters</a></li>
-              <li><a href="/collections/talc-body-powder" class="header-dropdown-link">Talc & Body Powder</a></li>
+              <li><a href="/collections/bodycare" class="header-dropdown-link header-dropdown-all">✨ View All Bodycare (71)</a></li>
+              <li><a href="/collections/body-wash-shower-gel" class="header-dropdown-link">Body Wash & Shower Gel (26)</a></li>
+              <li><a href="/collections/body-lotions" class="header-dropdown-link">Body Lotions (24)</a></li>
+              <li><a href="/collections/body-creams" class="header-dropdown-link">Body Creams & Butters (6)</a></li>
+              <li><a href="/collections/talc-body-powder" class="header-dropdown-link">Talc & Body Powder (2)</a></li>
             </ul>
           </li>
 
@@ -144,13 +206,13 @@
               <span class="dropdown-chevron">▾</span>
             </a>
             <ul class="header-dropdown-menu">
-              <li><a href="/collections/fragrance" class="header-dropdown-link header-dropdown-all">✨ View All Fragrances (25+)</a></li>
-              <li><a href="/collections/perfumes-for-men" class="header-dropdown-link">Perfumes for Men</a></li>
-              <li><a href="/collections/perfumes-for-women" class="header-dropdown-link">Perfumes for Women</a></li>
-              <li><a href="/collections/unisex-perfumes" class="header-dropdown-link">Unisex Perfumes</a></li>
-              <li><a href="/collections/eau-de-parfum" class="header-dropdown-link">Eau de Parfum (EDP)</a></li>
-              <li><a href="/collections/eau-de-toilette" class="header-dropdown-link">Eau de Toilette (EDT)</a></li>
-              <li><a href="/collections/premium-fragrances" class="header-dropdown-link text-gold">👑 Premium Fragrances</a></li>
+              <li><a href="/collections/fragrance" class="header-dropdown-link header-dropdown-all">✨ View All Fragrances (25)</a></li>
+              <li><a href="/collections/perfumes-for-men" class="header-dropdown-link">Perfumes for Men (9)</a></li>
+              <li><a href="/collections/perfumes-for-women" class="header-dropdown-link">Perfumes for Women (6)</a></li>
+              <li><a href="/collections/unisex-perfumes" class="header-dropdown-link">Unisex Perfumes (13)</a></li>
+              <li><a href="/collections/eau-de-parfum" class="header-dropdown-link">Eau de Parfum (10)</a></li>
+              <li><a href="/collections/eau-de-toilette" class="header-dropdown-link">Eau de Toilette (6)</a></li>
+              <li><a href="/collections/premium-fragrances" class="header-dropdown-link text-gold">👑 Premium Fragrances (12)</a></li>
             </ul>
           </li>
 
@@ -161,14 +223,28 @@
             </a>
           </li>
 
-          <!-- 7. Offers & Deals -->
+          <!-- 7. Bestsellers -->
           <li>
-            <a href="/collections/offers-deals" class="nav-item-link nav-item-offers">
-              <span>OFFERS 🏷️</span>
+            <a href="/collections/bestsellers" class="nav-item-link">
+              <span>🔥 BESTSELLERS</span>
             </a>
           </li>
 
-          <!-- 8. Partner Venture -->
+          <!-- 8. Trending -->
+          <li>
+            <a href="/collections/trending" class="nav-item-link">
+              <span>✨ TRENDING</span>
+            </a>
+          </li>
+
+          <!-- 9. Offers & Deals -->
+          <li>
+            <a href="/collections/offers-deals" class="nav-item-link nav-item-offers">
+              <span>🏷️ OFFERS</span>
+            </a>
+          </li>
+
+          <!-- 10. Partner Venture -->
           <li>
             <a href="https://sevasurgicalsanddrugs.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-item-link nav-item-partner" style="color: #0F7A42; font-weight: 800;">
               <span>🏥 SEVA SURGICALS ↗</span>
@@ -176,53 +252,8 @@
           </li>
         {%- endif -%}
       </ul>
-    </nav>
-
-    <!-- RIGHT: Action Icons -->
-    <div class="header-actions">
-      <!-- Search -->
-      {%- if section.settings.show_search -%}
-        <button type="button" class="header-action-btn" data-open-search title="Search" aria-label="Search" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="7.5"></circle>
-            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
-          </svg>
-        </button>
-      {%- endif -%}
-
-      <!-- Wishlist -->
-      {%- if section.settings.show_wishlist -%}
-        <button type="button" class="header-action-btn" data-open-wishlist title="Wishlist" aria-label="Wishlist" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
-          <span class="action-badge wishlist-badge" data-wishlist-count>0</span>
-        </button>
-      {%- endif -%}
-
-      <!-- Account -->
-      {%- if section.settings.show_account -%}
-        <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="header-action-btn" title="Account" aria-label="Account" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </a>
-      {%- endif -%}
-
-      <!-- Cart -->
-      {%- if section.settings.show_cart -%}
-        <button type="button" class="header-action-btn" data-open-cart title="Shopping Bag" aria-label="Cart" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <span class="action-badge cart-badge" data-cart-count>{{ cart.item_count }}</span>
-        </button>
-      {%- endif -%}
     </div>
-  </div>
+  </nav>
 
   <!-- Mobile Navigation Drawer with Accordion Submenus -->
   <div class="mobile-nav-drawer" id="MobileNavDrawer" aria-hidden="true">
@@ -389,12 +420,12 @@
     {
       "type": "range",
       "id": "logo_width",
-      "min": 24,
-      "max": 80,
+      "min": 28,
+      "max": 90,
       "step": 2,
       "unit": "px",
       "label": "Logo Max Width",
-      "default": 36
+      "default": 42
     },
     {
       "type": "text",
@@ -413,7 +444,7 @@
       "id": "use_custom_menu",
       "label": "Use Custom Navigation Menu from Admin",
       "default": false,
-      "info": "When unchecked, the built-in full 43-collection hierarchy (Skincare, Makeup, Haircare, Bodycare, Fragrance, Drinkware) is active automatically."
+      "info": "When unchecked, the built-in full 43-collection hierarchy is active automatically."
     },
     {
       "type": "link_list",
