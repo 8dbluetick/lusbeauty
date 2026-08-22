@@ -24,7 +24,11 @@
       {%- else -%}
         <div class="collection-products-grid">
           {%- for product in collection.products -%}
-            {% render 'product-card', product: product %}
+            {%- assign is_lazy = true -%}
+            {%- if forloop.index <= 4 -%}
+              {%- assign is_lazy = false -%}
+            {%- endif -%}
+            {% render 'product-card', product: product, lazy: is_lazy %}
           {%- endfor -%}
         </div>
 

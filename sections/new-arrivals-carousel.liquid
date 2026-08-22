@@ -18,8 +18,12 @@
       {%- assign new_collection = collections[section.settings.collection] | default: collections.all -%}
       {%- if new_collection != blank and new_collection.products_count > 0 -%}
         {%- for product in new_collection.products limit: 10 -%}
+          {%- assign is_lazy = true -%}
+          {%- if forloop.index <= 4 -%}
+            {%- assign is_lazy = false -%}
+          {%- endif -%}
           <div class="carousel-item-slide">
-            {% render 'product-card', product: product %}
+            {% render 'product-card', product: product, lazy: is_lazy %}
           </div>
         {%- endfor -%}
       {%- endif -%}

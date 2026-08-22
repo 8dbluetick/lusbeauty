@@ -15,11 +15,25 @@
       <div class="product-gallery-panel">
         <div class="main-image-viewport">
           {%- assign current_variant = product.selected_or_first_available_variant -%}
-          {%- assign featured_img = current_variant.featured_image | default: product.featured_media -%}
-          {%- if featured_img -%}
-            <img id="ProductMainImg" src="{{ featured_img | image_url: width: 900 }}" alt="{{ featured_img.alt | escape | default: product.title }}" class="product-stage-img" width="800" height="800">
+          {%- assign featured_img = current_variant.featured_image | default: product.featured_media | default: product.featured_image | default: product.media.first | default: product.images.first -%}
+          {%- if featured_img != blank -%}
+            <img
+              id="ProductMainImg"
+              src="{{ featured_img | image_url: width: 900 }}"
+              srcset="{{ featured_img | image_url: width: 600 }} 600w, {{ featured_img | image_url: width: 900 }} 900w, {{ featured_img | image_url: width: 1200 }} 1200w"
+              sizes="(max-width: 767px) 100vw, 50vw"
+              alt="{{ featured_img.alt | default: product.title | escape }}"
+              class="product-stage-img"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              width="800"
+              height="1000"
+            >
           {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-stage-img' }}
+            <div class="product-stage-placeholder">
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-stage-img' }}
+            </div>
           {%- endif -%}
 
           {%- if current_variant.compare_at_price > current_variant.price -%}
@@ -34,7 +48,16 @@
           <div class="thumbnail-strip">
             {%- for media in product.media -%}
               <button type="button" class="thumb-btn {% if forloop.first %}active{% endif %}" data-thumb-src="{{ media | image_url: width: 900 }}" data-media-id="{{ media.id }}" aria-label="View media {{ forloop.index }}">
-                <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | default: product.title | escape }}" width="80" height="80" loading="lazy">
+                <img
+                  src="{{ media | image_url: width: 160 }}"
+                  srcset="{{ media | image_url: width: 120 }} 120w, {{ media | image_url: width: 200 }} 200w"
+                  sizes="80px"
+                  alt="{{ media.alt | default: product.title | escape }}"
+                  width="80"
+                  height="100"
+                  loading="lazy"
+                  decoding="async"
+                >
               </button>
             {%- endfor -%}
           </div>

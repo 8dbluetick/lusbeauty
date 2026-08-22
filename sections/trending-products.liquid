@@ -29,7 +29,11 @@
         {%- assign featured_collection = collections[section.settings.collection] | default: collections.all -%}
         {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
           {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
-            {% render 'product-card', product: product %}
+            {%- assign is_lazy = true -%}
+            {%- if forloop.index <= 4 -%}
+              {%- assign is_lazy = false -%}
+            {%- endif -%}
+            {% render 'product-card', product: product, lazy: is_lazy %}
           {%- endfor -%}
         {%- else -%}
           <div class="no-products-message">

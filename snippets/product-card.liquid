@@ -3,38 +3,50 @@
   Accepts:
   - product: {Object} Product Liquid object
   - show_vendor: {Boolean} Show the product vendor (default: true)
+  - lazy: {Boolean} Whether to lazy load the image (default: true)
 {% endcomment %}
 
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign price = current_variant.price -%}
 {%- assign compare_at_price = current_variant.compare_at_price -%}
 {%- assign vendor = product.vendor | default: product.collections.first.title | default: 'LUSH' -%}
+{%- assign card_img = product.featured_media | default: product.featured_image | default: product.media.first | default: product.images.first -%}
+{%- assign secondary_img = product.media[1] | default: product.images[1] -%}
 
 <div class="lush-product-card group" data-product-id="{{ product.id }}" data-category="{{ product.type | downcase }} {{ product.tags | join: ' ' | downcase }}">
   <!-- 1. Product Image Container (Consistent 4:5 Aspect Ratio) -->
   <div class="card-media-wrapper">
     <a href="{{ product.url }}" class="card-image-link" aria-label="{{ product.title | escape }}">
-      {%- if product.featured_media -%}
+      {%- if card_img != blank -%}
         <img
-          src="{{ product.featured_media | image_url: width: 600 }}"
-          alt="{{ product.featured_media.alt | default: product.title | escape }}"
+          src="{{ card_img | image_url: width: 540 }}"
+          srcset="{{ card_img | image_url: width: 320 }} 320w, {{ card_img | image_url: width: 480 }} 480w, {{ card_img | image_url: width: 640 }} 640w, {{ card_img | image_url: width: 800 }} 800w"
+          sizes="(max-width: 480px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          alt="{{ card_img.alt | default: product.title | escape }}"
           class="card-primary-image"
-          loading="lazy"
+          loading="{% if lazy == false %}eager{% else %}lazy{% endif %}"
+          {% if lazy == false %}fetchpriority="high"{% endif %}
+          decoding="async"
           width="500"
           height="625"
         >
-        {%- if product.media.size > 1 -%}
+        {%- if secondary_img != blank -%}
           <img
-            src="{{ product.media[1] | image_url: width: 600 }}"
+            src="{{ secondary_img | image_url: width: 540 }}"
+            srcset="{{ secondary_img | image_url: width: 320 }} 320w, {{ secondary_img | image_url: width: 480 }} 480w, {{ secondary_img | image_url: width: 640 }} 640w"
+            sizes="(max-width: 480px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             alt="{{ product.title | escape }}"
             class="card-secondary-image"
             loading="lazy"
+            decoding="async"
             width="500"
             height="625"
           >
         {%- endif -%}
       {%- else -%}
-        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg card-primary-image' }}
+        <div class="card-placeholder-wrap">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg card-primary-image' }}
+        </div>
       {%- endif -%}
     </a>
 

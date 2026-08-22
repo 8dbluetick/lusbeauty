@@ -17,7 +17,11 @@
         {%- assign count = 0 -%}
         {%- for rel_product in collection_to_use.products -%}
           {%- if rel_product.id != current_id and count < section.settings.products_to_show -%}
-            {% render 'product-card', product: rel_product %}
+            {%- assign is_lazy = true -%}
+            {%- if count < 4 -%}
+              {%- assign is_lazy = false -%}
+            {%- endif -%}
+            {% render 'product-card', product: rel_product, lazy: is_lazy %}
             {%- assign count = count | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}

@@ -843,6 +843,7 @@ function initProductVariantSelector() {
       // 6. Update Variant Image if available
       if (variant.featured_image && variant.featured_image.src && mainImg) {
         mainImg.src = variant.featured_image.src;
+        mainImg.removeAttribute('srcset');
         section.querySelectorAll('.thumb-btn').forEach(thumb => {
           if (thumb.getAttribute('data-thumb-src')?.includes(variant.featured_image.id) || thumb.getAttribute('data-media-id') == variant.featured_image.id) {
             section.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
@@ -938,6 +939,7 @@ function initProductPage() {
       const mainImg = document.getElementById('ProductMainImg');
       if (mainImg && thumb.dataset.thumbSrc) {
         mainImg.src = thumb.dataset.thumbSrc;
+        mainImg.removeAttribute('srcset');
       }
     });
   });

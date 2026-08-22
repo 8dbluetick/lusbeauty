@@ -18,7 +18,11 @@
         <div class="products-grid-4">
           {%- for item in search.results -%}
             {%- if item.object_type == 'product' -%}
-              {% render 'product-card', product: item %}
+              {%- assign is_lazy = true -%}
+              {%- if forloop.index <= 4 -%}
+                {%- assign is_lazy = false -%}
+              {%- endif -%}
+              {% render 'product-card', product: item, lazy: is_lazy %}
             {%- endif -%}
           {%- endfor -%}
         </div>
