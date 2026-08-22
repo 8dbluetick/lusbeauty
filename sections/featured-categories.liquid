@@ -1,5 +1,5 @@
 {%- if section.settings.enable_section -%}
-  <section class="lush-categories-section lush-marquee-categories-section">
+  <section class="lush-categories-section">
     <div class="page-width">
       <div class="section-header-center">
         {%- if section.settings.badge != blank -%}
@@ -10,390 +10,89 @@
           <p class="section-subtitle">{{ section.settings.subtitle }}</p>
         {%- endif -%}
       </div>
-    </div>
 
-    <!-- Dual Running Marquee Wrapper -->
-    <div class="collection-marquee-wrapper" style="--marquee-speed: {{ section.settings.speed | default: 32 }}s;">
-      <!-- Row 1: Leftward Running Marquee (Right to Left) -->
-      <div class="collection-marquee-row row-left">
-        <div class="collection-marquee-track track-left">
-          <!-- Group 1 -->
-          <div class="collection-marquee-group">
-            <!-- Card 1: Skincare -->
-            <a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
+      <div class="categories-grid-6">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign coll = collections[block.settings.collection] -%}
+            {%- assign card_url = block.settings.link | default: coll.url | default: '/collections/all' -%}
+            {%- assign card_title = block.settings.title | default: coll.title | default: 'Collection' -%}
+            {%- assign card_img = block.settings.image | default: coll.featured_image | default: coll.products.first.featured_image -%}
+
+            {%- assign default_img = 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop' -%}
+            {%- case forloop.index -%}
+              {%- when 2 -%}
+                {%- assign default_img = 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop' -%}
+              {%- when 3 -%}
+                {%- assign default_img = 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop' -%}
+              {%- when 4 -%}
+                {%- assign default_img = 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800&auto=format&fit=crop' -%}
+              {%- when 5 -%}
+                {%- assign default_img = 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop' -%}
+              {%- when 6 -%}
+                {%- assign default_img = 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800&auto=format&fit=crop' -%}
+            {%- endcase -%}
+
+            <a href="{{ card_url }}" class="category-card group lush-reveal" {{ block.shopify_attributes }}>
               <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Skincare" class="cat-img" loading="lazy" width="400" height="500">
+                {%- if card_img != blank -%}
+                  <img src="{{ card_img | image_url: width: 800 }}" alt="{{ card_title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
+                {%- else -%}
+                  <img src="{{ default_img }}" alt="{{ card_title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
+                {%- endif -%}
                 <div class="cat-overlay"></div>
-                <span class="cat-count-pill">✨ Top Rated</span>
+                {%- if coll.products_count != blank and coll.products_count > 0 -%}
+                  <span class="cat-count-pill">{{ coll.products_count }} Items</span>
+                {%- endif -%}
                 <div class="cat-content">
-                  <span class="cat-super">LUSH SKINCARE</span>
-                  <h3 class="cat-name">Dermal Skincare</h3>
-                  <p class="cat-desc">Serums, Cleansers & Moisturizers</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
+                  {%- if block.settings.super_title != blank -%}
+                    <span class="cat-super">{{ block.settings.super_title }}</span>
+                  {%- endif -%}
+                  <h3 class="cat-name">{{ card_title }}</h3>
+                  {%- if block.settings.description != blank -%}
+                    <p class="cat-desc">{{ block.settings.description }}</p>
+                  {%- endif -%}
+                  <div class="cat-cta">
+                    <span>Explore Collection</span>
+                    <span class="cat-arrow">→</span>
+                  </div>
                 </div>
               </div>
             </a>
-
-            <!-- Card 2: Makeup -->
-            <a href="{% if collections['makeup'] != blank %}{{ collections['makeup'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Makeup" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💄 Glamour</span>
-                <div class="cat-content">
-                  <span class="cat-super">LUSH MAKEUP</span>
-                  <h3 class="cat-name">Cosmetics & Makeup</h3>
-                  <p class="cat-desc">Lipsticks, Foundations & Liners</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 3: Lipsticks & Lip Care -->
-            <a href="{% if collections['lipsticks'] != blank %}{{ collections['lipsticks'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Lipsticks & Lip Care" class="cat-img" loading="lazy" decoding="async" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💄 Glamour</span>
-                <div class="cat-content">
-                  <span class="cat-super">LIP EDIT</span>
-                  <h3 class="cat-name">Lipsticks & Lip Care</h3>
-                  <p class="cat-desc">Matte, Glossy, Tints & Balms</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 4: Korean Skincare -->
-            <a href="{% if collections['korean-skincare'] != blank %}{{ collections['korean-skincare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800&auto=format&fit=crop" alt="Korean Skincare" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🌿 K-Beauty</span>
-                <div class="cat-content">
-                  <span class="cat-super">AUTHENTIC K-BEAUTY</span>
-                  <h3 class="cat-name">Korean Skincare</h3>
-                  <p class="cat-desc">COSRX, Laneige & Beauty of Joseon</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 5: Perfumes & Fragrances -->
-            <a href="{% if collections['fragrance'] != blank %}{{ collections['fragrance'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop" alt="Fragrances" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🌸 Premium</span>
-                <div class="cat-content">
-                  <span class="cat-super">SIGNATURE SCENTS</span>
-                  <h3 class="cat-name">Luxury Fragrances</h3>
-                  <p class="cat-desc">French Perfumes & Body Mists</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 6: Tumblers & Drinkware -->
-            <a href="{% if collections['tumblers-drinkware'] != blank %}{{ collections['tumblers-drinkware'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=800&auto=format&fit=crop" alt="Tumblers & Drinkware" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🥤 Trending</span>
-                <div class="cat-content">
-                  <span class="cat-super">HYDRATION & STYLE</span>
-                  <h3 class="cat-name">Tumblers & Drinkware</h3>
-                  <p class="cat-desc">Insulated Sippers & Aesthetic Flasks</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Group 2 (Duplicate for Seamless Loop) -->
-          <div class="collection-marquee-group" aria-hidden="true">
-            <!-- Card 1 -->
-            <a href="{% if collections['skincare'] != blank %}{{ collections['skincare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Skincare" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">✨ Top Rated</span>
-                <div class="cat-content">
-                  <span class="cat-super">LUSH SKINCARE</span>
-                  <h3 class="cat-name">Dermal Skincare</h3>
-                  <p class="cat-desc">Serums, Cleansers & Moisturizers</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 2 -->
-            <a href="{% if collections['makeup'] != blank %}{{ collections['makeup'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Makeup" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💄 Glamour</span>
-                <div class="cat-content">
-                  <span class="cat-super">LUSH MAKEUP</span>
-                  <h3 class="cat-name">Cosmetics & Makeup</h3>
-                  <p class="cat-desc">Lipsticks, Foundations & Liners</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 3 -->
-            <a href="{% if collections['lipsticks'] != blank %}{{ collections['lipsticks'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Lipsticks & Lip Care" class="cat-img" loading="lazy" decoding="async" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💄 Glamour</span>
-                <div class="cat-content">
-                  <span class="cat-super">LIP EDIT</span>
-                  <h3 class="cat-name">Lipsticks & Lip Care</h3>
-                  <p class="cat-desc">Matte, Glossy, Tints & Balms</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 4 -->
-            <a href="{% if collections['korean-skincare'] != blank %}{{ collections['korean-skincare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800&auto=format&fit=crop" alt="Korean Skincare" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🌿 K-Beauty</span>
-                <div class="cat-content">
-                  <span class="cat-super">AUTHENTIC K-BEAUTY</span>
-                  <h3 class="cat-name">Korean Skincare</h3>
-                  <p class="cat-desc">COSRX, Laneige & Beauty of Joseon</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 5 -->
-            <a href="{% if collections['fragrance'] != blank %}{{ collections['fragrance'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop" alt="Fragrances" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🌸 Premium</span>
-                <div class="cat-content">
-                  <span class="cat-super">SIGNATURE SCENTS</span>
-                  <h3 class="cat-name">Luxury Fragrances</h3>
-                  <p class="cat-desc">French Perfumes & Body Mists</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 6 -->
-            <a href="{% if collections['tumblers-drinkware'] != blank %}{{ collections['tumblers-drinkware'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=800&auto=format&fit=crop" alt="Tumblers & Drinkware" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🥤 Trending</span>
-                <div class="cat-content">
-                  <span class="cat-super">HYDRATION & STYLE</span>
-                  <h3 class="cat-name">Tumblers & Drinkware</h3>
-                  <p class="cat-desc">Insulated Sippers & Aesthetic Flasks</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2: Rightward Running Marquee (Left to Right) -->
-      <div class="collection-marquee-row row-right">
-        <div class="collection-marquee-track track-right">
-          <!-- Group 1 -->
-          <div class="collection-marquee-group">
-            <!-- Card 7: Haircare -->
-            <a href="{% if collections['haircare'] != blank %}{{ collections['haircare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800&auto=format&fit=crop" alt="Haircare" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">✨ Salon Quality</span>
-                <div class="cat-content">
-                  <span class="cat-super">HAIR RITUALS</span>
-                  <h3 class="cat-name">Hair Care & Styling</h3>
-                  <p class="cat-desc">Oils, Serums, Shampoos & Masks</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 8: Bodycare -->
-            <a href="{% if collections['bodycare'] != blank %}{{ collections['bodycare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" alt="Bodycare" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🛁 Nourishing</span>
-                <div class="cat-content">
-                  <span class="cat-super">BATH & BODY</span>
-                  <h3 class="cat-name">Body Wash & Lotions</h3>
-                  <p class="cat-desc">Body Butters, Scrubs & Talc</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 9: Sunscreens -->
-            <a href="{% if collections['sunscreens'] != blank %}{{ collections['sunscreens'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=800&auto=format&fit=crop" alt="Sunscreens" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">☀️ SPF 50+</span>
-                <div class="cat-content">
-                  <span class="cat-super">SUN DEFENSE</span>
-                  <h3 class="cat-name">Sunscreens & Fluids</h3>
-                  <p class="cat-desc">Matte, Dewy & Invisible Sun Protection</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 10: Face Serums -->
-            <a href="{% if collections['face-serums'] != blank %}{{ collections['face-serums'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1608248597359-2ff9b860b777?q=80&w=800&auto=format&fit=crop" alt="Face Serums" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💧 Actives</span>
-                <div class="cat-content">
-                  <span class="cat-super">POTENT ACTIVES</span>
-                  <h3 class="cat-name">Face Serums</h3>
-                  <p class="cat-desc">Niacinamide, Salicylic & Vit C</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 11: Lipsticks & Lip Care -->
-            <a href="{% if collections['lipsticks'] != blank %}{{ collections['lipsticks'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Lipsticks" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💋 Velvety</span>
-                <div class="cat-content">
-                  <span class="cat-super">LIP COUTURE</span>
-                  <h3 class="cat-name">Lipsticks & Lip Care</h3>
-                  <p class="cat-desc">Matte Liquid, Balms & Glosses</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 12: Offers & Deals -->
-            <a href="{% if collections['offers-deals'] != blank %}{{ collections['offers-deals'].url }}{% elsif collections['sale'] != blank %}{{ collections['sale'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop" alt="Offers & Deals" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill pill-offer-red">🔥 Up to 50% OFF</span>
-                <div class="cat-content">
-                  <span class="cat-super" style="color: #FF7B6B;">BEST VALUES</span>
-                  <h3 class="cat-name">Offers & Mega Deals</h3>
-                  <p class="cat-desc">Special Nagpur In-Store & Online Discounts</p>
-                  <div class="cat-cta"><span>Explore Deals</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Group 2 (Duplicate for Seamless Loop) -->
-          <div class="collection-marquee-group" aria-hidden="true">
-            <!-- Card 7 -->
-            <a href="{% if collections['haircare'] != blank %}{{ collections['haircare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800&auto=format&fit=crop" alt="Haircare" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">✨ Salon Quality</span>
-                <div class="cat-content">
-                  <span class="cat-super">HAIR RITUALS</span>
-                  <h3 class="cat-name">Hair Care & Styling</h3>
-                  <p class="cat-desc">Oils, Serums, Shampoos & Masks</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 8 -->
-            <a href="{% if collections['bodycare'] != blank %}{{ collections['bodycare'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" alt="Bodycare" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">🛁 Nourishing</span>
-                <div class="cat-content">
-                  <span class="cat-super">BATH & BODY</span>
-                  <h3 class="cat-name">Body Wash & Lotions</h3>
-                  <p class="cat-desc">Body Butters, Scrubs & Talc</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 9 -->
-            <a href="{% if collections['sunscreens'] != blank %}{{ collections['sunscreens'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=800&auto=format&fit=crop" alt="Sunscreens" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">☀️ SPF 50+</span>
-                <div class="cat-content">
-                  <span class="cat-super">SUN DEFENSE</span>
-                  <h3 class="cat-name">Sunscreens & Fluids</h3>
-                  <p class="cat-desc">Matte, Dewy & Invisible Sun Protection</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 10 -->
-            <a href="{% if collections['face-serums'] != blank %}{{ collections['face-serums'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1608248597359-2ff9b860b777?q=80&w=800&auto=format&fit=crop" alt="Face Serums" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💧 Actives</span>
-                <div class="cat-content">
-                  <span class="cat-super">POTENT ACTIVES</span>
-                  <h3 class="cat-name">Face Serums</h3>
-                  <p class="cat-desc">Niacinamide, Salicylic & Vit C</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 11 -->
-            <a href="{% if collections['lipsticks'] != blank %}{{ collections['lipsticks'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop" alt="Lipsticks" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill">💋 Velvety</span>
-                <div class="cat-content">
-                  <span class="cat-super">LIP COUTURE</span>
-                  <h3 class="cat-name">Lipsticks & Lip Care</h3>
-                  <p class="cat-desc">Matte Liquid, Balms & Glosses</p>
-                  <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Card 12 -->
-            <a href="{% if collections['offers-deals'] != blank %}{{ collections['offers-deals'].url }}{% elsif collections['sale'] != blank %}{{ collections['sale'].url }}{% else %}/collections/all{% endif %}" class="collection-running-card group">
-              <div class="cat-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop" alt="Offers & Deals" class="cat-img" loading="lazy" width="400" height="500">
-                <div class="cat-overlay"></div>
-                <span class="cat-count-pill pill-offer-red">🔥 Up to 50% OFF</span>
-                <div class="cat-content">
-                  <span class="cat-super" style="color: #FF7B6B;">BEST VALUES</span>
-                  <h3 class="cat-name">Offers & Mega Deals</h3>
-                  <p class="cat-desc">Special Nagpur In-Store & Online Discounts</p>
-                  <div class="cat-cta"><span>Explore Deals</span> <span class="cat-arrow">→</span></div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Auto-fetch actual Shopify store collections dynamically -->
+          {%- assign coll_count = 0 -%}
+          {%- for col in collections -%}
+            {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
+              {%- assign coll_count = coll_count | plus: 1 -%}
+              {%- if coll_count <= 6 -%}
+                {%- assign col_img = col.featured_image | default: col.products.first.featured_image -%}
+                <a href="{{ col.url }}" class="category-card group lush-reveal">
+                  <div class="cat-image-wrapper">
+                    {%- if col_img != blank -%}
+                      <img src="{{ col_img | image_url: width: 800 }}" alt="{{ col.title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
+                    {%- else -%}
+                      <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="{{ col.title | escape }}" class="cat-img" loading="lazy" width="600" height="750">
+                    {%- endif -%}
+                    <div class="cat-overlay"></div>
+                    {%- if col.products_count > 0 -%}
+                      <span class="cat-count-pill">{{ col.products_count }} Items</span>
+                    {%- endif -%}
+                    <div class="cat-content">
+                      <span class="cat-super">LUSH COLLECTION</span>
+                      <h3 class="cat-name">{{ col.title }}</h3>
+                      {%- if col.description != blank -%}
+                        <p class="cat-desc">{{ col.description | strip_html | truncate: 75 }}</p>
+                      {%- endif -%}
+                      <div class="cat-cta"><span>Explore Collection</span> <span class="cat-arrow">→</span></div>
+                    </div>
+                  </div>
+                </a>
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     </div>
   </section>
@@ -401,7 +100,7 @@
 
 {% schema %}
 {
-  "name": "Running Collections Marquee",
+  "name": "Shop By Category",
   "settings": [
     {
       "type": "checkbox",
@@ -413,7 +112,7 @@
       "type": "text",
       "id": "badge",
       "label": "Section Badge",
-      "default": "✨ CURATED COLLECTIONS"
+      "default": "✨ Curated Collections"
     },
     {
       "type": "text",
@@ -426,21 +125,93 @@
       "id": "subtitle",
       "label": "Subheading",
       "default": "Explore our handpicked categories in-store in Nagpur or browse and order online."
-    },
+    }
+  ],
+  "blocks": [
     {
-      "type": "range",
-      "id": "speed",
-      "min": 15,
-      "max": 60,
-      "step": 2,
-      "unit": "s",
-      "label": "Marquee Scroll Speed",
-      "default": 32
+      "type": "category_card",
+      "name": "Collection Block",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Shopify Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Cover Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "super_title",
+          "label": "Super Tag",
+          "default": "LUSH COLLECTION"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Explore our collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom Link (Optional)"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Running Collections Marquee"
+      "name": "Shop By Category",
+      "blocks": [
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "LUSH SKINCARE",
+            "title": "Skincare & Dermal Care",
+            "description": "Serums, Sunscreens, Moisturizers & Cleansers"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "LUSH COSMETICS",
+            "title": "Cosmetics & Makeup",
+            "description": "Lipsticks, Foundations, Kajal, Eyeliners & Mascaras"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "EXCLUSIVE BAGS",
+            "title": "Designer Handbags & Clutches",
+            "description": "Totes, Shoulder Bags, Clutches & Sling Bags"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "HAIR RITUALS",
+            "title": "Hair Care & Styling",
+            "description": "Premium Hair Oils, Styling Serums, Spa Masks & Clips"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "super_title": "SIGNATURE SCENTS",
+            "title": "Perfumes & Fragrances",
+            "description": "French & Arabic Perfumes, Deodorants & Body Mists"
+          }
+        }
+      ]
     }
   ]
 }

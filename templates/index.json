@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_banner": {
@@ -7,21 +16,24 @@
           "type": "trust_badge",
           "settings": {
             "icon": "🛡️",
-            "title": "100% Genuine Brands"
+            "title": "100% Genuine Brands",
+            "link": ""
           }
         },
         "badge_2": {
           "type": "trust_badge",
           "settings": {
             "icon": "📍",
-            "title": "Nagpur Store"
+            "title": "Nagpur Store",
+            "link": ""
           }
         },
         "badge_3": {
           "type": "trust_badge",
           "settings": {
             "icon": "🚇",
-            "title": "Near Metro Pillar 213–214"
+            "title": "Near Metro Pillar 213–214",
+            "link": ""
           }
         }
       },
@@ -33,86 +45,14 @@
       "settings": {
         "badge_text": "📍 Nagpur Premier Store • Gandhi Nagar (Near Lad Sq.)",
         "heading": "Beauty, Style & Everything You Love.",
-        "subheading": "Discover dermatological skincare, luxury cosmetics, designer handbags, fragrances and beauty accessories — all under one roof.",
+        "subheading": "Discover skincare, cosmetics, jewellery, handbags and accessories — all under one roof.",
         "primary_cta_text": "Shop Collection",
         "primary_cta_link": "/collections/all",
         "secondary_cta_text": "📍 Visit Nagpur Store",
         "secondary_cta_link": "#store-section",
         "media_type": "video",
-        "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787312722/angelpeterr__14050530_171336862_qanvrp.mp4"
-      }
-    },
-    "featured_categories": {
-      "type": "featured-categories",
-      "blocks": {
-        "cat_1": {
-          "type": "category_card",
-          "settings": {
-            "super_title": "LUSH SKINCARE",
-            "title": "Dermatological Skincare",
-            "description": "Serums, Sunscreens, Moisturizers & Cleansers",
-            "link": "/collections/all"
-          }
-        },
-        "cat_2": {
-          "type": "category_card",
-          "settings": {
-            "super_title": "LUSH COSMETICS",
-            "title": "Cosmetics & Makeup",
-            "description": "Lipsticks, Foundations, Kajal, Eyeliners & Mascaras",
-            "link": "/collections/all"
-          }
-        },
-        "cat_3": {
-          "type": "category_card",
-          "settings": {
-            "super_title": "EXCLUSIVE BAGS",
-            "title": "Designer Handbags & Clutches",
-            "description": "Bridal Clutches, Luxury Totes & Party Sling Bags",
-            "link": "/collections/all"
-          }
-        },
-        "cat_4": {
-          "type": "category_card",
-          "settings": {
-            "super_title": "HAIR RITUALS",
-            "title": "Hair Care & Styling",
-            "description": "Premium Hair Oils, Styling Serums, Spa Masks & Clips",
-            "link": "/collections/all"
-          }
-        },
-        "cat_5": {
-          "type": "category_card",
-          "settings": {
-            "super_title": "SIGNATURE SCENTS",
-            "title": "Perfumes & Fragrances",
-            "description": "French & Arabic Perfumes, Deodorants & Body Mists",
-            "link": "/collections/all"
-          }
-        },
-        "cat_6": {
-          "type": "category_card",
-          "settings": {
-            "super_title": "BEAUTY TOOLS",
-            "title": "Beauty Tools & Accessories",
-            "description": "Makeup Brushes, Sponges, Organizers & Beauty Tools",
-            "link": "/collections/all"
-          }
-        }
-      },
-      "block_order": [
-        "cat_1",
-        "cat_2",
-        "cat_3",
-        "cat_4",
-        "cat_5",
-        "cat_6"
-      ],
-      "settings": {
-        "enable_section": true,
-        "badge": "✨ CURATED COLLECTIONS",
-        "title": "Shop By Collection",
-        "subtitle": "Explore our handpicked categories in-store in Nagpur or browse and order online."
+        "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787312722/angelpeterr__14050530_171336862_qanvrp.mp4",
+        "bg_color": "#faf7f2"
       }
     },
     "trending_products": {
@@ -121,7 +61,8 @@
         "enable_section": true,
         "badge": "🔥 Most Loved in Nagpur",
         "title": "Trending Now",
-        "subtitle": "Top rated skincare, beauty essentials, luxury handbags & signature fragrances.",
+        "subtitle": "Top rated skincare, beauty essentials, luxury handbags & sparkling jewellery.",
+        "collection": "",
         "products_to_show": 8,
         "show_filters": true,
         "btn_text": "Explore Full Collection",
@@ -138,7 +79,8 @@
             "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787301075/explore.with_shruti_14050530_135038188_yhjyo2.mp4",
             "label": "▶ Reel",
             "caption": "Store walkthrough & exclusive beauty shopping at Nagpur store ✨",
-            "author": "@explore.with_shruti × @lushbeautymart"
+            "author": "@explore.with_shruti × @lushbeautymart",
+            "link": ""
           }
         },
         "reel_2": {
@@ -147,18 +89,20 @@
             "media_type": "video",
             "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787300962/angelpeterr__14050530_135035349_b9xjrn.mp4",
             "label": "▶ Reel",
-            "caption": "Luxury skincare & cosmetics glamour look 💫",
-            "author": "@angelpeterr_ × @lushbeautymart"
+            "caption": "Bridal jewellery & cosmetics glamour look 💫",
+            "author": "@angelpeterr_ × @lushbeautymart",
+            "link": ""
           }
         },
         "reel_3": {
           "type": "reel_item",
           "settings": {
-            "media_type": "image",
-            "video_url": "",
+            "media_type": "video",
+            "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov",
             "label": "📷 Post",
-            "caption": "Unboxing premium cosmetics & designer bags in-store ✨",
-            "author": "@lushbeautymart"
+            "caption": "Unboxing premium jewellery & cosmetics in-store 💎",
+            "author": "@lushbeautymart",
+            "link": ""
           }
         }
       },
@@ -172,111 +116,8 @@
         "badge": "📸 SOCIAL GALLERY",
         "heading": "Follow @lushbeautymart",
         "subheading": "Real unboxings, store walkthroughs, and beauty updates straight from our Nagpur showroom.",
+        "instagram_link": "",
         "follow_btn_text": "Follow @lushbeautymart on Instagram"
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "blocks": {
-        "rev_1": {
-          "type": "review_card",
-          "settings": {
-            "author_name": "Pooja Deshmukh",
-            "verified_tag": "In-Store Shopper",
-            "location": "Dharampeth, Nagpur",
-            "quote": "Visited their Lad Square store for my sister's wedding shopping. The luxury cosmetics, perfumes, and designer handbag collection are truly premium and 100% genuine. Best beauty store in Nagpur!",
-            "product_tag": "Designer Bridal Clutch & Makeup Kit"
-          }
-        },
-        "rev_2": {
-          "type": "review_card",
-          "settings": {
-            "author_name": "Rhea Sharma",
-            "verified_tag": "Verified Nagpur Buyer",
-            "location": "Ramdaspeth, Nagpur",
-            "quote": "Ordered skincare serums and got super fast same-day delivery right to my home in Ramdaspeth. Authentic brands, beautiful luxury packaging, and very helpful customer service on WhatsApp!",
-            "product_tag": "Glow Boosting Vitamin C Serum"
-          }
-        },
-        "rev_3": {
-          "type": "review_card",
-          "settings": {
-            "author_name": "Ananya Joshi",
-            "verified_tag": "In-Store Shopper",
-            "location": "Gandhi Nagar, Nagpur",
-            "quote": "I love their quilted handbags and lipsticks collection. The quality is outstanding and prices are very reasonable for genuine branded products. Highly recommended!",
-            "product_tag": "Luxury Quilted Sling Bag"
-          }
-        }
-      },
-      "block_order": [
-        "rev_1",
-        "rev_2",
-        "rev_3"
-      ],
-      "settings": {
-        "enable_section": true,
-        "badge": "⭐ CUSTOMER REVIEWS",
-        "title": "Loved by 10,000+ Nagpur Shoppers",
-        "subtitle": "Real reviews from our in-store showroom visitors and online shoppers across Nagpur."
-      }
-    },
-    "partner_ventures": {
-      "type": "partner-ventures",
-      "settings": {
-        "enable_section": true,
-        "badge": "🏥 OUR HEALTHCARE & PHARMACY VENTURE",
-        "title": "Seva Surgicals & Drugs",
-        "tagline": "Nagpur’s Trusted Medical, Surgical & Pharmacy Destination",
-        "description": "Looking for authentic prescription medicines, surgical instruments, hospital equipment, healthcare devices, or diagnostic supplies in Nagpur? Visit our dedicated pharmacy and surgical supply store in Dhantoli, Nagpur.",
-        "website_url": "https://sevasurgicalsanddrugs.vercel.app/",
-        "btn_text": "Visit Seva Surgicals Website ↗",
-        "whatsapp_number": "919119595951"
-      }
-    },
-    "faq": {
-      "type": "faq",
-      "blocks": {
-        "faq_1": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Where is Lush Beauty Mart located in Nagpur?",
-            "answer": "Our premier physical store is located Below Hotel Maitrayee, Near Lad Square, directly opposite Metro Station Pillar No. 213 & 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010. We are open all 7 days from 10:30 AM to 9:30 PM with convenient customer parking."
-          }
-        },
-        "faq_2": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Are all the cosmetics and skincare products 100% genuine?",
-            "answer": "Yes, absolutely! We source 100% authentic, verified products directly from authorized brand distributors with genuine batch codes and manufacturer seals."
-          }
-        },
-        "faq_3": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How fast is local delivery in Nagpur?",
-            "answer": "We provide FREE Same-Day & Next-Day Doorstep Express Delivery across Nagpur for all orders above ₹999."
-          }
-        },
-        "faq_4": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Can I place orders directly on WhatsApp?",
-            "answer": "Yes! You can use our Instant 1-Click WhatsApp Order feature to order directly with our Nagpur showroom team on +91 91195 95951 via UPI or Cash on Delivery."
-          }
-        }
-      },
-      "block_order": [
-        "faq_1",
-        "faq_2",
-        "faq_3",
-        "faq_4"
-      ],
-      "settings": {
-        "enable_section": true,
-        "badge": "❓ GOT QUESTIONS?",
-        "title": "Frequently Asked Questions",
-        "subtitle": "Everything you need to know about our Nagpur showroom visits, authenticity, delivery, and online ordering."
       }
     },
     "store_experience": {
@@ -285,7 +126,7 @@
         "enable_section": true,
         "badge": "🏬 Flagship Experience Center",
         "heading": "Visit Lush Beauty Mart",
-        "text": "Explore our collection in-store and discover dermatological skincare, cosmetics, designer handbags and beauty accessories all in one place.",
+        "text": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place.",
         "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov",
         "store_name": "Lush Beauty Mart",
         "area": "Gandhi Nagar, North Ambazari Road, Nagpur",
@@ -295,6 +136,7 @@
         "timings": "Monday to Sunday: 10:30 AM – 9:30 PM (All 7 Days Open)",
         "phone": "9119595951",
         "whatsapp": "919119595951",
+        "map_link": "",
         "call_btn_text": "📞 Call Store",
         "whatsapp_btn_text": "💬 WhatsApp Us",
         "directions_btn_text": "🧭 Get Directions"
@@ -303,12 +145,8 @@
   },
   "order": [
     "hero_banner",
-    "featured_categories",
     "trending_products",
     "instagram_feed",
-    "testimonials",
-    "partner_ventures",
-    "faq",
     "store_experience"
   ]
 }
