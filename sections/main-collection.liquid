@@ -1,24 +1,28 @@
 <section class="lush-collection-section">
   <div class="page-width">
-    <!-- Header -->
+    <!-- Luxury Collection Page Header -->
     <div class="collection-header-wrap">
-      <span class="collection-super">LUSH BEAUTY MART NAGPUR</span>
+      <span class="collection-eyebrow">LUSH BEAUTY MART NAGPUR</span>
       <h1 class="collection-main-title">{{ collection.title | default: "All Products" }}</h1>
       {%- if collection.description != blank -%}
-        <p class="collection-desc">{{ collection.description }}</p>
+        <p class="collection-desc">{{ collection.description | strip_html | truncate: 180 }}</p>
       {%- endif -%}
-      <p class="collection-count-sub">Showing {{ collection.products_count }} items available in-store and online</p>
+      <div class="collection-meta-bar">
+        <span class="collection-count-sub">Showing {{ collection.products_count }} items available in-store and online</span>
+      </div>
     </div>
 
     <!-- Collection Grid -->
-    {%- paginate collection.products by 16 -%}
+    {%- paginate collection.products by 24 -%}
       {%- if collection.products_count == 0 -%}
         <div class="collection-empty-state">
-          <p>No products found in this collection.</p>
-          <a href="/collections/all" class="btn-hero-primary">View All Products</a>
+          <div class="empty-icon-wrap">🛍️</div>
+          <h2 class="empty-title">No products found in this collection</h2>
+          <p class="empty-desc">New arrivals are being added daily to our Nagpur showroom. Explore our other popular collections.</p>
+          <a href="/collections/all" class="btn-hero-primary">Browse All Collections</a>
         </div>
       {%- else -%}
-        <div class="products-grid-4">
+        <div class="collection-products-grid">
           {%- for product in collection.products -%}
             {% render 'product-card', product: product %}
           {%- endfor -%}
