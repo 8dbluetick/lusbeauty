@@ -4918,86 +4918,107 @@ h1, h2, h3, h4, .font-serif {
   border: none;
 }
 
-.product-cta-buttons {
+.product-cta-group {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
-.btn-add-bag {
-  flex: 1;
+@media (min-width: 1024px) {
+  .product-cta-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+.btn-pdp-primary-add {
+  width: 100%;
   min-height: 48px;
-  padding: 12px 18px;
+  padding: 14px 20px;
   background: #1F1610;
   color: #FFFFFF;
   border: none;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(31, 22, 16, 0.2);
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-add-bag:hover {
+.btn-pdp-primary-add:hover {
   background: var(--color-accent-gold, #C5A059);
   color: #1F1610;
   transform: translateY(-1px);
 }
 
-.btn-buy-now {
-  flex: 1;
+.btn-pdp-secondary-buy {
+  width: 100%;
   min-height: 48px;
-  padding: 12px 18px;
+  padding: 14px 20px;
   background: #FFFFFF;
   color: #1F1610;
   border: 2px solid #1F1610;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-buy-now:hover {
+.btn-pdp-secondary-buy:hover {
   background: #1F1610;
   color: #FFFFFF;
 }
 
-.btn-product-whatsapp-enquire {
+.btn-pdp-tertiary-whatsapp {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 16px;
+  background: #25D366;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 42px;
-  padding: 10px 14px;
-  background: #25D366;
-  color: #FFFFFF;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.78rem;
-  font-weight: 700;
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
   transition: all 0.2s ease;
 }
 
-.btn-product-whatsapp-enquire:hover {
+@media (min-width: 1024px) {
+  .btn-pdp-tertiary-whatsapp {
+    grid-column: 1 / -1;
+  }
+}
+
+.btn-pdp-tertiary-whatsapp:hover {
   background: #20BA5A;
   transform: translateY(-1px);
 }
 
-/* --- App-like Delivery Section --- */
+/* --- Real Shiprocket-Backed Delivery Section --- */
 .pdp-delivery-box {
   background: #FFFFFF;
   border: 1px solid #EAE3DA;
   border-radius: 12px;
   padding: 14px 16px;
-  margin: 4px 0;
+  margin: 6px 0;
 }
 
 .delivery-box-header {
@@ -5021,14 +5042,20 @@ h1, h2, h3, h4, .font-serif {
   padding: 0 12px;
   border: 1.5px solid #E0D7CB;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #1F1610;
   background: #FAF7F2;
+  transition: border-color 0.2s ease;
+}
+
+.pincode-input:focus {
+  border-color: #1F1610;
+  outline: none;
 }
 
 .btn-pincode-check {
   height: 40px;
-  padding: 0 16px;
+  padding: 0 18px;
   background: #1F1610;
   color: #FFFFFF;
   border: none;
@@ -5038,6 +5065,10 @@ h1, h2, h3, h4, .font-serif {
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
 }
 
 .btn-pincode-check:hover {
@@ -5045,27 +5076,43 @@ h1, h2, h3, h4, .font-serif {
   color: #1F1610;
 }
 
+.btn-pincode-loader {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .pincode-result-msg {
-  margin-top: 8px;
-  font-size: 0.74rem;
-  line-height: 1.4;
-  padding: 6px 10px;
-  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 .pincode-result-msg.success {
   background: #E8F5E9;
   color: #0F7A42;
+  border: 1px solid #C8E6C9;
 }
 
 .pincode-result-msg.error {
   background: #FFEBEE;
   color: #C62828;
+  border: 1px solid #FFCDD2;
 }
 
 .pincode-result-msg.info {
   background: #E3F2FD;
   color: #1565C0;
+  border: 1px solid #BBDEFB;
 }
 
 .delivery-default-perks {
@@ -5253,29 +5300,31 @@ h1, h2, h3, h4, .font-serif {
   margin-top: 10px;
 }
 
-/* --- Sticky Mobile Bottom Purchase Bar --- */
+/* --- Compact Mobile Sticky Bottom Purchase Bar --- */
 .sticky-mobile-pdp-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 998;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid #EAE3DA;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  padding: 8px 14px calc(8px + env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
   transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
 .sticky-mobile-pdp-bar.active {
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 @media (min-width: 768px) {
@@ -5284,36 +5333,38 @@ h1, h2, h3, h4, .font-serif {
   }
 }
 
-.sticky-bar-info {
+.sticky-bar-left {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   min-width: 0;
-  flex: 1;
 }
 
-.sticky-bar-title {
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #1F1610;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.sticky-bar-thumb {
+  width: 36px;
+  height: 45px;
+  object-fit: contain;
+  background: #FAF7F2;
+  border-radius: 6px;
+  border: 1px solid #EAE3DA;
+  flex-shrink: 0;
 }
 
 .sticky-bar-price {
-  font-size: 0.88rem;
+  font-size: 1.05rem;
   font-weight: 900;
   color: #1F1610;
   font-family: var(--font-serif);
 }
 
 .btn-sticky-add-bag {
-  padding: 10px 18px;
+  min-height: 42px;
+  padding: 10px 20px;
   background: #1F1610;
   color: #FFFFFF;
   border: none;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;

@@ -213,43 +213,46 @@
             </div>
           </div>
 
-          <!-- Main Action Buttons -->
-          <div class="product-cta-buttons" id="ProductMainCtaRow">
-            <button type="submit" name="add" class="btn-add-bag" id="BtnAddBag" {% unless current_variant.available %}disabled{% endunless %}>
+          <!-- Main Action Buttons with Perfect Hierarchy -->
+          <div class="product-cta-group" id="ProductMainCtaRow">
+            <button type="submit" name="add" class="btn-pdp-primary-add" id="BtnAddBag" {% unless current_variant.available %}disabled{% endunless %}>
               <span data-add-to-cart-text>{% if current_variant.available %}ADD TO BAG{% else %}SOLD OUT{% endif %}</span>
             </button>
 
-            <button type="button" class="btn-buy-now" id="BtnBuyNow" {% unless current_variant.available %}style="display: none;"{% endunless %}>
+            <button type="button" class="btn-pdp-secondary-buy" id="BtnBuyNow" {% unless current_variant.available %}style="display: none;"{% endunless %}>
               <span>BUY NOW</span>
             </button>
-          </div>
 
-          <!-- Direct WhatsApp Enquiry -->
-          {%- assign wa_enquiry_text = 'Namaste Lush Beauty Mart Nagpur! 🌸 I want to order: ' | append: product.title | append: ' (' | append: current_variant.price | money | append: '). Is this available for pickup / delivery?' -%}
-          <a href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ wa_enquiry_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-product-whatsapp-enquire">
-            <span>💬 Instant Order / Enquiry on WhatsApp (+91 91195 95951)</span>
-          </a>
+            <!-- Tertiary Action: Direct WhatsApp Enquiry -->
+            {%- assign wa_enquiry_text = 'Namaste Lush Beauty Mart Nagpur! 🌸 I want to order: ' | append: product.title | append: ' (' | append: current_variant.price | money | append: '). Is this available for pickup / delivery?' -%}
+            <a href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ wa_enquiry_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-pdp-tertiary-whatsapp">
+              <span>💬 Order / Enquire on WhatsApp</span>
+            </a>
+          </div>
         {%- endform -%}
 
-        <!-- 5. App-like Compact Delivery Section (Pincode Checker) -->
-        <div class="pdp-delivery-box">
+        <!-- 5. Real Shiprocket-Backed Delivery Serviceability Section -->
+        <div class="pdp-delivery-box" id="ShiprocketDeliveryBox" data-product-price="{{ current_variant.price }}" data-product-weight="{{ product.variants.first.weight | default: 500 }}">
           <div class="delivery-box-header">
             <span class="delivery-box-icon">🚚</span>
-            <span class="delivery-box-title">Delivery & Availability</span>
+            <span class="delivery-box-title">Check Delivery Availability</span>
           </div>
           <div class="delivery-input-row">
-            <input type="text" id="DeliveryPincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode (e.g. 440010)" class="pincode-input" aria-label="Delivery Pincode">
-            <button type="button" id="BtnCheckPincode" class="btn-pincode-check">CHECK</button>
+            <input type="text" id="DeliveryPincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode (e.g. 440010)" class="pincode-input" aria-label="Delivery Pincode" inputmode="numeric" pattern="[0-9]*">
+            <button type="button" id="BtnCheckPincode" class="btn-pincode-check">
+              <span class="btn-pincode-label">CHECK</span>
+              <span class="btn-pincode-loader" style="display: none;"></span>
+            </button>
           </div>
           <div id="PincodeResult" class="pincode-result-msg" style="display: none;"></div>
-          <div class="delivery-default-perks">
+          <div class="delivery-default-perks" id="DeliveryDefaultPerks">
             <div class="perk-item">
               <span class="perk-dot">⚡</span>
-              <span><strong>Nagpur Express:</strong> Same-Day / Next-Day Delivery</span>
+              <span><strong>Nagpur Local:</strong> Same-Day / Next-Day Delivery & Lad Sq. Pickup</span>
             </div>
             <div class="perk-item">
-              <span class="perk-dot">🏬</span>
-              <span><strong>Showroom Pickup:</strong> Ready in 30 mins at Lad Square</span>
+              <span class="perk-dot">🚚</span>
+              <span><strong>Pan-India Shipping:</strong> 3–5 Days tracked courier dispatch via Shiprocket</span>
             </div>
           </div>
         </div>
@@ -338,15 +341,17 @@
   </div>
 
   <!-- ====================================================================
-       MOBILE STICKY BOTTOM PURCHASE BAR
+       COMPACT MOBILE STICKY BOTTOM PURCHASE BAR
        ==================================================================== -->
   <div class="sticky-mobile-pdp-bar" id="StickyMobilePdpBar">
-    <div class="sticky-bar-info">
-      <span class="sticky-bar-title">{{ product.title | truncate: 24 }}</span>
+    <div class="sticky-bar-left">
+      {%- if featured_img != blank -%}
+        <img src="{{ featured_img | image_url: width: 80 }}" alt="{{ product.title | escape }}" class="sticky-bar-thumb" width="36" height="45" loading="lazy">
+      {%- endif -%}
       <span class="sticky-bar-price" data-sticky-price>{{ current_variant.price | money }}</span>
     </div>
     <button type="button" class="btn-sticky-add-bag" id="BtnStickyAddBag" {% unless current_variant.available %}disabled{% endunless %}>
-      <span data-sticky-add-text>{% if current_variant.available %}+ ADD TO BAG{% else %}SOLD OUT{% endif %}</span>
+      <span data-sticky-add-text>{% if current_variant.available %}ADD TO BAG{% else %}SOLD OUT{% endif %}</span>
     </button>
   </div>
 

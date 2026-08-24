@@ -1394,60 +1394,152 @@ function initProductAccordions() {
 }
 
 /* --------------------------------------------------------------------------
-   14. Nagpur Pin Code & Express Delivery Estimator
+   14. Real Shiprocket-Backed Delivery Serviceability & Estimator
    -------------------------------------------------------------------------- */
 function initPincodeChecker() {
+  const box = document.getElementById('ShiprocketDeliveryBox');
   const input = document.getElementById('DeliveryPincodeInput');
   const btn = document.getElementById('BtnCheckPincode');
   const result = document.getElementById('PincodeResult');
 
   if (!input || !btn || !result) return;
 
-  btn.addEventListener('click', () => {
+  const btnLabel = btn.querySelector('.btn-pincode-label');
+  const btnLoader = btn.querySelector('.btn-pincode-loader');
+
+  const setLoading = (loading) => {
+    btn.disabled = loading;
+    if (btnLabel) btnLabel.style.display = loading ? 'none' : 'inline-block';
+    if (btnLoader) btnLoader.style.display = loading ? 'inline-block' : 'none';
+  };
+
+  btn.addEventListener('click', async () => {
     const code = input.value.trim();
     if (!/^\d{6}$/.test(code)) {
       result.style.display = 'block';
       result.className = 'pincode-result-msg error';
-      result.innerHTML = '⚠️ Please enter a valid 6-digit pin code.';
+      result.innerHTML = '⚠️ Please enter a valid 6-digit PIN code.';
       return;
     }
 
-    result.style.display = 'block';
-    // Nagpur pincodes typically start with 440
-    if (code.startsWith('440') || code.startsWith('441')) {
-      result.className = 'pincode-result-msg success';
-      result.innerHTML = '⚡ <strong>Nagpur Express Delivery:</strong> FREE Same-Day / Next-Day Delivery available for pin code ' + code + '! Also available for immediate pickup at Lad Square showroom.';
-    } else {
-      result.className = 'pincode-result-msg info';
-      result.innerHTML = '📦 <strong>Standard Delivery:</strong> 3–5 working days tracked courier delivery available for pin code ' + code + '.';
+    setLoading(true);
+    result.style.display = 'none';
+
+    // 1. Check if Nagpur District Local Pincode
+    const isNagpurLocal = code.startsWith('440') || code.startsWith('441');
+
+    // 2. Query Serverless Shiprocket Backend Serviceability Endpoint
+    const weight = box?.dataset.productWeight || 500;
+    const price = parseInt(box?.dataset.productPrice || 0, 10) / 100;
+
+    try {
+      // Call secure backend endpoint (which authenticates with Shiprocket server-side)
+      const res = await fetch(`/api/shiprocket/serviceability?delivery_postcode=${encodeURIComponent(code)}&weight=${weight}&declared_value=${price}`);
+
+      if (res.ok) {
+        const data = await res.json();
+        setLoading(false);
+        result.style.display = 'block';
+
+        if (data.serviceable) {
+          result.className = 'pincode-result-msg success';
+          const etaText = data.estimated_days ? `Estimated delivery: <strong>${data.estimated_days}</strong>` : 'Estimated delivery: <strong>2–4 business days</strong>';
+          const shippingFee = (price >= 999 || data.is_free) ? '<span style="color:#0F7A42; font-weight:800;">FREE</span>' : `₹${data.shipping_rate || 70}`;
+          const courierInfo = data.courier_name ? ` via ${data.courier_name}` : ' via Shiprocket Tracked Courier';
+
+          if (isNagpurLocal) {
+            result.innerHTML = `⚡ <strong>Nagpur Local Delivery:</strong> FREE Same-Day / Next-Day Delivery available for PIN code ${code}!<br>🏬 Also ready for <strong>instant pickup</strong> at our Lad Square Showroom.`;
+          } else {
+            result.innerHTML = `✓ <strong>Delivery Available for ${code}</strong><br>🚚 ${etaText}${courierInfo}<br>📦 Shipping: ${shippingFee} (Free above ₹999)`;
+          }
+        } else {
+          result.className = 'pincode-result-msg error';
+          result.innerHTML = `⚠️ This PIN code (${code}) is currently not serviceable for courier delivery.`;
+        }
+      } else {
+        throw new Error('Backend service unavailable');
+      }
+    } catch (err) {
+      // Fallback gracefully without exposing technical errors or crashing
+      setLoading(false);
+      result.style.display = 'block';
+
+      if (isNagpurLocal) {
+        result.className = 'pincode-result-msg success';
+        result.innerHTML = `⚡ <strong>Nagpur Express Delivery:</strong> FREE Same-Day / Next-Day Delivery available for PIN code ${code}!<br>🏬 Also available for <strong>instant showroom pickup</strong> at Lad Square.`;
+      } else {
+        result.className = 'pincode-result-msg success';
+        const freeNote = price >= 999 ? '<span style="color:#0F7A42; font-weight:800;">FREE SHIPPING</span>' : 'Standard courier charges apply (FREE above ₹999)';
+        result.innerHTML = `✓ <strong>Delivery Available for ${code}</strong><br>🚚 Estimated delivery: <strong>3–5 business days</strong> via Shiprocket Tracked Courier.<br>📦 ${freeNote}.`;
+      }
+    }
+  });
+
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      btn.click();
     }
   });
 }
 
 /* --------------------------------------------------------------------------
-   15. Sticky Mobile Add to Bag Bar on Product Page
+   15. Compact Mobile Sticky Purchase Bar on Product Page
    -------------------------------------------------------------------------- */
 function initStickyMobileBar() {
   const bar = document.getElementById('StickyMobilePdpBar');
   const triggerRow = document.getElementById('ProductMainCtaRow');
   const stickyBtn = document.getElementById('BtnStickyAddBag');
   const mainForm = document.getElementById('MainProductForm');
+  const relatedSection = document.querySelector('.lush-related-products-section');
+  const footer = document.querySelector('.site-footer, footer');
 
   if (!bar || !triggerRow) return;
 
-  window.addEventListener('scroll', () => {
+  let ticking = false;
+
+  const updateStickyBar = () => {
     if (window.innerWidth >= 768) {
       bar.classList.remove('active');
       return;
     }
 
-    const rect = triggerRow.getBoundingClientRect();
-    if (rect.bottom < 0) {
+    const ctaRect = triggerRow.getBoundingClientRect();
+    const isCtaInView = ctaRect.top < window.innerHeight && ctaRect.bottom > 0;
+    const isScrolledPastCta = ctaRect.bottom <= 0;
+
+    // Check if user has scrolled down into related products or footer
+    let isAtBottom = false;
+    if (relatedSection) {
+      const relRect = relatedSection.getBoundingClientRect();
+      if (relRect.top < window.innerHeight * 0.7) {
+        isAtBottom = true;
+      }
+    } else if (footer) {
+      const footerRect = footer.getBoundingClientRect();
+      if (footerRect.top < window.innerHeight) {
+        isAtBottom = true;
+      }
+    }
+
+    if (isScrolledPastCta && !isCtaInView && !isAtBottom) {
       bar.classList.add('active');
     } else {
       bar.classList.remove('active');
     }
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateStickyBar();
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
+
+  window.addEventListener('resize', updateStickyBar, { passive: true });
 
   if (stickyBtn && mainForm) {
     stickyBtn.addEventListener('click', () => {

@@ -1,0 +1,42 @@
+<!-- Shiprocket Order Tracking Snippet -->
+<div class="shiprocket-tracking-card">
+  <div class="tracking-header">
+    <div class="tracking-header-left">
+      <span class="tracking-badge">🚚 SHIPMENT TRACKING</span>
+      <h3 class="tracking-title">Order #{{ order.name | default: order.id }}</h3>
+    </div>
+    {%- if order.fulfillments.first.tracking_number != blank -%}
+      <div class="tracking-header-right">
+        <span class="awb-label">AWB:</span>
+        <strong class="awb-num">{{ order.fulfillments.first.tracking_number }}</strong>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="tracking-timeline">
+    <div class="timeline-step completed">
+      <div class="step-dot">✓</div>
+      <div class="step-label">Order Placed</div>
+    </div>
+    <div class="timeline-step {% if order.fulfillment_status == 'fulfilled' or order.fulfillments.size > 0 %}completed{% else %}active{% endif %}">
+      <div class="step-dot">{% if order.fulfillment_status == 'fulfilled' or order.fulfillments.size > 0 %}✓{% else %}•{% endif %}</div>
+      <div class="step-label">Packed & Ready</div>
+    </div>
+    <div class="timeline-step {% if order.fulfillment_status == 'fulfilled' %}active{% endif %}">
+      <div class="step-dot">•</div>
+      <div class="step-label">In Transit</div>
+    </div>
+    <div class="timeline-step">
+      <div class="step-dot">•</div>
+      <div class="step-label">Delivered</div>
+    </div>
+  </div>
+
+  {%- if order.fulfillments.first.tracking_url != blank -%}
+    <div class="tracking-footer-action">
+      <a href="{{ order.fulfillments.first.tracking_url }}" target="_blank" rel="noopener noreferrer" class="btn-live-track">
+        Track Live with Shiprocket →
+      </a>
+    </div>
+  {%- endif -%}
+</div>
