@@ -1,21 +1,16 @@
-<!-- Luxury Slide-in Toast Notification for Instant Add-to-Bag Feedback -->
-<div id="LushToastContainer" class="lush-toast-container" aria-live="polite">
+<!-- Minimal, Elegant Add-to-Bag Toast Notification -->
+<div id="LushToastContainer" class="lush-toast-container" aria-live="polite" role="status">
   <div id="LushAddToCartToast" class="lush-toast-card">
-    <div class="toast-media">
-      <img id="ToastProductImg" src="" alt="Product Thumbnail" class="toast-img" width="52" height="52" loading="lazy">
-      <span class="toast-check-icon">✓</span>
-    </div>
-    <div class="toast-info">
-      <span class="toast-eyebrow">✨ Added to Shopping Bag</span>
-      <h6 id="ToastProductTitle" class="toast-title">Product Title</h6>
-      <div class="toast-meta-row">
-        <span id="ToastProductVariant" class="toast-variant"></span>
-        <span id="ToastProductPrice" class="toast-price"></span>
+    <div class="toast-content-compact">
+      <span class="toast-check-badge">✓</span>
+      <div class="toast-text-wrap">
+        <span class="toast-main-msg">Added to bag</span>
+        <span id="ToastProductTitle" class="toast-item-title"></span>
       </div>
     </div>
-    <div class="toast-actions">
+    <div class="toast-actions-compact">
       <button type="button" class="btn-toast-view-bag" data-open-cart aria-label="Open Shopping Bag">
-        <span>View Bag</span>
+        <span>View Bag →</span>
       </button>
       <button type="button" class="btn-toast-close" id="BtnCloseToast" aria-label="Close notification">&times;</button>
     </div>

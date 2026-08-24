@@ -30,20 +30,32 @@ function initCartDrawer() {
   const drawer = document.getElementById('LushCartDrawer');
   if (!drawer) return;
 
-  // Open triggers
-  document.querySelectorAll('[data-open-cart]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Open triggers - Only explicit intentional clicks on [data-open-cart]
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('[data-open-cart]');
+    if (openBtn) {
       e.preventDefault();
+      e.stopPropagation();
       openCartDrawer();
-    });
+    }
   });
 
   // Close triggers
   drawer.querySelectorAll('[data-close-cart]').forEach(el => {
-    el.addEventListener('click', closeCartDrawer);
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeCartDrawer();
+    });
   });
 
-  // Intercept standard Add to Cart forms
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('active')) {
+      closeCartDrawer();
+    }
+  });
+
+  // Intercept standard Add to Cart forms - SILENT ADD WITH TOAST ONLY
   document.addEventListener('submit', async (e) => {
     const form = e.target;
     if (form.matches('.card-form, .product-form') || form.getAttribute('action') === '/cart/add') {
@@ -51,6 +63,7 @@ function initCartDrawer() {
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
       if (submitBtn) {
+        if (submitBtn.disabled) return; // Prevent rapid duplicate clicks
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span>Adding...</span>';
       }
@@ -64,9 +77,10 @@ function initCartDrawer() {
 
         if (response.ok) {
           const addedItem = await response.json();
-          showAddToCartToast(addedItem);
+          // Update cart badge and drawer silently in the background
           await updateCartDrawer();
-          openCartDrawer();
+          // Show small, non-intrusive confirmation toast (DO NOT OPEN DRAWER)
+          showAddToCartToast(addedItem);
         } else {
           const errData = await response.json();
           alert(errData.description || 'Could not add product to cart.');
@@ -124,53 +138,28 @@ let toastTimeout = null;
 
 function showAddToCartToast(item) {
   const toastContainer = document.getElementById('LushToastContainer');
-  const toast = document.getElementById('LushAddToCartToast');
-  if (!toastContainer || !toast || !item) return;
+  if (!toastContainer || !item) return;
 
-  const img = document.getElementById('ToastProductImg');
   const title = document.getElementById('ToastProductTitle');
-  const variant = document.getElementById('ToastProductVariant');
-  const price = document.getElementById('ToastProductPrice');
-
-  if (img) {
-    const imgSrc = item.featured_image ? (item.featured_image.url || item.featured_image) : (item.image || '');
-    if (imgSrc) {
-      img.src = imgSrc;
-      img.style.display = 'block';
-    } else {
-      img.style.display = 'none';
-    }
-    img.alt = item.title || 'Product';
-  }
-
   if (title) {
-    title.textContent = item.product_title || item.title || 'Product added';
+    const productTitle = item.product_title || item.title || 'Product';
+    const variantTitle = (item.variant_title && item.variant_title !== 'Default Title') ? ` • ${item.variant_title}` : '';
+    title.textContent = `${productTitle}${variantTitle}`;
   }
 
-  if (variant) {
-    if (item.variant_title && item.variant_title !== 'Default Title') {
-      variant.textContent = item.variant_title;
-      variant.style.display = 'inline-block';
-    } else {
-      variant.style.display = 'none';
-    }
-  }
-
-  if (price) {
-    const rawPrice = item.final_line_price || item.price || item.original_price || 0;
-    price.textContent = formatMoney(rawPrice);
-  }
-
+  // Clear previous timer to prevent overlapping glitches on rapid clicks
   if (toastTimeout) clearTimeout(toastTimeout);
   toastContainer.classList.add('active');
 
+  // Auto-hide after 2.5 seconds
   toastTimeout = setTimeout(() => {
     toastContainer.classList.remove('active');
-  }, 4500);
+  }, 2500);
 
   const closeBtn = document.getElementById('BtnCloseToast');
   if (closeBtn) {
-    closeBtn.onclick = () => {
+    closeBtn.onclick = (e) => {
+      e.preventDefault();
       if (toastTimeout) clearTimeout(toastTimeout);
       toastContainer.classList.remove('active');
     };
