@@ -1,53 +1,117 @@
 <section class="lush-main-product-section" data-product-id="{{ product.id }}" id="ProductSection-{{ product.id }}">
-  <div class="page-width">
-    <!-- Breadcrumbs -->
-    <div class="product-breadcrumbs">
-      <a href="/">Home</a> <span>/</span>
-      <a href="/collections/all">Shop</a> <span>/</span>
+  <div class="page-width pdp-container">
+    <!-- 1. Breadcrumbs / Navigation -->
+    <nav class="product-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="bc-sep">/</span>
+      <a href="/collections/all">Shop</a>
       {%- if product.collections.first -%}
-        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a> <span>/</span>
+        <span class="bc-sep">/</span>
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
       {%- endif -%}
-      <span>{{ product.title }}</span>
-    </div>
+      <span class="bc-sep">/</span>
+      <span class="bc-current" aria-current="page">{{ product.title | truncate: 35 }}</span>
+    </nav>
+
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- assign featured_img = current_variant.featured_image | default: product.featured_media | default: product.featured_image | default: product.media.first | default: product.images.first -%}
 
     <div class="main-product-grid">
-      <!-- Left Column: Product Gallery -->
+      <!-- ====================================================================
+           LEFT COLUMN: PRODUCT IMAGE GALLERY (APP-LIKE SWIPE ON MOBILE)
+           ==================================================================== -->
       <div class="product-gallery-panel">
-        <div class="main-image-viewport">
-          {%- assign current_variant = product.selected_or_first_available_variant -%}
-          {%- assign featured_img = current_variant.featured_image | default: product.featured_media | default: product.featured_image | default: product.media.first | default: product.images.first -%}
-          {%- if featured_img != blank -%}
-            <img
-              id="ProductMainImg"
-              src="{{ featured_img | image_url: width: 900 }}"
-              srcset="{{ featured_img | image_url: width: 600 }} 600w, {{ featured_img | image_url: width: 900 }} 900w, {{ featured_img | image_url: width: 1200 }} 1200w"
-              sizes="(max-width: 767px) 100vw, 50vw"
-              alt="{{ featured_img.alt | default: product.title | escape }}"
-              class="product-stage-img"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-              width="800"
-              height="1000"
-            >
-          {%- else -%}
-            <div class="product-stage-placeholder">
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-stage-img' }}
-            </div>
-          {%- endif -%}
-
+        <div class="main-image-viewport" id="ProductGalleryViewport">
+          <!-- Discount Badge on Gallery -->
           {%- if current_variant.compare_at_price > current_variant.price -%}
             {%- assign disc = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
             <span class="badge-stage-discount" data-stage-discount>{{ disc }}% OFF</span>
           {%- else -%}
             <span class="badge-stage-discount" data-stage-discount style="display: none;"></span>
           {%- endif -%}
+
+          <!-- Mobile Image Counter Badge e.g. "1 / 4" -->
+          {%- if product.media.size > 1 -%}
+            <div class="pdp-gallery-counter" id="PdpGalleryCounter">
+              <span id="PdpCurrentSlide">1</span> / <span>{{ product.media.size }}</span>
+            </div>
+          {%- endif -%}
+
+          <!-- Zoom / Expand Hint Button -->
+          <button type="button" class="btn-gallery-zoom" id="BtnOpenLightbox" aria-label="Open fullscreen image viewer" title="Tap to zoom">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <polyline points="9 21 3 21 3 15"></polyline>
+              <line x1="21" y1="3" x2="14" y2="10"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+          </button>
+
+          <!-- Mobile Swipeable Image Track / Desktop Hero Container -->
+          <div class="pdp-media-track no-scrollbar" id="PdpMediaTrack">
+            {%- if product.media.size > 0 -%}
+              {%- for media in product.media -%}
+                <div class="pdp-media-slide {% if forloop.first %}active{% endif %}" data-media-index="{{ forloop.index }}" data-media-id="{{ media.id }}">
+                  <img
+                    {% if forloop.first %}id="ProductMainImg"{% endif %}
+                    src="{{ media | image_url: width: 900 }}"
+                    srcset="{{ media | image_url: width: 450 }} 450w, {{ media | image_url: width: 750 }} 750w, {{ media | image_url: width: 1050 }} 1050w"
+                    sizes="(max-width: 767px) 100vw, 50vw"
+                    alt="{{ media.alt | default: product.title | escape }}"
+                    class="product-stage-img"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    {% if forloop.first %}fetchpriority="high"{% endif %}
+                    decoding="async"
+                    width="800"
+                    height="1000"
+                  >
+                </div>
+              {%- endfor -%}
+            {%- elsif featured_img != blank -%}
+              <div class="pdp-media-slide active">
+                <img
+                  id="ProductMainImg"
+                  src="{{ featured_img | image_url: width: 900 }}"
+                  srcset="{{ featured_img | image_url: width: 450 }} 450w, {{ featured_img | image_url: width: 750 }} 750w, {{ featured_img | image_url: width: 1050 }} 1050w"
+                  sizes="(max-width: 767px) 100vw, 50vw"
+                  alt="{{ featured_img.alt | default: product.title | escape }}"
+                  class="product-stage-img"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                  width="800"
+                  height="1000"
+                >
+              </div>
+            {%- else -%}
+              <div class="pdp-media-slide active product-stage-placeholder">
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-stage-img' }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <!-- Mobile Pagination Dots -->
+          {%- if product.media.size > 1 -%}
+            <div class="pdp-mobile-dots" id="PdpMobileDots">
+              {%- for media in product.media -%}
+                <span class="pdp-dot {% if forloop.first %}active{% endif %}" data-dot-index="{{ forloop.index }}"></span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
         </div>
 
+        <!-- Desktop Thumbnail Strip -->
         {%- if product.media.size > 1 -%}
-          <div class="thumbnail-strip">
+          <div class="thumbnail-strip no-scrollbar" id="PdpThumbnailStrip">
             {%- for media in product.media -%}
-              <button type="button" class="thumb-btn {% if forloop.first %}active{% endif %}" data-thumb-src="{{ media | image_url: width: 900 }}" data-media-id="{{ media.id }}" aria-label="View media {{ forloop.index }}">
+              <button
+                type="button"
+                class="thumb-btn {% if forloop.first %}active{% endif %}"
+                data-thumb-src="{{ media | image_url: width: 900 }}"
+                data-media-id="{{ media.id }}"
+                data-thumb-index="{{ forloop.index }}"
+                aria-label="View media {{ forloop.index }}"
+              >
                 <img
                   src="{{ media | image_url: width: 160 }}"
                   srcset="{{ media | image_url: width: 120 }} 120w, {{ media | image_url: width: 200 }} 200w"
@@ -64,18 +128,28 @@
         {%- endif -%}
       </div>
 
-      <!-- Right Column: Product Purchasing Form & Details -->
+      <!-- ====================================================================
+           RIGHT COLUMN: PRODUCT DETAILS & PURCHASING PANEL
+           ==================================================================== -->
       <div class="product-info-panel">
-        <div class="product-category-rating-row">
-          <span class="product-type-pill">{{ product.type | default: product.vendor | default: "LUSH EXCLUSIVE" | upcase }}</span>
-          {%- if product.vendor != blank and product.vendor != shop.name -%}
-            <span class="product-brand-tag">{{ product.vendor | upcase }}</span>
-          {%- endif -%}
+        <!-- 1. Brand & Rating Header Row -->
+        <div class="product-header-meta">
+          <div class="product-brand-badge-wrap">
+            <span class="pdp-brand-name">{{ product.vendor | default: shop.name | default: 'LUSH BEAUTY MART' | upcase }}</span>
+            <span class="pdp-verified-badge">✓ GENUINE</span>
+          </div>
+
+          <div class="pdp-rating-pill">
+            <span class="star-icon">★</span>
+            <span class="rating-val">4.9</span>
+            <span class="rating-count">(Nagpur Store Verified)</span>
+          </div>
         </div>
 
+        <!-- 2. Product Title -->
         <h1 class="product-page-title">{{ product.title }}</h1>
 
-        <!-- Price Card with Live Variant Binding -->
+        <!-- 3. Price Card with Live Variant Binding -->
         <div class="product-price-card" data-price-card>
           <div class="price-row-main">
             <span class="price-big" data-product-price>{{ current_variant.price | money }}</span>
@@ -88,27 +162,24 @@
               {%- endif -%}
             </span>
           </div>
-          <p class="tax-shipping-note">Inclusive of all taxes. Free express delivery in Nagpur on orders above ₹999.</p>
+          <p class="tax-shipping-note">
+            <span>Inclusive of all taxes</span> • <span>Free Nagpur Express Delivery on orders above ₹999</span>
+          </p>
         </div>
 
-        <!-- Short Description -->
-        {%- if product.description != blank -%}
-          <div class="product-description-rte">
-            {{ product.description }}
-          </div>
-        {%- endif -%}
-
-        <!-- Form: Variants, Quantity & Actions -->
+        <!-- 4. Purchasing Form: Variants, Quantity & Action Buttons -->
         {%- form 'product', product, id: 'MainProductForm', class: 'product-form' -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" id="ProductVariantId">
 
+          <!-- Variant / Option Selector Pills -->
           {%- unless product.has_only_default_variant -%}
             <div class="product-variants-wrap" data-variant-selectors>
               {%- for option in product.options_with_values -%}
                 <div class="variant-option-group" data-option-group="{{ option.position }}">
                   <div class="variant-label-row">
                     <label class="variant-label" for="Option-{{ option.position }}">
-                      {{ option.name }}: <strong class="selected-option-value" data-selected-val-for="{{ option.position }}">{{ option.selected_value }}</strong>
+                      Select {{ option.name }}:
+                      <strong class="selected-option-value" data-selected-val-for="{{ option.position }}">{{ option.selected_value }}</strong>
                     </label>
                   </div>
                   <div class="variant-pill-row">
@@ -132,7 +203,7 @@
             </div>
           {%- endunless -%}
 
-          <!-- Quantity Stepper -->
+          <!-- Quantity Selector Stepper -->
           <div class="quantity-row">
             <label class="qty-title" for="ProductQuantityInput">Quantity:</label>
             <div class="qty-selector">
@@ -142,52 +213,114 @@
             </div>
           </div>
 
-          <!-- Buttons: Add to Bag, Buy Now, WhatsApp Enquiry -->
+          <!-- Main Action Buttons -->
           <div class="product-cta-buttons" id="ProductMainCtaRow">
             <button type="submit" name="add" class="btn-add-bag" id="BtnAddBag" {% unless current_variant.available %}disabled{% endunless %}>
-              <span data-add-to-cart-text>{% if current_variant.available %}Add to Shopping Bag{% else %}Sold Out{% endif %}</span>
+              <span data-add-to-cart-text>{% if current_variant.available %}ADD TO BAG{% else %}SOLD OUT{% endif %}</span>
             </button>
 
             <button type="button" class="btn-buy-now" id="BtnBuyNow" {% unless current_variant.available %}style="display: none;"{% endunless %}>
-              <span>Buy Now</span>
+              <span>BUY NOW</span>
             </button>
           </div>
 
-          {%- assign wa_enquiry_text = 'Namaste Lush Beauty Mart Nagpur! 🌸 I am interested in: ' | append: product.title | append: ' (' | append: current_variant.price | money | append: '). Is this in stock at your Lad Square store?' -%}
+          <!-- Direct WhatsApp Enquiry -->
+          {%- assign wa_enquiry_text = 'Namaste Lush Beauty Mart Nagpur! 🌸 I want to order: ' | append: product.title | append: ' (' | append: current_variant.price | money | append: '). Is this available for pickup / delivery?' -%}
           <a href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ wa_enquiry_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-product-whatsapp-enquire">
-            <span>💬 Enquire Product on WhatsApp (+91 91195 95951)</span>
+            <span>💬 Instant Order / Enquiry on WhatsApp (+91 91195 95951)</span>
           </a>
         {%- endform -%}
 
-        <!-- Collapsible Product Details & Care Tabs -->
-        <div class="product-accordions-group">
-          <!-- Accordion 1: Highlights & Authenticity -->
-          <div class="product-acc-item active">
-            <button type="button" class="product-acc-header" aria-expanded="true">
-              <span>🌿 Highlights & Authenticity</span>
-              <span class="acc-arrow">−</span>
-            </button>
-            <div class="product-acc-content">
-              <ul class="acc-bullets-list">
-                <li><strong>100% Genuine Branded Product</strong> sourced directly with manufacturer batch seal.</li>
-                <li>Dermatologist & beauty stylist recommended formulations & designs.</li>
-                <li>In-stock and available for immediate pickup at our <strong>Lad Square, Nagpur</strong> showroom.</li>
-              </ul>
+        <!-- 5. App-like Compact Delivery Section (Pincode Checker) -->
+        <div class="pdp-delivery-box">
+          <div class="delivery-box-header">
+            <span class="delivery-box-icon">🚚</span>
+            <span class="delivery-box-title">Delivery & Availability</span>
+          </div>
+          <div class="delivery-input-row">
+            <input type="text" id="DeliveryPincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode (e.g. 440010)" class="pincode-input" aria-label="Delivery Pincode">
+            <button type="button" id="BtnCheckPincode" class="btn-pincode-check">CHECK</button>
+          </div>
+          <div id="PincodeResult" class="pincode-result-msg" style="display: none;"></div>
+          <div class="delivery-default-perks">
+            <div class="perk-item">
+              <span class="perk-dot">⚡</span>
+              <span><strong>Nagpur Express:</strong> Same-Day / Next-Day Delivery</span>
+            </div>
+            <div class="perk-item">
+              <span class="perk-dot">🏬</span>
+              <span><strong>Showroom Pickup:</strong> Ready in 30 mins at Lad Square</span>
             </div>
           </div>
+        </div>
 
-          <!-- Accordion 2: Care & Usage Instructions -->
+        <!-- 6. Trust & Authenticity Badges Strip -->
+        <div class="pdp-trust-strip">
+          <div class="pdp-trust-item">
+            <span class="trust-icon">🛡️</span>
+            <div class="trust-text">
+              <strong>100% Genuine</strong>
+              <span>Batch Sealed Direct Import</span>
+            </div>
+          </div>
+          <div class="pdp-trust-item">
+            <span class="trust-icon">🏬</span>
+            <div class="trust-text">
+              <strong>Nagpur Showroom</strong>
+              <span>Lad Square Metro Pillar 213</span>
+            </div>
+          </div>
+          <div class="pdp-trust-item">
+            <span class="trust-icon">✨</span>
+            <div class="trust-text">
+              <strong>Derm Verified</strong>
+              <span>Authentic formulations</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Collapsible Product Details Accordions -->
+        <div class="product-accordions-group">
+          <!-- Accordion 1: Product Description -->
+          {%- if product.description != blank -%}
+            <div class="product-acc-item active">
+              <button type="button" class="product-acc-header" aria-expanded="true">
+                <span>🌿 Product Description & Details</span>
+                <span class="acc-arrow">−</span>
+              </button>
+              <div class="product-acc-content">
+                <div class="product-description-rte">
+                  {{ product.description }}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <!-- Accordion 2: Usage, Care & Directions -->
           <div class="product-acc-item">
             <button type="button" class="product-acc-header" aria-expanded="false">
-              <span>✨ Care, Material & Usage Guide</span>
+              <span>✨ Usage, Application & Storage Guide</span>
               <span class="acc-arrow">+</span>
             </button>
             <div class="product-acc-content" style="display: none;">
-              <p>For skincare & cosmetics, store in a cool, dry place away from direct sunlight. For luxury accessories, store in dust bags and avoid direct moisture or perfume contact to retain lasting lustre.</p>
+              <p>• Store in a cool, dry place away from direct sunlight and humidity.<br>
+              • Always perform a 24-hour patch test before first use on sensitive skin.<br>
+              • Keep caps and lids firmly tightened after each application to preserve potency and fragrance.</p>
             </div>
           </div>
 
-          <!-- Accordion 3: Nagpur Express Delivery & Store Pickup -->
+          <!-- Accordion 3: 100% Authenticity Guarantee -->
+          <div class="product-acc-item">
+            <button type="button" class="product-acc-header" aria-expanded="false">
+              <span>🛡️ 100% Authenticity Guarantee</span>
+              <span class="acc-arrow">+</span>
+            </button>
+            <div class="product-acc-content" style="display: none;">
+              <p>Every product at <strong>Lush Beauty Mart</strong> is guaranteed 100% genuine and sourced directly with verifiable batch codes and manufacturer seals. Products are inspected for quality before delivery or in-store pickup at our Nagpur showroom.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 4: Shipping & Showroom Pickup -->
           <div class="product-acc-item">
             <button type="button" class="product-acc-header" aria-expanded="false">
               <span>🚚 Delivery & In-Store Showroom Pickup</span>
@@ -195,8 +328,8 @@
             </button>
             <div class="product-acc-content" style="display: none;">
               <p>• <strong>Nagpur Doorstep Delivery:</strong> Free Same-Day / Next-Day Delivery on orders above ₹999.<br>
-              • <strong>Showroom Pickup:</strong> Instant pickup available at Below Hotel Maitrayee, Near Lad Square (Metro Pillar 213–214), North Ambazari Road, Nagpur.<br>
-              • <strong>Pan India:</strong> 3–5 working days tracked courier delivery.</p>
+              • <strong>Showroom Pickup:</strong> Free instant pickup available at Below Hotel Maitrayee, Near Lad Square (Metro Pillar 213–214), North Ambazari Road, Nagpur.<br>
+              • <strong>Pan India:</strong> 3–5 working days tracked courier dispatch via Shiprocket / BlueDart / Delhivery.</p>
             </div>
           </div>
         </div>
@@ -204,18 +337,36 @@
     </div>
   </div>
 
-  <!-- Sticky Mobile Add to Bag Bar -->
+  <!-- ====================================================================
+       MOBILE STICKY BOTTOM PURCHASE BAR
+       ==================================================================== -->
   <div class="sticky-mobile-pdp-bar" id="StickyMobilePdpBar">
     <div class="sticky-bar-info">
-      <span class="sticky-bar-title">{{ product.title | truncate: 25 }}</span>
+      <span class="sticky-bar-title">{{ product.title | truncate: 24 }}</span>
       <span class="sticky-bar-price" data-sticky-price>{{ current_variant.price | money }}</span>
     </div>
     <button type="button" class="btn-sticky-add-bag" id="BtnStickyAddBag" {% unless current_variant.available %}disabled{% endunless %}>
-      <span data-sticky-add-text>{% if current_variant.available %}+ Add to Bag{% else %}Sold Out{% endif %}</span>
+      <span data-sticky-add-text>{% if current_variant.available %}+ ADD TO BAG{% else %}SOLD OUT{% endif %}</span>
     </button>
   </div>
 
-  <!-- Product JSON data for real-time variant synchronization -->
+  <!-- ====================================================================
+       FULLSCREEN IMAGE LIGHTBOX VIEWER MODAL
+       ==================================================================== -->
+  <div class="pdp-lightbox-modal" id="PdpLightboxModal" aria-hidden="true" role="dialog" aria-label="Image Fullscreen Viewer">
+    <div class="pdp-lightbox-backdrop" id="BtnCloseLightboxBackdrop"></div>
+    <div class="pdp-lightbox-content">
+      <button type="button" class="btn-close-lightbox" id="BtnCloseLightbox" aria-label="Close fullscreen view">&times;</button>
+      <div class="lightbox-img-wrap">
+        <img id="LightboxMainImg" src="{{ featured_img | image_url: width: 1400 }}" alt="{{ product.title | escape }}" class="lightbox-img">
+      </div>
+      <div class="lightbox-counter" id="LightboxCounter">
+        <span id="LightboxCurrent">1</span> / <span>{{ product.media.size | default: 1 }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embedded Product JSON Data for Real-Time Variant Synchronization -->
   <script type="application/json" id="ProductJson-{{ product.id }}">
     {{ product | json }}
   </script>

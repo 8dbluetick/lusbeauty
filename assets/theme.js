@@ -919,21 +919,104 @@ function initProductVariantSelector() {
    10. Main Product Page Helpers
    -------------------------------------------------------------------------- */
 function initProductPage() {
-  // Thumbnail switch
-  document.querySelectorAll('.thumb-btn').forEach(thumb => {
+  const mediaTrack = document.getElementById('PdpMediaTrack');
+  const currentSlideEl = document.getElementById('PdpCurrentSlide');
+  const slides = document.querySelectorAll('.pdp-media-slide');
+  const dots = document.querySelectorAll('.pdp-dot');
+  const thumbs = document.querySelectorAll('.thumb-btn');
+
+  // 1. Mobile Gallery Scroll & Swipe Tracking
+  if (mediaTrack && slides.length > 0) {
+    let scrollTimeout;
+    mediaTrack.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const trackWidth = mediaTrack.clientWidth || 1;
+        const scrollLeft = mediaTrack.scrollLeft;
+        const activeIdx = Math.min(slides.length - 1, Math.max(0, Math.round(scrollLeft / trackWidth)));
+
+        if (currentSlideEl) currentSlideEl.textContent = activeIdx + 1;
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeIdx);
+        });
+
+        thumbs.forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === activeIdx);
+        });
+      }, 50);
+    }, { passive: true });
+  }
+
+  // 2. Thumbnail Clicks
+  thumbs.forEach((thumb, idx) => {
     thumb.addEventListener('click', () => {
-      document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+      thumbs.forEach(b => b.classList.remove('active'));
       thumb.classList.add('active');
 
+      if (mediaTrack && slides[idx]) {
+        const slideLeft = slides[idx].offsetLeft;
+        mediaTrack.scrollTo({ left: slideLeft, behavior: 'smooth' });
+      }
+
       const mainImg = document.getElementById('ProductMainImg');
-      if (mainImg && thumb.dataset.thumbSrc) {
+      if (mainImg && thumb.dataset.thumbSrc && window.innerWidth >= 768) {
         mainImg.src = thumb.dataset.thumbSrc;
         mainImg.removeAttribute('srcset');
       }
     });
   });
 
-  // Quantity Stepper
+  // 3. Fullscreen Lightbox Modal
+  const lightbox = document.getElementById('PdpLightboxModal');
+  const lightboxImg = document.getElementById('LightboxMainImg');
+  const lightboxCounter = document.getElementById('LightboxCurrent');
+  const openLightboxBtn = document.getElementById('BtnOpenLightbox');
+  const closeLightboxBtn = document.getElementById('BtnCloseLightbox');
+  const closeLightboxBackdrop = document.getElementById('BtnCloseLightboxBackdrop');
+
+  const openLightbox = (src, index) => {
+    if (!lightbox || !lightboxImg) return;
+    lightboxImg.src = src || '';
+    if (lightboxCounter && index) lightboxCounter.textContent = index;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox) return;
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  if (openLightboxBtn) {
+    openLightboxBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const activeSlide = document.querySelector('.pdp-media-slide.active') || slides[0];
+      const img = activeSlide?.querySelector('img');
+      const idx = activeSlide?.dataset.mediaIndex || 1;
+      openLightbox(img?.src, idx);
+    });
+  }
+
+  slides.forEach(slide => {
+    slide.addEventListener('click', () => {
+      const img = slide.querySelector('img');
+      const idx = slide.dataset.mediaIndex || 1;
+      openLightbox(img?.src, idx);
+    });
+  });
+
+  if (closeLightboxBtn) closeLightboxBtn.addEventListener('click', closeLightbox);
+  if (closeLightboxBackdrop) closeLightboxBackdrop.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox?.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+
+  // 4. Quantity Stepper
   const minus = document.getElementById('BtnQtyMinus');
   const plus = document.getElementById('BtnQtyPlus');
   const input = document.getElementById('ProductQuantityInput');
@@ -947,7 +1030,7 @@ function initProductPage() {
     });
   }
 
-  // Buy Now direct checkout
+  // 5. Buy Now direct checkout
   const btnBuyNow = document.getElementById('BtnBuyNow');
   if (btnBuyNow) {
     btnBuyNow.addEventListener('click', () => {
@@ -959,7 +1042,7 @@ function initProductPage() {
     });
   }
 
-  // Dynamic PDP WhatsApp Enquiry with live variant & quantity
+  // 6. Dynamic PDP WhatsApp Enquiry with live variant & quantity
   const pdpWaBtn = document.querySelector('.btn-product-whatsapp-enquire');
   if (pdpWaBtn) {
     pdpWaBtn.addEventListener('click', (e) => {
