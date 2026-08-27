@@ -5255,6 +5255,26 @@ h1, h2, h3, h4, .font-serif {
   stroke: #16A34A;
 }
 
+/* Judge.me Star Badge & App Blocks */
+.pdp-judgeme-badge-wrap,
+.pdp-app-block-item {
+  margin: 6px 0;
+  display: block;
+}
+
+.pdp-judgeme-badge-wrap .jdgm-preview-badge,
+.pdp-judgeme-badge-wrap .jdgm-widget {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.pdp-judgeme-reviews-wrap {
+  margin: 20px 0;
+  padding: 16px 0;
+  border-top: 1px solid #EAE3DA;
+}
+
 .variant-option-group {
   margin-top: 4px;
 }

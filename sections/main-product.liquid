@@ -135,7 +135,9 @@
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when '@app' -%}
-              {% render block %}
+              <div class="pdp-app-block-item" {{ block.shopify_attributes }}>
+                {% render block %}
+              </div>
 
             {%- when 'vendor_actions' -%}
               <!-- Brand Header Row with Share & Wishlist -->
@@ -212,22 +214,29 @@
               </div>
 
             {%- when 'rating' -%}
-              <!-- Star Rating / Reviews Block -->
+              <!-- Star Rating / Reviews Block with Judge.me Integration -->
               <div class="pdp-rating-below-price" {{ block.shopify_attributes }}>
-                <div class="pdp-rating-stars-group">
-                  <span class="pdp-stars">★★★★★</span>
-                  {%- if product.metafields.reviews.rating.value != blank -%}
+                {%- if product.metafields.judgeme.badge != blank -%}
+                  <div class="pdp-judgeme-badge-wrap">
+                    {{ product.metafields.judgeme.badge }}
+                  </div>
+                {%- elsif product.metafields.reviews.rating.value != blank -%}
+                  <div class="pdp-rating-stars-group">
+                    <span class="pdp-stars">★★★★★</span>
                     <span class="pdp-rating-score">{{ product.metafields.reviews.rating.value | round: 1 }}</span>
                     {%- if product.metafields.reviews.rating_count != blank -%}
                       <span class="pdp-reviews-count">({{ product.metafields.reviews.rating_count }} Customer Reviews)</span>
                     {%- else -%}
                       <span class="pdp-reviews-count">(Customer Reviews)</span>
                     {%- endif -%}
-                  {%- else -%}
+                  </div>
+                {%- else -%}
+                  <div class="pdp-rating-stars-group">
+                    <span class="pdp-stars">★★★★★</span>
                     <span class="pdp-rating-score">4.9</span>
                     <span class="pdp-reviews-count">(128+ Verified Reviews)</span>
-                  {%- endif -%}
-                </div>
+                  </div>
+                {%- endif -%}
                 <span class="pdp-rating-divider">•</span>
                 <span class="pdp-stock-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -235,6 +244,22 @@
                   </svg>
                   In Stock & Ready to Dispatch
                 </span>
+              </div>
+
+            {%- when 'judgeme_badge' -%}
+              <!-- Dedicated Judge.me Star Badge Block -->
+              <div class="pdp-judgeme-badge-wrap" {{ block.shopify_attributes }}>
+                <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>
+                  {{ product.metafields.judgeme.badge }}
+                </div>
+              </div>
+
+            {%- when 'judgeme_reviews' -%}
+              <!-- Dedicated Judge.me Full Reviews Widget Block -->
+              <div class="pdp-judgeme-reviews-wrap" {{ block.shopify_attributes }}>
+                <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}'>
+                  {{ product.metafields.judgeme.widget }}
+                </div>
               </div>
 
             {%- when 'description' -%}
@@ -589,6 +614,16 @@
     {
       "type": "accordions",
       "name": "Collapsible Details Tabs",
+      "limit": 1
+    },
+    {
+      "type": "judgeme_badge",
+      "name": "Judge.me Star Badge",
+      "limit": 1
+    },
+    {
+      "type": "judgeme_reviews",
+      "name": "Judge.me Reviews Widget",
       "limit": 1
     },
     {
