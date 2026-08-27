@@ -15,6 +15,10 @@
           "type": "price",
           "settings": {}
         },
+        "judgeme_badge": {
+          "type": "judgeme_badge",
+          "settings": {}
+        },
         "rating": {
           "type": "rating",
           "settings": {}
@@ -53,6 +57,7 @@
         "vendor_actions",
         "title",
         "price",
+        "judgeme_badge",
         "rating",
         "description",
         "variant_picker",

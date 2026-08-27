@@ -1,4 +1,4 @@
-<section class="lush-main-product-section" data-product-id="{{ product.id }}" id="ProductSection-{{ product.id }}">
+<div class="lush-main-product-section" data-product-id="{{ product.id }}" id="ProductSection-{{ product.id }}">
   <div class="page-width pdp-container">
     <!-- 1. Breadcrumbs / Navigation -->
     <nav class="product-breadcrumbs" aria-label="Breadcrumb">
@@ -58,69 +58,39 @@
                     srcset="{{ media | image_url: width: 450 }} 450w, {{ media | image_url: width: 750 }} 750w, {{ media | image_url: width: 1050 }} 1050w"
                     sizes="(max-width: 767px) 100vw, 50vw"
                     alt="{{ media.alt | default: product.title | escape }}"
-                    class="product-stage-img"
+                    class="pdp-slide-img"
+                    width="900"
+                    height="900"
                     loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                    {% if forloop.first %}fetchpriority="high"{% endif %}
                     decoding="async"
-                    width="800"
-                    height="1000"
                   >
                 </div>
               {%- endfor -%}
-            {%- elsif featured_img != blank -%}
-              <div class="pdp-media-slide active">
-                <img
-                  id="ProductMainImg"
-                  src="{{ featured_img | image_url: width: 900 }}"
-                  srcset="{{ featured_img | image_url: width: 450 }} 450w, {{ featured_img | image_url: width: 750 }} 750w, {{ featured_img | image_url: width: 1050 }} 1050w"
-                  sizes="(max-width: 767px) 100vw, 50vw"
-                  alt="{{ featured_img.alt | default: product.title | escape }}"
-                  class="product-stage-img"
-                  loading="eager"
-                  fetchpriority="high"
-                  decoding="async"
-                  width="800"
-                  height="1000"
-                >
-              </div>
             {%- else -%}
-              <div class="pdp-media-slide active product-stage-placeholder">
-                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-stage-img' }}
+              <div class="pdp-media-slide active">
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg pdp-slide-img' }}
               </div>
             {%- endif -%}
           </div>
-
-          <!-- Mobile Pagination Dots -->
-          {%- if product.media.size > 1 -%}
-            <div class="pdp-mobile-dots" id="PdpMobileDots">
-              {%- for media in product.media -%}
-                <span class="pdp-dot {% if forloop.first %}active{% endif %}" data-dot-index="{{ forloop.index }}"></span>
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
         </div>
 
-        <!-- Desktop Thumbnail Strip -->
+        <!-- Desktop Thumbnail Strip (Horizontal Scroll / Grid) -->
         {%- if product.media.size > 1 -%}
-          <div class="thumbnail-strip no-scrollbar" id="PdpThumbnailStrip">
+          <div class="pdp-thumbnails-strip no-scrollbar" id="PdpThumbnailsStrip">
             {%- for media in product.media -%}
               <button
                 type="button"
-                class="thumb-btn {% if forloop.first %}active{% endif %}"
-                data-thumb-src="{{ media | image_url: width: 900 }}"
-                data-media-id="{{ media.id }}"
-                data-thumb-index="{{ forloop.index }}"
-                aria-label="View media {{ forloop.index }}"
+                class="pdp-thumb-btn {% if forloop.first %}active{% endif %}"
+                data-target-index="{{ forloop.index }}"
+                aria-label="View product image {{ forloop.index }}"
               >
                 <img
-                  src="{{ media | image_url: width: 160 }}"
-                  srcset="{{ media | image_url: width: 120 }} 120w, {{ media | image_url: width: 200 }} 200w"
-                  sizes="80px"
+                  src="{{ media | image_url: width: 140 }}"
                   alt="{{ media.alt | default: product.title | escape }}"
-                  width="80"
-                  height="100"
+                  class="pdp-thumb-img"
+                  width="64"
+                  height="64"
                   loading="lazy"
-                  decoding="async"
                 >
               </button>
             {%- endfor -%}
@@ -135,9 +105,7 @@
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when '@app' -%}
-              <div class="pdp-app-block-item" {{ block.shopify_attributes }}>
-                {% render block %}
-              </div>
+              {% render block %}
 
             {%- when 'vendor_actions' -%}
               <!-- Brand Header Row with Share & Wishlist -->
@@ -533,7 +501,7 @@
   <script type="application/json" id="ProductJson-{{ product.id }}">
     {{ product | json }}
   </script>
-</section>
+</div>
 
 {% schema %}
 {
