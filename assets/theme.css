@@ -5679,6 +5679,64 @@ h1, h2, h3, h4, .font-serif {
   line-height: 1.2;
 }
 
+/* --- Product Description Card (Styled like Price Card) --- */
+.product-description-card {
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-top: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(31, 22, 16, 0.02);
+}
+
+.description-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.desc-card-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.desc-card-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1F1610;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.product-description-card .product-description-rte {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: #4A3E37;
+}
+
+.product-description-card .product-description-rte p {
+  margin: 0 0 10px;
+}
+
+.product-description-card .product-description-rte p:last-child {
+  margin-bottom: 0;
+}
+
+.product-description-card .product-description-rte ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.product-description-card .product-description-rte li {
+  margin-bottom: 5px;
+}
+
 /* --- Collapsible Accordions --- */
 .product-accordions-group {
   display: flex;

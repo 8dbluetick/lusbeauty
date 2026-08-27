@@ -400,24 +400,22 @@
           </div>
         </div>
 
-        <!-- 7. Collapsible Product Details Accordions -->
-        <div class="product-accordions-group">
-          <!-- Accordion 1: Product Description -->
-          {%- if product.description != blank -%}
-            <div class="product-acc-item active">
-              <button type="button" class="product-acc-header" aria-expanded="true">
-                <span>🌿 Product Description & Details</span>
-                <span class="acc-arrow">−</span>
-              </button>
-              <div class="product-acc-content">
-                <div class="product-description-rte">
-                  {{ product.description }}
-                </div>
-              </div>
+        <!-- 7. Product Description Card (Styled like Price Card) -->
+        {%- if product.description != blank -%}
+          <div class="product-description-card">
+            <div class="description-card-header">
+              <span class="desc-card-icon">🌿</span>
+              <h3 class="desc-card-title">Product Description & Details</h3>
             </div>
-          {%- endif -%}
+            <div class="product-description-rte">
+              {{ product.description }}
+            </div>
+          </div>
+        {%- endif -%}
 
-          <!-- Accordion 2: Usage, Care & Directions -->
+        <!-- 8. Collapsible Product Details & Trust Accordions -->
+        <div class="product-accordions-group">
+          <!-- Accordion 1: Usage, Care & Directions -->
           <div class="product-acc-item">
             <button type="button" class="product-acc-header" aria-expanded="false">
               <span>✨ Usage, Application & Storage Guide</span>
