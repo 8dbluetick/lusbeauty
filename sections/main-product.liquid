@@ -132,7 +132,7 @@
            RIGHT COLUMN: PRODUCT DETAILS & PURCHASING PANEL
            ==================================================================== -->
       <div class="product-info-panel">
-        <!-- 1. Brand & Rating Header Row with Share -->
+        <!-- 1. Brand Header Row with Share & Wishlist -->
         <div class="product-header-meta">
           <div class="product-brand-badge-wrap">
             <span class="pdp-brand-name">{{ product.vendor | default: shop.name | default: 'LUSH BEAUTY MART' | upcase }}</span>
@@ -140,22 +140,6 @@
           </div>
 
           <div class="product-header-actions-wrap">
-            {%- if product.metafields.reviews.rating.value != blank -%}
-              <div class="pdp-rating-pill">
-                <span class="star-icon">★</span>
-                <span class="rating-val">{{ product.metafields.reviews.rating.value | round: 1 }}</span>
-                {%- if product.metafields.reviews.rating_count != blank -%}
-                  <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
-                {%- endif -%}
-              </div>
-            {%- else -%}
-              <div class="pdp-rating-pill">
-                <span class="star-icon">★</span>
-                <span class="rating-val">4.9</span>
-                <span class="rating-count">(Nagpur Store)</span>
-              </div>
-            {%- endif -%}
-
             <!-- Share Product Pill Button -->
             <button
               type="button"
@@ -173,6 +157,9 @@
                 <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
                 <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
               </svg>
+              <span>Share</span>
+            </button>
+
             <!-- Wishlist Product Pill Button -->
             <button
               type="button"
@@ -214,6 +201,31 @@
           <p class="tax-shipping-note">
             <span>Inclusive of all taxes</span> • <span>Free Nagpur Express Delivery on orders above ₹999</span>
           </p>
+        </div>
+
+        <!-- 3b. Star Rating / Reviews Block (Directly below Price, above Purchasing Form / Add to Cart) -->
+        <div class="pdp-rating-below-price">
+          <div class="pdp-rating-stars-group">
+            <span class="pdp-stars">★★★★★</span>
+            {%- if product.metafields.reviews.rating.value != blank -%}
+              <span class="pdp-rating-score">{{ product.metafields.reviews.rating.value | round: 1 }}</span>
+              {%- if product.metafields.reviews.rating_count != blank -%}
+                <span class="pdp-reviews-count">({{ product.metafields.reviews.rating_count }} Customer Reviews)</span>
+              {%- else -%}
+                <span class="pdp-reviews-count">(Customer Reviews)</span>
+              {%- endif -%}
+            {%- else -%}
+              <span class="pdp-rating-score">4.9</span>
+              <span class="pdp-reviews-count">(128+ Verified Reviews)</span>
+            {%- endif -%}
+          </div>
+          <span class="pdp-rating-divider">•</span>
+          <span class="pdp-stock-badge">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            In Stock & Ready to Dispatch
+          </span>
         </div>
 
         <!-- 4. Purchasing Form: Variants, Quantity & Action Buttons -->

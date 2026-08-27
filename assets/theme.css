@@ -5195,6 +5195,66 @@ h1, h2, h3, h4, .font-serif {
   line-height: 1.4;
 }
 
+/* Star Rating & Review Block Directly Below Price */
+.pdp-rating-below-price {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+
+.pdp-rating-stars-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pdp-stars {
+  color: #F59E0B;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.pdp-rating-score {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #1F1610;
+}
+
+.pdp-reviews-count {
+  font-size: 0.78rem;
+  color: #6E5E52;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.pdp-rating-divider {
+  color: #D4C9BF;
+  font-size: 0.8rem;
+}
+
+.pdp-stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #16A34A;
+  background: rgba(22, 163, 74, 0.08);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.pdp-stock-badge svg {
+  stroke: #16A34A;
+}
+
 .variant-option-group {
   margin-top: 4px;
 }
