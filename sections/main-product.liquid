@@ -132,17 +132,49 @@
            RIGHT COLUMN: PRODUCT DETAILS & PURCHASING PANEL
            ==================================================================== -->
       <div class="product-info-panel">
-        <!-- 1. Brand & Rating Header Row -->
+        <!-- 1. Brand & Rating Header Row with Share -->
         <div class="product-header-meta">
           <div class="product-brand-badge-wrap">
             <span class="pdp-brand-name">{{ product.vendor | default: shop.name | default: 'LUSH BEAUTY MART' | upcase }}</span>
             <span class="pdp-verified-badge">✓ GENUINE</span>
           </div>
 
-          <div class="pdp-rating-pill">
-            <span class="star-icon">★</span>
-            <span class="rating-val">4.9</span>
-            <span class="rating-count">(Nagpur Store Verified)</span>
+          <div class="product-header-actions-wrap">
+            {%- if product.metafields.reviews.rating.value != blank -%}
+              <div class="pdp-rating-pill">
+                <span class="star-icon">★</span>
+                <span class="rating-val">{{ product.metafields.reviews.rating.value | round: 1 }}</span>
+                {%- if product.metafields.reviews.rating_count != blank -%}
+                  <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              <div class="pdp-rating-pill">
+                <span class="star-icon">★</span>
+                <span class="rating-val">4.9</span>
+                <span class="rating-count">(Nagpur Store)</span>
+              </div>
+            {%- endif -%}
+
+            <!-- Share Product Pill Button -->
+            <button
+              type="button"
+              class="btn-pdp-share-pill"
+              data-share-btn
+              data-share-title="{{ product.title | escape }}"
+              data-share-url="{{ shop.url }}{{ product.url }}"
+              title="Share this product"
+              aria-label="Share this product"
+            >
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+              <span>Share</span>
+            </button>
           </div>
         </div>
 
@@ -228,6 +260,63 @@
             <a href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ wa_enquiry_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-pdp-tertiary-whatsapp">
               <span>💬 Order / Enquire on WhatsApp</span>
             </a>
+          </div>
+
+          <!-- Quick Share Links Bar -->
+          <div class="pdp-share-strip">
+            <span class="share-strip-label">Share Product:</span>
+            <div class="share-strip-buttons">
+              <!-- Native / Web Share Button -->
+              <button
+                type="button"
+                class="btn-share-icon btn-share-native"
+                data-share-btn
+                data-share-title="{{ product.title | escape }}"
+                data-share-url="{{ shop.url }}{{ product.url }}"
+                title="Share product"
+                aria-label="Share product"
+              >
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+                <span>Share</span>
+              </button>
+
+              <!-- WhatsApp Share -->
+              {%- assign share_wa_text = 'Check out this beauty product at Lush Beauty Mart Nagpur: ' | append: product.title | append: ' - ' | append: shop.url | append: product.url -%}
+              <a
+                href="https://api.whatsapp.com/send?text={{ share_wa_text | url_encode }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-share-icon btn-share-wa"
+                title="Share on WhatsApp"
+                aria-label="Share on WhatsApp"
+              >
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+                </svg>
+                <span>WhatsApp</span>
+              </a>
+
+              <!-- Copy Link -->
+              <button
+                type="button"
+                class="btn-share-icon btn-copy-link"
+                data-copy-link="{{ shop.url }}{{ product.url }}"
+                title="Copy Product Link"
+                aria-label="Copy Product Link"
+              >
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy Link</span>
+              </button>
+            </div>
           </div>
         {%- endform -%}
 

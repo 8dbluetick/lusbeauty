@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCouponCopy();
   initProductPage();
   initProductVariantSelector();
+  initShareButtons();
 });
 
 /* --------------------------------------------------------------------------
@@ -749,12 +750,12 @@ function initProductVariantSelector() {
       if (!variant) {
         if (addBagBtn) {
           addBagBtn.disabled = true;
-          if (addBagText) addBagText.textContent = 'Unavailable';
+          if (addBagText) addBagText.textContent = 'UNAVAILABLE';
         }
         if (buyNowBtn) buyNowBtn.style.display = 'none';
         if (stickyAddBagBtn) {
           stickyAddBagBtn.disabled = true;
-          if (stickyAddText) stickyAddText.textContent = 'Unavailable';
+          if (stickyAddText) stickyAddText.textContent = 'UNAVAILABLE';
         }
         return;
       }
@@ -770,9 +771,13 @@ function initProductVariantSelector() {
         priceEl.textContent = formattedPrice;
       }
 
-      // 3. Update Sticky Mobile Price
+      // 3. Update Sticky Mobile Price & Thumbnail
       if (stickyPriceEl) {
         stickyPriceEl.textContent = formattedPrice;
+      }
+      const stickyThumb = section.querySelector('.sticky-bar-thumb');
+      if (stickyThumb && variant.featured_image && variant.featured_image.src) {
+        stickyThumb.src = variant.featured_image.src;
       }
 
       // 4. Update Compare-at Price, Savings & Discount %
@@ -806,42 +811,52 @@ function initProductVariantSelector() {
       if (variant.available) {
         if (addBagBtn) {
           addBagBtn.disabled = false;
-          if (addBagText) addBagText.textContent = 'Add to Shopping Bag';
+          if (addBagText) addBagText.textContent = 'ADD TO BAG';
         }
         if (buyNowBtn) {
           buyNowBtn.style.display = '';
         }
         if (stickyAddBagBtn) {
           stickyAddBagBtn.disabled = false;
-          if (stickyAddText) stickyAddText.textContent = '+ Add to Bag';
+          if (stickyAddText) stickyAddText.textContent = 'ADD TO BAG';
         }
       } else {
         if (addBagBtn) {
           addBagBtn.disabled = true;
-          if (addBagText) addBagText.textContent = 'Sold Out';
+          if (addBagText) addBagText.textContent = 'SOLD OUT';
         }
         if (buyNowBtn) {
           buyNowBtn.style.display = 'none';
         }
         if (stickyAddBagBtn) {
           stickyAddBagBtn.disabled = true;
-          if (stickyAddText) stickyAddText.textContent = 'Sold Out';
+          if (stickyAddText) stickyAddText.textContent = 'SOLD OUT';
         }
       }
 
-      // 6. Update Variant Image if available
-      if (variant.featured_image && variant.featured_image.src && mainImg) {
-        mainImg.src = variant.featured_image.src;
-        mainImg.removeAttribute('srcset');
-        section.querySelectorAll('.thumb-btn').forEach(thumb => {
-          if (thumb.getAttribute('data-thumb-src')?.includes(variant.featured_image.id) || thumb.getAttribute('data-media-id') == variant.featured_image.id) {
-            section.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
-            thumb.classList.add('active');
-          }
-        });
+      // 6. Update Delivery Checker Box Data Price for Accurate Dynamic Free Delivery
+      const deliveryBox = section.querySelector('#ShiprocketDeliveryBox');
+      if (deliveryBox) {
+        deliveryBox.dataset.productPrice = variant.price;
       }
 
-      // 7. Update URL without page reload
+      // 7. Update Variant Image and Scroll to Slide if available
+      if (variant.featured_image) {
+        const targetThumb = Array.from(section.querySelectorAll('.thumb-btn')).find(thumb =>
+          thumb.getAttribute('data-media-id') == variant.featured_image.id ||
+          thumb.getAttribute('data-thumb-src')?.includes(String(variant.featured_image.id))
+        );
+        if (targetThumb) {
+          targetThumb.click();
+        } else if (mainImg && variant.featured_image.src) {
+          mainImg.src = variant.featured_image.src;
+          mainImg.removeAttribute('srcset');
+          const track = document.getElementById('PdpMediaTrack');
+          if (track) track.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+      }
+
+      // 8. Update URL without page reload
       if (window.history && window.history.replaceState) {
         const url = new URL(window.location.href);
         url.searchParams.set('variant', variant.id);
@@ -948,7 +963,7 @@ function initProductPage() {
     }, { passive: true });
   }
 
-  // 2. Thumbnail Clicks
+  // 2. Thumbnail Clicks (Smooth Scroll without image overwrite)
   thumbs.forEach((thumb, idx) => {
     thumb.addEventListener('click', () => {
       thumbs.forEach(b => b.classList.remove('active'));
@@ -958,16 +973,10 @@ function initProductPage() {
         const slideLeft = slides[idx].offsetLeft;
         mediaTrack.scrollTo({ left: slideLeft, behavior: 'smooth' });
       }
-
-      const mainImg = document.getElementById('ProductMainImg');
-      if (mainImg && thumb.dataset.thumbSrc && window.innerWidth >= 768) {
-        mainImg.src = thumb.dataset.thumbSrc;
-        mainImg.removeAttribute('srcset');
-      }
     });
   });
 
-  // 3. Fullscreen Lightbox Modal
+  // 3. Fullscreen Lightbox Modal (with touch swipe gesture guard)
   const lightbox = document.getElementById('PdpLightboxModal');
   const lightboxImg = document.getElementById('LightboxMainImg');
   const lightboxCounter = document.getElementById('LightboxCurrent');
@@ -999,8 +1008,34 @@ function initProductPage() {
     });
   }
 
+  // Prevent accidental lightbox trigger while swiping gallery on mobile
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isSwipeDrag = false;
+
+  if (mediaTrack) {
+    mediaTrack.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        isSwipeDrag = false;
+      }
+    }, { passive: true });
+
+    mediaTrack.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        const diffX = Math.abs(e.touches[0].clientX - touchStartX);
+        const diffY = Math.abs(e.touches[0].clientY - touchStartY);
+        if (diffX > 8 || diffY > 8) {
+          isSwipeDrag = true;
+        }
+      }
+    }, { passive: true });
+  }
+
   slides.forEach(slide => {
     slide.addEventListener('click', () => {
+      if (isSwipeDrag) return; // Ignore drag gestures
       const img = slide.querySelector('img');
       const idx = slide.dataset.mediaIndex || 1;
       openLightbox(img?.src, idx);
@@ -1016,7 +1051,7 @@ function initProductPage() {
     }
   });
 
-  // 4. Quantity Stepper
+  // 4. Quantity Stepper with bounds validation
   const minus = document.getElementById('BtnQtyMinus');
   const plus = document.getElementById('BtnQtyPlus');
   const input = document.getElementById('ProductQuantityInput');
@@ -1027,6 +1062,9 @@ function initProductPage() {
     });
     plus.addEventListener('click', () => {
       input.value = parseInt(input.value || 1, 10) + 1;
+    });
+    input.addEventListener('change', () => {
+      input.value = Math.max(1, parseInt(input.value || 1, 10) || 1);
     });
   }
 
@@ -1042,28 +1080,28 @@ function initProductPage() {
     });
   }
 
-  // 6. Dynamic PDP WhatsApp Enquiry with live variant & quantity
-  const pdpWaBtn = document.querySelector('.btn-product-whatsapp-enquire');
-  if (pdpWaBtn) {
-    pdpWaBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const title = document.querySelector('.product-page-title')?.textContent?.trim() || 'Exclusive Product';
-      const price = document.querySelector('[data-product-price]')?.textContent?.trim() || document.querySelector('.price-big')?.textContent?.trim() || '';
-      const qty = document.getElementById('ProductQuantityInput')?.value || 1;
-      const selectedVariant = document.querySelector('.variant-radio:checked')?.value || '';
-      const variantText = selectedVariant ? ` _(${selectedVariant})_` : '';
+  // 6. Dynamic PDP WhatsApp Enquiry with live variant, price & quantity
+  document.addEventListener('click', (e) => {
+    const pdpWaBtn = e.target.closest('.btn-pdp-tertiary-whatsapp, .btn-product-whatsapp-enquire');
+    if (!pdpWaBtn) return;
+    e.preventDefault();
 
-      const msg = `🌸 *NAMASTE LUSH BEAUTY MART NAGPUR!* 🌸\n\n` +
-        `I would like to order / inquire about:\n\n` +
-        `✨ *Product:* ${title}${variantText}\n` +
-        `📦 *Quantity:* ${qty}\n` +
-        `💰 *Price:* ${price}\n\n` +
-        `📍 *Showroom:* Below Hotel Maitrayee, Near Lad Square, North Ambazari Rd, Nagpur\n\n` +
-        `Is this in stock for immediate showroom pickup / delivery? Please share UPI payment details! ✨`;
+    const title = document.querySelector('.product-page-title')?.textContent?.trim() || 'Exclusive Product';
+    const price = document.querySelector('[data-product-price]')?.textContent?.trim() || document.querySelector('.price-big')?.textContent?.trim() || '';
+    const qty = document.getElementById('ProductQuantityInput')?.value || 1;
+    const selectedVariant = document.querySelector('.variant-radio:checked')?.value || document.querySelector('.selected-option-value')?.textContent?.trim() || '';
+    const variantText = selectedVariant ? ` _(${selectedVariant})_` : '';
 
-      window.open(`https://wa.me/919119595951?text=${encodeURIComponent(msg)}`, '_blank');
-    });
-  }
+    const msg = `🌸 *NAMASTE LUSH BEAUTY MART NAGPUR!* 🌸\n\n` +
+      `I would like to order / inquire about:\n\n` +
+      `✨ *Product:* ${title}${variantText}\n` +
+      `📦 *Quantity:* ${qty}\n` +
+      `💰 *Price:* ${price}\n\n` +
+      `📍 *Showroom:* Below Hotel Maitrayee, Near Lad Square, North Ambazari Rd, Nagpur\n\n` +
+      `Is this in stock for immediate showroom pickup / delivery? Please share UPI payment details! ✨`;
+
+    window.open(`https://wa.me/919119595951?text=${encodeURIComponent(msg)}`, '_blank');
+  });
 }
 
 /* --------------------------------------------------------------------------
@@ -1415,10 +1453,10 @@ function initPincodeChecker() {
 
   btn.addEventListener('click', async () => {
     const code = input.value.trim();
-    if (!/^\d{6}$/.test(code)) {
+    if (!/^[1-8][0-9]{5}$/.test(code)) {
       result.style.display = 'block';
       result.className = 'pincode-result-msg error';
-      result.innerHTML = '⚠️ Please enter a valid 6-digit PIN code.';
+      result.innerHTML = '⚠️ Please enter a valid 6-digit Indian postal code (starting with 1–8).';
       return;
     }
 
@@ -1749,6 +1787,95 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+/* --------------------------------------------------------------------------
+   17. Native Web Share & Social Share Integration for All Products
+   -------------------------------------------------------------------------- */
+function initShareButtons() {
+  document.addEventListener('click', async (e) => {
+    // 1. Share Button Trigger (Web Share API or Fallback)
+    const shareBtn = e.target.closest('[data-share-btn]');
+    if (shareBtn) {
+      e.preventDefault();
+      e.stopPropagation();
 
+      const title = shareBtn.dataset.shareTitle || document.title || 'Lush Beauty Mart Product';
+      const url = shareBtn.dataset.shareUrl || window.location.href;
+      const text = `Check out "${title}" at Lush Beauty Mart Nagpur! ✨\n${url}`;
 
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: title,
+            text: `Check out "${title}" at Lush Beauty Mart Nagpur! ✨`,
+            url: url,
+          });
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') return; // User dismissed share sheet
+        }
+      }
 
+      // Fallback: Copy link to clipboard
+      copyUrlToClipboard(url, title);
+      return;
+    }
+
+    // 2. Direct Copy Link Button Trigger
+    const copyBtn = e.target.closest('[data-copy-link]');
+    if (copyBtn) {
+      e.preventDefault();
+      const url = copyBtn.dataset.copyLink || window.location.href;
+      copyUrlToClipboard(url);
+    }
+  });
+
+  function copyUrlToClipboard(url, title = '') {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        showShareConfirmationToast(title);
+      }).catch(() => {
+        fallbackCopy(url, title);
+      });
+    } else {
+      fallbackCopy(url, title);
+    }
+  }
+
+  function fallbackCopy(url, title) {
+    const input = document.createElement('input');
+    input.setAttribute('value', url);
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.select();
+    try {
+      document.execCommand('copy');
+      showShareConfirmationToast(title);
+    } catch (err) {
+      prompt('Copy product link:', url);
+    }
+    document.body.removeChild(input);
+  }
+
+  function showShareConfirmationToast(title = '') {
+    const toast = document.getElementById('LushToastContainer') || document.getElementById('AddToCartToast');
+    if (toast) {
+      const msg = toast.querySelector('.toast-main-msg');
+      const titleEl = toast.querySelector('.toast-item-title');
+      const prevMsg = msg ? msg.textContent : 'Added to bag ✓';
+      const prevTitle = titleEl ? titleEl.textContent : '';
+
+      if (msg) msg.textContent = 'Link Copied to Clipboard! 📋';
+      if (titleEl) titleEl.textContent = title ? title.slice(0, 30) : 'Ready to share!';
+      toast.classList.add('active');
+
+      setTimeout(() => {
+        toast.classList.remove('active');
+        setTimeout(() => {
+          if (msg) msg.textContent = prevMsg;
+          if (titleEl) titleEl.textContent = prevTitle;
+        }, 400);
+      }, 2500);
+    }
+  }
+}

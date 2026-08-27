@@ -4670,6 +4670,12 @@ h1, h2, h3, h4, .font-serif {
   padding-bottom: 4px;
 }
 
+@media (max-width: 767px) {
+  .thumbnail-strip {
+    display: none;
+  }
+}
+
 .thumb-btn {
   width: 68px;
   height: 85px;
@@ -4734,6 +4740,12 @@ h1, h2, h3, h4, .font-serif {
   border-radius: 4px;
 }
 
+.product-header-actions-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .pdp-rating-pill {
   display: inline-flex;
   align-items: center;
@@ -4750,6 +4762,28 @@ h1, h2, h3, h4, .font-serif {
 .pdp-rating-pill .star-icon {
   color: #F59E0B;
   font-size: 0.8rem;
+}
+
+.btn-pdp-share-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1F1610;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  padding: 3px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-pdp-share-pill:hover {
+  background: #FFFFFF;
+  border-color: var(--color-accent-gold, #C5A059);
+  color: #C5A059;
+  transform: scale(1.04);
 }
 
 .product-page-title {
@@ -5010,6 +5044,75 @@ h1, h2, h3, h4, .font-serif {
 .btn-pdp-tertiary-whatsapp:hover {
   background: #20BA5A;
   transform: translateY(-1px);
+}
+
+/* --- Social Share Strip --- */
+.pdp-share-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  border-radius: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+  .pdp-share-strip {
+    grid-column: 1 / -1;
+  }
+}
+
+.share-strip-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6E5E52;
+}
+
+.share-strip-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-share-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #FFFFFF;
+  border: 1px solid #E0D7CB;
+  color: #1F1610;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-share-icon:hover {
+  border-color: #1F1610;
+  transform: translateY(-1px);
+}
+
+.btn-share-wa {
+  color: #0F7A42;
+  border-color: rgba(37, 211, 102, 0.4);
+}
+
+.btn-share-wa:hover {
+  background: #E8F5E9;
+  border-color: #25D366;
+  color: #0F7A42;
+}
+
+.btn-copy-link:hover {
+  border-color: var(--color-accent-gold, #C5A059);
+  color: #C5A059;
 }
 
 /* --- Real Shiprocket-Backed Delivery Section --- */
