@@ -111,10 +111,10 @@
         <span class="cart-total-val" data-cart-total>{{ cart.total_price | money }}</span>
       </div>
 
-      <!-- Checkout CTAs -->
+      <!-- Checkout CTAs with Razorpay Magic Checkout Support -->
       <div class="cart-checkout-actions">
-        <form action="/checkout" method="post">
-          <button type="submit" class="btn-drawer-checkout" name="checkout">
+        <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">
+          <button type="submit" id="CartDrawer-Checkout" class="cart__checkout-button button btn-drawer-checkout" name="checkout" data-checkout-button>
             <span>Proceed to Checkout</span>
             <span class="arrow-icon">→</span>
           </button>

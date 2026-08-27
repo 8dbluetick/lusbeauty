@@ -176,9 +176,9 @@
 
             <!-- Action Buttons -->
             <div class="checkout-action-group">
-              <!-- Shopify Native Secure Checkout -->
-              <form action="/checkout" method="post">
-                <button type="submit" class="btn-shimmer-checkout" name="checkout">
+              <!-- Shopify Native Secure Checkout with Razorpay Magic Checkout Support -->
+              <form action="{{ routes.cart_url }}" method="post" id="cart">
+                <button type="submit" id="checkout" class="cart__checkout-button button btn-shimmer-checkout" name="checkout" data-checkout-button {% if cart.item_count == 0 %}disabled{% endif %}>
                   <span class="btn-text">Proceed to Checkout</span>
                   <span class="btn-icon">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">

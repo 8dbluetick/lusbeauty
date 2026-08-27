@@ -1068,14 +1068,26 @@ function initProductPage() {
     });
   }
 
-  // 5. Buy Now direct checkout
+  // 5. Buy Now direct checkout (Compatible with Razorpay Magic Checkout)
   const btnBuyNow = document.getElementById('BtnBuyNow');
   if (btnBuyNow) {
-    btnBuyNow.addEventListener('click', () => {
+    btnBuyNow.addEventListener('click', async () => {
       const variantId = document.getElementById('ProductVariantId')?.value;
-      const qty = document.getElementById('ProductQuantityInput')?.value || 1;
+      const qty = parseInt(document.getElementById('ProductQuantityInput')?.value || '1', 10);
       if (variantId) {
-        window.location.href = `/cart/${variantId}:${qty}`;
+        btnBuyNow.disabled = true;
+        const originalText = btnBuyNow.innerHTML;
+        btnBuyNow.innerHTML = '<span>REDIRECTING...</span>';
+        try {
+          await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: variantId, quantity: qty })
+          });
+          window.location.href = '/checkout';
+        } catch (err) {
+          window.location.href = `/cart/${variantId}:${qty}`;
+        }
       }
     });
   }
