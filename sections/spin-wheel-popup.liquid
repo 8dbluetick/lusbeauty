@@ -1,9 +1,9 @@
-﻿{% comment %}
+{% comment %}
   Lush Beauty Mart — Luxury Spin-to-Win Fortune Wheel Popup
   Fully customizable in Shopify Theme Customizer
 {% endcomment %}
 
-{%- if section.settings.enable_spin_wheel -%}
+{%- if template.name == 'index' and section.settings.enable_spin_wheel -%}
   <!-- Floating Launcher Badge (Bottom Left) -->
   {%- if section.settings.show_floating_launcher -%}
     <button

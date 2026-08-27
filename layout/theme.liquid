@@ -128,20 +128,18 @@
       </svg>
     </button>
 
-    <!-- Spin to Win Fortune Wheel Stylesheet -->
-    {{ 'spin-wheel.css' | asset_url | stylesheet_tag }}
+    <!-- Spin to Win Fortune Wheel (Home Page Only) -->
+    {%- if template.name == 'index' -%}
+      {{ 'spin-wheel.css' | asset_url | stylesheet_tag }}
+      {% section 'spin-wheel-popup' %}
+      {{ 'spin-wheel.js' | asset_url | script_tag }}
+    {%- endif -%}
 
     <!-- Loyalty Wallet Stylesheet -->
     {{ 'wallet.css' | asset_url | stylesheet_tag }}
 
-    <!-- Spin to Win Fortune Wheel Popup Section -->
-    {% section 'spin-wheel-popup' %}
-
     <!-- Theme JavaScript -->
     {{ 'theme.js' | asset_url | script_tag }}
-
-    <!-- Spin to Win Fortune Wheel JavaScript -->
-    {{ 'spin-wheel.js' | asset_url | script_tag }}
 
     <!-- Loyalty Wallet JavaScript -->
     {{ 'wallet.js' | asset_url | script_tag }}
