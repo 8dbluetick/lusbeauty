@@ -1,0 +1,204 @@
+{% comment %}
+  Lush Beauty Mart — Loyalty Wallet Dashboard Section
+  File: sections/wallet-page.liquid
+  Reads wallet server URL from section setting: wallet_server_url
+{% endcomment %}
+
+<div class="wallet-page-wrap" id="LushWalletPage">
+
+  {% unless customer %}
+  {%- comment -%} ── NOT LOGGED IN STATE ── {%- endcomment -%}
+  <div class="wallet-login-prompt">
+    <div class="wallet-login-inner">
+      <svg class="wallet-login-icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+        <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+        <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>
+      </svg>
+      <h2 class="wallet-login-heading">Your Lush Wallet Awaits</h2>
+      <p class="wallet-login-subtext">Sign in to view your loyalty points, redeem rewards, and track your beauty journey with Lush Beauty Mart.</p>
+      <a href="{{ routes.account_login_url }}" class="btn-wallet-login">
+        Sign In to View Wallet
+      </a>
+      <p class="wallet-login-register">
+        New here? <a href="{{ routes.account_register_url }}" class="wallet-register-link">Create an account</a> and earn 50 welcome points!
+      </p>
+    </div>
+  </div>
+  {% endunless %}
+
+  {% if customer %}
+  {%- comment -%} ── LOGGED IN STATE ── {%- endcomment -%}
+
+  {%- comment -%} ── HERO BALANCE CARD ── {%- endcomment -%}
+  <div class="wallet-hero-card" data-customer-id="{{ customer.id }}">
+    <div class="wallet-hero-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#C5A059" opacity="0.18"/>
+        <circle cx="32" cy="32" r="22" fill="#C5A059" opacity="0.32"/>
+        <circle cx="32" cy="32" r="14" fill="#C5A059"/>
+        <text x="32" y="37" text-anchor="middle" font-size="14" font-family="serif" fill="#1F1610" font-weight="900">₹</text>
+      </svg>
+    </div>
+    <p class="wallet-hero-eyebrow">LUSH WALLET</p>
+    <h2 class="wallet-hero-greeting">Hi, {{ customer.first_name }}! ✨</h2>
+    <div class="wallet-hero-balance-wrap">
+      <span id="WalletPointsBalance" class="wallet-balance-number">—</span>
+      <span class="wallet-balance-unit">Points</span>
+    </div>
+    <p class="wallet-hero-rupee-value">Worth ₹<span id="WalletRupeesValue">—</span></p>
+  </div>
+
+  {%- comment -%} ── STATS PILLS ROW ── {%- endcomment -%}
+  <div class="wallet-stats-row">
+    <div class="wallet-stat-pill">
+      <span class="wallet-stat-label">Lifetime Earned</span>
+      <span class="wallet-stat-value" id="WalletLifetimePoints">—</span> pts
+    </div>
+    <div class="wallet-stat-pill">
+      <span class="wallet-stat-label">Min. Redeem</span>
+      <span class="wallet-stat-value">200</span> pts = ₹20
+    </div>
+  </div>
+
+  {%- comment -%} ── REDEEM SECTION ── {%- endcomment -%}
+  <div class="wallet-redeem-card">
+    <h3 class="wallet-card-heading">Redeem Your Points</h3>
+    <p class="wallet-card-subtext">Minimum 200 pts (₹20) — Maximum 500 pts (₹50) per order</p>
+
+    <div class="wallet-redeem-form">
+      <div class="wallet-input-wrap">
+        <label for="WalletRedeemInput" class="wallet-input-label">Points to Redeem</label>
+        <input
+          type="number"
+          id="WalletRedeemInput"
+          class="wallet-redeem-input"
+          placeholder="Enter points (200–500)"
+          min="200"
+          max="500"
+          step="100"
+          autocomplete="off"
+        >
+      </div>
+      <div class="wallet-redeem-value-preview">
+        = ₹<span id="WalletRedeemRupees">0</span> off your order
+      </div>
+      <button type="button" id="BtnRedeemPoints" class="btn-wallet-redeem">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 12 20 22 4 22 4 12"/>
+          <rect x="2" y="7" width="20" height="5"/>
+          <line x1="12" y1="22" x2="12" y2="7"/>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+        </svg>
+        Get Discount Code
+      </button>
+    </div>
+
+    {%- comment -%} Code display (hidden by default) {%- endcomment -%}
+    <div class="wallet-code-display" id="WalletCodeDisplay" style="display:none;" aria-live="polite">
+      <p class="wallet-code-prompt">🎉 Your discount code is ready:</p>
+      <div class="wallet-code-box">
+        <span id="WalletDiscountCode" class="wallet-discount-code">LUSH-XXXXXX</span>
+        <button type="button" id="BtnCopyCode" class="btn-copy-code" aria-label="Copy discount code">
+          Copy
+        </button>
+      </div>
+      <p class="wallet-code-hint">Use this code at checkout. Valid for this order only.</p>
+    </div>
+
+    {%- comment -%} Error display {%- endcomment -%}
+    <div class="wallet-redeem-error" id="WalletRedeemError" style="display:none;" role="alert" aria-live="assertive"></div>
+  </div>
+
+  {%- comment -%} ── HOW TO EARN GUIDE ── {%- endcomment -%}
+  {% if section.settings.show_earn_guide %}
+  <div class="wallet-earn-guide">
+    <h3 class="wallet-card-heading">How to Earn Points</h3>
+    <p class="wallet-card-subtext">Every rupee you spend brings you closer to your next reward ✨</p>
+    <div class="wallet-earn-grid">
+
+      <div class="wallet-earn-card">
+        <span class="wallet-earn-emoji">🛍</span>
+        <span class="wallet-earn-title">Shop & Earn</span>
+        <span class="wallet-earn-desc">Every ₹100 spent = <strong>10 points</strong></span>
+      </div>
+
+      <div class="wallet-earn-card">
+        <span class="wallet-earn-emoji">🎉</span>
+        <span class="wallet-earn-title">First Purchase</span>
+        <span class="wallet-earn-desc"><strong>100 bonus points</strong> on your very first order</span>
+      </div>
+
+      <div class="wallet-earn-card">
+        <span class="wallet-earn-emoji">👤</span>
+        <span class="wallet-earn-title">Account Signup</span>
+        <span class="wallet-earn-desc"><strong>50 welcome points</strong> just for joining us</span>
+      </div>
+
+      <div class="wallet-earn-card">
+        <span class="wallet-earn-emoji">💝</span>
+        <span class="wallet-earn-title">Birthday Bonus</span>
+        <span class="wallet-earn-desc"><strong>200 surprise points</strong> on your special day</span>
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
+
+  {%- comment -%} ── TRANSACTION HISTORY ── {%- endcomment -%}
+  <div class="wallet-history-card">
+    <h3 class="wallet-card-heading">Transaction History</h3>
+    <div id="WalletHistoryContainer" aria-live="polite">
+      <div class="wallet-history-loading">
+        <span class="wallet-loading-spinner" aria-hidden="true"></span>
+        Loading your transactions…
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── HIDDEN SERVER CONFIG for JS ── {%- endcomment -%}
+  <div
+    id="WalletServerConfig"
+    data-server-url="{{ section.settings.wallet_server_url | escape }}"
+    data-customer-id="{{ customer.id }}"
+    style="display:none;"
+    aria-hidden="true"
+  ></div>
+
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Loyalty Wallet",
+  "tag": "section",
+  "class": "section-wallet-page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "wallet_server_url",
+      "label": "Wallet Server URL",
+      "info": "The base URL of your loyalty wallet backend API (e.g. your Railway.app deployment).",
+      "default": "https://your-app.up.railway.app"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_earn_guide",
+      "label": "Show 'How to Earn Points' guide",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Page Heading",
+      "default": "My Lush Wallet"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Loyalty Wallet"
+    }
+  ]
+}
+{% endschema %}

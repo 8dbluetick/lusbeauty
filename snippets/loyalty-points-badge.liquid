@@ -1,0 +1,30 @@
+{% comment %}
+  Lush Beauty Mart — Loyalty Points Badge Snippet
+  File: snippets/loyalty-points-badge.liquid
+  Usage: {%- render 'loyalty-points-badge' -%}
+  Shows customer's wallet points in the header/nav drawer. Only renders when customer is logged in.
+{% endcomment %}
+
+{% if customer %}
+<a href="/pages/wallet" class="loyalty-points-badge" id="LoyaltyPointsBadge" title="View My Lush Wallet">
+
+  {{- comment -}} Gold coin icon {{- endcomment -}}
+  <svg class="loyalty-badge-coin-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <circle cx="32" cy="32" r="30" fill="#C5A059" opacity="0.2"/>
+    <circle cx="32" cy="32" r="20" fill="#C5A059" opacity="0.4"/>
+    <circle cx="32" cy="32" r="13" fill="#C5A059"/>
+    <text x="32" y="37" text-anchor="middle" font-size="13" font-family="Georgia, serif" fill="#1F1610" font-weight="900">₹</text>
+  </svg>
+
+  <span class="loyalty-badge-text">
+    <span class="loyalty-badge-label">My Wallet</span>
+    <span class="loyalty-badge-pts" id="NavWalletPoints">— pts</span>
+  </span>
+
+  {{- comment -}} Chevron right icon {{- endcomment -}}
+  <svg class="loyalty-badge-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="9 18 15 12 9 6"/>
+  </svg>
+
+</a>
+{% endif %}

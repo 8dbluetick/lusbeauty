@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "wallet": {
+      "type": "wallet-page",
+      "settings": {
+        "wallet_server_url": "https://your-app.up.railway.app",
+        "show_earn_guide": true,
+        "heading_text": "My Lush Wallet"
+      }
+    }
+  },
+  "order": ["wallet"]
+}

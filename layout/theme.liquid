@@ -128,7 +128,13 @@
       </svg>
     </button>
 
+    <!-- Loyalty Wallet Stylesheet -->
+    {{ 'wallet.css' | asset_url | stylesheet_tag }}
+
     <!-- Theme JavaScript -->
     {{ 'theme.js' | asset_url | script_tag }}
+
+    <!-- Loyalty Wallet JavaScript -->
+    {{ 'wallet.js' | asset_url | script_tag }}
   </body>
 </html>
