@@ -4,8 +4,8 @@
     <div class="page-width header-container">
       <!-- Mobile: Hamburger Menu Button -->
       <div class="header-mobile-toggle">
-        <button type="button" class="btn-hamburger" id="BtnMobileMenuToggle" aria-label="Open Navigation" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round">
+        <button type="button" class="btn-hamburger" id="BtnMobileMenuToggle" aria-label="Open menu" title="Open menu" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round">
             <line x1="4" y1="7" x2="20" y2="7"></line>
             <line x1="4" y1="12" x2="20" y2="12"></line>
             <line x1="4" y1="17" x2="20" y2="17"></line>
@@ -59,43 +59,53 @@
       <div class="header-actions">
         <!-- Search Icon (Mobile Only) -->
         {%- if section.settings.show_search -%}
-          <button type="button" class="header-action-btn mobile-search-trigger" data-open-search title="Search" aria-label="Search" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="7.5"></circle>
-              <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
-            </svg>
+          <button type="button" class="header-action-btn mobile-search-trigger" data-open-search title="Search products" aria-label="Search products" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <span class="action-icon-wrap">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7.5"></circle>
+                <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+              </svg>
+            </span>
           </button>
         {%- endif -%}
 
         <!-- Wishlist -->
         {%- if section.settings.show_wishlist -%}
-          <button type="button" class="header-action-btn" data-open-wishlist title="Wishlist" aria-label="Wishlist" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-            <span class="action-badge wishlist-badge" data-wishlist-count>0</span>
+          <button type="button" class="header-action-btn header-wishlist-btn" data-open-wishlist title="View wishlist" aria-label="View wishlist" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <span class="action-icon-wrap">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <span class="action-badge wishlist-badge" data-wishlist-count style="display: none;">0</span>
+            </span>
           </button>
         {%- endif -%}
 
         <!-- Account -->
         {%- if section.settings.show_account -%}
-          <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="header-action-btn" title="Account" aria-label="Account" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
+          <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="header-action-btn header-account-btn" title="Open account" aria-label="Open account" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <span class="action-icon-wrap">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
           </a>
         {%- endif -%}
 
         <!-- Cart -->
         {%- if section.settings.show_cart -%}
-          <button type="button" class="header-action-btn" data-open-cart title="Shopping Bag" aria-label="Cart" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-            <span class="action-badge cart-badge" data-cart-count>{{ cart.item_count }}</span>
+          <button type="button" class="header-action-btn header-cart-btn" data-open-cart title="View cart" aria-label="View cart" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
+            <span class="action-icon-wrap">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span class="action-badge cart-badge" data-cart-count {% if cart.item_count == 0 %}style="display: none;"{% endif %}>
+                {%- if cart.item_count > 99 -%}99+{%- else -%}{{ cart.item_count }}{%- endif -%}
+              </span>
+            </span>
           </button>
         {%- endif -%}
       </div>

@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductPage();
   initProductVariantSelector();
   initShareButtons();
+  initWishlist();
 });
 
 /* --------------------------------------------------------------------------
@@ -133,6 +134,9 @@ function initCartDrawer() {
       }
     });
   }
+
+  // Synchronize cart state on page load
+  updateCartDrawer();
 }
 
 let toastTimeout = null;
@@ -200,8 +204,14 @@ async function updateCartDrawer() {
     const cart = await res.json();
 
     // 1. Update count badges across entire page
+    const displayCount = cart.item_count > 99 ? '99+' : cart.item_count;
     document.querySelectorAll('[data-cart-count]').forEach(el => {
-      el.textContent = cart.item_count;
+      el.textContent = displayCount;
+      if (cart.item_count > 0) {
+        el.style.display = 'flex';
+      } else {
+        el.style.display = 'none';
+      }
     });
 
     const itemsContainer = document.querySelector('[data-cart-items-container]');
@@ -1877,8 +1887,8 @@ function initShareButtons() {
       const prevMsg = msg ? msg.textContent : 'Added to bag ✓';
       const prevTitle = titleEl ? titleEl.textContent : '';
 
-      if (msg) msg.textContent = 'Link Copied to Clipboard! 📋';
-      if (titleEl) titleEl.textContent = title ? title.slice(0, 30) : 'Ready to share!';
+      if (msg) msg.textContent = title ? title : 'Link Copied to Clipboard! 📋';
+      if (titleEl) titleEl.textContent = title ? '' : 'Ready to share!';
       toast.classList.add('active');
 
       setTimeout(() => {
@@ -1890,4 +1900,246 @@ function initShareButtons() {
       }, 2500);
     }
   }
+}
+
+/* --------------------------------------------------------------------------
+   19. Luxury Wishlist System (LocalStorage, Badges, Heart Toggles & Drawer)
+   -------------------------------------------------------------------------- */
+const WISHLIST_STORAGE_KEY = 'lush_wishlist_items_v1';
+
+function getStoredWishlist() {
+  try {
+    const raw = localStorage.getItem(WISHLIST_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveStoredWishlist(items) {
+  try {
+    localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(items));
+  } catch (e) {}
+}
+
+function updateWishlistBadges(count) {
+  const displayCount = count > 99 ? '99+' : count;
+  document.querySelectorAll('[data-wishlist-count]').forEach(el => {
+    el.textContent = displayCount;
+    if (count > 0) {
+      el.style.display = 'flex';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+
+  document.querySelectorAll('[data-wishlist-count-drawer]').forEach(el => {
+    el.textContent = count;
+  });
+}
+
+function updateWishlistHeartStates() {
+  const items = getStoredWishlist();
+  const ids = new Set(items.map(i => String(i.id)));
+
+  document.querySelectorAll('[data-wishlist-toggle]').forEach(btn => {
+    const pId = String(btn.getAttribute('data-wishlist-toggle') || btn.getAttribute('data-product-id') || '');
+    if (pId && ids.has(pId)) {
+      btn.classList.add('is-active');
+      const heartSvg = btn.querySelector('.icon-heart');
+      if (heartSvg) {
+        heartSvg.setAttribute('fill', '#E11D48');
+        heartSvg.setAttribute('stroke', '#E11D48');
+      }
+    } else {
+      btn.classList.remove('is-active');
+      const heartSvg = btn.querySelector('.icon-heart');
+      if (heartSvg) {
+        heartSvg.setAttribute('fill', 'none');
+        heartSvg.setAttribute('stroke', 'currentColor');
+      }
+    }
+  });
+}
+
+function renderWishlistDrawer() {
+  const container = document.getElementById('WishlistDrawerBody');
+  if (!container) return;
+
+  const items = getStoredWishlist();
+  updateWishlistBadges(items.length);
+
+  if (items.length === 0) {
+    container.innerHTML = `
+      <div class="wishlist-empty-state">
+        <div class="wishlist-empty-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </div>
+        <h4 class="wishlist-empty-title">Your Wishlist is Empty</h4>
+        <p class="wishlist-empty-desc">Save your favorite luxury fragrances, cosmetics, skincare and designer handbags to shop later.</p>
+        <a href="/collections/all" class="btn-wishlist-shop" data-close-wishlist>
+          <span>Explore Best Sellers</span>
+          <span>→</span>
+        </a>
+      </div>
+    `;
+  } else {
+    let html = '<div class="wishlist-item-list">';
+    items.forEach(item => {
+      html += `
+        <div class="wishlist-item" data-wishlist-item-id="${item.id}">
+          <a href="${item.url || '#'}" class="wishlist-item-img-link">
+            <img src="${item.image || ''}" alt="${item.title || 'Product'}" class="wishlist-item-img" width="70" height="85" loading="lazy">
+          </a>
+          <div class="wishlist-item-info">
+            ${item.vendor ? `<span class="wishlist-item-vendor">${item.vendor}</span>` : ''}
+            <a href="${item.url || '#'}" class="wishlist-item-title">${item.title || 'Product'}</a>
+            <div class="wishlist-item-price">${item.price || ''}</div>
+            <div class="wishlist-item-actions">
+              <button type="button" class="btn-wishlist-move-bag" data-wishlist-move-bag="${item.id}">
+                Move to Bag +
+              </button>
+              <button type="button" class="btn-wishlist-remove" data-wishlist-remove-id="${item.id}" aria-label="Remove item">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+  }
+}
+
+function openWishlistDrawer() {
+  const drawer = document.getElementById('LushWishlistDrawer');
+  if (drawer) {
+    renderWishlistDrawer();
+    drawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeWishlistDrawer() {
+  const drawer = document.getElementById('LushWishlistDrawer');
+  if (drawer) {
+    drawer.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function initWishlist() {
+  const initialItems = getStoredWishlist();
+  updateWishlistBadges(initialItems.length);
+  updateWishlistHeartStates();
+
+  // 1. Open / Close Wishlist Drawer
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('[data-open-wishlist]');
+    if (openBtn) {
+      e.preventDefault();
+      openWishlistDrawer();
+      return;
+    }
+
+    const closeBtn = e.target.closest('[data-close-wishlist]');
+    if (closeBtn) {
+      e.preventDefault();
+      closeWishlistDrawer();
+      return;
+    }
+
+    // 2. Wishlist Toggle (Product cards & PDP)
+    const toggleBtn = e.target.closest('[data-wishlist-toggle]');
+    if (toggleBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const pId = String(toggleBtn.getAttribute('data-wishlist-toggle') || toggleBtn.getAttribute('data-product-id') || '');
+      if (!pId) return;
+
+      let items = getStoredWishlist();
+      const existingIdx = items.findIndex(i => String(i.id) === pId);
+
+      if (existingIdx > -1) {
+        items.splice(existingIdx, 1);
+        saveStoredWishlist(items);
+        updateWishlistBadges(items.length);
+        updateWishlistHeartStates();
+        renderWishlistDrawer();
+        showShareConfirmationToast('Removed from wishlist');
+      } else {
+        const title = toggleBtn.getAttribute('data-product-title') || document.querySelector('.product-page-title')?.textContent?.trim() || 'Product';
+        const url = toggleBtn.getAttribute('data-product-url') || window.location.pathname;
+        const image = toggleBtn.getAttribute('data-product-image') || document.querySelector('#ProductMainImg')?.src || '';
+        const price = toggleBtn.getAttribute('data-product-price') || document.querySelector('[data-product-price]')?.textContent?.trim() || '';
+        const vendor = toggleBtn.getAttribute('data-product-vendor') || document.querySelector('.pdp-brand-name')?.textContent?.trim() || 'Lush Beauty Mart';
+
+        items.push({ id: pId, title, url, image, price, vendor });
+        saveStoredWishlist(items);
+        updateWishlistBadges(items.length);
+        updateWishlistHeartStates();
+        renderWishlistDrawer();
+        showShareConfirmationToast('Added to wishlist ♥');
+      }
+      return;
+    }
+
+    // 3. Remove single item from inside Wishlist Drawer
+    const removeBtn = e.target.closest('[data-wishlist-remove-id]');
+    if (removeBtn) {
+      e.preventDefault();
+      const pId = removeBtn.getAttribute('data-wishlist-remove-id');
+      let items = getStoredWishlist();
+      items = items.filter(i => String(i.id) !== String(pId));
+      saveStoredWishlist(items);
+      updateWishlistBadges(items.length);
+      updateWishlistHeartStates();
+      renderWishlistDrawer();
+      return;
+    }
+
+    // 4. Move to Bag from inside Wishlist Drawer
+    const moveBtn = e.target.closest('[data-wishlist-move-bag]');
+    if (moveBtn) {
+      e.preventDefault();
+      const pId = moveBtn.getAttribute('data-wishlist-move-bag');
+      moveBtn.disabled = true;
+      moveBtn.textContent = 'Adding...';
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: pId, quantity: 1 })
+      })
+      .then(res => res.json())
+      .then(async (addedItem) => {
+        let items = getStoredWishlist();
+        items = items.filter(i => String(i.id) !== String(pId));
+        saveStoredWishlist(items);
+        updateWishlistBadges(items.length);
+        updateWishlistHeartStates();
+        renderWishlistDrawer();
+
+        await updateCartDrawer();
+        if (typeof showAddToCartToast === 'function') {
+          showAddToCartToast(addedItem);
+        }
+      })
+      .catch(err => {
+        moveBtn.disabled = false;
+        moveBtn.textContent = 'Move to Bag +';
+      });
+    }
+  });
+
+  // Escape key closes wishlist
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeWishlistDrawer();
+    }
+  });
 }

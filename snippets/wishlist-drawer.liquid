@@ -1,0 +1,21 @@
+<!-- Reusable Luxury Wishlist Drawer Component -->
+<div class="wishlist-drawer" id="LushWishlistDrawer" aria-hidden="true">
+  <div class="wishlist-drawer-backdrop" data-close-wishlist></div>
+  <div class="wishlist-drawer-panel" role="dialog" aria-modal="true" aria-label="My Wishlist">
+    <!-- Header -->
+    <div class="wishlist-drawer-header">
+      <div class="wishlist-header-left">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="color: #C5A059;">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <h3 class="wishlist-drawer-title">MY WISHLIST (<span data-wishlist-count-drawer>0</span>)</h3>
+      </div>
+      <button type="button" class="btn-close-wishlist" data-close-wishlist aria-label="Close Wishlist">&times;</button>
+    </div>
+
+    <!-- Body Container (Populated dynamically via JavaScript) -->
+    <div class="wishlist-drawer-body" id="WishlistDrawerBody">
+      <!-- Content populated by theme.js renderWishlistDrawer() -->
+    </div>
+  </div>
+</div>
