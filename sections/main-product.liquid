@@ -186,27 +186,21 @@
             {%- when 'rating' -%}
               <!-- Star Rating / Reviews Block with Judge.me Integration -->
               <div class="pdp-rating-below-price" {{ block.shopify_attributes }}>
-                {%- if product.metafields.judgeme.badge != blank -%}
-                  <div class="pdp-judgeme-badge-wrap">
-                    {{ product.metafields.judgeme.badge }}
-                  </div>
-                {%- elsif product.metafields.reviews.rating.value != blank -%}
-                  <div class="pdp-rating-stars-group">
-                    <span class="pdp-stars">★★★★★</span>
+                <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>
+                  {{ product.metafields.judgeme.badge }}
+                </div>
+                <div class="pdp-rating-stars-group">
+                  <span class="pdp-stars">★★★★★</span>
+                  {%- if product.metafields.reviews.rating.value != blank -%}
                     <span class="pdp-rating-score">{{ product.metafields.reviews.rating.value | round: 1 }}</span>
                     {%- if product.metafields.reviews.rating_count != blank -%}
-                      <span class="pdp-reviews-count">({{ product.metafields.reviews.rating_count }} Customer Reviews)</span>
-                    {%- else -%}
-                      <span class="pdp-reviews-count">(Customer Reviews)</span>
+                      <span class="pdp-reviews-count">({{ product.metafields.reviews.rating_count }} Reviews)</span>
                     {%- endif -%}
-                  </div>
-                {%- else -%}
-                  <div class="pdp-rating-stars-group">
-                    <span class="pdp-stars">★★★★★</span>
+                  {%- else -%}
                     <span class="pdp-rating-score">4.9</span>
-                    <span class="pdp-reviews-count">(128+ Verified Reviews)</span>
-                  </div>
-                {%- endif -%}
+                    <span class="pdp-reviews-count">(128+ Reviews)</span>
+                  {%- endif -%}
+                </div>
                 <span class="pdp-rating-divider">•</span>
                 <span class="pdp-stock-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
