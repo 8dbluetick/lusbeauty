@@ -4601,18 +4601,20 @@ h1, h2, h3, h4, .font-serif {
   border-radius: var(--radius-md);
 }
 
-/* Floating WhatsApp Widget */
+/* Floating WhatsApp Widget (Bottom Right) */
 .lush-whatsapp-widget {
   position: fixed;
   bottom: 80px;
-  left: 20px;
+  right: 20px;
+  left: auto;
   z-index: 90;
 }
 
 @media (min-width: 1024px) {
   .lush-whatsapp-widget {
     bottom: 24px;
-    left: 24px;
+    right: 24px;
+    left: auto;
   }
 }
 
@@ -4640,7 +4642,8 @@ h1, h2, h3, h4, .font-serif {
 .wa-popup-card {
   position: absolute;
   bottom: 60px;
-  left: 0;
+  right: 0;
+  left: auto;
   width: 300px;
   background: #FFFFFF;
   border-radius: var(--radius-md);
@@ -7353,7 +7356,7 @@ h1, h2, h3, h4, .font-serif {
 /* 4. Floating Back-to-Top Action Button */
 .btn-back-to-top {
   position: fixed;
-  bottom: 84px;
+  bottom: 140px;
   right: 20px;
   width: 44px;
   height: 44px;
@@ -7375,10 +7378,10 @@ h1, h2, h3, h4, .font-serif {
 
 @media (min-width: 768px) {
   .btn-back-to-top {
-    bottom: 28px;
-    right: 28px;
-    width: 48px;
-    height: 48px;
+    bottom: 84px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
   }
 }
 
