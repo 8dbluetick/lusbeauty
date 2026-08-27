@@ -2,6 +2,65 @@
   "sections": {
     "main_product": {
       "type": "main-product",
+      "blocks": {
+        "vendor_actions": {
+          "type": "vendor_actions",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "icon": "🌿",
+            "heading": "Product Description & Details"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "delivery_checker": {
+          "type": "delivery_checker",
+          "settings": {
+            "title": "Check Delivery Availability"
+          }
+        },
+        "trust_badges": {
+          "type": "trust_badges",
+          "settings": {}
+        },
+        "accordions": {
+          "type": "accordions",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_actions",
+        "title",
+        "price",
+        "rating",
+        "description",
+        "variant_picker",
+        "buy_buttons",
+        "delivery_checker",
+        "trust_badges",
+        "accordions"
+      ],
       "settings": {}
     },
     "related_products": {
