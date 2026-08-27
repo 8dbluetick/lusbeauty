@@ -1,0 +1,307 @@
+﻿{% comment %}
+  Lush Beauty Mart — Luxury Spin-to-Win Fortune Wheel Popup
+  Fully customizable in Shopify Theme Customizer
+{% endcomment %}
+
+{%- if section.settings.enable_spin_wheel -%}
+  <!-- Floating Launcher Badge (Bottom Left) -->
+  {%- if section.settings.show_floating_launcher -%}
+    <button
+      type="button"
+      class="lush-wheel-floating-launcher"
+      id="LushWheelLauncher"
+      aria-label="Open Spin to Win Wheel"
+      title="Spin & Win Discounts!"
+    >
+      <span class="launcher-icon">🎁</span>
+      <span class="launcher-text">{{ section.settings.launcher_text | default: 'Spin & Win' }}</span>
+      <span class="launcher-sparkle">✨</span>
+    </button>
+  {%- endif -%}
+
+  <!-- Main Modal Backdrop & Container -->
+  <div
+    class="lush-wheel-modal-overlay"
+    id="LushWheelOverlay"
+    data-delay="{{ section.settings.delay_seconds | default: 3 }}"
+    data-auto-open="{{ section.settings.auto_open }}"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Spin to win discount coupon"
+  >
+    <div class="lush-wheel-backdrop" id="LushWheelBackdrop"></div>
+
+    <div class="lush-wheel-container">
+      <!-- Close Button -->
+      <button type="button" class="btn-close-wheel" id="BtnCloseWheel" aria-label="Close spin wheel modal">
+        &times;
+      </button>
+
+      <!-- Step 1: Spin The Wheel View -->
+      <div class="wheel-interactive-wrap" id="WheelInteractiveWrap">
+        <!-- Left / Top Content -->
+        <div class="wheel-header-content">
+          <div class="wheel-badge-pill">
+            <span>✨ {{ section.settings.badge_text | default: 'LUCKY REWARDS' }}</span>
+          </div>
+          <h2 class="wheel-modal-title">{{ section.settings.heading | default: 'Spin & Win Luxury Deals!' }}</h2>
+          <p class="wheel-modal-subtitle">{{ section.settings.subheading | default: 'Try your luck to win exclusive discount coupons, free gifts & express shipping vouchers!' }}</p>
+        </div>
+
+        <!-- Wheel Stage with Ticker -->
+        <div class="wheel-stage-container">
+          <!-- Golden Ticker Needle -->
+          <div class="wheel-ticker-needle" id="WheelTicker">
+            <svg viewBox="0 0 32 40" width="32" height="40">
+              <polygon points="16,40 0,6 32,6" fill="#C5A059" stroke="#1F1610" stroke-width="1.5" />
+              <circle cx="16" cy="10" r="6" fill="#FAF7F2" stroke="#1F1610" stroke-width="1.5" />
+            </svg>
+          </div>
+
+          <!-- Rotating Wheel Disc -->
+          <div class="wheel-disc-wrapper" id="WheelDiscWrapper">
+            <canvas id="LushWheelCanvas" width="500" height="500"></canvas>
+          </div>
+
+          <!-- Center Gold Spin Button -->
+          <button type="button" class="btn-center-spin" id="BtnCenterSpin" aria-label="Spin the wheel">
+            <span class="spin-btn-text">SPIN</span>
+            <span class="spin-btn-sub">✨</span>
+          </button>
+        </div>
+
+        <!-- Wheel Action Form / Button -->
+        <div class="wheel-form-wrap">
+          <button type="button" class="btn-action-spin" id="BtnActionSpin">
+            <span>🎯 {{ section.settings.button_text | default: 'TAP TO SPIN THE WHEEL' }}</span>
+          </button>
+          <p class="wheel-terms-note">One lucky spin per visitor • Coupons valid for 48 hours</p>
+        </div>
+      </div>
+
+      <!-- Step 2: Winning Result View (Celebration) -->
+      <div class="wheel-result-wrap" id="WheelResultWrap" style="display: none;">
+        <canvas class="confetti-canvas" id="ConfettiCanvas"></canvas>
+
+        <div class="win-celebration-badge">🎉 CONGRATULATIONS! 🎉</div>
+        <h2 class="win-heading">You Won!</h2>
+        <div class="win-prize-display" id="WinPrizeText">10% OFF ON ENTIRE ORDER</div>
+
+        <p class="win-instructions">Your exclusive discount coupon code is ready:</p>
+
+        <!-- Copyable Coupon Box -->
+        <div class="win-coupon-box">
+          <div class="coupon-code-val" id="WinCouponCode">LUSH-LUCKY10</div>
+          <button type="button" class="btn-copy-coupon" id="BtnCopyCoupon" title="Copy discount code">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="CopyCouponLabel">COPY</span>
+          </button>
+        </div>
+
+        <!-- Action Button: Apply and Shop -->
+        <div class="win-actions-group">
+          <a href="/collections/all" class="btn-win-apply" id="BtnApplyCoupon">
+            <span>🛍️ APPLY DISCOUNT & SHOP NOW</span>
+          </a>
+          <button type="button" class="btn-win-continue" id="BtnContinueBrowsing">
+            Continue Browsing
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wheel Slices JSON Config for JavaScript -->
+  <script type="application/json" id="LushWheelConfig">
+    {
+      "slices": [
+        {
+          "label": "{{ section.settings.slice_1_text | default: '₹100 OFF' }}",
+          "code": "{{ section.settings.slice_1_code | default: 'LUSH100' }}",
+          "color": "#1F1610",
+          "textColor": "#FAF7F2"
+        },
+        {
+          "label": "{{ section.settings.slice_2_text | default: '10% OFF' }}",
+          "code": "{{ section.settings.slice_2_code | default: 'LUSH10' }}",
+          "color": "#C5A059",
+          "textColor": "#1F1610"
+        },
+        {
+          "label": "{{ section.settings.slice_3_text | default: 'FREE SHIPPING' }}",
+          "code": "{{ section.settings.slice_3_code | default: 'FREESHIP' }}",
+          "color": "#2A201A",
+          "textColor": "#FAF7F2"
+        },
+        {
+          "label": "{{ section.settings.slice_4_text | default: '₹200 OFF' }}",
+          "code": "{{ section.settings.slice_4_code | default: 'LUSH200' }}",
+          "color": "#E2878D",
+          "textColor": "#1F1610"
+        },
+        {
+          "label": "{{ section.settings.slice_5_text | default: '15% OFF' }}",
+          "code": "{{ section.settings.slice_5_code | default: 'LUSH15' }}",
+          "color": "#16A34A",
+          "textColor": "#FFFFFF"
+        },
+        {
+          "label": "{{ section.settings.slice_6_text | default: 'SURPRISE GIFT' }}",
+          "code": "{{ section.settings.slice_6_code | default: 'LUSHGIFT' }}",
+          "color": "#8B6F3E",
+          "textColor": "#FFFFFF"
+        }
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Spin to Win Popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_spin_wheel",
+      "label": "Enable Spin Wheel Popup",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_open",
+      "label": "Auto Open on Visit",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay_seconds",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "s",
+      "label": "Auto-Open Delay",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_floating_launcher",
+      "label": "Show Floating '🎁 Spin & Win' Icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "launcher_text",
+      "label": "Launcher Button Text",
+      "default": "Spin & Win"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Top Badge Text",
+      "default": "LUCKY REWARDS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Spin & Win Luxury Deals! ✨"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Try your luck to win exclusive discount coupons, free gifts & express shipping vouchers!"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Spin Button Text",
+      "default": "TAP TO SPIN THE WHEEL"
+    },
+    {
+      "type": "header",
+      "content": "Wheel Slices (6 Prizes)"
+    },
+    {
+      "type": "text",
+      "id": "slice_1_text",
+      "label": "Slice 1 Prize Label",
+      "default": "₹100 OFF"
+    },
+    {
+      "type": "text",
+      "id": "slice_1_code",
+      "label": "Slice 1 Coupon Code",
+      "default": "LUSH100"
+    },
+    {
+      "type": "text",
+      "id": "slice_2_text",
+      "label": "Slice 2 Prize Label",
+      "default": "10% OFF"
+    },
+    {
+      "type": "text",
+      "id": "slice_2_code",
+      "label": "Slice 2 Coupon Code",
+      "default": "LUSH10"
+    },
+    {
+      "type": "text",
+      "id": "slice_3_text",
+      "label": "Slice 3 Prize Label",
+      "default": "FREE SHIPPING"
+    },
+    {
+      "type": "text",
+      "id": "slice_3_code",
+      "label": "Slice 3 Coupon Code",
+      "default": "FREESHIP"
+    },
+    {
+      "type": "text",
+      "id": "slice_4_text",
+      "label": "Slice 4 Prize Label",
+      "default": "₹200 OFF"
+    },
+    {
+      "type": "text",
+      "id": "slice_4_code",
+      "label": "Slice 4 Coupon Code",
+      "default": "LUSH200"
+    },
+    {
+      "type": "text",
+      "id": "slice_5_text",
+      "label": "Slice 5 Prize Label",
+      "default": "15% OFF"
+    },
+    {
+      "type": "text",
+      "id": "slice_5_code",
+      "label": "Slice 5 Coupon Code",
+      "default": "LUSH15"
+    },
+    {
+      "type": "text",
+      "id": "slice_6_text",
+      "label": "Slice 6 Prize Label",
+      "default": "SURPRISE GIFT"
+    },
+    {
+      "type": "text",
+      "id": "slice_6_code",
+      "label": "Slice 6 Coupon Code",
+      "default": "LUSHGIFT"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spin to Win Popup"
+    }
+  ]
+}
+{% endschema %}

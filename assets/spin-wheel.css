@@ -1,0 +1,464 @@
+﻿/* ==========================================================================
+   Lush Beauty Mart — Spin to Win Luxury Fortune Wheel Styling
+   ========================================================================== */
+
+/* Floating Launcher Button (Bottom Left) */
+.lush-wheel-floating-launcher {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9990;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1F1610 0%, #3D2D20 100%);
+  color: #FAF7F2;
+  border: 1.5px solid #C5A059;
+  box-shadow: 0 8px 24px rgba(31, 22, 16, 0.25), 0 0 12px rgba(197, 160, 89, 0.4);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: lushWheelPulse 3s infinite ease-in-out;
+}
+
+.lush-wheel-floating-launcher:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(31, 22, 16, 0.35), 0 0 18px rgba(197, 160, 89, 0.6);
+  background: linear-gradient(135deg, #C5A059 0%, #DFBD75 100%);
+  color: #1F1610;
+  border-color: #1F1610;
+}
+
+.lush-wheel-floating-launcher .launcher-icon {
+  font-size: 1.1rem;
+  animation: lushBounce 2s infinite ease-in-out;
+}
+
+.lush-wheel-floating-launcher .launcher-sparkle {
+  color: #C5A059;
+}
+
+@keyframes lushWheelPulse {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(31, 22, 16, 0.25), 0 0 0 0 rgba(197, 160, 89, 0.5);
+  }
+  50% {
+    box-shadow: 0 10px 28px rgba(31, 22, 16, 0.3), 0 0 0 10px rgba(197, 160, 89, 0);
+  }
+}
+
+@keyframes lushBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Modal Overlay & Backdrop */
+.lush-wheel-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.lush-wheel-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lush-wheel-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 22, 16, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Main Container Card */
+.lush-wheel-container {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  background: #FAF7F2;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), 0 0 35px rgba(197, 160, 89, 0.25);
+  padding: 32px 24px 28px;
+  text-align: center;
+  overflow: hidden;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lush-wheel-modal-overlay.active .lush-wheel-container {
+  transform: scale(1) translateY(0);
+}
+
+/* Close Button */
+.btn-close-wheel {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #EAE3DA;
+  color: #6E5E52;
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-close-wheel:hover {
+  background: #1F1610;
+  color: #FAF7F2;
+  transform: rotate(90deg);
+}
+
+/* Header Content */
+.wheel-badge-pill {
+  display: inline-flex;
+  padding: 4px 14px;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 999px;
+  color: #8B6F3E;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.wheel-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #1F1610;
+  line-height: 1.2;
+  margin: 0 0 6px;
+}
+
+.wheel-modal-subtitle {
+  font-size: 0.82rem;
+  color: #6E5E52;
+  line-height: 1.4;
+  margin: 0 auto 16px;
+  max-width: 360px;
+}
+
+/* Wheel Stage with Ticker */
+.wheel-stage-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Golden Ticker Needle */
+.wheel-ticker-needle {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: transform 0.1s ease;
+}
+
+.wheel-ticker-needle.ticking {
+  transform: translateX(-50%) rotate(-12deg);
+}
+
+/* Rotating Wheel Disc */
+.wheel-disc-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px #C5A059, 0 0 0 9px #1F1610, 0 12px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  background: #FAF7F2;
+}
+
+#LushWheelCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Center Gold Spin Button */
+.btn-center-spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #DFBD75 0%, #C5A059 50%, #9B7830 100%);
+  border: 3px solid #FAF7F2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  color: #1F1610;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-center-spin:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.6);
+}
+
+.spin-btn-text {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  line-height: 1;
+}
+
+.spin-btn-sub {
+  font-size: 0.55rem;
+  margin-top: 1px;
+}
+
+/* Action Button */
+.wheel-form-wrap {
+  margin-top: 6px;
+}
+
+.btn-action-spin {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #1F1610 0%, #35261C 100%);
+  color: #FAF7F2;
+  border: 1.5px solid #C5A059;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(31, 22, 16, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-action-spin:hover {
+  background: linear-gradient(135deg, #C5A059 0%, #DFBD75 100%);
+  color: #1F1610;
+  border-color: #1F1610;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(197, 160, 89, 0.4);
+}
+
+.wheel-terms-note {
+  font-size: 0.7rem;
+  color: #8C7B6E;
+  margin: 8px 0 0;
+}
+
+/* ==========================================================================
+   Step 2: Winning Result View
+   ========================================================================== */
+.wheel-result-wrap {
+  position: relative;
+  padding: 10px 0;
+  animation: lushWinPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes lushWinPop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.win-celebration-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: #16A34A;
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.win-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 0 0 6px;
+}
+
+.win-prize-display {
+  display: inline-block;
+  padding: 10px 20px;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1.5px dashed #C5A059;
+  border-radius: 12px;
+  color: #8B6F3E;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.win-instructions {
+  font-size: 0.82rem;
+  color: #6E5E52;
+  margin: 0 0 10px;
+}
+
+/* Copyable Coupon Box */
+.win-coupon-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 2px solid #1F1610;
+  border-radius: 12px;
+  padding: 8px 12px 8px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.coupon-code-val {
+  font-family: monospace;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #1F1610;
+}
+
+.btn-copy-coupon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #C5A059;
+  color: #1F1610;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-coupon:hover {
+  background: #1F1610;
+  color: #FAF7F2;
+}
+
+.btn-copy-coupon.copied {
+  background: #16A34A;
+  color: #FFFFFF;
+}
+
+/* Actions Group */
+.win-actions-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-win-apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 20px;
+  background: #1F1610;
+  color: #FAF7F2;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(31, 22, 16, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-win-apply:hover {
+  background: #C5A059;
+  color: #1F1610;
+  transform: translateY(-2px);
+}
+
+.btn-win-continue {
+  background: none;
+  border: none;
+  color: #8C7B6E;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.btn-win-continue:hover {
+  color: #1F1610;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .lush-wheel-container {
+    padding: 26px 16px 20px;
+    border-radius: 20px;
+  }
+
+  .wheel-stage-container {
+    width: 240px;
+    height: 240px;
+  }
+
+  .wheel-modal-title {
+    font-size: 1.35rem;
+  }
+
+  .win-heading {
+    font-size: 1.55rem;
+  }
+
+  .lush-wheel-floating-launcher {
+    bottom: 80px; /* Above bottom sticky bar */
+    left: 16px;
+    padding: 8px 14px;
+    font-size: 0.76rem;
+  }
+}
