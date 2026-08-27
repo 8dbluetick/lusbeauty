@@ -7334,6 +7334,177 @@ h1, h2, h3, h4, .font-serif {
   }
 }
 
+/* =========================================================================
+   8. LUXURY MOBILE ANIMATIONS & HAPTIC MICRO-INTERACTIONS
+   ========================================================================= */
+
+/* A. Heart Pop Animation for Wishlist Toggles */
+@keyframes lushHeartPop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.38) rotate(-8deg); }
+  70% { transform: scale(0.88) rotate(4deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.card-wishlist-btn.is-active svg,
+.btn-pdp-wishlist.is-active svg {
+  animation: lushHeartPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* B. Badge Spring Bounce Animation on Cart / Wishlist Update */
+@keyframes lushBadgePop {
+  0% { transform: scale(0.3); opacity: 0; }
+  65% { transform: scale(1.28); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.action-badge.badge-pop {
+  animation: lushBadgePop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* C. Tactile Mobile Touch Feedback (:active) */
+@media (max-width: 1023px) {
+  .lush-product-card {
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .lush-product-card:active {
+    transform: scale(0.978);
+  }
+
+  .btn-add-bag:active,
+  .btn-shimmer-checkout:active,
+  .btn-hero-primary:active,
+  .btn-view-product:active,
+  .btn-shop-collection:active {
+    transform: scale(0.95) !important;
+    transition: transform 0.1s ease;
+  }
+
+  .header-action-btn:active,
+  .btn-hamburger:active {
+    transform: scale(0.88) !important;
+    transition: transform 0.1s ease;
+  }
+
+  .category-card:active,
+  .featured-category-card:active,
+  .category-circle-item:active {
+    transform: scale(0.95);
+    transition: transform 0.12s ease;
+  }
+
+  .reel-card-item:active {
+    transform: scale(0.97);
+  }
+}
+
+/* D. Mobile Navigation Drawer Staggered Cascade Entrance */
+.mobile-nav-drawer.active .mobile-nav-item,
+.mobile-nav-drawer.active .mobile-nav-link {
+  animation: navItemSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(1) { animation-delay: 0.04s; }
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(2) { animation-delay: 0.08s; }
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(3) { animation-delay: 0.12s; }
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(4) { animation-delay: 0.16s; }
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(5) { animation-delay: 0.20s; }
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(6) { animation-delay: 0.24s; }
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(7) { animation-delay: 0.28s; }
+.mobile-nav-drawer.active .mobile-nav-item:nth-child(8) { animation-delay: 0.32s; }
+
+@keyframes navItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* E. Luxury Gleam Shimmer on Sale & Verified Badges */
+@keyframes lushGleam {
+  0% { transform: translateX(-120%) skewX(-20deg); }
+  35%, 100% { transform: translateX(280%) skewX(-20deg); }
+}
+
+.badge-sale,
+.pdp-verified-badge,
+.badge-discount,
+.card-tag-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-sale::after,
+.pdp-verified-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: lushGleam 4.5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* F. Floating WhatsApp Widget Luxury Glow Pulse */
+@keyframes waLuxuryPulse {
+  0% {
+    box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.65);
+  }
+  70% {
+    box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45), 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.floating-whatsapp-btn,
+.btn-floating-wa,
+#WhatsAppFloatingBtn {
+  animation: waLuxuryPulse 3.2s infinite ease-in-out;
+}
+
+/* G. Back-to-Top Floating Gentle Hover Bounce */
+@keyframes backToTopBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.btn-back-to-top.active {
+  animation: backToTopBounce 2.6s infinite ease-in-out;
+}
+
+.btn-back-to-top:active {
+  transform: scale(0.9) !important;
+}
+
+/* H. Toast Notification Luxury Spring Slide */
+@keyframes toastSpringSlide {
+  0% {
+    transform: translate(-50%, -30px) scale(0.92);
+    opacity: 0;
+  }
+  65% {
+    transform: translate(-50%, 6px) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+.toast-notification.active {
+  animation: toastSpringSlide 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lush-reveal {
@@ -7344,7 +7515,11 @@ h1, h2, h3, h4, .font-serif {
   
   .btn-hero-primary::after,
   .btn-add-bag::after,
-  .btn-partner-primary::after {
+  .btn-partner-primary::after,
+  .badge-sale::after,
+  .pdp-verified-badge::after,
+  .floating-whatsapp-btn,
+  .btn-back-to-top.active {
     animation: none !important;
   }
 }

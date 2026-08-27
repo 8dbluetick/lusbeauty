@@ -206,9 +206,15 @@ async function updateCartDrawer() {
     // 1. Update count badges across entire page
     const displayCount = cart.item_count > 99 ? '99+' : cart.item_count;
     document.querySelectorAll('[data-cart-count]').forEach(el => {
+      const prev = el.textContent;
       el.textContent = displayCount;
       if (cart.item_count > 0) {
         el.style.display = 'flex';
+        if (prev !== String(displayCount)) {
+          el.classList.remove('badge-pop');
+          void el.offsetWidth;
+          el.classList.add('badge-pop');
+        }
       } else {
         el.style.display = 'none';
       }
@@ -1640,10 +1646,11 @@ function initScrollAnimations() {
     '.lush-reveal'
   ];
 
+  const isMobile = window.innerWidth < 768;
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -60px 0px',
-    threshold: 0.12
+    rootMargin: isMobile ? '0px 0px -25px 0px' : '0px 0px -60px 0px',
+    threshold: isMobile ? 0.05 : 0.12
   };
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -1664,7 +1671,7 @@ function initScrollAnimations() {
       const siblings = Array.from(parentGrid.children);
       const childIndex = siblings.indexOf(el);
       if (childIndex >= 0) {
-        el.style.transitionDelay = `${childIndex * 0.08}s`;
+        el.style.transitionDelay = `${childIndex * (isMobile ? 0.05 : 0.08)}s`;
       }
     }
     
@@ -1925,9 +1932,15 @@ function saveStoredWishlist(items) {
 function updateWishlistBadges(count) {
   const displayCount = count > 99 ? '99+' : count;
   document.querySelectorAll('[data-wishlist-count]').forEach(el => {
+    const prev = el.textContent;
     el.textContent = displayCount;
     if (count > 0) {
       el.style.display = 'flex';
+      if (prev !== String(displayCount)) {
+        el.classList.remove('badge-pop');
+        void el.offsetWidth;
+        el.classList.add('badge-pop');
+      }
     } else {
       el.style.display = 'none';
     }
