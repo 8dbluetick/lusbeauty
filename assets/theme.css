@@ -7646,6 +7646,75 @@ h1, h2, h3, h4, .font-serif {
   animation: toastSpringSlide 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
 }
 
+/* ==========================================================================
+   Luxury Add to Cart Micro-Animations & Flying Particle Effect
+   ========================================================================== */
+
+/* 1. Flying Parabolic Thumbnail Clone */
+.fly-to-cart-clone {
+  position: fixed;
+  z-index: 999999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #FAF7F2;
+  border: 2px solid #C5A059;
+  box-shadow: 0 8px 24px rgba(31, 22, 16, 0.4), 0 0 15px rgba(197, 160, 89, 0.6);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.65s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.65s ease;
+  will-change: transform, opacity;
+}
+
+/* 2. Success Button State */
+.btn-add-success {
+  background: #16A34A !important;
+  color: #FFFFFF !important;
+  border-color: #16A34A !important;
+  transform: scale(0.97) !important;
+  transition: all 0.2s ease !important;
+}
+
+/* 3. Header Cart Icon Bag Bounce & Gold Shockwave */
+.cart-bag-jump {
+  animation: cartBagBounce 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  position: relative;
+}
+
+.cart-bag-jump::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #C5A059;
+  animation: goldCartPulse 0.65s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes cartBagBounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.35) rotate(-8deg); }
+  60% { transform: scale(0.92) rotate(4deg); }
+  80% { transform: scale(1.1) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes goldCartPulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lush-reveal {

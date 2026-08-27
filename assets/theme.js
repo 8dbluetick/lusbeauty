@@ -79,24 +79,97 @@ function initCartDrawer() {
 
         if (response.ok) {
           const addedItem = await response.json();
-          // Update cart badge and drawer silently in the background
+          
+          // 1. Trigger Flying Parabolic Product Image to Cart Icon
+          animateFlyToCart(form, addedItem);
+
+          // 2. Button Micro-Interaction (Success Checkmark + Pop)
+          if (submitBtn) {
+            submitBtn.classList.add('btn-add-success');
+            submitBtn.innerHTML = '<span>✓ ADDED TO BAG</span>';
+            setTimeout(() => {
+              submitBtn.classList.remove('btn-add-success');
+              submitBtn.innerHTML = originalBtnText;
+            }, 1800);
+          }
+
+          // 3. Update cart badge & drawer in background
           await updateCartDrawer();
-          // Show small, non-intrusive confirmation toast (DO NOT OPEN DRAWER)
+
+          // 4. Show non-intrusive luxury confirmation toast
           showAddToCartToast(addedItem);
         } else {
           const errData = await response.json();
           alert(errData.description || 'Could not add product to cart.');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+          }
         }
       } catch (err) {
         form.submit();
       } finally {
-        if (submitBtn) {
+        if (submitBtn && !submitBtn.classList.contains('btn-add-success')) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnText;
         }
       }
     }
   });
+
+  // Flying Parabolic Animation from Product to Cart Icon
+  function animateFlyToCart(sourceEl, item) {
+    const targetCartBtn = document.getElementById('BtnOpenCart') || document.querySelector('.header-cart-icon') || document.querySelector('[data-cart-drawer-trigger]');
+    if (!targetCartBtn) return;
+
+    let imgEl = null;
+    if (sourceEl) {
+      const card = sourceEl.closest('.product-card, .lush-product-card, .main-product-grid, .product-stage-wrap');
+      if (card) {
+        imgEl = card.querySelector('img');
+      }
+    }
+    if (!imgEl) {
+      imgEl = document.getElementById('ProductMainImg') || sourceEl;
+    }
+
+    const srcRect = imgEl ? imgEl.getBoundingClientRect() : (sourceEl ? sourceEl.getBoundingClientRect() : null);
+    const targetRect = targetCartBtn.getBoundingClientRect();
+    if (!srcRect || !targetRect) return;
+
+    const flyer = document.createElement('div');
+    flyer.className = 'fly-to-cart-clone';
+
+    const imgSrc = (item && (item.image || (item.featured_image && item.featured_image.url))) || (imgEl && imgEl.src) || '';
+    if (imgSrc) {
+      flyer.style.backgroundImage = `url(${imgSrc})`;
+    } else {
+      flyer.innerHTML = '<span style="font-size: 20px;">🛍️</span>';
+    }
+
+    const startX = srcRect.left + (srcRect.width / 2) - 28;
+    const startY = srcRect.top + (srcRect.height / 2) - 28;
+    const endX = targetRect.left + (targetRect.width / 2) - 14;
+    const endY = targetRect.top + (targetRect.height / 2) - 14;
+
+    flyer.style.left = `${startX}px`;
+    flyer.style.top = `${startY}px`;
+    document.body.appendChild(flyer);
+
+    // Force reflow and animate translation
+    requestAnimationFrame(() => {
+      flyer.style.transform = `translate(${endX - startX}px, ${endY - startY}px) scale(0.25)`;
+      flyer.style.opacity = '0.2';
+    });
+
+    setTimeout(() => {
+      if (flyer.parentNode) flyer.parentNode.removeChild(flyer);
+      // Trigger gold ripple and spring shake on Cart Icon
+      targetCartBtn.classList.remove('cart-bag-jump');
+      void targetCartBtn.offsetWidth;
+      targetCartBtn.classList.add('cart-bag-jump');
+    }, 700);
+  }
 
   // Item quantity steppers & remove
   drawer.addEventListener('click', async (e) => {
