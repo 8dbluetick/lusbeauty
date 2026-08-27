@@ -81,7 +81,7 @@
           </button>
         {%- endif -%}
 
-        <!-- Account -->
+        <!-- Account (Desktop only — on mobile use bottom nav or hamburger) -->
         {%- if section.settings.show_account -%}
           <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="header-action-btn header-account-btn" title="Open account" aria-label="Open account" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
             <span class="action-icon-wrap">

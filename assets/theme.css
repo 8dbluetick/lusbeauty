@@ -212,8 +212,6 @@ h1, h2, h3, h4, .font-serif {
   padding: 8px 0;
   border-bottom: 1px solid #F3EDE7;
   background-color: inherit;
-  position: relative;
-  z-index: 100;
 }
 
 @media (min-width: 1024px) {
@@ -225,27 +223,18 @@ h1, h2, h3, h4, .font-serif {
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
   box-sizing: border-box;
-}
-
-@media (max-width: 1023px) {
-  .header-container {
-    display: grid;
-    grid-template-columns: 44px 1fr auto;
-    align-items: center;
-    gap: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
-    max-width: 100%;
-  }
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 @media (min-width: 1024px) {
   .header-container {
     gap: 28px;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -256,13 +245,6 @@ h1, h2, h3, h4, .font-serif {
   flex-shrink: 0;
 }
 
-@media (max-width: 1023px) {
-  .header-mobile-toggle {
-    grid-column: 1;
-    justify-content: flex-start;
-  }
-}
-
 @media (min-width: 1024px) {
   .header-mobile-toggle {
     display: none;
@@ -270,10 +252,10 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .btn-hamburger {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -291,20 +273,19 @@ h1, h2, h3, h4, .font-serif {
   background: var(--color-bg-cream, #FAF7F2);
 }
 
-/* Brand Logo Wrap */
+/* Brand Logo Wrap — grows to fill available space, centered on mobile */
 .header-logo-wrap {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  flex: 1 1 auto;
   min-width: 0;
+  justify-content: flex-start;
 }
 
 @media (max-width: 1023px) {
   .header-logo-wrap {
-    grid-column: 2;
     justify-content: center;
     text-align: center;
-    overflow: hidden;
   }
 }
 
@@ -313,15 +294,14 @@ h1, h2, h3, h4, .font-serif {
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  max-width: 100%;
   min-width: 0;
 }
 
 .header-logo-img {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  max-height: 32px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  max-height: 34px;
   object-fit: contain;
   border-radius: 6px;
   border: 1px solid #EBE5DF;
@@ -340,7 +320,7 @@ h1, h2, h3, h4, .font-serif {
 
 .brand-title {
   font-family: var(--font-serif);
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   color: #1F1610;
@@ -357,11 +337,17 @@ h1, h2, h3, h4, .font-serif {
   letter-spacing: 0.12em;
   color: #8A7363;
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 1px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  opacity: 0.85;
+}
+
+/* Hide tagline on mobile to save space */
+@media (max-width: 1023px) {
+  .brand-tagline {
+    display: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -384,47 +370,39 @@ h1, h2, h3, h4, .font-serif {
   }
 }
 
-@media (max-width: 360px) {
+/* Very narrow screens (320px) — tighten spacing */
+@media (max-width: 359px) {
   .header-container {
-    grid-template-columns: 36px 1fr auto;
-    padding-left: 6px;
-    padding-right: 6px;
-    gap: 4px;
+    gap: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
   .btn-hamburger {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
   }
   .header-logo-img {
     width: 28px;
     height: 28px;
     min-width: 28px;
+    max-height: 28px;
   }
   .brand-title {
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     letter-spacing: 0.02em;
-  }
-  .brand-tagline {
-    display: none;
-  }
-}
-  .brand-tagline {
-    font-size: 0.5rem;
-    letter-spacing: 0.18em;
-    margin-top: 3px;
   }
 }
 
-/* Luxury Center Live Search Mock Bar (Desktop) */
+/* Luxury Center Live Search Mock Bar — Desktop only. NEVER shows on mobile. */
 .header-search-bar-wrap {
-  display: none;
+  display: none !important;
 }
 
 @media (min-width: 1024px) {
   .header-search-bar-wrap {
-    display: flex;
+    display: flex !important;
     flex: 1;
     max-width: 500px;
     margin: 0 auto;
@@ -662,10 +640,10 @@ h1, h2, h3, h4, .font-serif {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   color: #1F1610;
   border-radius: var(--radius-full, 999px);
   position: relative;
@@ -674,7 +652,17 @@ h1, h2, h3, h4, .font-serif {
   border: none;
   cursor: pointer;
   text-decoration: none;
+  flex-shrink: 0;
   transition: color 0.2s ease, background 0.2s ease;
+}
+
+@media (min-width: 1024px) {
+  .header-action-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
 }
 
 .header-action-btn:hover,
@@ -704,9 +692,17 @@ h1, h2, h3, h4, .font-serif {
   display: flex;
 }
 
+/* Account icon is hidden on mobile (accessible via hamburger/bottom nav) */
+.header-account-btn {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .mobile-search-trigger {
     display: none;
+  }
+  .header-account-btn {
+    display: flex;
   }
 }
 
