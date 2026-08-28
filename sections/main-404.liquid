@@ -16,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const default404 = document.getElementById('Default404Section');
   if (!container || !default404) return;
 
+  if (path.includes('brand')) {
+    window.location.href = '/collections/all';
+    return;
+  }
+
   const policies = {
     privacy: {
       badge: '🔒 LEGAL & COMPLIANCE',

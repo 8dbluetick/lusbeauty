@@ -8486,6 +8486,229 @@ h1, h2, h3, h4, .font-serif {
   color: rgba(247, 239, 225, 0.6);
 }
 
+/* ==========================================================================
+   All Brands Directory Page (Nykaa / Sephora Standard)
+   ========================================================================== */
+
+.lush-brands-directory-section {
+  padding: 44px 0 70px;
+  background: #FAF7F2;
+  min-height: 75vh;
+}
+
+.brands-dir-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.brands-dir-badge {
+  display: inline-flex;
+  padding: 5px 14px;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 999px;
+  color: #8B6F3E;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.brands-dir-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 0 0 8px;
+}
+
+.brands-dir-sub {
+  font-size: 0.94rem;
+  color: #6E5E52;
+  max-width: 580px;
+  margin: 0 auto 24px;
+}
+
+.brands-search-wrap {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+}
+
+.brands-search-icon {
+  position: absolute;
+  left: 16px;
+  color: #8A7363;
+  pointer-events: none;
+}
+
+.brands-search-input {
+  width: 100%;
+  padding: 14px 105px 14px 46px;
+  background: #FFFFFF;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  color: #1F1610;
+  box-shadow: 0 4px 16px rgba(31, 22, 16, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brands-search-input:focus {
+  outline: none;
+  border-color: #C5A059;
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.2);
+}
+
+.brands-count-pill {
+  position: absolute;
+  right: 12px;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  color: #8B6F3E;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.brands-alphabet-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.letter-btn {
+  background: #FFFFFF;
+  border: 1px solid #EAE3DA;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #1F1610;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.letter-btn:hover,
+.letter-btn.active {
+  background: #1F1610;
+  color: #C5A059;
+  border-color: #1F1610;
+}
+
+/* Brands Grid */
+.brands-dir-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .brands-dir-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .brands-dir-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+}
+
+.brand-dir-card {
+  background: #FFFFFF;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 18px;
+  padding: 22px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.brand-dir-card:hover {
+  transform: translateY(-4px);
+  border-color: #C5A059;
+  box-shadow: 0 12px 30px rgba(197, 160, 89, 0.22);
+}
+
+.brand-verified-tag {
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #16A34A;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.brand-dir-logo-wrap {
+  width: 100%;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.brand-dir-logo-img {
+  max-height: 40px;
+  max-width: 130px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-dir-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 0 0 4px;
+}
+
+.brand-dir-cat {
+  font-size: 0.74rem;
+  color: #8A7363;
+  margin-bottom: 16px;
+}
+
+.btn-brand-explore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 16px;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #1F1610;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.brand-dir-card:hover .btn-brand-explore {
+  background: #1F1610;
+  color: #C5A059;
+  border-color: #1F1610;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lush-reveal {

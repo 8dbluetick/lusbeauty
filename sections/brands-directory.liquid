@@ -1,0 +1,335 @@
+{% comment %}
+  Lush Beauty Mart — All Brands Directory (Nykaa / Sephora Style)
+  Interactive search, A-Z letter filters, and 1-click vendor collection links
+{% endcomment %}
+
+<section class="lush-brands-directory-section">
+  <div class="page-width">
+    <!-- Header -->
+    <div class="brands-dir-header">
+      <span class="brands-dir-badge">👑 OFFICIAL LUXURY DIRECTORY</span>
+      <h1 class="brands-dir-title">Shop by Authorized Brand</h1>
+      <p class="brands-dir-sub">100% Authentic products sourced directly from verified brand partners & stocked in our Nagpur Flagship Showroom.</p>
+      
+      <!-- Interactive Brand Search -->
+      <div class="brands-search-wrap">
+        <svg class="brands-search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="BrandSearchInput" class="brands-search-input" placeholder="Search brand by name (e.g. Minimalist, MAC, Dot & Key, L'Oreal)..." autocomplete="off">
+        <span class="brands-count-pill" id="BrandCountPill">17 Brands</span>
+      </div>
+
+      <!-- Alphabet Letter Filter Bar -->
+      <div class="brands-alphabet-bar" id="BrandAlphabetBar">
+        <button type="button" class="letter-btn active" data-letter="ALL">ALL</button>
+        <button type="button" class="letter-btn" data-letter="B">B</button>
+        <button type="button" class="letter-btn" data-letter="C">C</button>
+        <button type="button" class="letter-btn" data-letter="D">D</button>
+        <button type="button" class="letter-btn" data-letter="E">E</button>
+        <button type="button" class="letter-btn" data-letter="K">K</button>
+        <button type="button" class="letter-btn" data-letter="L">L</button>
+        <button type="button" class="letter-btn" data-letter="M">M</button>
+        <button type="button" class="letter-btn" data-letter="T">T</button>
+      </div>
+    </div>
+
+    <!-- Brands Grid -->
+    <div class="brands-dir-grid" id="BrandsDirectoryGrid">
+      <!-- 1. Dot & Key -->
+      <div class="brand-dir-card" data-brand-name="Dot & Key" data-brand-letter="D" data-brand-cat="Skincare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Dot_Key_Logo_l2cw3q.jpg" alt="Dot & Key" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Dot & Key</h3>
+        <span class="brand-dir-cat">Dermatological Skincare</span>
+        <a href="/collections/dot-and-key" class="btn-brand-explore">
+          <span>Shop Dot & Key</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 2. Kay Beauty -->
+      <div class="brand-dir-card" data-brand-name="Kay Beauty" data-brand-letter="K" data-brand-cat="Makeup">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Kay_Beauty_Logo_jvwfqj.jpg" alt="Kay Beauty" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Kay Beauty</h3>
+        <span class="brand-dir-cat">High-Definition Cosmetics</span>
+        <a href="/collections/kay-beauty" class="btn-brand-explore">
+          <span>Shop Kay Beauty</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 3. Lakme -->
+      <div class="brand-dir-card" data-brand-name="Lakme" data-brand-letter="L" data-brand-cat="Makeup">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Lakme_Logo_z1pfmr.jpg" alt="Lakme" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Lakmé</h3>
+        <span class="brand-dir-cat">Iconic Makeup & Skincare</span>
+        <a href="/collections/lakme" class="btn-brand-explore">
+          <span>Shop Lakmé</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 4. L'Oreal Professionnel -->
+      <div class="brand-dir-card" data-brand-name="L'Oreal Professionnel" data-brand-letter="L" data-brand-cat="Haircare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/L_Oreal_Professionnel_Logo_f0y489.jpg" alt="L'Oreal Professionnel" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">L'Oréal Professionnel</h3>
+        <span class="brand-dir-cat">Salon Hair Spa & Serums</span>
+        <a href="/collections/loreal-professionnel" class="btn-brand-explore">
+          <span>Shop L'Oréal Pro</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 5. Minimalist -->
+      <div class="brand-dir-card" data-brand-name="Minimalist" data-brand-letter="M" data-brand-cat="Skincare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Minimalist_Logo_prha1q.jpg" alt="Minimalist" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Minimalist</h3>
+        <span class="brand-dir-cat">Science-Backed Active Actives</span>
+        <a href="/collections/minimalist" class="btn-brand-explore">
+          <span>Shop Minimalist</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 6. Cetaphil -->
+      <div class="brand-dir-card" data-brand-name="Cetaphil" data-brand-letter="C" data-brand-cat="Skincare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Cetaphil_Logo_aoujzk.jpg" alt="Cetaphil" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Cetaphil</h3>
+        <span class="brand-dir-cat">#1 Dermatologist Recommended</span>
+        <a href="/collections/cetaphil" class="btn-brand-explore">
+          <span>Shop Cetaphil</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 7. MAC Cosmetics -->
+      <div class="brand-dir-card" data-brand-name="MAC Cosmetics" data-brand-letter="M" data-brand-cat="Makeup">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/MAC_Cosmetics_Logo_ncog8r.jpg" alt="MAC Cosmetics" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">M·A·C Cosmetics</h3>
+        <span class="brand-dir-cat">Global Professional Makeup</span>
+        <a href="/collections/mac-cosmetics" class="btn-brand-explore">
+          <span>Shop M·A·C</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 8. L'Oreal Paris -->
+      <div class="brand-dir-card" data-brand-name="L'Oreal Paris" data-brand-letter="L" data-brand-cat="Makeup">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/L_Oreal_Paris_Logo_kxwxbt.jpg" alt="L'Oreal Paris" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">L'Oréal Paris</h3>
+        <span class="brand-dir-cat">Parisian Beauty & Skincare</span>
+        <a href="/collections/loreal-paris" class="btn-brand-explore">
+          <span>Shop L'Oréal Paris</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 9. e.l.f. Cosmetics -->
+      <div class="brand-dir-card" data-brand-name="e.l.f. Cosmetics" data-brand-letter="E" data-brand-cat="Makeup">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/e.l.f._Cosmetics_Logo_y5bqon.jpg" alt="e.l.f. Cosmetics" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">e.l.f. Cosmetics</h3>
+        <span class="brand-dir-cat">100% Vegan & Clean Makeup</span>
+        <a href="/collections/elf-cosmetics" class="btn-brand-explore">
+          <span>Shop e.l.f.</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 10. The Ordinary -->
+      <div class="brand-dir-card" data-brand-name="The Ordinary" data-brand-letter="T" data-brand-cat="Skincare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/The_Ordinary_Logo_j9mzhc.jpg" alt="The Ordinary" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">The Ordinary</h3>
+        <span class="brand-dir-cat">Clinical Formulations with Integrity</span>
+        <a href="/collections/the-ordinary" class="btn-brand-explore">
+          <span>Shop The Ordinary</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 11. Laneige -->
+      <div class="brand-dir-card" data-brand-name="Laneige" data-brand-letter="L" data-brand-cat="Skincare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Laneige_Logo_ge6cmm.jpg" alt="Laneige" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Laneige</h3>
+        <span class="brand-dir-cat">Korean Water Sleeping Masks</span>
+        <a href="/collections/laneige" class="btn-brand-explore">
+          <span>Shop Laneige</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 12. Charlotte Tilbury -->
+      <div class="brand-dir-card" data-brand-name="Charlotte Tilbury" data-brand-letter="C" data-brand-cat="Makeup">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Charlotte_Tilbury_Logo_qxeunb.jpg" alt="Charlotte Tilbury" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Charlotte Tilbury</h3>
+        <span class="brand-dir-cat">Hollywood Luxury Glamour</span>
+        <a href="/collections/charlotte-tilbury" class="btn-brand-explore">
+          <span>Shop Charlotte Tilbury</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 13. Dove -->
+      <div class="brand-dir-card" data-brand-name="Dove" data-brand-letter="D" data-brand-cat="Bodycare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Dove_Logo_a1cwpw.jpg" alt="Dove" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Dove</h3>
+        <span class="brand-dir-cat">Deep Nourishing Body Care</span>
+        <a href="/collections/dove" class="btn-brand-explore">
+          <span>Shop Dove</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 14. Kerastase -->
+      <div class="brand-dir-card" data-brand-name="Kerastase" data-brand-letter="K" data-brand-cat="Haircare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Kerastase_Logo_shzzjj.jpg" alt="Kerastase" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Kérastase</h3>
+        <span class="brand-dir-cat">Luxury Professional Haircare</span>
+        <a href="/collections/kerastase" class="btn-brand-explore">
+          <span>Shop Kérastase</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 15. Estee Lauder -->
+      <div class="brand-dir-card" data-brand-name="Estee Lauder" data-brand-letter="E" data-brand-cat="Skincare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Estee_Lauder_Logo_mxv7lr.jpg" alt="Estee Lauder" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Estée Lauder</h3>
+        <span class="brand-dir-cat">Advanced Night Repair & Luxury</span>
+        <a href="/collections/all?filter.p.vendor=Estee+Lauder" class="btn-brand-explore">
+          <span>Shop Estée Lauder</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 16. Love Beauty & Planet -->
+      <div class="brand-dir-card" data-brand-name="Love Beauty & Planet" data-brand-letter="L" data-brand-cat="Bodycare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Love_Beauty_Planet_Logo_swz3db.jpg" alt="Love Beauty & Planet" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Love Beauty & Planet</h3>
+        <span class="brand-dir-cat">Eco-Conscious Hair & Body</span>
+        <a href="/collections/love-beauty-and-planet" class="btn-brand-explore">
+          <span>Shop Love Beauty</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- 17. Bath & Body Works -->
+      <div class="brand-dir-card" data-brand-name="Bath & Body Works" data-brand-letter="B" data-brand-cat="Fragrance">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Bath_Body_Works_Logo_hxmfwr.jpg" alt="Bath & Body Works" class="brand-dir-logo-img" width="140" height="45" loading="lazy">
+        </div>
+        <h3 class="brand-dir-name">Bath & Body Works</h3>
+        <span class="brand-dir-cat">Fine Fragrance Mists & Lotions</span>
+        <a href="/collections/bath-and-body-works" class="btn-brand-explore">
+          <span>Shop Bath & Body Works</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('BrandSearchInput');
+  const cards = document.querySelectorAll('.brand-dir-card');
+  const countPill = document.getElementById('BrandCountPill');
+  const letterBtns = document.querySelectorAll('.letter-btn');
+
+  let activeLetter = 'ALL';
+
+  function filterBrands() {
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const name = (card.getAttribute('data-brand-name') || '').toLowerCase();
+      const letter = card.getAttribute('data-brand-letter') || '';
+      const cat = (card.getAttribute('data-brand-cat') || '').toLowerCase();
+
+      const matchQuery = !query || name.includes(query) || cat.includes(query);
+      const matchLetter = activeLetter === 'ALL' || letter === activeLetter;
+
+      if (matchQuery && matchLetter) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (countPill) {
+      countPill.textContent = `${visibleCount} ${visibleCount === 1 ? 'Brand' : 'Brands'}`;
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterBrands);
+  }
+
+  letterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      letterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeLetter = btn.getAttribute('data-letter') || 'ALL';
+      filterBrands();
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Brands Directory",
+  "settings": []
+}
+{% endschema %}
