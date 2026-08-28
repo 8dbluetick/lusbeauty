@@ -8284,10 +8284,6 @@ h1, h2, h3, h4, .font-serif {
   animation: brandMarqueeScroll 35s linear infinite;
 }
 
-.brand-marquee-track:hover {
-  animation-play-state: paused;
-}
-
 @keyframes brandMarqueeScroll {
   0% {
     transform: translateX(0);
@@ -8314,17 +8310,11 @@ h1, h2, h3, h4, .font-serif {
   background: #FAF7F2;
   border: 1px solid #EAE3DA;
   border-radius: 12px;
-  text-decoration: none;
   box-shadow: 0 2px 8px rgba(31, 22, 16, 0.04);
-  transition: all 0.25s ease;
   flex-shrink: 0;
-}
-
-.brand-logo-card:hover {
-  transform: translateY(-2px);
-  border-color: #C5A059;
-  background: #FFFFFF;
-  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.2);
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
 }
 
 .brand-marquee-logo-img {

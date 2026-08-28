@@ -1,6 +1,6 @@
-{% comment %}
+﻿{% comment %}
   Lush Beauty Mart — Infinite Running Brand Logo Marquee
-  Smooth continuous marquee of 100% genuine authorized brands
+  Smooth non-stop continuous loop of 100% genuine authorized brands
 {% endcomment %}
 
 <style>
@@ -64,10 +64,6 @@
   animation: brandMarqueeScroll {{ section.settings.speed | default: 35 }}s linear infinite !important;
 }
 
-.brand-marquee-track:hover {
-  animation-play-state: paused !important;
-}
-
 @keyframes brandMarqueeScroll {
   0% {
     transform: translateX(0);
@@ -95,16 +91,11 @@
   background: #FFFFFF !important;
   border: 1.5px solid #EAE3DA !important;
   border-radius: 12px !important;
-  text-decoration: none !important;
   box-shadow: 0 2px 8px rgba(31, 22, 16, 0.04) !important;
-  transition: all 0.25s ease !important;
   flex-shrink: 0 !important;
-}
-
-.brand-logo-card:hover {
-  transform: translateY(-2px) !important;
-  border-color: #C5A059 !important;
-  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.2) !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  user-select: none !important;
 }
 
 .brand-marquee-logo-img {
@@ -148,74 +139,44 @@
     <div class="brand-marquee-track">
       <!-- Group 1 -->
       <div class="brand-marquee-content">
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            <a href="{{ block.settings.link | default: '/collections/all' }}" class="brand-logo-card" title="{{ block.settings.brand_name | escape }}" {{ block.shopify_attributes }}>
-              <img
-                src="{{ block.settings.logo_url }}"
-                alt="{{ block.settings.brand_name | escape }}"
-                class="brand-marquee-logo-img"
-                width="140"
-                height="45"
-                loading="eager"
-              >
-            </a>
-          {%- endfor -%}
-        {%- else -%}
-          <a href="/collections/all" class="brand-logo-card" title="Dot & Key"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Dot_Key_Logo_l2cw3q.jpg" alt="Dot & Key" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Kay Beauty"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Kay_Beauty_Logo_jvwfqj.jpg" alt="Kay Beauty" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Lakmé"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Lakme_Logo_z1pfmr.jpg" alt="Lakmé" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="L'Oréal Professionnel"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/L_Oreal_Professionnel_Logo_f0y489.jpg" alt="L'Oréal Professionnel" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Minimalist"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Minimalist_Logo_prha1q.jpg" alt="Minimalist" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Cetaphil"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Cetaphil_Logo_aoujzk.jpg" alt="Cetaphil" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="M·A·C Cosmetics"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/MAC_Cosmetics_Logo_ncog8r.jpg" alt="M·A·C Cosmetics" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="L'Oréal Paris"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/L_Oreal_Paris_Logo_kxwxbt.jpg" alt="L'Oréal Paris" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="e.l.f. Cosmetics"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/e.l.f._Cosmetics_Logo_y5bqon.jpg" alt="e.l.f. Cosmetics" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="The Ordinary"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/The_Ordinary_Logo_j9mzhc.jpg" alt="The Ordinary" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Laneige"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Laneige_Logo_ge6cmm.jpg" alt="Laneige" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Charlotte Tilbury"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Charlotte_Tilbury_Logo_qxeunb.jpg" alt="Charlotte Tilbury" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Dove"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Dove_Logo_a1cwpw.jpg" alt="Dove" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Kérastase"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Kerastase_Logo_shzzjj.jpg" alt="Kérastase" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Estée Lauder"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Estee_Lauder_Logo_mxv7lr.jpg" alt="Estée Lauder" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Love Beauty & Planet"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Love_Beauty_Planet_Logo_swz3db.jpg" alt="Love Beauty & Planet" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" title="Bath & Body Works"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Bath_Body_Works_Logo_hxmfwr.jpg" alt="Bath & Body Works" class="brand-marquee-logo-img" width="140" height="45"></a>
-        {%- endif -%}
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Dot_Key_Logo_l2cw3q.jpg" alt="Dot & Key" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Kay_Beauty_Logo_jvwfqj.jpg" alt="Kay Beauty" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Lakme_Logo_z1pfmr.jpg" alt="Lakmé" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/L_Oreal_Professionnel_Logo_f0y489.jpg" alt="L'Oréal Professionnel" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Minimalist_Logo_prha1q.jpg" alt="Minimalist" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Cetaphil_Logo_aoujzk.jpg" alt="Cetaphil" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/MAC_Cosmetics_Logo_ncog8r.jpg" alt="M·A·C Cosmetics" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/L_Oreal_Paris_Logo_kxwxbt.jpg" alt="L'Oréal Paris" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/e.l.f._Cosmetics_Logo_y5bqon.jpg" alt="e.l.f. Cosmetics" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/The_Ordinary_Logo_j9mzhc.jpg" alt="The Ordinary" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Laneige_Logo_ge6cmm.jpg" alt="Laneige" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Charlotte_Tilbury_Logo_qxeunb.jpg" alt="Charlotte Tilbury" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Dove_Logo_a1cwpw.jpg" alt="Dove" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Kerastase_Logo_shzzjj.jpg" alt="Kérastase" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Estee_Lauder_Logo_mxv7lr.jpg" alt="Estée Lauder" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Love_Beauty_Planet_Logo_swz3db.jpg" alt="Love Beauty & Planet" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Bath_Body_Works_Logo_hxmfwr.jpg" alt="Bath & Body Works" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
       </div>
 
-      <!-- Group 2 (Duplicate for Seamless Infinite Loop) -->
+      <!-- Group 2 (Duplicate for Seamless Infinite Marquee Loop) -->
       <div class="brand-marquee-content" aria-hidden="true">
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            <a href="{{ block.settings.link | default: '/collections/all' }}" class="brand-logo-card" tabindex="-1">
-              <img
-                src="{{ block.settings.logo_url }}"
-                alt="{{ block.settings.brand_name | escape }}"
-                class="brand-marquee-logo-img"
-                width="140"
-                height="45"
-                loading="eager"
-              >
-            </a>
-          {%- endfor -%}
-        {%- else -%}
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Dot_Key_Logo_l2cw3q.jpg" alt="Dot & Key" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Kay_Beauty_Logo_jvwfqj.jpg" alt="Kay Beauty" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Lakme_Logo_z1pfmr.jpg" alt="Lakmé" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/L_Oreal_Professionnel_Logo_f0y489.jpg" alt="L'Oréal Professionnel" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Minimalist_Logo_prha1q.jpg" alt="Minimalist" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Cetaphil_Logo_aoujzk.jpg" alt="Cetaphil" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/MAC_Cosmetics_Logo_ncog8r.jpg" alt="M·A·C Cosmetics" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/L_Oreal_Paris_Logo_kxwxbt.jpg" alt="L'Oréal Paris" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/e.l.f._Cosmetics_Logo_y5bqon.jpg" alt="e.l.f. Cosmetics" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/The_Ordinary_Logo_j9mzhc.jpg" alt="The Ordinary" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Laneige_Logo_ge6cmm.jpg" alt="Laneige" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Charlotte_Tilbury_Logo_qxeunb.jpg" alt="Charlotte Tilbury" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Dove_Logo_a1cwpw.jpg" alt="Dove" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Kerastase_Logo_shzzjj.jpg" alt="Kérastase" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Estee_Lauder_Logo_mxv7lr.jpg" alt="Estée Lauder" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Love_Beauty_Planet_Logo_swz3db.jpg" alt="Love Beauty & Planet" class="brand-marquee-logo-img" width="140" height="45"></a>
-          <a href="/collections/all" class="brand-logo-card" tabindex="-1"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Bath_Body_Works_Logo_hxmfwr.jpg" alt="Bath & Body Works" class="brand-marquee-logo-img" width="140" height="45"></a>
-        {%- endif -%}
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Dot_Key_Logo_l2cw3q.jpg" alt="Dot & Key" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Kay_Beauty_Logo_jvwfqj.jpg" alt="Kay Beauty" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Lakme_Logo_z1pfmr.jpg" alt="Lakmé" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/L_Oreal_Professionnel_Logo_f0y489.jpg" alt="L'Oréal Professionnel" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Minimalist_Logo_prha1q.jpg" alt="Minimalist" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Cetaphil_Logo_aoujzk.jpg" alt="Cetaphil" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/MAC_Cosmetics_Logo_ncog8r.jpg" alt="M·A·C Cosmetics" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/L_Oreal_Paris_Logo_kxwxbt.jpg" alt="L'Oréal Paris" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/e.l.f._Cosmetics_Logo_y5bqon.jpg" alt="e.l.f. Cosmetics" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/The_Ordinary_Logo_j9mzhc.jpg" alt="The Ordinary" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Laneige_Logo_ge6cmm.jpg" alt="Laneige" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Charlotte_Tilbury_Logo_qxeunb.jpg" alt="Charlotte Tilbury" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Dove_Logo_a1cwpw.jpg" alt="Dove" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Kerastase_Logo_shzzjj.jpg" alt="Kérastase" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Estee_Lauder_Logo_mxv7lr.jpg" alt="Estée Lauder" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Love_Beauty_Planet_Logo_swz3db.jpg" alt="Love Beauty & Planet" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
+        <div class="brand-logo-card"><img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Bath_Body_Works_Logo_hxmfwr.jpg" alt="Bath & Body Works" class="brand-marquee-logo-img" width="140" height="45" loading="eager"></div>
       </div>
     </div>
   </div>
@@ -252,29 +213,6 @@
       "id": "bg_color",
       "label": "Background Color",
       "default": "#FAF7F2"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "brand_logo",
-      "name": "Brand Logo",
-      "settings": [
-        {
-          "type": "text",
-          "id": "brand_name",
-          "label": "Brand Name"
-        },
-        {
-          "type": "text",
-          "id": "logo_url",
-          "label": "Logo Image URL (Cloudinary / CDN)"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Collection Link"
-        }
-      ]
     }
   ],
   "presets": [
