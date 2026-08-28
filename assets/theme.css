@@ -7715,6 +7715,177 @@ h1, h2, h3, h4, .font-serif {
   }
 }
 
+/* ==========================================================================
+   Mobile Native App Experience & Bottom App Dock
+   ========================================================================== */
+
+/* 1. Mobile App Bottom Navigation Dock */
+.lush-mobile-app-dock {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Prevent blue flash on tap across mobile */
+  *, *::before, *::after {
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+    -webkit-touch-callout: none;
+  }
+
+  .lush-mobile-app-dock {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9995;
+    background: rgba(250, 247, 242, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(197, 160, 89, 0.35);
+    box-shadow: 0 -6px 25px rgba(31, 22, 16, 0.08);
+    padding: 6px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .app-dock-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .app-dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #8C7B6E;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 12px;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+  }
+
+  .app-dock-item:active {
+    transform: scale(0.86);
+  }
+
+  .dock-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+  }
+
+  .dock-icon-wrap svg {
+    stroke: #6E5E52;
+    transition: all 0.25s ease;
+  }
+
+  .dock-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    transition: all 0.25s ease;
+  }
+
+  .dock-active-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #C5A059;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Active App Tab State */
+  .app-dock-item.active {
+    color: #1F1610;
+  }
+
+  .app-dock-item.active .dock-icon-wrap svg {
+    stroke: #C5A059;
+    transform: translateY(-1px);
+  }
+
+  .app-dock-item.active .dock-label {
+    color: #1F1610;
+    font-weight: 800;
+  }
+
+  .app-dock-item.active .dock-active-dot {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Live Badges on App Dock */
+  .dock-badge {
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    min-width: 17px;
+    height: 17px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #C5A059, #DFBD75);
+    color: #1F1610;
+    font-size: 0.6rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 1.5px solid #FAF7F2;
+    box-shadow: 0 2px 6px rgba(197, 160, 89, 0.4);
+    animation: lushBadgePop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Adjust Sticky PDP Bar to dock seamlessly above App Dock */
+  .sticky-mobile-pdp-bar {
+    bottom: calc(54px + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 9990 !important;
+  }
+
+  /* Adjust Floating WhatsApp & Spin Launchers above App Dock */
+  .lush-whatsapp-widget {
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 14px !important;
+  }
+
+  .lush-wheel-floating-launcher {
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 14px !important;
+  }
+
+  .btn-back-to-top {
+    bottom: calc(125px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 14px !important;
+  }
+
+  /* Smooth Native App Drawer Styling (Bottom Sheet feel) */
+  .drawer-panel,
+  .cart-drawer-panel,
+  .wishlist-drawer-panel,
+  .mobile-nav-panel {
+    border-radius: 24px 0 0 24px;
+    box-shadow: -8px 0 35px rgba(0, 0, 0, 0.25);
+  }
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lush-reveal {

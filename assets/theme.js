@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductVariantSelector();
   initShareButtons();
   initWishlist();
+  initMobileAppDock();
 });
 
 /* --------------------------------------------------------------------------
@@ -32,9 +33,9 @@ function initCartDrawer() {
   const drawer = document.getElementById('LushCartDrawer');
   if (!drawer) return;
 
-  // Open triggers - Only explicit intentional clicks on [data-open-cart]
+  // Open triggers - Only explicit intentional clicks on [data-open-cart] or [data-cart-drawer-trigger]
   document.addEventListener('click', (e) => {
-    const openBtn = e.target.closest('[data-open-cart]');
+    const openBtn = e.target.closest('[data-open-cart], [data-cart-drawer-trigger], #BtnOpenCart');
     if (openBtn) {
       e.preventDefault();
       e.stopPropagation();
@@ -441,6 +442,14 @@ function initMobileMenu() {
   toggleBtn.addEventListener('click', openMenu);
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   if (closeX) closeX.addEventListener('click', closeMenu);
+
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-drawer-open="mobile-nav"], [data-mobile-menu-trigger]');
+    if (trigger) {
+      e.preventDefault();
+      openMenu();
+    }
+  });
 
   // Mobile Accordion Submenu Toggles
   drawer.querySelectorAll('.mobile-accordion-toggle').forEach(btn => {
@@ -1370,11 +1379,12 @@ function initSearchModal() {
     document.body.style.overflow = '';
   };
 
-  document.querySelectorAll('[data-open-search]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-open-search], [data-search-trigger], [data-search-modal-trigger], #BtnOpenSearch');
+    if (btn) {
       e.preventDefault();
       openSearch();
-    });
+    }
   });
 
   modal.querySelectorAll('[data-close-search]').forEach(el => {
@@ -2124,7 +2134,7 @@ function initWishlist() {
 
   // 1. Open / Close Wishlist Drawer
   document.addEventListener('click', (e) => {
-    const openBtn = e.target.closest('[data-open-wishlist]');
+    const openBtn = e.target.closest('[data-open-wishlist], [data-wishlist-trigger], #BtnOpenWishlist');
     if (openBtn) {
       e.preventDefault();
       openWishlistDrawer();
@@ -2227,5 +2237,34 @@ function initWishlist() {
     if (e.key === 'Escape') {
       closeWishlistDrawer();
     }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Mobile App Dock Navigation Logic
+   -------------------------------------------------------------------------- */
+function initMobileAppDock() {
+  const dock = document.getElementById('LushMobileAppDock');
+  if (!dock) return;
+
+  const currentPath = window.location.pathname;
+  const items = dock.querySelectorAll('.app-dock-item');
+
+  // Highlight active tab
+  items.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href && href !== '#' && href === currentPath) {
+      items.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    }
+  });
+
+  // Tap vibration / tactile feel on supported mobile devices
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.navigator && window.navigator.vibrate) {
+        try { window.navigator.vibrate(15); } catch (e) {}
+      }
+    });
   });
 }

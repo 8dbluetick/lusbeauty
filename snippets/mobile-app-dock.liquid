@@ -1,0 +1,72 @@
+﻿{% comment %}
+  Lush Beauty Mart — Mobile Native App Bottom Navigation Dock
+  Provides a high-end luxury app experience (like Nykaa Luxe / Sephora / Zara) on mobile devices.
+{% endcomment %}
+
+<nav class="lush-mobile-app-dock" id="LushMobileAppDock" aria-label="Mobile Navigation">
+  <div class="app-dock-container">
+    <!-- 1. Home Tab -->
+    <a href="/" class="app-dock-item {% if template.name == 'index' %}active{% endif %}" title="Home" aria-label="Home">
+      <div class="dock-icon-wrap">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </div>
+      <span class="dock-label">Home</span>
+      <span class="dock-active-dot"></span>
+    </a>
+
+    <!-- 2. Categories / Shop Tab -->
+    <button type="button" class="app-dock-item" data-drawer-open="mobile-nav" title="Categories" aria-label="Browse Categories">
+      <div class="dock-icon-wrap">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+        </svg>
+      </div>
+      <span class="dock-label">Categories</span>
+      <span class="dock-active-dot"></span>
+    </button>
+
+    <!-- 3. Search Tab -->
+    <button type="button" class="app-dock-item" data-search-trigger title="Search Products" aria-label="Search Products">
+      <div class="dock-icon-wrap">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+      <span class="dock-label">Search</span>
+      <span class="dock-active-dot"></span>
+    </button>
+
+    <!-- 4. Wishlist Tab -->
+    <button type="button" class="app-dock-item" data-wishlist-trigger title="Wishlist" aria-label="Wishlist">
+      <div class="dock-icon-wrap">
+        <svg class="dock-heart-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span class="dock-badge dock-wishlist-badge" data-wishlist-count style="display: none;">0</span>
+      </div>
+      <span class="dock-label">Wishlist</span>
+      <span class="dock-active-dot"></span>
+    </button>
+
+    <!-- 5. Bag / Cart Tab -->
+    <button type="button" class="app-dock-item" data-cart-drawer-trigger title="Shopping Bag" aria-label="Shopping Bag">
+      <div class="dock-icon-wrap">
+        <svg class="dock-bag-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="dock-badge dock-cart-badge" data-cart-count style="display: none;">0</span>
+      </div>
+      <span class="dock-label">Bag</span>
+      <span class="dock-active-dot"></span>
+    </button>
+  </div>
+</nav>
