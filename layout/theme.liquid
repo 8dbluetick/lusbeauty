@@ -83,7 +83,7 @@
     </script>
 
     <!-- Theme Stylesheet -->
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}?v={{ 'now' | date: '%s' }}">
   </head>
 
   <body class="lush-theme-body">
@@ -151,7 +151,7 @@
     {% render 'mobile-app-dock' %}
 
     <!-- Theme JavaScript -->
-    {{ 'theme.js' | asset_url | script_tag }}
+    <script src="{{ 'theme.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer></script>
 
     <!-- Loyalty Wallet JavaScript -->
     {{ 'wallet.js' | asset_url | script_tag }}

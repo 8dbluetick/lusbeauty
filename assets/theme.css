@@ -6099,14 +6099,34 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .delivery-default-perks {
-  margin-top: 10px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 0.72rem;
-  color: #6E5E52;
-  border-top: 1px dashed #EAE3DA;
-  padding-top: 8px;
+  gap: 8px;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: #2C1D11 !important;
+  line-height: 1.45;
+}
+
+.perk-dot {
+  font-size: 0.95rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.perk-item strong {
+  color: #1F1610 !important;
+  font-weight: 800;
 }
 
 /* --- Trust & Authenticity Badges Strip --- */
