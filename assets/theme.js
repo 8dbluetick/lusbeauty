@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initShareButtons();
   initWishlist();
   initMobileAppDock();
+  initCollectionFilters();
 });
 
 /* --------------------------------------------------------------------------
@@ -2218,9 +2219,6 @@ function initWishlist() {
         renderWishlistDrawer();
 
         await updateCartDrawer();
-        if (typeof showAddToCartToast === 'function') {
-          showAddToCartToast(addedItem);
-        }
       })
       .catch(err => {
         moveBtn.disabled = false;
@@ -2264,4 +2262,54 @@ function initMobileAppDock() {
       }
     });
   });
+}
+
+/* --------------------------------------------------------------------------
+   Collection Filtering, Sorting & Price Controls
+   -------------------------------------------------------------------------- */
+function initCollectionFilters() {
+  const toggleBtn = document.getElementById('BtnToggleFilters');
+  const panel = document.getElementById('CollectionFilterPanel');
+  const sortBySelect = document.getElementById('CollectionSortBy');
+
+  if (toggleBtn && panel) {
+    toggleBtn.addEventListener('click', () => {
+      const isVisible = panel.style.display !== 'none';
+      panel.style.display = isVisible ? 'none' : 'block';
+      toggleBtn.classList.toggle('active', !isVisible);
+      toggleBtn.setAttribute('aria-expanded', !isVisible);
+    });
+  }
+
+  if (sortBySelect) {
+    sortBySelect.addEventListener('change', () => {
+      if (sortBySelect.value) {
+        window.location.href = sortBySelect.value;
+      }
+    });
+  }
+
+  // Populate active price filter inputs from URL search params if present
+  const params = new URLSearchParams(window.location.search);
+  const minInput = document.getElementById('FilterPriceMin');
+  const maxInput = document.getElementById('FilterPriceMax');
+  const availInput = document.querySelector('input[name="filter.v.availability"]');
+
+  if (minInput && params.get('filter.v.price.gte')) {
+    minInput.value = params.get('filter.v.price.gte');
+    if (panel) panel.style.display = 'block';
+    if (toggleBtn) toggleBtn.classList.add('active');
+  }
+
+  if (maxInput && params.get('filter.v.price.lte')) {
+    maxInput.value = params.get('filter.v.price.lte');
+    if (panel) panel.style.display = 'block';
+    if (toggleBtn) toggleBtn.classList.add('active');
+  }
+
+  if (availInput && params.get('filter.v.availability') === '1') {
+    availInput.checked = true;
+    if (panel) panel.style.display = 'block';
+    if (toggleBtn) toggleBtn.classList.add('active');
+  }
 }

@@ -27,6 +27,136 @@
       </div>
     </div>
 
+    {%- assign sort_by = collection.sort_by | default: collection.default_sort_by | default: 'created-descending' -%}
+
+    <!-- Luxury Collection Filter & Sorting Control Bar -->
+    <div class="collection-controls-bar">
+      <!-- 1. Quick Filter Pills Strip (Recently Added, Best Selling, Price Tiers) -->
+      <div class="collection-quick-filters no-scrollbar">
+        <span class="quick-filters-label">Filter & Sort:</span>
+        <a href="{{ collection.url }}?sort_by=created-descending" class="filter-pill-chip {% if sort_by == 'created-descending' %}active{% endif %}">
+          <span>🆕 Recently Added</span>
+        </a>
+        <a href="{{ collection.url }}?sort_by=best-selling" class="filter-pill-chip {% if sort_by == 'best-selling' %}active{% endif %}">
+          <span>🔥 Best Selling</span>
+        </a>
+        <a href="{{ collection.url }}?sort_by=price-ascending" class="filter-pill-chip {% if sort_by == 'price-ascending' %}active{% endif %}">
+          <span>💰 Price: Low to High</span>
+        </a>
+        <a href="{{ collection.url }}?sort_by=price-descending" class="filter-pill-chip {% if sort_by == 'price-descending' %}active{% endif %}">
+          <span>💎 Price: High to Low</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.lte=499" class="filter-pill-chip">
+          <span>Under ₹499</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.gte=500&filter.v.price.lte=999" class="filter-pill-chip">
+          <span>₹500 – ₹999</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.gte=1000&filter.v.price.lte=1999" class="filter-pill-chip">
+          <span>₹1,000 – ₹1,999</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.gte=2000" class="filter-pill-chip">
+          <span>₹2,000+</span>
+        </a>
+        {%- if collection.url contains '?' or request.query_string != blank -%}
+          <a href="{{ collection.url }}" class="filter-pill-chip clear-chip">
+            <span>✕ Reset</span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- 2. Sort Dropdown & Detailed Price Filter Toggle Button -->
+      <div class="collection-actions-row">
+        <!-- Sort Dropdown -->
+        <div class="sort-by-wrapper">
+          <label for="CollectionSortBy" class="sort-label">Sort:</label>
+          <div class="sort-select-box">
+            <select id="CollectionSortBy" class="sort-select" aria-label="Sort collection products">
+              <option value="{{ collection.url }}?sort_by=created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>🆕 Recently Added (Newest)</option>
+              <option value="{{ collection.url }}?sort_by=price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>💰 Price: Low to High</option>
+              <option value="{{ collection.url }}?sort_by=price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>💎 Price: High to Low</option>
+              <option value="{{ collection.url }}?sort_by=best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>🔥 Best Selling</option>
+              <option value="{{ collection.url }}?sort_by=manual" {% if sort_by == 'manual' %}selected{% endif %}>✨ Featured</option>
+              <option value="{{ collection.url }}?sort_by=title-ascending" {% if sort_by == 'title-ascending' %}selected{% endif %}>🔤 Title: A–Z</option>
+            </select>
+            <span class="sort-arrow">▾</span>
+          </div>
+        </div>
+
+        <!-- Filter Toggle Button -->
+        <button type="button" class="btn-toggle-filters" id="BtnToggleFilters" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14"></line>
+            <line x1="4" y1="10" x2="4" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12" y2="3"></line>
+            <line x1="20" y1="21" x2="20" y2="16"></line>
+            <line x1="20" y1="12" x2="20" y2="3"></line>
+            <line x1="1" y1="14" x2="7" y2="14"></line>
+            <line x1="9" y1="8" x2="15" y2="8"></line>
+            <line x1="17" y1="16" x2="23" y2="16"></line>
+          </svg>
+          <span>Price Filter</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Advanced Price & Stock Filter Drawer / Panel -->
+    <div class="collection-filter-panel" id="CollectionFilterPanel" style="display: none;">
+      <form id="CollectionFilterForm" class="filter-form" action="{{ collection.url }}" method="GET">
+        <input type="hidden" name="sort_by" value="{{ sort_by }}">
+        
+        <div class="filter-grid">
+          <!-- Price Range Inputs -->
+          <div class="filter-group">
+            <h4 class="filter-group-title">💰 Custom Price Range (₹ INR)</h4>
+            <div class="price-inputs-row">
+              <div class="price-input-wrap">
+                <span class="price-currency">₹</span>
+                <input
+                  type="number"
+                  name="filter.v.price.gte"
+                  id="FilterPriceMin"
+                  class="price-number-input"
+                  placeholder="Min Price"
+                  min="0"
+                  inputmode="numeric"
+                >
+              </div>
+              <span class="price-range-sep">to</span>
+              <div class="price-input-wrap">
+                <span class="price-currency">₹</span>
+                <input
+                  type="number"
+                  name="filter.v.price.lte"
+                  id="FilterPriceMax"
+                  class="price-number-input"
+                  placeholder="Max Price"
+                  min="0"
+                  inputmode="numeric"
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Availability Filter -->
+          <div class="filter-group">
+            <h4 class="filter-group-title">📦 Stock Availability</h4>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" name="filter.v.availability" value="1" class="filter-checkbox">
+              <span>In Stock & Ready for Nagpur Delivery / Pickup</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Filter Actions -->
+        <div class="filter-actions-bar">
+          <a href="{{ collection.url }}" class="btn-clear-filters">Reset Filter</a>
+          <button type="submit" class="btn-apply-filters">Apply Price Filter</button>
+        </div>
+      </form>
+    </div>
+
     <!-- Collection Grid -->
     {%- paginate collection.products by 24 -%}
       {%- if collection.products_count == 0 -%}
