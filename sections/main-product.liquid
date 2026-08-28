@@ -102,6 +102,13 @@
            RIGHT COLUMN: PRODUCT DETAILS & PURCHASING PANEL (DYNAMIC BLOCKS)
            ==================================================================== -->
       <div class="product-info-panel">
+        {%- assign has_offers_block = false -%}
+        {%- for b in section.blocks -%}
+          {%- if b.type == 'offers' -%}
+            {%- assign has_offers_block = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when '@app' -%}
@@ -306,69 +313,9 @@
                     </a>
                   </div>
 
-                  <!-- ==========================================================
-                       LUXURY OFFERS SECTION (Matching User Reference Design)
-                       ========================================================== -->
-                  {% render 'pdp-offers-card' %}
-
-                  <!-- ==========================================================
-                       PREMIUM SHARE PRODUCT SECTION (Directly Below Offers)
-                       ========================================================== -->
-                  <div class="pdp-share-product-box">
-                    <span class="pdp-share-title">Share Product:</span>
-                    <div class="pdp-share-btn-grid">
-                      <!-- 1. Native Web Share -->
-                      <button
-                        type="button"
-                        class="pdp-share-btn-item btn-share-native"
-                        data-share-btn
-                        data-share-title="{{ product.title | escape }}"
-                        data-share-url="{{ shop.url }}{{ product.url }}"
-                        title="Share Product"
-                        aria-label="Share Product"
-                      >
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <circle cx="18" cy="5" r="3"></circle>
-                          <circle cx="6" cy="12" r="3"></circle>
-                          <circle cx="18" cy="19" r="3"></circle>
-                          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                        </svg>
-                        <span>Share</span>
-                      </button>
-
-                      <!-- 2. WhatsApp Direct Share -->
-                      {%- assign share_wa_text = 'Check out this product from Lush Beauty Mart: ' | append: product.title | append: ' ' | append: shop.url | append: product.url -%}
-                      <a
-                        href="https://api.whatsapp.com/send?text={{ share_wa_text | url_encode }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="pdp-share-btn-item btn-share-whatsapp"
-                        title="Share on WhatsApp"
-                        aria-label="Share on WhatsApp"
-                      >
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
-                        </svg>
-                        <span>WhatsApp</span>
-                      </a>
-
-                      <!-- 3. Copy Link with Live Toast Feedback -->
-                      <button
-                        type="button"
-                        class="pdp-share-btn-item btn-share-copy"
-                        data-copy-link="{{ shop.url }}{{ product.url }}"
-                        title="Copy Product Link"
-                        aria-label="Copy Product Link"
-                      >
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                        <span class="copy-link-label">Copy Link</span>
-                      </button>
-                    </div>
-                  </div>
+                  {%- unless has_offers_block -%}
+                    {% render 'pdp-offers-card' %}
+                  {%- endunless -%}
                 {%- endform -%}
               </div>
 
