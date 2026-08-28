@@ -8725,6 +8725,52 @@ h1, h2, h3, h4, .font-serif {
   border-color: #1F1610;
 }
 
+/* ==========================================================================
+   Collection Brand Logo & Authorized Partner Header Card
+   ========================================================================== */
+
+.collection-brand-badge-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.collection-brand-logo-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: #FFFFFF;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(31, 22, 16, 0.06);
+}
+
+.collection-brand-logo-img {
+  max-height: 52px;
+  max-width: 170px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.collection-verified-pill {
+  display: inline-flex;
+  padding: 4px 12px;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  border-radius: 999px;
+  color: #8B6F3E;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lush-reveal {

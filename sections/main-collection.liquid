@@ -2,13 +2,28 @@
   <div class="page-width">
     <!-- Luxury Collection Page Header -->
     <div class="collection-header-wrap">
+      {%- if collection.image != blank -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card">
+            <img
+              src="{{ collection.image | image_url: width: 320 }}"
+              alt="{{ collection.title | escape }}"
+              class="collection-brand-logo-img"
+              width="150"
+              height="60"
+              loading="eager"
+            >
+          </div>
+          <span class="collection-verified-pill">🌟 100% ORIGINAL & AUTHORIZED BRAND PARTNER</span>
+        </div>
+      {%- endif -%}
       <span class="collection-eyebrow">LUSH BEAUTY MART NAGPUR</span>
       <h1 class="collection-main-title">{{ collection.title | default: "All Products" }}</h1>
       {%- if collection.description != blank -%}
-        <p class="collection-desc">{{ collection.description | strip_html | truncate: 180 }}</p>
+        <p class="collection-desc">{{ collection.description | strip_html | truncate: 240 }}</p>
       {%- endif -%}
       <div class="collection-meta-bar">
-        <span class="collection-count-sub">Showing {{ collection.products_count }} items available in-store and online</span>
+        <span class="collection-count-sub">Showing {{ collection.products_count }} authentic items available in-store and online</span>
       </div>
     </div>
 
