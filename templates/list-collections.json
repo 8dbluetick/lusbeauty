@@ -1,5 +1,9 @@
 {
   "sections": {
+    "brands_directory": {
+      "type": "brands-directory",
+      "settings": {}
+    },
     "featured_categories": {
       "type": "featured-categories",
       "settings": {
@@ -8,6 +12,7 @@
     }
   },
   "order": [
+    "brands_directory",
     "featured_categories"
   ]
 }

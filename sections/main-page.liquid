@@ -1,15 +1,23 @@
-<section class="lush-page-section">
-  <div class="page-width page-width--narrow">
-    <h1 class="page-title">{{ page.title }}</h1>
-    <div class="page-content-rte">
-      {{ page.content }}
-    </div>
+{% comment %}
+  Lush Beauty Mart — Standard Page Section
+{% endcomment %}
+
+<div class="page-width section-page-content" style="max-width: 900px; margin: 40px auto; padding: 0 16px; min-height: 50vh;">
+  <header class="page-header" style="text-align: center; margin-bottom: 30px;">
+    <h1 class="page-title" style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 800; color: #1F1610; margin-bottom: 8px;">{{ page.title }}</h1>
+    <div style="width: 60px; height: 3px; background: #C5A059; margin: 0 auto; border-radius: 999px;"></div>
+  </header>
+
+  <div class="rte page-rte-body" style="font-size: 0.95rem; line-height: 1.8; color: #3E3027;">
+    {{ page.content }}
   </div>
-</section>
+</div>
 
 {% schema %}
 {
-  "name": "Main Page",
+  "name": "Page Content",
+  "tag": "section",
+  "class": "section-main-page",
   "settings": []
 }
 {% endschema %}
