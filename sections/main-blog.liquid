@@ -1,57 +1,174 @@
 {% comment %}
-  Lush Beauty Mart — Main Blog & Editorial Journal Section
+  Lush Beauty Mart — Ultra-Luxury Editorial Beauty Journal (Vogue / Nykaa Luxe Style)
 {% endcomment %}
 
-<div class="main-blog-section" style="max-width: 1200px; margin: 40px auto 80px; padding: 0 16px; min-height: 60vh;">
-  <!-- Blog Header -->
-  <div style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
-    <span style="display: inline-block; padding: 4px 14px; background: rgba(197, 160, 89, 0.15); border: 1px solid rgba(197, 160, 89, 0.35); border-radius: 999px; font-size: 0.72rem; font-weight: 800; color: #8B6F3E; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px;">
-      🌸 THE LUSH BEAUTY JOURNAL
-    </span>
-    <h1 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 800; color: #1F1610; margin: 0 0 10px;">{{ blog.title }}</h1>
-    <p style="font-size: 0.88rem; color: #6E5E52; margin: 0;">Skincare routines, beauty insights, ingredient guides & luxury fragrance edits.</p>
-  </div>
+<div class="lush-blog-journal-wrapper" style="background: #FAF7F2; padding: 40px 0 80px; min-height: 80vh;">
+  <div class="page-width" style="max-width: 1240px; margin: 0 auto; padding: 0 16px;">
+    
+    <!-- Editorial Journal Header -->
+    <div style="text-align: center; max-width: 780px; margin: 0 auto 40px;">
+      <span style="display: inline-block; padding: 5px 16px; background: rgba(197, 160, 89, 0.15); border: 1px solid rgba(197, 160, 89, 0.35); border-radius: 999px; font-size: 0.72rem; font-weight: 800; color: #8B6F3E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px;">
+        ✨ THE LUSH EDITORIAL JOURNAL
+      </span>
+      <h1 style="font-family: var(--font-serif); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; color: #1F1610; line-height: 1.15; margin: 0 0 14px;">
+        {{ blog.title | default: 'Beauty Notes & Skincare Rituals' }}
+      </h1>
+      <p style="font-size: 0.92rem; color: #6E5E52; line-height: 1.6; margin: 0;">
+        Expert skincare routines, dermatologist-backed ingredients, luxury fragrance guides, and makeup artistry from our Nagpur beauty team.
+      </p>
 
-  {%- paginate blog.articles by 9 -%}
-    {%- if blog.articles.size > 0 -%}
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px;">
-        {%- for article in blog.articles -%}
-          <article style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 18px rgba(31, 22, 16, 0.04);">
-            {%- if article.image -%}
-              <a href="{{ article.url }}" style="display: block; aspect-ratio: 16/10; overflow: hidden;">
-                <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-              </a>
-            {%- endif -%}
-            <div style="padding: 20px; display: flex; flex-direction: column; flex: 1;">
-              <span style="font-size: 0.72rem; color: #8A7363; margin-bottom: 8px;">{{ article.published_at | date: "%B %d, %Y" }}</span>
-              <h2 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 10px; line-height: 1.35;">
-                <a href="{{ article.url }}" style="color: #1F1610; text-decoration: none;">{{ article.title }}</a>
+      <!-- Topic Filter Pills -->
+      <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="display: inline-block; padding: 6px 16px; background: #1F1610; color: #C5A059; font-size: 0.75rem; font-weight: 800; border-radius: 999px;">All Stories</span>
+        <span style="display: inline-block; padding: 6px 16px; background: #FFFFFF; border: 1px solid #EAE3DA; color: #1F1610; font-size: 0.75rem; font-weight: 700; border-radius: 999px;">✨ Glass Skincare</span>
+        <span style="display: inline-block; padding: 6px 16px; background: #FFFFFF; border: 1px solid #EAE3DA; color: #1F1610; font-size: 0.75rem; font-weight: 700; border-radius: 999px;">🌸 Luxury Fragrances</span>
+        <span style="display: inline-block; padding: 6px 16px; background: #FFFFFF; border: 1px solid #EAE3DA; color: #1F1610; font-size: 0.75rem; font-weight: 700; border-radius: 999px;">💄 Makeup & Glamour</span>
+        <span style="display: inline-block; padding: 6px 16px; background: #FFFFFF; border: 1px solid #EAE3DA; color: #1F1610; font-size: 0.75rem; font-weight: 700; border-radius: 999px;">🌿 Indian Beauty Tips</span>
+      </div>
+    </div>
+
+    {%- paginate blog.articles by 10 -%}
+      {%- if blog.articles.size > 0 -%}
+        
+        <!-- 1. FEATURED LEAD COVER STORY (First Article) -->
+        {%- assign featured_article = blog.articles.first -%}
+        <div class="blog-featured-hero-card" style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 20px; overflow: hidden; margin-bottom: 48px; box-shadow: 0 8px 30px rgba(31, 22, 16, 0.05); transition: transform 0.3s ease;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: stretch;">
+            <!-- Featured Image -->
+            <a href="{{ featured_article.url }}" style="display: block; position: relative; aspect-ratio: 16/10; overflow: hidden; background: #FAF7F2; text-decoration: none;">
+              {%- if featured_article.image -%}
+                <img
+                  src="{{ featured_article.image | image_url: width: 1000 }}"
+                  alt="{{ featured_article.title | escape }}"
+                  style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                  loading="eager"
+                  width="700"
+                  height="450"
+                >
+              {%- else -%}
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: linear-gradient(135deg, #FAF7F2 0%, #F5EDE4 100%);">🌸</div>
+              {%- endif -%}
+              <span style="position: absolute; top: 16px; left: 16px; background: #1F1610; color: #C5A059; font-size: 0.7rem; font-weight: 800; padding: 5px 12px; border-radius: 999px; letter-spacing: 0.05em; text-transform: uppercase;">
+                ★ EDITOR'S PICK
+              </span>
+            </a>
+
+            <!-- Featured Story Content -->
+            <div style="padding: 36px 30px; display: flex; flex-direction: column; justify-content: center;">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: #8A7363; margin-bottom: 12px; font-weight: 700;">
+                <span>{{ featured_article.published_at | date: "%B %d, %Y" }}</span>
+                <span>•</span>
+                <span>⏱️ 4 Min Read</span>
+                <span>•</span>
+                <span>By {{ featured_article.author | default: 'Lush Beauty Team' }}</span>
+              </div>
+
+              <h2 style="font-family: var(--font-serif); font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 800; color: #1F1610; line-height: 1.25; margin: 0 0 14px;">
+                <a href="{{ featured_article.url }}" style="color: #1F1610; text-decoration: none;">{{ featured_article.title }}</a>
               </h2>
-              <p style="font-size: 0.8rem; color: #6E5E52; line-height: 1.5; margin: 0 0 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                {{ article.excerpt_or_content | strip_html }}
+
+              <p style="font-size: 0.88rem; color: #6E5E52; line-height: 1.6; margin: 0 0 24px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                {{ featured_article.excerpt_or_content | strip_html }}
               </p>
-              <div style="margin-top: auto;">
-                <a href="{{ article.url }}" style="font-size: 0.78rem; font-weight: 800; color: #C5A059; text-decoration: none;">Read Full Article →</a>
+
+              <div>
+                <a href="{{ featured_article.url }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #1F1610; color: #C5A059; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 8px; text-decoration: none; transition: all 0.2s ease;">
+                  <span>Read Full Guide</span>
+                  <span>→</span>
+                </a>
               </div>
             </div>
-          </article>
-        {%- endfor -%}
-      </div>
-      {{ paginate | default_pagination }}
-    {%- else -%}
-      <div style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 16px; padding: 60px 20px; text-align: center;">
-        <span style="font-size: 3rem; display: block; margin-bottom: 12px;">✍️</span>
-        <h3 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800; color: #1F1610; margin-bottom: 6px;">Editorial Articles Coming Soon</h3>
-        <p style="font-size: 0.85rem; color: #6E5E52; margin-bottom: 20px;">Our beauty editors are crafting authentic guides on Indian skincare & luxury routines.</p>
-        <a href="/collections/all" style="display: inline-block; padding: 12px 24px; background: #1F1610; color: #C5A059; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; border-radius: 8px; text-decoration: none;">Explore Products →</a>
-      </div>
-    {%- endif -%}
-  {%- endpaginate -%}
+          </div>
+        </div>
+
+        <!-- Section Title for Remaining Stories -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1.5px solid #EAE3DA;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.4rem; font-weight: 800; color: #1F1610; margin: 0;">Latest Beauty Articles</h3>
+          <span style="font-size: 0.78rem; font-weight: 700; color: #8A7363;">{{ blog.articles_count }} {{ blog.articles_count | pluralize: 'Article', 'Articles' }}</span>
+        </div>
+
+        <!-- 2. LUXURY 3-COLUMN EDITORIAL STORIES GRID -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 26px;">
+          {%- for article in blog.articles -%}
+            <article class="blog-grid-card" style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 18px rgba(31, 22, 16, 0.04); transition: all 0.3s ease;">
+              <!-- Image -->
+              <a href="{{ article.url }}" style="display: block; position: relative; aspect-ratio: 16/10; overflow: hidden; background: #FAF7F2; text-decoration: none;">
+                {%- if article.image -%}
+                  <img
+                    src="{{ article.image | image_url: width: 600 }}"
+                    alt="{{ article.title | escape }}"
+                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
+                    loading="lazy"
+                    width="400"
+                    height="250"
+                  >
+                {%- else -%}
+                  <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: linear-gradient(135deg, #FAF7F2 0%, #F5EDE4 100%);">🌸</div>
+                {%- endif -%}
+                <span style="position: absolute; top: 12px; left: 12px; background: rgba(31, 22, 16, 0.8); color: #FFFFFF; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">
+                  SKINCARE & BEAUTY
+                </span>
+              </a>
+
+              <!-- Card Content -->
+              <div style="padding: 22px 20px; display: flex; flex-direction: column; flex: 1;">
+                <div style="font-size: 0.72rem; color: #8A7363; margin-bottom: 8px; font-weight: 600;">
+                  <span>{{ article.published_at | date: "%d %b %Y" }}</span> • <span>⏱️ 3 min read</span>
+                </div>
+
+                <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 10px; line-height: 1.35;">
+                  <a href="{{ article.url }}" style="color: #1F1610; text-decoration: none;">{{ article.title }}</a>
+                </h3>
+
+                <p style="font-size: 0.8rem; color: #6E5E52; line-height: 1.5; margin: 0 0 18px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                  {{ article.excerpt_or_content | strip_html }}
+                </p>
+
+                <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid #F3EDE7; display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-size: 0.72rem; color: #8A7363; font-weight: 600;">By {{ article.author | default: 'Lush Editors' }}</span>
+                  <a href="{{ article.url }}" style="font-size: 0.78rem; font-weight: 800; color: #C5A059; text-decoration: none;">Read Story →</a>
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {{ paginate | default_pagination }}
+
+      {%- else -%}
+        <!-- Empty State -->
+        <div style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 20px; padding: 60px 20px; text-align: center; max-width: 600px; margin: 40px auto;">
+          <span style="font-size: 3.5rem; display: block; margin-bottom: 12px;">✍️</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 800; color: #1F1610; margin-bottom: 8px;">Beauty Editorial Journal Launching Soon</h2>
+          <p style="font-size: 0.85rem; color: #6E5E52; margin-bottom: 24px; line-height: 1.5;">Our beauty editors are publishing guides on Indian skincare routines, Korean glass skin, and luxury perfume pairing.</p>
+          <a href="/collections/all" style="display: inline-block; padding: 12px 28px; background: #1F1610; color: #C5A059; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; border-radius: 8px; text-decoration: none;">Explore Genuine Products →</a>
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+
+    <!-- VIP Beauty Club Newsletter Box -->
+    <div style="background: linear-gradient(135deg, #1F1610 0%, #322116 100%); border-radius: 20px; padding: 36px 24px; margin-top: 60px; text-align: center; color: #FFFFFF; border: 1px solid rgba(197, 160, 89, 0.4);">
+      <span style="font-size: 1.8rem; display: block; margin-bottom: 8px;">💌</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 800; color: #C5A059; margin: 0 0 8px;">Join The Lush Beauty Circle</h3>
+      <p style="font-size: 0.85rem; color: #E8DFD5; max-width: 500px; margin: 0 auto 20px; line-height: 1.5;">Get exclusive weekly skincare guides, secret VIP discount codes, and new brand drop alerts directly to your inbox.</p>
+      
+      {%- form 'customer', class: 'blog-newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter, blog_subscriber">
+        <div style="display: flex; max-width: 440px; margin: 0 auto; gap: 8px;">
+          <input type="email" name="contact[email]" required placeholder="Enter your email address" style="flex: 1; padding: 12px 16px; border: 1px solid rgba(197, 160, 89, 0.5); border-radius: 8px; background: #FFFFFF; color: #1F1610; font-size: 0.85rem; outline: none;">
+          <button type="submit" style="padding: 12px 20px; background: #C5A059; color: #1F1610; font-weight: 800; font-size: 0.82rem; text-transform: uppercase; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap;">
+            Subscribe
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+
+  </div>
 </div>
 
 {% schema %}
 {
-  "name": "Blog Posts",
+  "name": "Blog Journal",
   "settings": []
 }
 {% endschema %}
