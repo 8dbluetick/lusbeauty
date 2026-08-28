@@ -5709,178 +5709,192 @@ h1, h2, h3, h4, .font-serif {
 }
 
 /* ==========================================================================
-   Luxury Offers & Promo Section (Existing Store Coupons)
+   Offers Section (Matching Exact User Reference UI)
    ========================================================================== */
 
-.pdp-offers-promo-card {
-  background: #FAF7F2;
-  border: 1.5px solid #EAE3DA;
-  border-radius: 14px;
-  padding: 16px 16px 12px;
-  margin-top: 14px;
-  box-shadow: 0 4px 16px rgba(31, 22, 16, 0.03);
+.pdp-offers-section-wrap {
+  margin-top: 18px;
+  margin-bottom: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pdp-offers-standalone-block {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (min-width: 1024px) {
-  .pdp-offers-promo-card {
+  .pdp-offers-section-wrap,
+  .pdp-offers-standalone-block {
     grid-column: 1 / -1;
   }
 }
 
-.pdp-offers-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
-}
-
-.offers-header-left {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.pdp-offers-fire {
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.pdp-offers-title {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  font-weight: 800;
+.pdp-offers-section-title {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #1F1610;
-  margin: 0;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  margin: 0 0 10px 2px;
+  letter-spacing: -0.01em;
 }
 
-.offers-count-pill {
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  color: #8B6F3E;
-  background: rgba(197, 160, 89, 0.15);
-  border: 1px solid rgba(197, 160, 89, 0.35);
-  padding: 3px 8px;
-  border-radius: 999px;
-  text-transform: uppercase;
-}
-
-.pdp-offers-list {
+.pdp-offers-card-box {
+  background: #FFFFFF;
+  border: 1.5px solid #8EC5FC;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 18px rgba(0, 102, 204, 0.05);
   display: flex;
   flex-direction: column;
   gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.pdp-offer-item {
+.pdp-offers-rows-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.pdp-offer-row-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 12px;
-  background: #FFFFFF;
-  border: 1px solid #EAE3DA;
-  border-radius: 10px;
-  transition: all 0.2s ease;
+  padding: 12px 0;
+  border-bottom: 1px solid #F0F4F8;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.pdp-offer-item:hover {
-  border-color: #C5A059;
-  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.12);
-  transform: translateY(-1px);
+.pdp-offer-row-item:last-child {
+  border-bottom: none;
 }
 
-.offer-item-left {
+.offer-row-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
   flex: 1;
 }
 
-.offer-badge-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #FAF7F2;
-  border: 1px solid #EAE3DA;
+.offer-starburst-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  background: #E8F4FD;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: #C5A059;
   flex-shrink: 0;
 }
 
-.offer-item-details {
+.offer-text-details {
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
-.offer-item-heading {
-  font-size: 0.8rem;
+.offer-heading-blue {
+  font-size: 0.88rem;
   font-weight: 800;
-  color: #1F1610;
+  color: #0747A6;
   line-height: 1.25;
+  margin-bottom: 2px;
 }
 
-.offer-item-sub {
-  font-size: 0.68rem;
-  color: #6E5E52;
-  line-height: 1.25;
-  margin-top: 1px;
+.offer-desc-sub {
+  font-size: 0.76rem;
+  color: #4A5568;
+  line-height: 1.35;
 }
 
-.offer-code-pill-wrap {
+.offer-code-action {
   flex-shrink: 0;
 }
 
-.btn-copy-coupon {
+.btn-dashed-coupon {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: #FAF7F2;
-  border: 1.5px dashed #C5A059;
-  border-radius: 6px;
-  padding: 5px 10px;
-  color: #1F1610;
-  font-size: 0.72rem;
+  gap: 8px;
+  padding: 7px 14px;
+  background: #FFFFFF;
+  border: 1.5px dashed #0747A6;
+  border-radius: 8px;
+  font-size: 0.82rem;
   font-weight: 800;
   font-family: monospace;
-  letter-spacing: 0.05em;
+  color: #1F1610;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
-.btn-copy-coupon:hover {
-  background: #1F1610;
-  color: #C5A059;
-  border-color: #1F1610;
+.btn-dashed-coupon:hover {
+  background: #F0F7FF;
+  border-color: #0052CC;
+  transform: translateY(-1px);
 }
 
-.btn-copy-coupon.copied {
+.btn-dashed-coupon.copied {
   background: #0F7A42 !important;
   color: #FFFFFF !important;
   border-color: #0F7A42 !important;
   border-style: solid !important;
 }
 
-.coupon-copy-icon {
-  font-size: 0.75rem;
-  line-height: 1;
+.copy-doc-icon {
+  color: #0747A6;
+  transition: color 0.2s ease;
 }
 
-.pdp-extra-offers {
+.btn-dashed-coupon.copied .copy-doc-icon {
+  color: #FFFFFF;
+}
+
+.pdp-extra-offers-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
   animation: extraOffersSlide 0.28s ease-out;
+  width: 100%;
+}
+
+@keyframes extraOffersSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-toggle-all-offers {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px 0 2px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #0747A6;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.btn-toggle-all-offers:hover {
+  color: #1F1610;
+  text-decoration: underline;
 }
 
 @keyframes extraOffersSlide {

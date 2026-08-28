@@ -307,124 +307,9 @@
                   </div>
 
                   <!-- ==========================================================
-                       LUXURY OFFERS & PROMO SECTION (Existing Store Coupons)
+                       LUXURY OFFERS SECTION (Matching User Reference Design)
                        ========================================================== -->
-                  <div class="pdp-offers-promo-card" id="PdpOffersPromoCard">
-                    <div class="pdp-offers-header">
-                      <div class="offers-header-left">
-                        <span class="pdp-offers-fire">🔥</span>
-                        <h4 class="pdp-offers-title">Offers & Promo</h4>
-                      </div>
-                      <span class="offers-count-pill">6 Active Coupons</span>
-                    </div>
-
-                    <div class="pdp-offers-list">
-                      <!-- Initial Top 2 Featured Offers -->
-                      <div class="pdp-offer-item">
-                        <div class="offer-item-left">
-                          <span class="offer-badge-icon">%</span>
-                          <div class="offer-item-details">
-                            <strong class="offer-item-heading">Get ₹200 OFF</strong>
-                            <span class="offer-item-sub">Shop for ₹1,499 or more</span>
-                          </div>
-                        </div>
-                        <div class="offer-code-pill-wrap">
-                          <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH200" aria-label="Copy coupon code LUSH200">
-                            <span class="coupon-code-label">LUSH200</span>
-                            <span class="coupon-copy-icon">📋</span>
-                          </button>
-                        </div>
-                      </div>
-
-                      <div class="pdp-offer-item">
-                        <div class="offer-item-left">
-                          <span class="offer-badge-icon">🚚</span>
-                          <div class="offer-item-details">
-                            <strong class="offer-item-heading">Free Shipping</strong>
-                            <span class="offer-item-sub">Available across India & Nagpur</span>
-                          </div>
-                        </div>
-                        <div class="offer-code-pill-wrap">
-                          <button type="button" class="btn-copy-coupon" data-copy-coupon="FRESHIP" aria-label="Copy coupon code FRESHIP">
-                            <span class="coupon-code-label">FRESHIP</span>
-                            <span class="coupon-copy-icon">📋</span>
-                          </button>
-                        </div>
-                      </div>
-
-                      <!-- Collapsible Remaining Offers (Hidden by default, smooth expand) -->
-                      <div class="pdp-extra-offers" id="PdpExtraOffers" style="display: none;">
-                        <div class="pdp-offer-item">
-                          <div class="offer-item-left">
-                            <span class="offer-badge-icon">🎁</span>
-                            <div class="offer-item-details">
-                              <strong class="offer-item-heading">10% OFF Entire Order</strong>
-                              <span class="offer-item-sub">Shop for ₹999 or more</span>
-                            </div>
-                          </div>
-                          <div class="offer-code-pill-wrap">
-                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSHGIFT" aria-label="Copy coupon code LUSHGIFT">
-                              <span class="coupon-code-label">LUSHGIFT</span>
-                              <span class="coupon-copy-icon">📋</span>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="pdp-offer-item">
-                          <div class="offer-item-left">
-                            <span class="offer-badge-icon">💰</span>
-                            <div class="offer-item-details">
-                              <strong class="offer-item-heading">Flat ₹100 OFF</strong>
-                              <span class="offer-item-sub">Shop for ₹799 or more</span>
-                            </div>
-                          </div>
-                          <div class="offer-code-pill-wrap">
-                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH100" aria-label="Copy coupon code LUSH100">
-                              <span class="coupon-code-label">LUSH100</span>
-                              <span class="coupon-copy-icon">📋</span>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="pdp-offer-item">
-                          <div class="offer-item-left">
-                            <span class="offer-badge-icon">✨</span>
-                            <div class="offer-item-details">
-                              <strong class="offer-item-heading">15% Luxury Discount</strong>
-                              <span class="offer-item-sub">Shop for ₹999 or more</span>
-                            </div>
-                          </div>
-                          <div class="offer-code-pill-wrap">
-                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH15" aria-label="Copy coupon code LUSH15">
-                              <span class="coupon-code-label">LUSH15</span>
-                              <span class="coupon-copy-icon">📋</span>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="pdp-offer-item">
-                          <div class="offer-item-left">
-                            <span class="offer-badge-icon">🏷️</span>
-                            <div class="offer-item-details">
-                              <strong class="offer-item-heading">10% Instant OFF</strong>
-                              <span class="offer-item-sub">Shop for ₹499 or more</span>
-                            </div>
-                          </div>
-                          <div class="offer-code-pill-wrap">
-                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH10" aria-label="Copy coupon code LUSH10">
-                              <span class="coupon-code-label">LUSH10</span>
-                              <span class="coupon-copy-icon">📋</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- View All Offers Toggle Button -->
-                    <button type="button" class="btn-toggle-all-offers" id="BtnToggleAllOffers" aria-expanded="false">
-                      <span id="ToggleOffersText">View All Offers (4 more) →</span>
-                    </button>
-                  </div>
+                  {% render 'pdp-offers-card' %}
 
                   <!-- ==========================================================
                        PREMIUM SHARE PRODUCT SECTION (Directly Below Offers)
@@ -485,6 +370,12 @@
                     </div>
                   </div>
                 {%- endform -%}
+              </div>
+
+            {%- when 'offers' -%}
+              <!-- Dedicated Offers Block -->
+              <div class="pdp-offers-standalone-block" {{ block.shopify_attributes }}>
+                {% render 'pdp-offers-card' %}
               </div>
 
             {%- when 'delivery_checker' -%}
@@ -690,6 +581,11 @@
     {
       "type": "buy_buttons",
       "name": "Buy Buttons & WhatsApp",
+      "limit": 1
+    },
+    {
+      "type": "offers",
+      "name": "Offers & Promo Card",
       "limit": 1
     },
     {

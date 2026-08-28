@@ -38,6 +38,10 @@
           "type": "buy_buttons",
           "settings": {}
         },
+        "offers": {
+          "type": "offers",
+          "settings": {}
+        },
         "delivery_checker": {
           "type": "delivery_checker",
           "settings": {
@@ -62,6 +66,7 @@
         "description",
         "variant_picker",
         "buy_buttons",
+        "offers",
         "delivery_checker",
         "trust_badges",
         "accordions"

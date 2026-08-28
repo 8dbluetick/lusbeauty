@@ -733,7 +733,7 @@ function initCouponCopy() {
       navigator.clipboard.writeText(code).then(() => {
         const originalHtml = copyCouponBtn.innerHTML;
         copyCouponBtn.classList.add('copied');
-        copyCouponBtn.innerHTML = `<span>${code}</span> <span class="coupon-copy-icon">✓ Copied!</span>`;
+        copyCouponBtn.innerHTML = `<span class="coupon-text-val">${code}</span> <span>✓ Copied!</span>`;
 
         setTimeout(() => {
           copyCouponBtn.classList.remove('copied');
