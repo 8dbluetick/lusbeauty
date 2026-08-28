@@ -606,10 +606,10 @@
     "trending_products",
     "brand_spotlight",
     "instagram_feed",
-    "testimonials",
-    "partner_ventures",
-    "faq",
     "brand_marquee",
-    "store_experience"
+    "store_experience",
+    "faq",
+    "testimonials",
+    "partner_ventures"
   ]
 }
