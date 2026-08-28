@@ -102,13 +102,6 @@
            RIGHT COLUMN: PRODUCT DETAILS & PURCHASING PANEL (DYNAMIC BLOCKS)
            ==================================================================== -->
       <div class="product-info-panel">
-        {%- assign has_offers_block = false -%}
-        {%- for b in section.blocks -%}
-          {%- if b.type == 'offers' -%}
-            {%- assign has_offers_block = true -%}
-          {%- endif -%}
-        {%- endfor -%}
-
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when '@app' -%}
@@ -313,16 +306,11 @@
                     </a>
                   </div>
 
-                  {%- unless has_offers_block -%}
-                    {% render 'pdp-offers-card' %}
-                  {%- endunless -%}
+                  <!-- ==========================================================
+                       LUXURY OFFERS SECTION (Unconditionally Rendered on All PDPs)
+                       ========================================================== -->
+                  {% render 'pdp-offers-card' %}
                 {%- endform -%}
-              </div>
-
-            {%- when 'offers' -%}
-              <!-- Dedicated Offers Block -->
-              <div class="pdp-offers-standalone-block" {{ block.shopify_attributes }}>
-                {% render 'pdp-offers-card' %}
               </div>
 
             {%- when 'delivery_checker' -%}
@@ -528,11 +516,6 @@
     {
       "type": "buy_buttons",
       "name": "Buy Buttons & WhatsApp",
-      "limit": 1
-    },
-    {
-      "type": "offers",
-      "name": "Offers & Promo Card",
       "limit": 1
     },
     {
