@@ -1,0 +1,190 @@
+﻿{% comment %}
+  Lush Beauty Mart — Luxury Live Order Tracking Section
+  Integrates with Shiprocket, BlueDart, Delhivery & Local Nagpur Showroom Dispatch
+{% endcomment %}
+
+<div class="lush-track-page-wrap">
+  <div class="page-width track-page-container">
+    <!-- Header Hero Banner -->
+    <div class="track-hero-card">
+      <div class="track-badge-pill">
+        <span>🚚 LIVE COURIER TRACKING</span>
+      </div>
+      <h1 class="track-page-title">{{ section.settings.heading | default: 'Track Your Order' }}</h1>
+      <p class="track-page-subtitle">{{ section.settings.subheading | default: 'Enter your Shiprocket AWB tracking number or Shopify Order ID to get real-time live location updates.' }}</p>
+    </div>
+
+    <!-- Main Tracker Card -->
+    <div class="track-card-main">
+      <!-- Tabs: AWB Number vs Order ID -->
+      <div class="track-tab-switcher" role="tablist">
+        <button type="button" class="track-tab-btn active" id="TabAwb" role="tab" aria-selected="true" data-tab-target="paneAwb">
+          <span>📦 By Tracking / AWB Number</span>
+        </button>
+        <button type="button" class="track-tab-btn" id="TabOrderId" role="tab" aria-selected="false" data-tab-target="paneOrderId">
+          <span>🏷️ By Order ID & Phone</span>
+        </button>
+      </div>
+
+      <!-- Tab Pane 1: AWB Number Tracker -->
+      <div class="track-tab-pane active" id="PaneAwb">
+        <form id="FormTrackAwb" class="track-form">
+          <div class="track-input-group">
+            <label for="InputAwbNumber" class="track-input-label">Shiprocket / Courier AWB Number:</label>
+            <div class="track-input-wrap">
+              <span class="track-input-icon">🔍</span>
+              <input
+                type="text"
+                id="InputAwbNumber"
+                class="track-text-input"
+                placeholder="e.g. 143214569871 or SR1024"
+                required
+                autocomplete="off"
+              >
+            </div>
+            <p class="track-input-hint">Found in the SMS / WhatsApp tracking message sent after order dispatch.</p>
+          </div>
+
+          <button type="submit" class="btn-track-submit" id="BtnTrackAwb">
+            <span>🚀 TRACK ORDER LIVE</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Tab Pane 2: Order ID & Phone Number Tracker -->
+      <div class="track-tab-pane" id="PaneOrderId" style="display: none;">
+        <form id="FormTrackOrderId" class="track-form">
+          <div class="track-input-grid">
+            <div class="track-input-group">
+              <label for="InputOrderId" class="track-input-label">Shopify Order ID:</label>
+              <div class="track-input-wrap">
+                <span class="track-input-icon">#</span>
+                <input
+                  type="text"
+                  id="InputOrderId"
+                  class="track-text-input"
+                  placeholder="e.g. 1024 or #LUSH-1024"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="track-input-group">
+              <label for="InputOrderPhone" class="track-input-label">Mobile Number / Email:</label>
+              <div class="track-input-wrap">
+                <span class="track-input-icon">📱</span>
+                <input
+                  type="text"
+                  id="InputOrderPhone"
+                  class="track-text-input"
+                  placeholder="e.g. 9119595951 or your@email.com"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-track-submit" id="BtnTrackOrderId">
+            <span>🚀 SEARCH & TRACK ORDER</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Live Tracking Loading State -->
+      <div class="track-loading-state" id="TrackLoadingState" style="display: none;">
+        <div class="track-spinner"></div>
+        <p>Connecting to Shiprocket Tracking Server...</p>
+      </div>
+
+      <!-- Embedded / Dynamic Results Container -->
+      <div class="track-results-container" id="TrackResultsContainer" style="display: none;">
+        <!-- Dynamic Content Injected via JS -->
+      </div>
+    </div>
+
+    <!-- 4-Step Standard Delivery Journey Explainer -->
+    <div class="delivery-journey-card">
+      <h3 class="journey-title">Lush Beauty Mart Delivery Journey</h3>
+      <div class="journey-steps-grid">
+        <div class="journey-step-item">
+          <div class="step-num-badge">1</div>
+          <div class="step-icon">🏬</div>
+          <h4>Packed in Nagpur</h4>
+          <p>Quality inspected & batch verified at our Lad Sq. Showroom.</p>
+        </div>
+
+        <div class="journey-step-item">
+          <div class="step-num-badge">2</div>
+          <div class="step-icon">⚡</div>
+          <h4>Dispatched via Shiprocket</h4>
+          <p>Handed over to BlueDart, Delhivery or DTDC Express.</p>
+        </div>
+
+        <div class="journey-step-item">
+          <div class="step-num-badge">3</div>
+          <div class="step-icon">🚚</div>
+          <h4>In Transit</h4>
+          <p>Real-time tracked across GPS checkpoints to your city.</p>
+        </div>
+
+        <div class="journey-step-item">
+          <div class="step-num-badge">4</div>
+          <div class="step-icon">🎁</div>
+          <h4>Doorstep Delivery</h4>
+          <p>Delivered safely to your hands in temperature-sealed box.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Need Help / WhatsApp Direct Inquiry Card -->
+    <div class="track-help-card">
+      <div class="help-card-content">
+        <div class="help-icon">💬</div>
+        <div class="help-text">
+          <h3>Need instant help with your shipment?</h3>
+          <p>Our Nagpur customer support team is active on WhatsApp to assist with live updates, address modifications & express re-attempts.</p>
+        </div>
+      </div>
+      <a
+        href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ 'Namaste Lush Beauty Mart! 🌸 I need help tracking my order. My Order ID is: ' | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-track-whatsapp"
+        id="BtnTrackWhatsAppHelp"
+      >
+        <span>💬 Chat on WhatsApp (+91 91195 95951)</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Track Order Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Track Your Order Live"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Enter your Shiprocket AWB tracking number or Order ID to get real-time location updates directly from our courier network."
+    },
+    {
+      "type": "text",
+      "id": "shiprocket_domain",
+      "label": "Shiprocket Branded Domain",
+      "default": "lushbeautymart.shiprocket.co"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Track Order Page"
+    }
+  ]
+}
+{% endschema %}

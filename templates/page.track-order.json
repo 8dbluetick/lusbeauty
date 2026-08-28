@@ -1,0 +1,19 @@
+﻿{
+  "sections": {
+    "main": {
+      "type": "track-order-page",
+      "settings": {
+        "heading": "Track Your Order Live",
+        "subheading": "Enter your Shiprocket AWB tracking number or Shopify Order ID to get real-time location updates directly from our courier network."
+      }
+    },
+    "store_experience": {
+      "type": "store-experience",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "store_experience"
+  ]
+}

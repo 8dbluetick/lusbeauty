@@ -143,6 +143,10 @@
     <!-- Loyalty Wallet Stylesheet -->
     {{ 'wallet.css' | asset_url | stylesheet_tag }}
 
+    <!-- Live Order Tracking Stylesheet & Script -->
+    {{ 'track-order.css' | asset_url | stylesheet_tag }}
+    {{ 'track-order.js' | asset_url | script_tag }}
+
     <!-- Mobile Native App Bottom Dock (iOS/Android App Navigation) -->
     {% render 'mobile-app-dock' %}
 
