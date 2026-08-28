@@ -8347,6 +8347,145 @@ h1, h2, h3, h4, .font-serif {
   }
 }
 
+/* ==========================================================================
+   Policy & Legal Pages (Privacy, Terms, Refunds, Shipping)
+   ========================================================================== */
+
+.lush-policy-section {
+  padding: 50px 0 70px;
+  background: #FAF7F2;
+  min-height: 70vh;
+}
+
+.policy-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.policy-badge {
+  display: inline-flex;
+  padding: 5px 14px;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 999px;
+  color: #8B6F3E;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.policy-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.35rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 0 0 8px;
+}
+
+.policy-updated {
+  font-size: 0.84rem;
+  color: #8A7363;
+}
+
+.policy-content-card {
+  background: #FFFFFF;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 6px 24px rgba(31, 22, 16, 0.05);
+  color: #4A3E36;
+  line-height: 1.75;
+  font-size: 0.94rem;
+}
+
+.policy-content-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 28px 0 10px;
+}
+
+.policy-content-card h3:first-child {
+  margin-top: 0;
+}
+
+.policy-content-card p {
+  margin: 0 0 16px;
+}
+
+.policy-content-card ul {
+  padding-left: 20px;
+  margin: 0 0 20px;
+}
+
+.policy-content-card li {
+  margin-bottom: 8px;
+}
+
+.policy-contact-box {
+  background: #FAF7F2;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.policy-contact-box p {
+  margin: 0 0 6px;
+}
+
+.policy-contact-box p:last-child {
+  margin-bottom: 0;
+}
+
+.policy-contact-box a {
+  color: #C5A059;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Footer Legal Links in Bottom Bar */
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+}
+
+.footer-legal-links a {
+  color: rgba(247, 239, 225, 0.65);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+  color: #C5A059;
+}
+
+.footer-contact-item {
+  margin-top: 6px !important;
+  font-size: 0.84rem;
+}
+
+.footer-contact-item a {
+  color: #C5A059;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-contact-item a:hover {
+  text-decoration: underline;
+}
+
+.footer-timings-text {
+  margin-top: 6px !important;
+  font-size: 0.8rem;
+  color: rgba(247, 239, 225, 0.6);
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lush-reveal {
