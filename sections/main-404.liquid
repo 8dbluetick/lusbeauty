@@ -1,4 +1,6 @@
-<section class="lush-404-section">
+﻿<div id="DynamicPolicyContainer" style="display: none;"></div>
+
+<section class="lush-404-section" id="Default404Section">
   <div class="page-width text-center">
     <span class="error-badge">404</span>
     <h1 class="error-title">Page Not Found</h1>
@@ -6,6 +8,110 @@
     <a href="/collections/all" class="btn-hero-primary">Explore All Collections →</a>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const path = window.location.pathname.toLowerCase();
+  const container = document.getElementById('DynamicPolicyContainer');
+  const default404 = document.getElementById('Default404Section');
+  if (!container || !default404) return;
+
+  const policies = {
+    privacy: {
+      badge: '🔒 LEGAL & COMPLIANCE',
+      title: 'Privacy Policy',
+      html: `
+        <h3>1. Information We Collect</h3>
+        <p>At Lush Beauty Mart (lushbeautymart.in), we respect your privacy. When you visit our website, place an order, or contact our customer support, we collect information necessary to fulfill your orders, including your name, shipping address, contact phone number, and email address (<strong>info.lushbeauty@gmail.com</strong>).</p>
+        <h3>2. How We Use Your Information</h3>
+        <p>Your details are used strictly for processing deliveries, live courier tracking, customer support, and fraud prevention.</p>
+        <h3>3. Payment Security</h3>
+        <p>We do not store your credit card, debit card, or UPI PINs on our servers. All online payments are securely encrypted via RBI-authorized payment gateways.</p>
+        <div class="policy-contact-box">
+          <p><strong>Lush Beauty Mart Customer Care</strong></p>
+          <p>📍 Below Hotel Maitrayee, Near Lad Sq., North Ambazari Road, Nagpur – 440 010</p>
+          <p>📞 Phone / WhatsApp: <a href="tel:9119595951">+91 91195 95951</a></p>
+          <p>✉️ Email: <a href="mailto:info.lushbeauty@gmail.com">info.lushbeauty@gmail.com</a></p>
+        </div>
+      `
+    },
+    terms: {
+      badge: '📜 TERMS & CONDITIONS',
+      title: 'Terms of Service',
+      html: `
+        <h3>1. Overview & Acceptance</h3>
+        <p>By visiting Lush Beauty Mart or purchasing from our flagship showroom in Nagpur, you agree to our terms of service.</p>
+        <h3>2. 100% Authentic Product Guarantee</h3>
+        <p>All cosmetics, skincare, fragrances, and accessories listed on Lush Beauty Mart are 100% genuine and sourced directly from verified authorized brand distributors with genuine batch codes and seals.</p>
+        <div class="policy-contact-box">
+          <p><strong>Lush Beauty Mart Customer Care</strong></p>
+          <p>📍 Below Hotel Maitrayee, Near Lad Sq., North Ambazari Road, Nagpur – 440 010</p>
+          <p>📞 Helpline: <a href="tel:9119595951">+91 91195 95951</a></p>
+          <p>✉️ Email: <a href="mailto:info.lushbeauty@gmail.com">info.lushbeauty@gmail.com</a></p>
+        </div>
+      `
+    },
+    refund: {
+      badge: '🔄 RETURNS & EXCHANGES',
+      title: 'Refund & Return Policy',
+      html: `
+        <h3>1. Return Eligibility</h3>
+        <p>If you receive a damaged, defective, or incorrect product, you are eligible for a replacement or full refund within <strong>7 days</strong> of delivery.</p>
+        <h3>2. Conditions for Return</h3>
+        <p>Item must be unused, unopened with original seal intact. Please share an unboxing video or clear photos within 48 hours of delivery.</p>
+        <div class="policy-contact-box">
+          <p><strong>Lush Beauty Mart Returns Desk</strong></p>
+          <p>💬 WhatsApp Support: <a href="https://wa.me/919119595951" target="_blank">+91 91195 95951</a></p>
+          <p>✉️ Email: <a href="mailto:info.lushbeauty@gmail.com">info.lushbeauty@gmail.com</a></p>
+        </div>
+      `
+    },
+    shipping: {
+      badge: '🚚 FAST DOORSTEP DISPATCH',
+      title: 'Shipping & Delivery Policy',
+      html: `
+        <h3>1. Nagpur Local Express Delivery</h3>
+        <p>Same-day doorstep delivery dispatched directly from our Lad Square Flagship Showroom across Nagpur.</p>
+        <h3>2. Pan-India Delivery (3-5 Days)</h3>
+        <p>Express courier dispatch via Bluedart, Delhivery, and DTDC with live courier tracking.</p>
+        <h3>3. Free Shipping on ₹999+</h3>
+        <p>We provide <strong>FREE SHIPPING</strong> across India on all orders of ₹999 and above.</p>
+        <div class="policy-contact-box">
+          <p><strong>Track Your Parcel Live:</strong> <a href="/pages/track-order" style="color:#C5A059;font-weight:700;">Click Here to Track Order →</a></p>
+          <p>📞 Delivery Hotline: <a href="tel:9119595951">+91 91195 95951</a></p>
+          <p>✉️ Shipping Desk: <a href="mailto:info.lushbeauty@gmail.com">info.lushbeauty@gmail.com</a></p>
+        </div>
+      `
+    }
+  };
+
+  let matched = null;
+  if (path.includes('privacy')) matched = policies.privacy;
+  else if (path.includes('terms')) matched = policies.terms;
+  else if (path.includes('refund') || path.includes('return')) matched = policies.refund;
+  else if (path.includes('shipping') || path.includes('delivery')) matched = policies.shipping;
+
+  if (matched) {
+    document.title = `${matched.title} — Lush Beauty Mart`;
+    default404.style.display = 'none';
+    container.style.display = 'block';
+    container.innerHTML = `
+      <section class="lush-policy-section">
+        <div class="page-width page-width--narrow">
+          <div class="policy-header">
+            <span class="policy-badge">${matched.badge}</span>
+            <h1 class="policy-title">${matched.title}</h1>
+            <p class="policy-updated">Official Policy • Lush Beauty Mart Nagpur</p>
+          </div>
+          <div class="policy-content-card">
+            ${matched.html}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+});
+</script>
 
 {% schema %}
 {
