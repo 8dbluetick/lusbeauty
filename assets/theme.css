@@ -5705,73 +5705,294 @@ h1, h2, h3, h4, .font-serif {
   transform: translateY(-1px);
 }
 
-/* --- Social Share Strip --- */
-.pdp-share-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 8px 12px;
+/* ==========================================================================
+   Luxury Offers & Promo Section (Existing Store Coupons)
+   ========================================================================== */
+
+.pdp-offers-promo-card {
   background: #FAF7F2;
-  border: 1px solid #EAE3DA;
-  border-radius: 8px;
-  margin-top: 4px;
-  flex-wrap: wrap;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 14px;
+  padding: 16px 16px 12px;
+  margin-top: 14px;
+  box-shadow: 0 4px 16px rgba(31, 22, 16, 0.03);
 }
 
 @media (min-width: 1024px) {
-  .pdp-share-strip {
+  .pdp-offers-promo-card {
     grid-column: 1 / -1;
   }
 }
 
-.share-strip-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #6E5E52;
+.pdp-offers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
 }
 
-.share-strip-buttons {
+.offers-header-left {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.btn-share-icon {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 9px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  background: #FFFFFF;
-  border: 1px solid #E0D7CB;
+.pdp-offers-fire {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.pdp-offers-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
   color: #1F1610;
-  cursor: pointer;
-  text-decoration: none;
+  margin: 0;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.offers-count-pill {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #8B6F3E;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.pdp-offers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pdp-offer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #FFFFFF;
+  border: 1px solid #EAE3DA;
+  border-radius: 10px;
   transition: all 0.2s ease;
 }
 
-.btn-share-icon:hover {
-  border-color: #1F1610;
+.pdp-offer-item:hover {
+  border-color: #C5A059;
+  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.12);
   transform: translateY(-1px);
 }
 
-.btn-share-wa {
+.offer-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.offer-badge-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #C5A059;
+  flex-shrink: 0;
+}
+
+.offer-item-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.offer-item-heading {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #1F1610;
+  line-height: 1.25;
+}
+
+.offer-item-sub {
+  font-size: 0.68rem;
+  color: #6E5E52;
+  line-height: 1.25;
+  margin-top: 1px;
+}
+
+.offer-code-pill-wrap {
+  flex-shrink: 0;
+}
+
+.btn-copy-coupon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FAF7F2;
+  border: 1.5px dashed #C5A059;
+  border-radius: 6px;
+  padding: 5px 10px;
+  color: #1F1610;
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-coupon:hover {
+  background: #1F1610;
+  color: #C5A059;
+  border-color: #1F1610;
+}
+
+.btn-copy-coupon.copied {
+  background: #0F7A42 !important;
+  color: #FFFFFF !important;
+  border-color: #0F7A42 !important;
+  border-style: solid !important;
+}
+
+.coupon-copy-icon {
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.pdp-extra-offers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  animation: extraOffersSlide 0.28s ease-out;
+}
+
+@keyframes extraOffersSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-toggle-all-offers {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 0 4px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #8B6F3E;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+}
+
+.btn-toggle-all-offers:hover {
+  color: #1F1610;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Premium Share Product Section (Directly Below Offers)
+   ========================================================================== */
+
+.pdp-share-product-box {
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 1024px) {
+  .pdp-share-product-box {
+    grid-column: 1 / -1;
+  }
+}
+
+.pdp-share-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #6E5E52;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pdp-share-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.pdp-share-btn-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #FFFFFF;
+  border: 1px solid #E0D7CB;
+  border-radius: 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #1F1610;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pdp-share-btn-item:hover {
+  border-color: #1F1610;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(31, 22, 16, 0.08);
+}
+
+.btn-share-whatsapp {
   color: #0F7A42;
   border-color: rgba(37, 211, 102, 0.4);
 }
 
-.btn-share-wa:hover {
+.btn-share-whatsapp:hover {
   background: #E8F5E9;
   border-color: #25D366;
   color: #0F7A42;
 }
 
-.btn-copy-link:hover {
-  border-color: var(--color-accent-gold, #C5A059);
+.btn-share-copy:hover {
+  border-color: #C5A059;
   color: #C5A059;
+}
+
+.btn-share-copy.copied {
+  background: #0F7A42 !important;
+  color: #FFFFFF !important;
+  border-color: #0F7A42 !important;
 }
 
 /* --- Real Shiprocket-Backed Delivery Section --- */

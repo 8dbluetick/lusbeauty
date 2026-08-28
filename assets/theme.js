@@ -697,9 +697,10 @@ function initCarousels() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Coupon Copy Helper
+   7. Coupon Copy & PDP Offers & Promo Interactive System
    -------------------------------------------------------------------------- */
 function initCouponCopy() {
+  // 1. Existing Cart Drawer / Offer Card Coupons
   document.querySelectorAll('[data-coupon-code]').forEach(btn => {
     btn.addEventListener('click', () => {
       const code = btn.dataset.couponCode;
@@ -719,6 +720,50 @@ function initCouponCopy() {
         }, 2500);
       });
     });
+  });
+
+  // 2. Product Page (PDP) Active Discount Code Copy Buttons
+  document.addEventListener('click', (e) => {
+    const copyCouponBtn = e.target.closest('[data-copy-coupon]');
+    if (copyCouponBtn) {
+      e.preventDefault();
+      const code = copyCouponBtn.dataset.copyCoupon || copyCouponBtn.getAttribute('data-copy-coupon');
+      if (!code) return;
+
+      navigator.clipboard.writeText(code).then(() => {
+        const originalHtml = copyCouponBtn.innerHTML;
+        copyCouponBtn.classList.add('copied');
+        copyCouponBtn.innerHTML = `<span>${code}</span> <span class="coupon-copy-icon">✓ Copied!</span>`;
+
+        setTimeout(() => {
+          copyCouponBtn.classList.remove('copied');
+          copyCouponBtn.innerHTML = originalHtml;
+        }, 1800);
+      }).catch(() => {
+        prompt('Copy discount code:', code);
+      });
+      return;
+    }
+
+    // 3. PDP Offers & Promo View All Offers Expand/Collapse
+    const toggleOffersBtn = e.target.closest('#BtnToggleAllOffers');
+    if (toggleOffersBtn) {
+      e.preventDefault();
+      const extraOffers = document.getElementById('PdpExtraOffers');
+      const toggleText = document.getElementById('ToggleOffersText') || toggleOffersBtn.querySelector('span');
+      if (!extraOffers) return;
+
+      const isHidden = extraOffers.style.display === 'none';
+      if (isHidden) {
+        extraOffers.style.display = 'flex';
+        toggleOffersBtn.setAttribute('aria-expanded', 'true');
+        if (toggleText) toggleText.textContent = 'Show Less ↑';
+      } else {
+        extraOffers.style.display = 'none';
+        toggleOffersBtn.setAttribute('aria-expanded', 'false');
+        if (toggleText) toggleText.textContent = 'View All Offers (4 more) →';
+      }
+    }
   });
 }
 
@@ -1936,6 +1981,17 @@ function initShareButtons() {
       e.preventDefault();
       const url = copyBtn.dataset.copyLink || window.location.href;
       copyUrlToClipboard(url);
+
+      const label = copyBtn.querySelector('.copy-link-label') || copyBtn.querySelector('span');
+      if (label) {
+        const originalText = label.textContent;
+        copyBtn.classList.add('copied');
+        label.textContent = '✓ Copied!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          label.textContent = originalText;
+        }, 1800);
+      }
     }
   });
 

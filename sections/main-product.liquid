@@ -306,20 +306,143 @@
                     </a>
                   </div>
 
-                  <!-- Quick Share Links Bar -->
-                  <div class="pdp-share-strip">
-                    <span class="share-strip-label">Share Product:</span>
-                    <div class="share-strip-buttons">
+                  <!-- ==========================================================
+                       LUXURY OFFERS & PROMO SECTION (Existing Store Coupons)
+                       ========================================================== -->
+                  <div class="pdp-offers-promo-card" id="PdpOffersPromoCard">
+                    <div class="pdp-offers-header">
+                      <div class="offers-header-left">
+                        <span class="pdp-offers-fire">🔥</span>
+                        <h4 class="pdp-offers-title">Offers & Promo</h4>
+                      </div>
+                      <span class="offers-count-pill">6 Active Coupons</span>
+                    </div>
+
+                    <div class="pdp-offers-list">
+                      <!-- Initial Top 2 Featured Offers -->
+                      <div class="pdp-offer-item">
+                        <div class="offer-item-left">
+                          <span class="offer-badge-icon">%</span>
+                          <div class="offer-item-details">
+                            <strong class="offer-item-heading">Get ₹200 OFF</strong>
+                            <span class="offer-item-sub">Shop for ₹1,499 or more</span>
+                          </div>
+                        </div>
+                        <div class="offer-code-pill-wrap">
+                          <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH200" aria-label="Copy coupon code LUSH200">
+                            <span class="coupon-code-label">LUSH200</span>
+                            <span class="coupon-copy-icon">📋</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="pdp-offer-item">
+                        <div class="offer-item-left">
+                          <span class="offer-badge-icon">🚚</span>
+                          <div class="offer-item-details">
+                            <strong class="offer-item-heading">Free Shipping</strong>
+                            <span class="offer-item-sub">Available across India & Nagpur</span>
+                          </div>
+                        </div>
+                        <div class="offer-code-pill-wrap">
+                          <button type="button" class="btn-copy-coupon" data-copy-coupon="FRESHIP" aria-label="Copy coupon code FRESHIP">
+                            <span class="coupon-code-label">FRESHIP</span>
+                            <span class="coupon-copy-icon">📋</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <!-- Collapsible Remaining Offers (Hidden by default, smooth expand) -->
+                      <div class="pdp-extra-offers" id="PdpExtraOffers" style="display: none;">
+                        <div class="pdp-offer-item">
+                          <div class="offer-item-left">
+                            <span class="offer-badge-icon">🎁</span>
+                            <div class="offer-item-details">
+                              <strong class="offer-item-heading">10% OFF Entire Order</strong>
+                              <span class="offer-item-sub">Shop for ₹999 or more</span>
+                            </div>
+                          </div>
+                          <div class="offer-code-pill-wrap">
+                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSHGIFT" aria-label="Copy coupon code LUSHGIFT">
+                              <span class="coupon-code-label">LUSHGIFT</span>
+                              <span class="coupon-copy-icon">📋</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="pdp-offer-item">
+                          <div class="offer-item-left">
+                            <span class="offer-badge-icon">💰</span>
+                            <div class="offer-item-details">
+                              <strong class="offer-item-heading">Flat ₹100 OFF</strong>
+                              <span class="offer-item-sub">Shop for ₹799 or more</span>
+                            </div>
+                          </div>
+                          <div class="offer-code-pill-wrap">
+                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH100" aria-label="Copy coupon code LUSH100">
+                              <span class="coupon-code-label">LUSH100</span>
+                              <span class="coupon-copy-icon">📋</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="pdp-offer-item">
+                          <div class="offer-item-left">
+                            <span class="offer-badge-icon">✨</span>
+                            <div class="offer-item-details">
+                              <strong class="offer-item-heading">15% Luxury Discount</strong>
+                              <span class="offer-item-sub">Shop for ₹999 or more</span>
+                            </div>
+                          </div>
+                          <div class="offer-code-pill-wrap">
+                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH15" aria-label="Copy coupon code LUSH15">
+                              <span class="coupon-code-label">LUSH15</span>
+                              <span class="coupon-copy-icon">📋</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="pdp-offer-item">
+                          <div class="offer-item-left">
+                            <span class="offer-badge-icon">🏷️</span>
+                            <div class="offer-item-details">
+                              <strong class="offer-item-heading">10% Instant OFF</strong>
+                              <span class="offer-item-sub">Shop for ₹499 or more</span>
+                            </div>
+                          </div>
+                          <div class="offer-code-pill-wrap">
+                            <button type="button" class="btn-copy-coupon" data-copy-coupon="LUSH10" aria-label="Copy coupon code LUSH10">
+                              <span class="coupon-code-label">LUSH10</span>
+                              <span class="coupon-copy-icon">📋</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- View All Offers Toggle Button -->
+                    <button type="button" class="btn-toggle-all-offers" id="BtnToggleAllOffers" aria-expanded="false">
+                      <span id="ToggleOffersText">View All Offers (4 more) →</span>
+                    </button>
+                  </div>
+
+                  <!-- ==========================================================
+                       PREMIUM SHARE PRODUCT SECTION (Directly Below Offers)
+                       ========================================================== -->
+                  <div class="pdp-share-product-box">
+                    <span class="pdp-share-title">Share Product:</span>
+                    <div class="pdp-share-btn-grid">
+                      <!-- 1. Native Web Share -->
                       <button
                         type="button"
-                        class="btn-share-icon btn-share-native"
+                        class="pdp-share-btn-item btn-share-native"
                         data-share-btn
                         data-share-title="{{ product.title | escape }}"
                         data-share-url="{{ shop.url }}{{ product.url }}"
-                        title="Share product"
-                        aria-label="Share product"
+                        title="Share Product"
+                        aria-label="Share Product"
                       >
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <circle cx="18" cy="5" r="3"></circle>
                           <circle cx="6" cy="12" r="3"></circle>
                           <circle cx="18" cy="19" r="3"></circle>
@@ -329,33 +452,35 @@
                         <span>Share</span>
                       </button>
 
-                      {%- assign share_wa_text = 'Check out this beauty product at Lush Beauty Mart Nagpur: ' | append: product.title | append: ' - ' | append: shop.url | append: product.url -%}
+                      <!-- 2. WhatsApp Direct Share -->
+                      {%- assign share_wa_text = 'Check out this product from Lush Beauty Mart: ' | append: product.title | append: ' ' | append: shop.url | append: product.url -%}
                       <a
                         href="https://api.whatsapp.com/send?text={{ share_wa_text | url_encode }}"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="btn-share-icon btn-share-wa"
+                        class="pdp-share-btn-item btn-share-whatsapp"
                         title="Share on WhatsApp"
                         aria-label="Share on WhatsApp"
                       >
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
                           <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
                         </svg>
                         <span>WhatsApp</span>
                       </a>
 
+                      <!-- 3. Copy Link with Live Toast Feedback -->
                       <button
                         type="button"
-                        class="btn-share-icon btn-copy-link"
+                        class="pdp-share-btn-item btn-share-copy"
                         data-copy-link="{{ shop.url }}{{ product.url }}"
                         title="Copy Product Link"
                         aria-label="Copy Product Link"
                       >
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
-                        <span>Copy Link</span>
+                        <span class="copy-link-label">Copy Link</span>
                       </button>
                     </div>
                   </div>
