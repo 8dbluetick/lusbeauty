@@ -35,6 +35,50 @@
       </div>
     </div>
 
+    <!-- VIP Special Discount Newsletter Subscription Box -->
+    <div class="footer-newsletter-card">
+      <div class="newsletter-content-wrap">
+        <div class="newsletter-text-col">
+          <span class="newsletter-badge">🎁 VIP BEAUTY CLUB</span>
+          <h3 class="newsletter-title">Get Special Discounts in Your Inbox</h3>
+          <p class="newsletter-subtitle">Subscribe for secret flash sales, exclusive discount codes & new luxury brand arrivals delivered straight to your email.</p>
+        </div>
+        <div class="newsletter-form-col">
+          {%- form 'customer', id: 'FooterNewsletterForm', class: 'footer-newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter, vip_discount">
+            {%- if form.posted_successfully? -%}
+              <div class="newsletter-success-msg">
+                <span>🎉 <strong>Thank you!</strong> You are now subscribed. Check your email for special discount offers!</span>
+              </div>
+            {%- else -%}
+              <div class="newsletter-input-group">
+                <input
+                  type="email"
+                  name="contact[email]"
+                  id="FooterNewsletterEmail"
+                  class="newsletter-input"
+                  placeholder="Enter your email address..."
+                  value="{{ form.email }}"
+                  aria-label="Email address for special discounts"
+                  required
+                  autocomplete="email"
+                >
+                <button type="submit" class="btn-newsletter-submit" aria-label="Send special offers to email">
+                  <span>Send Offer →</span>
+                </button>
+              </div>
+              {%- if form.errors -%}
+                <div class="newsletter-error-msg">
+                  <span>{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</span>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endform -%}
+          <p class="newsletter-privacy-note">🔒 100% Privacy. No spam, only genuine beauty deals & exclusive offers.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Main Footer Links Grid -->
     <div class="footer-main-grid">
       <!-- Col 1: Brand Info & Social -->
