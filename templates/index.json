@@ -31,6 +31,10 @@
         "badge_3"
       ],
       "settings": {
+        "show_promo_banner": true,
+        "promo_banner_image": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787898064/WhatsApp_Image_2026-08-28_at_11.48.58_AM_bb4zgm.jpg",
+        "promo_banner_link": "/collections/all",
+        "promo_banner_alt": "Lush Beauty Mart Raksha Bandhan Festive Special Collection",
         "badge_text": "📍 Nagpur Premier Store • Gandhi Nagar (Near Lad Sq.)",
         "heading": "Beauty, Style & Everything You Love.",
         "subheading": "Discover dermatological skincare, luxury cosmetics, designer handbags, fragrances and beauty accessories — all under one roof.",

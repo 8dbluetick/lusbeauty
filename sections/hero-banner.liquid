@@ -1,5 +1,25 @@
 <section class="lush-hero-section" style="background: linear-gradient(180deg, {{ section.settings.bg_color | default: '#FAF7F2' }} 0%, #FAF4EB 100%);">
   <div class="hero-bg-glow"></div>
+
+  {%- if section.settings.show_promo_banner and section.settings.promo_banner_image != blank -%}
+    <!-- Dedicated Responsive Hero Promotional Banner (Zero-Overlap Flow) -->
+    <div class="hero-promo-banner-wrap">
+      <div class="page-width hero-promo-container">
+        <a href="{{ section.settings.promo_banner_link | default: '/collections/all' }}" class="hero-promo-banner-link" aria-label="{{ section.settings.promo_banner_alt | default: 'Lush Beauty Mart Festive Promotion' | escape }}">
+          <img
+            src="{{ section.settings.promo_banner_image }}"
+            alt="{{ section.settings.promo_banner_alt | default: 'Lush Beauty Mart Raksha Bandhan Festive Special Offer' | escape }}"
+            class="hero-promo-banner-img"
+            width="1280"
+            height="720"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </a>
+      </div>
+    </div>
+  {%- endif -%}
+
   <div class="page-width hero-container">
     <div class="hero-grid">
       <!-- Left Column: Typography & CTAs -->
@@ -106,6 +126,38 @@
 {
   "name": "Hero Banner",
   "settings": [
+    {
+      "type": "header",
+      "content": "Promotional Banner (Top of Hero)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_promo_banner",
+      "label": "Show Promotional Banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "promo_banner_image",
+      "label": "Promotional Banner Image URL",
+      "default": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787898064/WhatsApp_Image_2026-08-28_at_11.48.58_AM_bb4zgm.jpg"
+    },
+    {
+      "type": "url",
+      "id": "promo_banner_link",
+      "label": "Promotional Banner Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "promo_banner_alt",
+      "label": "Banner Alt Text",
+      "default": "Lush Beauty Mart Raksha Bandhan Festive Special Collection"
+    },
+    {
+      "type": "header",
+      "content": "Hero Content & Messaging"
+    },
     {
       "type": "text",
       "id": "badge_text",
