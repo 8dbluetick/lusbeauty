@@ -387,120 +387,12 @@ async function updateCartDrawer() {
       }
     });
 
-    // 5. Update Blinkit-Style Quick Commerce UI
-    updateBlinkitCartStrip(cart);
-    updateCardSteppers(cart);
-
-    // 6. Handle empty cart page reload if on /cart
+    // 5. Handle empty cart page reload if on /cart
     if (window.location.pathname === '/cart' && cart.item_count === 0) {
       window.location.reload();
     }
   } catch (e) {}
 }
-
-/* --------------------------------------------------------------------------
-   Blinkit Quick-Commerce Interactive Quantity Steppers & Floating Strip
-   -------------------------------------------------------------------------- */
-function updateBlinkitCartStrip(cart) {
-  const strip = document.getElementById('BlinkitFloatingCartStrip');
-  if (!strip) return;
-
-  if (cart && cart.item_count > 0) {
-    strip.style.display = 'block';
-    const countEl = document.getElementById('BlinkitStripCount');
-    const totalEl = document.getElementById('BlinkitStripTotal');
-    if (countEl) {
-      countEl.textContent = `${cart.item_count} ${cart.item_count === 1 ? 'Item' : 'Items'}`;
-    }
-    if (totalEl) {
-      totalEl.textContent = '₹' + (cart.total_price / 100).toFixed(0);
-    }
-  } else {
-    strip.style.display = 'none';
-  }
-}
-
-function updateCardSteppers(cart) {
-  const stepperWraps = document.querySelectorAll('[data-card-stepper-wrap]');
-  if (!stepperWraps.length) return;
-
-  const qtyMap = {};
-  if (cart && cart.items) {
-    cart.items.forEach(item => {
-      qtyMap[String(item.variant_id || item.id)] = item.quantity;
-    });
-  }
-
-  stepperWraps.forEach(wrap => {
-    const variantId = String(wrap.getAttribute('data-variant-id') || '');
-    if (!variantId) return;
-
-    const currentQty = qtyMap[variantId] || 0;
-
-    if (currentQty > 0) {
-      wrap.innerHTML = `
-        <div class="blinkit-card-stepper" data-variant-id="${variantId}">
-          <button type="button" class="stepper-btn stepper-minus" data-step-change="minus" data-variant-id="${variantId}" aria-label="Decrease quantity">−</button>
-          <span class="stepper-count">${currentQty}</span>
-          <button type="button" class="stepper-btn stepper-plus" data-step-change="plus" data-variant-id="${variantId}" aria-label="Increase quantity">+</button>
-        </div>
-      `;
-    } else {
-      wrap.innerHTML = `
-        <form method="post" action="/cart/add" class="card-form" data-card-product-form>
-          <input type="hidden" name="id" value="${variantId}">
-          <button type="submit" class="btn-card-add-to-cart btn-blinkit-add" aria-label="Add to Bag">
-            <span class="btn-add-label">+ ADD</span>
-          </button>
-        </form>
-      `;
-    }
-  });
-}
-
-// Global Event Delegate for Blinkit Card Quantity Steppers
-document.addEventListener('click', async (e) => {
-  const stepBtn = e.target.closest('[data-step-change]');
-  if (!stepBtn) return;
-  e.preventDefault();
-  e.stopPropagation();
-
-  const variantId = stepBtn.getAttribute('data-variant-id');
-  const action = stepBtn.getAttribute('data-step-change');
-  if (!variantId) return;
-
-  try {
-    const res = await fetch('/cart.js');
-    const cart = await res.json();
-    const lineItem = cart.items.find(i => String(i.variant_id || i.id) === String(variantId));
-    const currentQty = lineItem ? lineItem.quantity : 0;
-    const newQty = action === 'plus' ? currentQty + 1 : Math.max(0, currentQty - 1);
-
-    if (newQty === 0 && lineItem) {
-      await fetch('/cart/change.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: lineItem.key, quantity: 0 })
-      });
-    } else if (newQty > 0) {
-      if (lineItem) {
-        await fetch('/cart/change.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: lineItem.key, quantity: newQty })
-        });
-      } else {
-        await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: variantId, quantity: 1 })
-        });
-      }
-    }
-
-    await updateCartDrawer();
-  } catch (err) {}
-});
 
 // Cart Page Coupon Handler
 document.addEventListener('DOMContentLoaded', () => {

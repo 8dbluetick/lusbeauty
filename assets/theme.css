@@ -8225,276 +8225,136 @@ h1, h2, h3, h4, .font-serif {
 }
 
 /* ==========================================================================
-   Blinkit Quick-Commerce UI & Interactive Card Quantity Steppers
+   Luxury Infinite Brand Partner Logo Marquee
    ========================================================================== */
 
-/* 1. Blinkit Delivery Badge on Product Cards */
-.badge-blinkit {
-  background: #16A34A !important;
-  color: #FFFFFF !important;
-  font-weight: 900 !important;
-  font-size: 0.62rem !important;
-  letter-spacing: 0.4px !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35) !important;
-  padding: 3px 7px !important;
+.lush-brand-marquee-section {
+  padding: 36px 0 44px;
+  border-top: 1px solid #EAE3DA;
+  border-bottom: 1px solid #EAE3DA;
+  overflow: hidden;
+  position: relative;
 }
 
-/* 2. Blinkit Header Express Location Pill */
-.blinkit-header-delivery-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.brand-marquee-header-wrap {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.brand-marquee-badge {
+  display: inline-flex;
   padding: 4px 12px;
-  background: #FAF4EB;
-  border: 1px solid rgba(197, 160, 89, 0.5);
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
   border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
+  color: #8B6F3E;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
-.blinkit-header-delivery-pill:hover {
-  background: #FFFFFF;
-  border-color: #C5A059;
-  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.2);
-}
-
-.blinkit-bolt-icon {
-  font-size: 1rem;
-  color: #F59E0B;
-  animation: boltPulse 1.8s infinite ease-in-out;
-}
-
-@keyframes boltPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.blinkit-loc-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-  text-align: left;
-}
-
-.blinkit-loc-text strong {
-  font-size: 0.72rem;
-  font-weight: 900;
+.brand-marquee-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 800;
   color: #1F1610;
-  letter-spacing: 0.2px;
+  margin: 0 0 6px;
 }
 
-.blinkit-loc-text span {
-  font-size: 0.64rem;
-  color: #8A7363;
+.brand-marquee-sub {
+  font-size: 0.86rem;
+  color: #6E5E52;
+  margin: 0 auto;
+  max-width: 520px;
 }
 
-@media (max-width: 900px) {
-  .blinkit-header-delivery-pill {
-    display: none;
+.brand-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.brand-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: brandMarqueeScroll 35s linear infinite;
+}
+
+.brand-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes brandMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-/* 3. Blinkit Interactive Card Quantity Stepper */
-.btn-blinkit-add {
-  background: #1F1610 !important;
-  color: #FAF7F2 !important;
-  border: 1.5px solid #C5A059 !important;
-  font-weight: 800 !important;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-.btn-blinkit-add:hover {
-  background: #C5A059 !important;
-  color: #1F1610 !important;
-  transform: translateY(-1px) !important;
-}
-
-.blinkit-card-stepper {
+.brand-marquee-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 38px;
-  background: #1F1610;
-  border: 1.5px solid #C5A059;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 14px rgba(31, 22, 16, 0.2);
-  animation: stepperPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  gap: 18px;
+  padding-right: 18px;
 }
 
-@keyframes stepperPop {
-  0% { transform: scale(0.9); }
-  100% { transform: scale(1); }
-}
-
-.blinkit-card-stepper .stepper-btn {
-  width: 38px;
-  height: 100%;
-  background: none;
-  border: none;
-  color: #FAF7F2;
-  font-size: 1.15rem;
-  font-weight: 900;
+.brand-logo-card {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-  user-select: none;
+  padding: 8px 20px;
+  height: 56px;
+  min-width: 130px;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(31, 22, 16, 0.04);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
 }
 
-.blinkit-card-stepper .stepper-btn:hover {
-  background: #C5A059;
-  color: #1F1610;
+.brand-logo-card:hover {
+  transform: translateY(-2px);
+  border-color: #C5A059;
+  background: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.2);
 }
 
-.blinkit-card-stepper .stepper-btn:active {
-  transform: scale(0.85);
-}
-
-.blinkit-card-stepper .stepper-count {
-  font-size: 0.92rem;
-  font-weight: 900;
-  color: #C5A059;
-  min-width: 24px;
-  text-align: center;
-  user-select: none;
-}
-
-/* 4. Blinkit Floating Quick Cart Strip */
-.blinkit-floating-cart-strip {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 520px;
-  z-index: 9992;
-  background: linear-gradient(135deg, #1F1610 0%, #2E1F16 100%);
-  border: 1.5px solid #C5A059;
-  border-radius: 16px;
-  box-shadow: 0 10px 35px rgba(31, 22, 16, 0.4), 0 0 18px rgba(197, 160, 89, 0.35);
-  animation: blinkitSlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.brand-marquee-logo-img {
+  max-height: 36px;
+  max-width: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 @media (max-width: 767px) {
-  .blinkit-floating-cart-strip {
-    bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 8px);
-    width: calc(100% - 24px);
+  .lush-brand-marquee-section {
+    padding: 28px 0 34px;
   }
-}
 
-@keyframes blinkitSlideUp {
-  0% { transform: translate(-50%, 40px) scale(0.92); opacity: 0; }
-  100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
-}
+  .brand-marquee-heading {
+    font-size: 1.35rem;
+  }
 
-.blinkit-strip-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-}
+  .brand-logo-card {
+    height: 48px;
+    padding: 6px 14px;
+    min-width: 105px;
+  }
 
-.blinkit-strip-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.blinkit-strip-bag-icon {
-  position: relative;
-  width: 38px;
-  height: 38px;
-  background: rgba(197, 160, 89, 0.18);
-  border: 1px solid #C5A059;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #C5A059;
-}
-
-.blinkit-cart-qty-badge {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background: #16A34A;
-  color: #FFFFFF;
-  font-size: 0.64rem;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid #1F1610;
-}
-
-.blinkit-strip-info {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.blinkit-strip-total-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.blinkit-strip-total {
-  font-size: 1.05rem;
-  font-weight: 900;
-  color: #FAF7F2;
-  letter-spacing: -0.2px;
-}
-
-.blinkit-strip-savings {
-  font-size: 0.68rem;
-  font-weight: 800;
-  color: #16A34A;
-  background: rgba(22, 163, 74, 0.2);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.blinkit-strip-sub {
-  font-size: 0.68rem;
-  color: #C5A059;
-  font-weight: 600;
-}
-
-.btn-blinkit-view-cart {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 18px;
-  background: linear-gradient(135deg, #C5A059 0%, #DFBD75 100%);
-  color: #1F1610;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.84rem;
-  font-weight: 900;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
-  transition: all 0.2s ease;
-}
-
-.btn-blinkit-view-cart:hover {
-  transform: scale(1.04);
-  background: #FFFFFF;
-}
-
-.btn-blinkit-view-cart:active {
-  transform: scale(0.96);
+  .brand-marquee-logo-img {
+    max-height: 30px;
+    max-width: 95px;
+  }
 }
 
 /* Reduce motion for accessibility */

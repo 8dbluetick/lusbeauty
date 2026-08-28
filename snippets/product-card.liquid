@@ -52,7 +52,6 @@
 
     <!-- 2. Badges (Top-Left, non-overlapping) -->
     <div class="card-badges">
-      <span class="badge badge-blinkit">⚡ 2-HR DELIVERY</span>
       {%- if compare_at_price > price -%}
         {%- assign discount = compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round -%}
         <span class="badge badge-discount">{{ discount }}% OFF</span>
@@ -151,18 +150,18 @@
       {%- endif -%}
     </div>
 
-    <!-- Add to Cart / Action Button (Blinkit Interactive Quick Stepper Enabled) -->
-    <div class="card-cta-wrap" data-card-stepper-wrap data-variant-id="{{ current_variant.id }}">
+    <!-- Add to Cart / Action Button (Bottom Pinned) -->
+    <div class="card-cta-wrap">
       {%- if product.available -%}
         {%- if product.variants.size > 1 -%}
           <a href="{{ product.url }}" class="btn-card-add-to-cart" aria-label="Select Options for {{ product.title | escape }}">
             <span>Select Options</span>
           </a>
         {%- else -%}
-          <form method="post" action="/cart/add" class="card-form" data-card-product-form>
+          <form method="post" action="/cart/add" class="card-form">
             <input type="hidden" name="id" value="{{ current_variant.id }}">
-            <button type="submit" class="btn-card-add-to-cart btn-blinkit-add" aria-label="Add {{ product.title | escape }} to Bag">
-              <span class="btn-add-label">+ ADD</span>
+            <button type="submit" class="btn-card-add-to-cart" aria-label="Add {{ product.title | escape }} to Bag">
+              <span>+ Add to Bag</span>
             </button>
           </form>
         {%- endif -%}

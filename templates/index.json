@@ -447,6 +447,156 @@
         "title": "Official Brand Spotlight",
         "subtitle": "Sourced directly from certified brand distributors and stocked in our Nagpur Showroom."
       }
+    },
+    "brand_marquee": {
+      "type": "brand-marquee",
+      "blocks": {
+        "b_1": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Dot & Key",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Dot_Key_Logo_l2cw3q.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_2": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Kay Beauty",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Kay_Beauty_Logo_jvwfqj.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_3": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Lakmé",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/Lakme_Logo_z1pfmr.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_4": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "L'Oréal Professionnel",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914434/L_Oreal_Professionnel_Logo_f0y489.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_5": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Minimalist",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Minimalist_Logo_prha1q.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_6": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Cetaphil",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Cetaphil_Logo_aoujzk.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_7": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "M·A·C Cosmetics",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/MAC_Cosmetics_Logo_ncog8r.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_8": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "L'Oréal Paris",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/L_Oreal_Paris_Logo_kxwxbt.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_9": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "e.l.f. Cosmetics",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/e.l.f._Cosmetics_Logo_y5bqon.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_10": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "The Ordinary",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/The_Ordinary_Logo_j9mzhc.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_11": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Laneige",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Laneige_Logo_ge6cmm.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_12": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Charlotte Tilbury",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Charlotte_Tilbury_Logo_qxeunb.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_13": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Dove",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914433/Dove_Logo_a1cwpw.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_14": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Kérastase",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Kerastase_Logo_shzzjj.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_15": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Estée Lauder",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Estee_Lauder_Logo_mxv7lr.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_16": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Love Beauty & Planet",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Love_Beauty_Planet_Logo_swz3db.jpg",
+            "link": "/collections/all"
+          }
+        },
+        "b_17": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Bath & Body Works",
+            "logo_url": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787914432/Bath_Body_Works_Logo_hxmfwr.jpg",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "b_1", "b_2", "b_3", "b_4", "b_5", "b_6", "b_7", "b_8", "b_9", "b_10", "b_11", "b_12", "b_13", "b_14", "b_15", "b_16", "b_17"
+      ],
+      "settings": {
+        "heading": "100% Genuine Authorized Brands",
+        "subheading": "Fresh stocks sourced directly from official brand houses & available in our Nagpur Showroom.",
+        "speed": 32,
+        "bg_color": "#FAF7F2"
+      }
     }
   },
   "order": [
@@ -459,6 +609,7 @@
     "testimonials",
     "partner_ventures",
     "faq",
+    "brand_marquee",
     "store_experience"
   ]
 }
