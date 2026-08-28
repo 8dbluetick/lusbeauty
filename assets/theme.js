@@ -94,11 +94,8 @@ function initCartDrawer() {
             }, 1800);
           }
 
-          // 3. Update cart badge & drawer in background
+          // 3. Update cart badge & drawer in background (silent add, only bag animation)
           await updateCartDrawer();
-
-          // 4. Show non-intrusive luxury confirmation toast
-          showAddToCartToast(addedItem);
         } else {
           const errData = await response.json();
           alert(errData.description || 'Could not add product to cart.');
