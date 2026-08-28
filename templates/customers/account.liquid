@@ -1,0 +1,89 @@
+{% comment %}
+  Lush Beauty Mart — Customer Account Dashboard
+{% endcomment %}
+
+<div class="customer-account-page" style="max-width: 1100px; margin: 40px auto 80px; padding: 0 16px; min-height: 60vh;">
+  <!-- Header Banner -->
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1.5px solid #EAE3DA;">
+    <div>
+      <h1 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 800; color: #1F1610; margin: 0 0 4px;">Namaste, {{ customer.first_name | default: 'VIP Customer' }}! 👑</h1>
+      <p style="font-size: 0.85rem; color: #6E5E52; margin: 0;">Welcome to your Lush Beauty Mart member dashboard.</p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a href="/pages/wallet" style="padding: 10px 18px; background: #C5A059; color: #FFFFFF; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; border-radius: 8px; text-decoration: none;">💳 My Rewards Wallet</a>
+      <a href="/account/logout" style="padding: 10px 16px; background: #FAF7F2; border: 1px solid #EAE3DA; color: #1F1610; font-size: 0.78rem; font-weight: 700; border-radius: 8px; text-decoration: none;">Sign Out</a>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;" class="account-dashboard-grid">
+    <!-- Left Column: Order History -->
+    <div>
+      <h2 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800; color: #1F1610; margin-bottom: 16px;">Order History</h2>
+      {%- paginate customer.orders by 10 -%}
+        {%- if customer.orders.size > 0 -%}
+          <div style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 14px; overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left;">
+              <thead>
+                <tr style="background: #FAF7F2; border-bottom: 1px solid #EAE3DA;">
+                  <th style="padding: 12px 16px; font-weight: 800; color: #1F1610;">Order</th>
+                  <th style="padding: 12px 16px; font-weight: 800; color: #1F1610;">Date</th>
+                  <th style="padding: 12px 16px; font-weight: 800; color: #1F1610;">Payment</th>
+                  <th style="padding: 12px 16px; font-weight: 800; color: #1F1610;">Status</th>
+                  <th style="padding: 12px 16px; font-weight: 800; color: #1F1610;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr style="border-bottom: 1px solid #F3EDE7;">
+                    <td style="padding: 14px 16px; font-weight: 700;">
+                      <a href="{{ order.customer_url }}" style="color: #C5A059; text-decoration: none;">{{ order.name }}</a>
+                    </td>
+                    <td style="padding: 14px 16px; color: #6E5E52;">{{ order.created_at | date: "%d %b %Y" }}</td>
+                    <td style="padding: 14px 16px;">{{ order.financial_status_label }}</td>
+                    <td style="padding: 14px 16px;">
+                      <span style="display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; background: #E8F5E9; color: #2E7D32;">
+                        {{ order.fulfillment_status_label }}
+                      </span>
+                    </td>
+                    <td style="padding: 14px 16px; font-weight: 800; color: #1F1610;">{{ order.total_price | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+          {{ paginate | default_pagination }}
+        {%- else -%}
+          <div style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 14px; padding: 40px 20px; text-align: center;">
+            <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">🛍️</span>
+            <p style="font-size: 0.95rem; font-weight: 700; color: #1F1610; margin-bottom: 6px;">You haven't placed any orders yet</p>
+            <p style="font-size: 0.8rem; color: #6E5E52; margin-bottom: 20px;">Explore authentic skincare, cosmetics and luxury designer handbags.</p>
+            <a href="/collections/all" style="display: inline-block; padding: 12px 24px; background: #1F1610; color: #C5A059; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; border-radius: 8px; text-decoration: none;">Start Shopping →</a>
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+
+    <!-- Right Column: Account Details & Default Address -->
+    <div>
+      <h2 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800; color: #1F1610; margin-bottom: 16px;">Account Details</h2>
+      <div style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 14px; padding: 22px; margin-bottom: 20px;">
+        <h3 style="font-size: 0.95rem; font-weight: 800; color: #1F1610; margin: 0 0 10px;">{{ customer.name }}</h3>
+        <p style="font-size: 0.82rem; color: #6E5E52; margin: 0 0 6px;">📧 {{ customer.email }}</p>
+        {%- if customer.phone -%}
+          <p style="font-size: 0.82rem; color: #6E5E52; margin: 0 0 14px;">📱 {{ customer.phone }}</p>
+        {%- endif -%}
+
+        {%- if customer.default_address -%}
+          <div style="padding-top: 14px; margin-top: 14px; border-top: 1px solid #F3EDE7; font-size: 0.82rem; color: #3E3027; line-height: 1.5;">
+            <strong style="display: block; margin-bottom: 4px;">Primary Delivery Address:</strong>
+            {{ customer.default_address | format_address }}
+          </div>
+        {%- endif -%}
+
+        <div style="margin-top: 18px;">
+          <a href="/account/addresses" style="font-size: 0.78rem; font-weight: 800; color: #C5A059; text-decoration: none;">Manage Addresses ({{ customer.addresses_count }}) →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

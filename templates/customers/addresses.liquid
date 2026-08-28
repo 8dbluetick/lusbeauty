@@ -1,0 +1,27 @@
+{% comment %}
+  Lush Beauty Mart — Customer Address Book Template
+{% endcomment %}
+
+<div class="customer-addresses-page" style="max-width: 900px; margin: 40px auto 80px; padding: 0 16px; min-height: 60vh;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1.5px solid #EAE3DA;">
+    <div>
+      <h1 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 800; color: #1F1610; margin: 0 0 4px;">My Delivery Addresses</h1>
+      <p style="font-size: 0.82rem; color: #6E5E52; margin: 0;">Manage your shipping and delivery addresses for fast checkout.</p>
+    </div>
+    <a href="/account" style="font-size: 0.8rem; font-weight: 800; color: #C5A059; text-decoration: none;">← Back to Account</a>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+    {%- for address in customer.addresses -%}
+      <div style="background: #FFFFFF; border: 1px solid #EAE3DA; border-radius: 14px; padding: 20px; position: relative;">
+        {%- if address == customer.default_address -%}
+          <span style="display: inline-block; background: #C5A059; color: #FFFFFF; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; margin-bottom: 10px;">Default Address</span>
+        {%- endif -%}
+        <h3 style="font-size: 0.95rem; font-weight: 800; color: #1F1610; margin: 0 0 8px;">{{ address.first_name }} {{ address.last_name }}</h3>
+        <div style="font-size: 0.82rem; color: #6E5E52; line-height: 1.5; margin-bottom: 14px;">
+          {{ address | format_address }}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
