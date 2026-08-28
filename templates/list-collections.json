@@ -4,15 +4,13 @@
       "type": "brands-directory",
       "settings": {}
     },
-    "featured_categories": {
-      "type": "featured-categories",
-      "settings": {
-        "title": "All Collections & Departments"
-      }
+    "main_list_collections": {
+      "type": "main-list-collections",
+      "settings": {}
     }
   },
   "order": [
     "brands_directory",
-    "featured_categories"
+    "main_list_collections"
   ]
 }
