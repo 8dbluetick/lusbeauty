@@ -29,53 +29,18 @@
 
     {%- assign sort_by = collection.sort_by | default: collection.default_sort_by | default: 'created-descending' -%}
 
-    <!-- Luxury Collection Filter & Sorting Control Bar -->
+    <!-- LUXURY COLLECTION CONTROLS: QUICK FILTERS, SORT & PRICE DRAWER -->
     <div class="collection-controls-bar">
-      <!-- 1. Quick Filter Pills Strip (Recently Added, Best Selling, Price Tiers) -->
-      <div class="collection-quick-filters no-scrollbar">
-        <span class="quick-filters-label">Filter & Sort:</span>
-        <a href="{{ collection.url }}?sort_by=created-descending" class="filter-pill-chip {% if sort_by == 'created-descending' %}active{% endif %}">
-          <span>🆕 Recently Added</span>
-        </a>
-        <a href="{{ collection.url }}?sort_by=best-selling" class="filter-pill-chip {% if sort_by == 'best-selling' %}active{% endif %}">
-          <span>🔥 Best Selling</span>
-        </a>
-        <a href="{{ collection.url }}?sort_by=price-ascending" class="filter-pill-chip {% if sort_by == 'price-ascending' %}active{% endif %}">
-          <span>💰 Price: Low to High</span>
-        </a>
-        <a href="{{ collection.url }}?sort_by=price-descending" class="filter-pill-chip {% if sort_by == 'price-descending' %}active{% endif %}">
-          <span>💎 Price: High to Low</span>
-        </a>
-        <a href="{{ collection.url }}?filter.v.price.lte=499" class="filter-pill-chip">
-          <span>Under ₹499</span>
-        </a>
-        <a href="{{ collection.url }}?filter.v.price.gte=500&filter.v.price.lte=999" class="filter-pill-chip">
-          <span>₹500 – ₹999</span>
-        </a>
-        <a href="{{ collection.url }}?filter.v.price.gte=1000&filter.v.price.lte=1999" class="filter-pill-chip">
-          <span>₹1,000 – ₹1,999</span>
-        </a>
-        <a href="{{ collection.url }}?filter.v.price.gte=2000" class="filter-pill-chip">
-          <span>₹2,000+</span>
-        </a>
-        {%- if collection.url contains '?' or request.query_string != blank -%}
-          <a href="{{ collection.url }}" class="filter-pill-chip clear-chip">
-            <span>✕ Reset</span>
-          </a>
-        {%- endif -%}
-      </div>
-
-      <!-- 2. Sort Dropdown & Detailed Price Filter Toggle Button -->
+      <!-- 1. Top Controls Row: [ Sort Dropdown ] and [ Price Filter Toggle ] -->
       <div class="collection-actions-row">
         <!-- Sort Dropdown -->
         <div class="sort-by-wrapper">
-          <label for="CollectionSortBy" class="sort-label">Sort:</label>
           <div class="sort-select-box">
             <select id="CollectionSortBy" class="sort-select" aria-label="Sort collection products">
-              <option value="{{ collection.url }}?sort_by=created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>🆕 Recently Added (Newest)</option>
+              <option value="{{ collection.url }}?sort_by=created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>🆕 Recently Added</option>
+              <option value="{{ collection.url }}?sort_by=best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>🔥 Best Selling</option>
               <option value="{{ collection.url }}?sort_by=price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>💰 Price: Low to High</option>
               <option value="{{ collection.url }}?sort_by=price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>💎 Price: High to Low</option>
-              <option value="{{ collection.url }}?sort_by=best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>🔥 Best Selling</option>
               <option value="{{ collection.url }}?sort_by=manual" {% if sort_by == 'manual' %}selected{% endif %}>✨ Featured</option>
               <option value="{{ collection.url }}?sort_by=title-ascending" {% if sort_by == 'title-ascending' %}selected{% endif %}>🔤 Title: A–Z</option>
             </select>
@@ -85,7 +50,7 @@
 
         <!-- Filter Toggle Button -->
         <button type="button" class="btn-toggle-filters" id="BtnToggleFilters" aria-expanded="false">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="4" y1="21" x2="4" y2="14"></line>
             <line x1="4" y1="10" x2="4" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="12"></line>
@@ -98,6 +63,40 @@
           </svg>
           <span>Price Filter</span>
         </button>
+      </div>
+
+      <!-- 2. Quick Filter Pills Strip: Horizontal Touch-Scroll -->
+      <div class="collection-quick-filters no-scrollbar">
+        <span class="quick-filters-label">Quick:</span>
+        <a href="{{ collection.url }}?sort_by=created-descending" class="filter-pill-chip {% if sort_by == 'created-descending' %}active{% endif %}">
+          <span>🆕 Recently Added</span>
+        </a>
+        <a href="{{ collection.url }}?sort_by=best-selling" class="filter-pill-chip {% if sort_by == 'best-selling' %}active{% endif %}">
+          <span>🔥 Best Selling</span>
+        </a>
+        <a href="{{ collection.url }}?sort_by=price-ascending" class="filter-pill-chip {% if sort_by == 'price-ascending' %}active{% endif %}">
+          <span>💰 ₹ Low to High</span>
+        </a>
+        <a href="{{ collection.url }}?sort_by=price-descending" class="filter-pill-chip {% if sort_by == 'price-descending' %}active{% endif %}">
+          <span>💎 ₹ High to Low</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.lte=499" class="filter-pill-chip">
+          <span>Under ₹499</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.gte=500&filter.v.price.lte=999" class="filter-pill-chip">
+          <span>₹500–₹999</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.gte=1000&filter.v.price.lte=1999" class="filter-pill-chip">
+          <span>₹1,000–₹1,999</span>
+        </a>
+        <a href="{{ collection.url }}?filter.v.price.gte=2000" class="filter-pill-chip">
+          <span>₹2,000+</span>
+        </a>
+        {%- if collection.url contains '?' or request.query_string != blank -%}
+          <a href="{{ collection.url }}" class="filter-pill-chip clear-chip">
+            <span>✕ Reset</span>
+          </a>
+        {%- endif -%}
       </div>
     </div>
 
