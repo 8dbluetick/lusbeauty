@@ -1,0 +1,243 @@
+﻿{% comment %}
+  Lush Beauty Mart — Nykaa Luxe Style "Shop by Skin & Hair Concern" Section
+  Helps customers quickly find targeted dermatological solutions
+{% endcomment %}
+
+<section class="lush-concern-section" id="ShopByConcernSection">
+  <div class="page-width concern-container">
+    <!-- Header -->
+    <div class="section-header-center">
+      {%- if section.settings.badge != blank -%}
+        <span class="concern-badge-pill">{{ section.settings.badge }}</span>
+      {%- endif -%}
+      <h2 class="concern-section-title">{{ section.settings.title | default: 'Shop by Concern' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="concern-section-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Concern Grid / Mobile Snap Rail -->
+    <div class="concern-grid-wrap">
+      <div class="concern-cards-grid">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <a
+              href="{{ block.settings.link | default: '/collections/all' }}"
+              class="concern-card-item"
+              {{ block.shopify_attributes }}
+            >
+              <div class="concern-icon-wrap" style="background-color: {{ block.settings.bg_tint | default: '#F5EFE6' }};">
+                <span class="concern-emoji-icon">{{ block.settings.icon | default: '✨' }}</span>
+              </div>
+              <div class="concern-text-content">
+                <h3 class="concern-card-title">{{ block.settings.title }}</h3>
+                <p class="concern-card-desc">{{ block.settings.description }}</p>
+                <span class="concern-action-link">
+                  <span>Explore Products</span>
+                  <span class="concern-arrow">→</span>
+                </span>
+              </div>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default 6 Concerns -->
+          <a href="/collections/all" class="concern-card-item">
+            <div class="concern-icon-wrap" style="background-color: #FEE2E2;">
+              <span class="concern-emoji-icon">🔴</span>
+            </div>
+            <div class="concern-text-content">
+              <h3 class="concern-card-title">Acne & Blemishes</h3>
+              <p class="concern-card-desc">Salicylic Acid, Niacinamide & Tea Tree Solutions</p>
+              <span class="concern-action-link"><span>Explore Products</span><span class="concern-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a href="/collections/all" class="concern-card-item">
+            <div class="concern-icon-wrap" style="background-color: #FEF3C7;">
+              <span class="concern-emoji-icon">✨</span>
+            </div>
+            <div class="concern-text-content">
+              <h3 class="concern-card-title">Dark Spots & Pigmentation</h3>
+              <p class="concern-card-desc">Vitamin C, Alpha Arbutin & Kojic Acid Serums</p>
+              <span class="concern-action-link"><span>Explore Products</span><span class="concern-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a href="/collections/all" class="concern-card-item">
+            <div class="concern-icon-wrap" style="background-color: #E0F2FE;">
+              <span class="concern-emoji-icon">💧</span>
+            </div>
+            <div class="concern-text-content">
+              <h3 class="concern-card-title">Glass Skin & Hydration</h3>
+              <p class="concern-card-desc">Hyaluronic Acid, Ceramides & Snail Mucin Essences</p>
+              <span class="concern-action-link"><span>Explore Products</span><span class="concern-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a href="/collections/all" class="concern-card-item">
+            <div class="concern-icon-wrap" style="background-color: #FFEDD5;">
+              <span class="concern-emoji-icon">☀️</span>
+            </div>
+            <div class="concern-text-content">
+              <h3 class="concern-card-title">Sun Damage & Tanning</h3>
+              <p class="concern-card-desc">SPF 50 PA++++ Aqua Gels, Sunsticks & De-Tan Packs</p>
+              <span class="concern-action-link"><span>Explore Products</span><span class="concern-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a href="/collections/all" class="concern-card-item">
+            <div class="concern-icon-wrap" style="background-color: #F3E8FF;">
+              <span class="concern-emoji-icon">⏳</span>
+            </div>
+            <div class="concern-text-content">
+              <h3 class="concern-card-title">Anti-Aging & Fine Lines</h3>
+              <p class="concern-card-desc">Retinol 0.2%, Peptides & Collagen Night Creams</p>
+              <span class="concern-action-link"><span>Explore Products</span><span class="concern-arrow">→</span></span>
+            </div>
+          </a>
+
+          <a href="/collections/all" class="concern-card-item">
+            <div class="concern-icon-wrap" style="background-color: #DCFCE7;">
+              <span class="concern-emoji-icon">🌿</span>
+            </div>
+            <div class="concern-text-content">
+              <h3 class="concern-card-title">Hair Fall & Scalp Repair</h3>
+              <p class="concern-card-desc">Redensyl, Rosemary Essential Oils & Salon Masks</p>
+              <span class="concern-action-link"><span>Explore Products</span><span class="concern-arrow">→</span></span>
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by Concern",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text",
+      "default": "🔬 DERMATOLOGICALLY CURATED"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop by Skin & Hair Concern"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Targeted active formulations verified for Indian skin types. Find your perfect beauty routine."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "concern_item",
+      "name": "Concern Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "✨"
+        },
+        {
+          "type": "color",
+          "id": "bg_tint",
+          "label": "Icon Background Tint",
+          "default": "#F5EFE6"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Concern Title",
+          "default": "Acne & Blemishes"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Brief Solution / Actives",
+          "default": "Salicylic Acid, Niacinamide & Tea Tree Solutions"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection / Filter Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by Concern",
+      "blocks": [
+        {
+          "type": "concern_item",
+          "settings": {
+            "icon": "🔴",
+            "bg_tint": "#FEE2E2",
+            "title": "Acne & Blemishes",
+            "description": "Salicylic Acid, Niacinamide & Tea Tree Solutions",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "concern_item",
+          "settings": {
+            "icon": "✨",
+            "bg_tint": "#FEF3C7",
+            "title": "Dark Spots & Pigmentation",
+            "description": "Vitamin C, Alpha Arbutin & Kojic Acid Serums",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "concern_item",
+          "settings": {
+            "icon": "💧",
+            "bg_tint": "#E0F2FE",
+            "title": "Glass Skin & Hydration",
+            "description": "Hyaluronic Acid, Ceramides & Snail Mucin Essences",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "concern_item",
+          "settings": {
+            "icon": "☀️",
+            "bg_tint": "#FFEDD5",
+            "title": "Sun Damage & Tanning",
+            "description": "SPF 50 PA++++ Aqua Gels, Sunsticks & De-Tan Packs",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "concern_item",
+          "settings": {
+            "icon": "⏳",
+            "bg_tint": "#F3E8FF",
+            "title": "Anti-Aging & Fine Lines",
+            "description": "Retinol 0.2%, Peptides & Collagen Night Creams",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "concern_item",
+          "settings": {
+            "icon": "🌿",
+            "bg_tint": "#DCFCE7",
+            "title": "Hair Fall & Scalp Repair",
+            "description": "Redensyl, Rosemary Essential Oils & Salon Masks",
+            "link": "/collections/all"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

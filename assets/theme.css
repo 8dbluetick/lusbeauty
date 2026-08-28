@@ -7940,6 +7940,290 @@ h1, h2, h3, h4, .font-serif {
   }
 }
 
+/* ==========================================================================
+   Shop by Concern & Brand Spotlight Sections (Nykaa Luxe Style)
+   ========================================================================== */
+
+/* 1. Shop by Concern */
+.lush-concern-section {
+  padding: 44px 0 54px;
+  background: #FAF7F2;
+  border-top: 1px solid #EAE3DA;
+}
+
+.concern-badge-pill {
+  display: inline-flex;
+  padding: 5px 14px;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 999px;
+  color: #8B6F3E;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.concern-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 0 0 8px;
+}
+
+.concern-section-subtitle {
+  font-size: 0.92rem;
+  color: #6E5E52;
+  max-width: 580px;
+  margin: 0 auto 28px;
+}
+
+.concern-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (min-width: 1024px) {
+  .concern-cards-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+}
+
+.concern-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 16px;
+  padding: 20px 14px 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.concern-card-item:hover {
+  transform: translateY(-4px);
+  border-color: #C5A059;
+  box-shadow: 0 10px 28px rgba(197, 160, 89, 0.2);
+}
+
+.concern-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.concern-emoji-icon {
+  font-size: 1.6rem;
+}
+
+.concern-card-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.concern-card-desc {
+  font-size: 0.74rem;
+  color: #6E5E52;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  flex-grow: 1;
+}
+
+.concern-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #C5A059;
+  transition: gap 0.2s ease;
+}
+
+.concern-card-item:hover .concern-action-link {
+  gap: 8px;
+  color: #1F1610;
+}
+
+/* 2. Brand Spotlight */
+.lush-brands-section {
+  padding: 44px 0 54px;
+  background: #FFFFFF;
+  border-top: 1px solid #EAE3DA;
+}
+
+.brand-badge-pill {
+  display: inline-flex;
+  padding: 5px 14px;
+  background: rgba(31, 22, 16, 0.06);
+  border: 1px solid rgba(31, 22, 16, 0.15);
+  border-radius: 999px;
+  color: #1F1610;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.brand-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1F1610;
+  margin: 0 0 8px;
+}
+
+.brand-section-subtitle {
+  font-size: 0.92rem;
+  color: #6E5E52;
+  max-width: 580px;
+  margin: 0 auto 28px;
+}
+
+.brands-track-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .brands-track-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .brands-track-container {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+}
+
+.brand-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #FAF7F2;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 16px;
+  padding: 16px 12px;
+  text-decoration: none;
+  text-align: center;
+  min-height: 160px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.brand-card-item:hover {
+  transform: translateY(-4px);
+  background: #FFFFFF;
+  border-color: #C5A059;
+  box-shadow: 0 10px 28px rgba(31, 22, 16, 0.08);
+}
+
+.brand-verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #16A34A;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.brand-logo-area {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+}
+
+.brand-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #1F1610;
+}
+
+.brand-offer-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #C5A059;
+  background: rgba(197, 160, 89, 0.12);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.brand-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #1F1610;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.brand-card-item:hover .brand-explore-btn {
+  color: #C5A059;
+  gap: 7px;
+}
+
+/* Mobile horizontal snap rail for Concerns & Brands */
+@media (max-width: 640px) {
+  .concern-grid-wrap,
+  .brands-carousel-wrap {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -16px;
+    padding: 0 16px 12px;
+  }
+
+  .concern-cards-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .concern-card-item {
+    flex: 0 0 200px;
+    scroll-snap-align: start;
+  }
+
+  .brands-track-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .brand-card-item {
+    flex: 0 0 160px;
+    scroll-snap-align: start;
+  }
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lush-reveal {

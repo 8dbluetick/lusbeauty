@@ -303,12 +303,158 @@
         "whatsapp_btn_text": "💬 WhatsApp Us",
         "directions_btn_text": "🧭 Get Directions"
       }
+    },
+    "shop_by_concern": {
+      "type": "shop-by-concern",
+      "blocks": {
+        "concern_1": {
+          "type": "concern_item",
+          "settings": {
+            "icon": "🔴",
+            "bg_tint": "#FEE2E2",
+            "title": "Acne & Blemishes",
+            "description": "Salicylic Acid, Niacinamide & Tea Tree Solutions",
+            "link": "/collections/all"
+          }
+        },
+        "concern_2": {
+          "type": "concern_item",
+          "settings": {
+            "icon": "✨",
+            "bg_tint": "#FEF3C7",
+            "title": "Dark Spots & Pigmentation",
+            "description": "Vitamin C, Alpha Arbutin & Kojic Acid Serums",
+            "link": "/collections/all"
+          }
+        },
+        "concern_3": {
+          "type": "concern_item",
+          "settings": {
+            "icon": "💧",
+            "bg_tint": "#E0F2FE",
+            "title": "Glass Skin & Hydration",
+            "description": "Hyaluronic Acid, Ceramides & Snail Mucin Essences",
+            "link": "/collections/all"
+          }
+        },
+        "concern_4": {
+          "type": "concern_item",
+          "settings": {
+            "icon": "☀️",
+            "bg_tint": "#FFEDD5",
+            "title": "Sun Damage & Tanning",
+            "description": "SPF 50 PA++++ Aqua Gels, Sunsticks & De-Tan Packs",
+            "link": "/collections/all"
+          }
+        },
+        "concern_5": {
+          "type": "concern_item",
+          "settings": {
+            "icon": "⏳",
+            "bg_tint": "#F3E8FF",
+            "title": "Anti-Aging & Fine Lines",
+            "description": "Retinol 0.2%, Peptides & Collagen Night Creams",
+            "link": "/collections/all"
+          }
+        },
+        "concern_6": {
+          "type": "concern_item",
+          "settings": {
+            "icon": "🌿",
+            "bg_tint": "#DCFCE7",
+            "title": "Hair Fall & Scalp Repair",
+            "description": "Redensyl, Rosemary Essential Oils & Salon Masks",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "concern_1",
+        "concern_2",
+        "concern_3",
+        "concern_4",
+        "concern_5",
+        "concern_6"
+      ],
+      "settings": {
+        "badge": "🔬 DERMATOLOGICALLY CURATED",
+        "title": "Shop by Skin & Hair Concern",
+        "subtitle": "Targeted active formulations verified for Indian skin types. Find your perfect beauty routine."
+      }
+    },
+    "brand_spotlight": {
+      "type": "brand-spotlight",
+      "blocks": {
+        "brand_1": {
+          "type": "brand_card",
+          "settings": {
+            "title": "MINIMALIST",
+            "offer_tag": "Up to 15% OFF • Serums",
+            "link": "/collections/all"
+          }
+        },
+        "brand_2": {
+          "type": "brand_card",
+          "settings": {
+            "title": "THE DERMA CO",
+            "offer_tag": "Buy 2 Get 10% OFF",
+            "link": "/collections/all"
+          }
+        },
+        "brand_3": {
+          "type": "brand_card",
+          "settings": {
+            "title": "L'ORÉAL PARIS",
+            "offer_tag": "Up to 30% OFF",
+            "link": "/collections/all"
+          }
+        },
+        "brand_4": {
+          "type": "brand_card",
+          "settings": {
+            "title": "MAYBELLINE NY",
+            "offer_tag": "Flat 20% OFF • Lipsticks",
+            "link": "/collections/all"
+          }
+        },
+        "brand_5": {
+          "type": "brand_card",
+          "settings": {
+            "title": "PLUM GOODNESS",
+            "offer_tag": "100% Vegan & Cruelty Free",
+            "link": "/collections/all"
+          }
+        },
+        "brand_6": {
+          "type": "brand_card",
+          "settings": {
+            "title": "SWISS BEAUTY",
+            "offer_tag": "Starting at just ₹199",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "brand_1",
+        "brand_2",
+        "brand_3",
+        "brand_4",
+        "brand_5",
+        "brand_6"
+      ],
+      "settings": {
+        "badge": "🌟 100% GENUINE PARTNERS",
+        "title": "Official Brand Spotlight",
+        "subtitle": "Sourced directly from certified brand distributors and stocked in our Nagpur Showroom."
+      }
     }
   },
   "order": [
     "hero_banner",
     "featured_categories",
+    "shop_by_concern",
     "trending_products",
+    "brand_spotlight",
     "instagram_feed",
     "testimonials",
     "partner_ventures",
