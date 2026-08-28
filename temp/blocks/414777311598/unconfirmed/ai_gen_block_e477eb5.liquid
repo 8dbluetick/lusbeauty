@@ -1,6 +1,573 @@
+{% doc %}
+  @prompt
+    Create a premium "Offers & Promo" section and an improved "Share Product" section for the product page of a luxury beauty store called Lush Beauty Mart.
+    
+    DESIGN AESTHETIC:
+    - Warm beige/cream background
+    - Elegant brown/dark text
+    - Subtle gold accents
+    - Rounded corners
+    - Thin premium borders
+    - Soft shadow
+    - Clean modern typography
+    - Minimal luxury beauty-store appearance (NOT generic Shopify default)
+    
+    --- OFFERS & PROMO SECTION ---
+    
+    Create a premium card titled "🔥 Offers & Promo"
+    
+    Use the following existing Shopify discount codes (DO NOT create new ones, DO NOT modify existing ones):
+    - LUSHGIFT — 10% off entire order, minimum purchase ₹999
+    - FRESHIP — Free shipping on all products for India
+    - LUSH200 — ₹200 off, minimum purchase ₹1,499
+    - LUSH100 — ₹100 off, minimum purchase ₹799
+    - LUSH15 — 15% off, minimum purchase ₹999
+    - LUSH10 — 10% off, minimum purchase ₹499
+    
+    Each offer card should show:
+    - Small attractive icon (e.g. % for discount, 🚚 for shipping)
+    - Offer title (e.g. "Get ₹200 OFF")
+    - Short description (e.g. "Shop for ₹1,499 or more")
+    - Discount code in a dashed/bordered pill
+    - Copy icon button beside the code
+    - Clicking copy → copies code to clipboard → shows "Copied!" for 1–2 seconds
+    
+    OFFER LOGIC:
+    - Initially show only the 2 most valuable offers (LUSH200 and FRESHIP)
+    - "View All Offers →" link smoothly expands to reveal all remaining offers
+    - Clicking "View All Offers" changes text to "Show Less"
+    - Smooth expand/collapse animation (no page reload)
+    - Each offer has its own copy button
+    
+    --- SHARE PRODUCT SECTION ---
+    
+    Place directly below the Offers & Promo card.
+    
+    Create a clean premium "Share Product" box with three buttons in one row:
+    1. [ Share ] — uses native Web Share API (product name + product URL); fallback gracefully if not supported
+    2. [ WhatsApp ] — opens WhatsApp with pre-filled message: "Check out this product from Lush Beauty Mart: [Product Name] [Product URL]"
+    3. [ Copy Link ] — copies current product URL to clipboard; shows "Link Copied!" feedback
+    
+    Use Liquid variables for product title and URL (e.g. {{ product.title }}, {{ shop.url }}{{ product.url }}).
+    
+    --- PLACEMENT ---
+    Position after Add to Cart / Buy Now buttons:
+    Product Price → Quantity → Add to Bag / Buy Now → Offers & Promo → Share Product → Delivery info
+    
+    --- RESPONSIVE ---
+    Desktop: compact horizontal layout, no excessive vertical space
+    Mobile: stack naturally, code + copy button tappable, share buttons fit in one row or wrap gracefully
+    
+    --- ANIMATIONS ---
+    - Smooth expand/collapse for "View All Offers"
+    - Slight hover effect on offer rows
+    - Copy button feedback animation
+    - No excessive animations, keep performance fast
+    
+    --- ACCESSIBILITY ---
+    - aria-labels on all copy/share buttons
+    - Keyboard accessible
+    - Good contrast
+    - Do not rely only on color for states
+    
+    --- IMPORTANT CONSTRAINTS ---
+    - Do NOT duplicate any existing sections
+    - Do NOT interfere with Add to Bag, Buy Now, cart, checkout, or Shopify discount application system
+    - Do NOT change product pricing
+    - Inspect existing product page layout before inserting; modify minimum necessary files
+    - Production-ready, clean, reusable code
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-offers-promo-{{ ai_gen_id }} {
+    display: block;
+    background-color: {{ block.settings.card_background }};
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.padding }}px;
+    margin: {{ block.settings.margin_top }}px 0;
+    box-shadow: 0 2px 8px rgba(44, 29, 17, 0.06);
+    width: 100%;
+  }
+
+  .ai-offers-promo-header-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ai-offers-promo-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-offers-list-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-offer-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background-color: {{ block.settings.offer_bg }};
+    border: 1px solid {{ block.settings.offer_border }};
+    border-radius: {{ block.settings.offer_radius }}px;
+    transition: all 0.2s ease;
+  }
+
+  .ai-offer-item-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.accent_color }};
+    box-shadow: 0 2px 6px rgba(197, 160, 89, 0.15);
+  }
+
+  .ai-offer-item-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  .ai-offer-icon-{{ ai_gen_id }} {
+    font-size: 20px;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.accent_color }};
+    color: {{ block.settings.card_background }};
+    border-radius: 50%;
+    font-weight: 600;
+  }
+
+  .ai-offer-content-{{ ai_gen_id }} {
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .ai-offer-title-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 2px 0;
+  }
+
+  .ai-offer-desc-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.text_secondary }};
+    margin: 0;
+  }
+
+  .ai-offer-code-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .ai-offer-code-{{ ai_gen_id }} {
+    padding: 6px 12px;
+    background-color: {{ block.settings.card_background }};
+    border: 1px dashed {{ block.settings.accent_color }};
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: {{ block.settings.accent_color }};
+    letter-spacing: 0.5px;
+    font-family: monospace;
+  }
+
+  .ai-copy-btn-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    position: relative;
+  }
+
+  .ai-copy-btn-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-copy-btn-{{ ai_gen_id }} svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ai-copy-feedback-{{ ai_gen_id }} {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: {{ block.settings.text_color }};
+    color: {{ block.settings.card_background }};
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-copy-feedback-{{ ai_gen_id }}.show {
+    opacity: 1;
+  }
+
+  .ai-view-all-{{ ai_gen_id }} {
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  .ai-view-all-btn-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    color: {{ block.settings.accent_color }};
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: opacity 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ai-view-all-btn-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 749px) {
+    .ai-offers-promo-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.75 }}px;
+    }
+
+    .ai-offer-item-{{ ai_gen_id }} {
+      flex-wrap: wrap;
+    }
+
+    .ai-offer-code-wrapper-{{ ai_gen_id }} {
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+  }
+{% endstyle %}
+
+<offers-promo-{{ ai_gen_id }} class="ai-offers-promo-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-offers-promo-header-{{ ai_gen_id }}">
+    <h3 class="ai-offers-promo-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h3>
+  </div>
+
+  <div class="ai-offers-list-{{ ai_gen_id }}">
+    <div class="ai-offer-item-{{ ai_gen_id }}" data-offer-index="1">
+      <div class="ai-offer-icon-{{ ai_gen_id }}">₹</div>
+      <div class="ai-offer-content-{{ ai_gen_id }}">
+        <p class="ai-offer-title-{{ ai_gen_id }}">Get ₹200 OFF</p>
+        <p class="ai-offer-desc-{{ ai_gen_id }}">On orders above ₹1,499</p>
+      </div>
+      <div class="ai-offer-code-wrapper-{{ ai_gen_id }}">
+        <span class="ai-offer-code-{{ ai_gen_id }}">LUSH200</span>
+        <button class="ai-copy-btn-{{ ai_gen_id }}" aria-label="Copy code LUSH200" data-code="LUSH200">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="ai-copy-feedback-{{ ai_gen_id }}">Copied!</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-offer-item-{{ ai_gen_id }}" data-offer-index="2">
+      <div class="ai-offer-icon-{{ ai_gen_id }}">🚚</div>
+      <div class="ai-offer-content-{{ ai_gen_id }}">
+        <p class="ai-offer-title-{{ ai_gen_id }}">Free Shipping</p>
+        <p class="ai-offer-desc-{{ ai_gen_id }}">On all orders across India</p>
+      </div>
+      <div class="ai-offer-code-wrapper-{{ ai_gen_id }}">
+        <span class="ai-offer-code-{{ ai_gen_id }}">FRESHIP</span>
+        <button class="ai-copy-btn-{{ ai_gen_id }}" aria-label="Copy code FRESHIP" data-code="FRESHIP">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="ai-copy-feedback-{{ ai_gen_id }}">Copied!</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-offer-item-{{ ai_gen_id }} hidden" data-offer-index="3">
+      <div class="ai-offer-icon-{{ ai_gen_id }}">%</div>
+      <div class="ai-offer-content-{{ ai_gen_id }}">
+        <p class="ai-offer-title-{{ ai_gen_id }}">15% OFF</p>
+        <p class="ai-offer-desc-{{ ai_gen_id }}">On orders above ₹999</p>
+      </div>
+      <div class="ai-offer-code-wrapper-{{ ai_gen_id }}">
+        <span class="ai-offer-code-{{ ai_gen_id }}">LUSH15</span>
+        <button class="ai-copy-btn-{{ ai_gen_id }}" aria-label="Copy code LUSH15" data-code="LUSH15">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="ai-copy-feedback-{{ ai_gen_id }}">Copied!</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-offer-item-{{ ai_gen_id }} hidden" data-offer-index="4">
+      <div class="ai-offer-icon-{{ ai_gen_id }}">%</div>
+      <div class="ai-offer-content-{{ ai_gen_id }}">
+        <p class="ai-offer-title-{{ ai_gen_id }}">10% OFF + Gift</p>
+        <p class="ai-offer-desc-{{ ai_gen_id }}">On orders above ₹999</p>
+      </div>
+      <div class="ai-offer-code-wrapper-{{ ai_gen_id }}">
+        <span class="ai-offer-code-{{ ai_gen_id }}">LUSHGIFT</span>
+        <button class="ai-copy-btn-{{ ai_gen_id }}" aria-label="Copy code LUSHGIFT" data-code="LUSHGIFT">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="ai-copy-feedback-{{ ai_gen_id }}">Copied!</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-offer-item-{{ ai_gen_id }} hidden" data-offer-index="5">
+      <div class="ai-offer-icon-{{ ai_gen_id }}">₹</div>
+      <div class="ai-offer-content-{{ ai_gen_id }}">
+        <p class="ai-offer-title-{{ ai_gen_id }}">Get ₹100 OFF</p>
+        <p class="ai-offer-desc-{{ ai_gen_id }}">On orders above ₹799</p>
+      </div>
+      <div class="ai-offer-code-wrapper-{{ ai_gen_id }}">
+        <span class="ai-offer-code-{{ ai_gen_id }}">LUSH100</span>
+        <button class="ai-copy-btn-{{ ai_gen_id }}" aria-label="Copy code LUSH100" data-code="LUSH100">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="ai-copy-feedback-{{ ai_gen_id }}">Copied!</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-offer-item-{{ ai_gen_id }} hidden" data-offer-index="6">
+      <div class="ai-offer-icon-{{ ai_gen_id }}">%</div>
+      <div class="ai-offer-content-{{ ai_gen_id }}">
+        <p class="ai-offer-title-{{ ai_gen_id }}">10% OFF</p>
+        <p class="ai-offer-desc-{{ ai_gen_id }}">On orders above ₹499</p>
+      </div>
+      <div class="ai-offer-code-wrapper-{{ ai_gen_id }}">
+        <span class="ai-offer-code-{{ ai_gen_id }}">LUSH10</span>
+        <button class="ai-copy-btn-{{ ai_gen_id }}" aria-label="Copy code LUSH10" data-code="LUSH10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="ai-copy-feedback-{{ ai_gen_id }}">Copied!</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-view-all-{{ ai_gen_id }}">
+    <button class="ai-view-all-btn-{{ ai_gen_id }}" aria-expanded="false">
+      <span class="ai-view-all-text-{{ ai_gen_id }}">View All Offers</span>
+      <span class="ai-view-all-arrow-{{ ai_gen_id }}">→</span>
+    </button>
+  </div>
+</offers-promo-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class OffersPromo{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.expanded = false;
+      }
+
+      connectedCallback() {
+        this.copyButtons = this.querySelectorAll('.ai-copy-btn-{{ ai_gen_id }}');
+        this.viewAllButton = this.querySelector('.ai-view-all-btn-{{ ai_gen_id }}');
+        this.viewAllText = this.querySelector('.ai-view-all-text-{{ ai_gen_id }}');
+        this.hiddenOffers = this.querySelectorAll('.ai-offer-item-{{ ai_gen_id }}.hidden');
+
+        this.setupCopyButtons();
+        this.setupViewAll();
+      }
+
+      setupCopyButtons() {
+        this.copyButtons.forEach((button) => {
+          button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const code = button.getAttribute('data-code');
+            const feedback = button.querySelector('.ai-copy-feedback-{{ ai_gen_id }}');
+            
+            navigator.clipboard.writeText(code).then(() => {
+              feedback.classList.add('show');
+              setTimeout(() => {
+                feedback.classList.remove('show');
+              }, 1500);
+            }).catch(() => {
+              const textArea = document.createElement('textarea');
+              textArea.value = code;
+              textArea.style.position = 'fixed';
+              textArea.style.left = '-9999px';
+              document.body.appendChild(textArea);
+              textArea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textArea);
+              
+              feedback.classList.add('show');
+              setTimeout(() => {
+                feedback.classList.remove('show');
+              }, 1500);
+            });
+          });
+        });
+      }
+
+      setupViewAll() {
+        this.viewAllButton.addEventListener('click', () => {
+          this.expanded = !this.expanded;
+          
+          this.hiddenOffers.forEach((offer) => {
+            if (this.expanded) {
+              offer.classList.remove('hidden');
+            } else {
+              offer.classList.add('hidden');
+            }
+          });
+
+          this.viewAllText.textContent = this.expanded ? 'Show Less' : 'View All Offers';
+          this.viewAllButton.setAttribute('aria-expanded', this.expanded);
+        });
+      }
+    }
+
+    customElements.define('offers-promo-{{ ai_gen_id }}', OffersPromo{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Offers & promo",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "🔥 Offers & Promo"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "offer_bg",
+      "label": "Offer background",
+      "default": "#FAF7F2"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#E8DFD6"
+    },
+    {
+      "type": "color",
+      "id": "offer_border",
+      "label": "Offer border",
+      "default": "#E8DFD6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#2C1D11"
+    },
+    {
+      "type": "color",
+      "id": "text_secondary",
+      "label": "Secondary text",
+      "default": "#6B5D52"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#C5A059"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "offer_radius",
+      "label": "Offer border radius",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top margin",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offers & promo"
+    }
+  ]
+}
 {% endschema %}
