@@ -1,124 +1,275 @@
 {% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#1F1610">
+    <title>Lush Beauty Mart Luxury Gift Card — {{ gift_card.balance | money_with_currency }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    <style>
+      :root {
+        --color-gold: #C5A059;
+        --color-dark: #1F1610;
+        --color-cream: #FAF7F2;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background: #FAF7F2;
+        color: #1F1610;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px 16px;
+      }
+      .gift-card-wrap {
+        max-width: 520px;
+        width: 100%;
+        text-align: center;
+      }
+      .brand-header {
+        margin-bottom: 24px;
+      }
+      .brand-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #1F1610;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .brand-subtitle {
+        font-size: 0.75rem;
+        color: #8A7363;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-top: 4px;
+      }
+      /* Luxury Digital Gift Card Visual */
+      .card-visual {
+        background: linear-gradient(135deg, #1F1610 0%, #352317 50%, #150E09 100%);
+        border: 2px solid #C5A059;
+        border-radius: 20px;
+        padding: 32px 28px;
+        color: #FFFFFF;
+        box-shadow: 0 16px 40px rgba(31, 22, 16, 0.25);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 28px;
+      }
+      .card-visual::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(197, 160, 89, 0.15) 0%, transparent 60%);
+        pointer-events: none;
+      }
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+      .card-chip {
+        width: 44px;
+        height: 32px;
+        background: linear-gradient(135deg, #E6C786 0%, #C5A059 100%);
+        border-radius: 6px;
+        position: relative;
+      }
+      .card-chip::after {
+        content: '';
+        position: absolute;
+        top: 8px; left: 8px; right: 8px; bottom: 8px;
+        border: 1px solid rgba(0,0,0,0.25);
+        border-radius: 3px;
+      }
+      .card-badge {
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: #C5A059;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .card-balance-label {
+        font-size: 0.75rem;
+        color: #C5A059;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 6px;
+      }
+      .card-balance-amount {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        margin-bottom: 24px;
+      }
+      .card-code-container {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px dashed rgba(197, 160, 89, 0.6);
+        border-radius: 12px;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .card-code-text {
+        font-family: monospace;
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+        color: #FFFFFF;
+      }
+      .btn-copy-code {
+        background: #C5A059;
+        color: #1F1610;
+        font-weight: 800;
+        font-size: 0.75rem;
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: background 0.2s;
+      }
+      .btn-copy-code:hover {
+        background: #D8B772;
+      }
+      .card-expiry {
+        margin-top: 16px;
+        font-size: 0.72rem;
+        color: #BBA99C;
+      }
+      .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .btn-shop-now {
+        display: block;
+        width: 100%;
+        padding: 16px;
+        background: #1F1610;
+        color: #C5A059;
+        font-weight: 800;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: transform 0.2s;
+      }
+      .btn-shop-now:hover {
+        transform: translateY(-2px);
+      }
+      .btn-print {
+        background: transparent;
+        border: 1.5px solid #EAE3DA;
+        color: #6E5E52;
+        padding: 12px;
+        font-weight: 700;
+        font-size: 0.82rem;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .qr-box {
+        background: #FFFFFF;
+        border: 1px solid #EAE3DA;
+        border-radius: 16px;
+        padding: 20px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .qr-text {
+        font-size: 0.78rem;
+        color: #6E5E52;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gift-card-wrap">
+      <!-- Header -->
+      <div class="brand-header">
+        <h1 class="brand-title">Lush Beauty Mart</h1>
+        <p class="brand-subtitle">Nagpur Luxury Boutique</p>
+      </div>
 
-{% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros %}
-{% assign formatted_initial_value_stripped = formatted_initial_value | strip_html %}
+      <!-- Luxury Card Graphic -->
+      <div class="card-visual">
+        <div class="card-top">
+          <div class="card-chip"></div>
+          <span class="card-badge">✨ LUXURY E-GIFT PASS</span>
+        </div>
 
-<!DOCTYPE html>
-<html>
+        <div class="card-balance-label">Gift Card Value</div>
+        <div class="card-balance-amount">{{ gift_card.balance | money_with_currency }}</div>
 
-<head>
+        <div class="card-code-container">
+          <span class="card-code-text" id="GiftCardCode">{{ gift_card.code | format_code }}</span>
+          <button type="button" class="btn-copy-code" id="BtnCopyGiftCode">Copy</button>
+        </div>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="format-detection" content="telephone=no">
+        <div class="card-expiry">
+          {%- if gift_card.expires_on -%}
+            Valid until: {{ gift_card.expires_on | date: "%d %B %Y" }}
+          {%- else -%}
+            Valid for 1 Year across all online & in-store collections.
+          {%- endif -%}
+        </div>
+      </div>
 
-  <title>Here's your {{ formatted_initial_value_stripped }} gift card for {{ shop.name }}!</title>
-  <meta name="description" content="Here's your gift card!">
+      <!-- Actions -->
+      <div class="action-buttons">
+        <a href="{{ shop.url }}" class="btn-shop-now">Start Shopping at Lush →</a>
+        <button type="button" class="btn-print" onclick="window.print();">🖨️ Print Gift Voucher</button>
+      </div>
 
-  {{ 'gift-card.css' | shopify_asset_url | stylesheet_tag }}
-  {{ 'modernizr.gift-card.js' | shopify_asset_url | script_tag }}
-  {{ 'vendor/qrcode.js' | shopify_asset_url | script_tag }}
-
-  <script type='text/javascript'>
-    function selectText(element) {
-
-        var doc = document;
-        var text = doc.getElementById(element);
-
-        if (doc.body.createTextRange) { // ms
-            var range = doc.body.createTextRange();
-            range.moveToElementText(text);
-            range.select();
-        } else if (window.getSelection) { // moz, opera, webkit
-            var selection = window.getSelection();
-            var range = doc.createRange();
-            range.selectNodeContents(text);
-            selection.removeAllRanges();
-            selection.addRange(range);
-        }
-
-    }
-  </script>
-
-</head>
-
-<body>
-
-  <div class="wrap">
-
-    <header role="banner" id="header">
-      <a href="{{ shop.url }}" class="logo">{{ shop.name }}</a>
-      <a href="{{ shop.url }}" class="shop-url">{{ shop.url | remove: 'http://' }}</a>
-    </header>
-
-      <main role="main">
-
-          <div id="gift-card-outer-container" {% if gift_card.expired or gift_card.enabled != true %}class="disabled"{% endif %}>
-            <div id="gift-card-inner-container">
-
-              <header id="gift-card-header">
-                <h2>Here's your gift card!</h2>
-                {% unless gift_card.enabled %}
-                  <span class="tag">Disabled</span>
-                {% endunless %}
-                {% if gift_card.expired and gift_card.enabled %}
-                   <span class="tag">Expired on {{ gift_card.expires_on | date: "%d/%m/%y" }}</span>
-                {% endif %}
-                {% if gift_card.expired != true and gift_card.expires_on and gift_card.enabled %}
-                  <span class="tag light">Expires on {{ gift_card.expires_on | date: "%d/%m/%y" }}</span>
-                {% endif %}
-              </header>
-
-              <div id="gift-card-holder">
-                <div class="corner top-left"></div>
-                <div class="corner bottom-right"></div>
-                <div class="corner top-right"></div>
-                <div class="corner bottom-left"></div>
-                <div id="gift-card">
-                  <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card illustration">
-                  {% assign initial_value_size = formatted_initial_value | size %}
-                  <div id="gift-card-amount" class="{% if initial_value_size > 6 %}medium{% endif %}">
-                    {% if gift_card.balance != gift_card.initial_value %}
-                      <span class="tooltip-container"><span class="tooltip-label">{{ gift_card.balance | money }} <small>left</small></span><span class="tooltip-triangle"></span></span>
-                    {% endif %}
-                    <strong>{{ formatted_initial_value }}</strong>
-                  </div>
-                  {% assign code_size = gift_card.code | format_code | size %}
-                  <div id="gift-card-code-outer" class="{% if code_size <= 25 %}large{% elsif code_size > 25 and code_size <= 30 %}medium{% else %}small{% endif %}" onclick="selectText('gift-card-code-digits');">
-                    <div id="gift-card-code-inner">
-                      <strong id="gift-card-code-digits">{{ gift_card.code | format_code }}</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="gift-card-instructions">
-                <p>Use this code at checkout to redeem your gift card.</p>
-              </div>
-              <div id="qr-code"></div>
-              <script>
-                new QRCode(document.getElementById("qr-code"), {
-                  text: "{{ gift_card.qr_identifier }}",
-                  width: 120,
-                  height: 120
-                });
-              </script>
-              <div id="gift-card-actions">
-                <a href="{{ shop.url }}" class="btn center" target="_blank">Start Shopping</a>
-                <a href="#" class="action-link left" onclick="window.print();"><i class="ico-16 print"></i>Print</a>
-              </div>
-            </div>
-          </div>
-      </main> <!-- / Main -->
-
-      <footer role="contentinfo">
-        {% if gift_card.pass_url %}
-          <a href="{{ gift_card.pass_url }}"><img id="apple-wallet-badge" src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="Add To Apple Wallet"></a>
-        {% endif %}
-      </footer>
-
+      <!-- In-Store Redemption QR Code -->
+      <div class="qr-box">
+        <div id="QrCodeContainer" data-identifier="{{ gift_card.qr_identifier }}"></div>
+        <p class="qr-text">🏬 Scan this code at our Lad Square, Nagpur Showroom checkout or use the code online.</p>
+      </div>
     </div>
 
-</body>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const copyBtn = document.getElementById('BtnCopyGiftCode');
+        const codeText = document.getElementById('GiftCardCode');
+        if (copyBtn && codeText) {
+          copyBtn.addEventListener('click', () => {
+            const cleanCode = codeText.textContent.replace(/\s+/g, '');
+            navigator.clipboard.writeText(cleanCode).then(() => {
+              copyBtn.textContent = '✓ Copied!';
+              setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+            });
+          });
+        }
+
+        const qrContainer = document.getElementById('QrCodeContainer');
+        if (qrContainer && typeof QRCode !== 'undefined') {
+          new QRCode(qrContainer, {
+            text: qrContainer.dataset.identifier,
+            width: 120,
+            height: 120
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
