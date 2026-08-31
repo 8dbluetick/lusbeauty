@@ -1079,7 +1079,19 @@ function initProductPage() {
   const currentSlideEl = document.getElementById('PdpCurrentSlide');
   const slides = document.querySelectorAll('.pdp-media-slide');
   const dots = document.querySelectorAll('.pdp-dot');
-  const thumbs = document.querySelectorAll('.thumb-btn');
+  const thumbs = document.querySelectorAll('.thumb-btn, .pdp-thumb-btn');
+
+  // Pause all gallery videos
+  const pauseOtherVideos = (currentIdx) => {
+    slides.forEach((slide, idx) => {
+      if (idx !== currentIdx) {
+        const vid = slide.querySelector('video');
+        if (vid && typeof vid.pause === 'function') {
+          vid.pause();
+        }
+      }
+    });
+  };
 
   // 1. Mobile Gallery Scroll & Swipe Tracking
   if (mediaTrack && slides.length > 0) {
@@ -1100,6 +1112,12 @@ function initProductPage() {
         thumbs.forEach((thumb, i) => {
           thumb.classList.toggle('active', i === activeIdx);
         });
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === activeIdx);
+        });
+
+        pauseOtherVideos(activeIdx);
       }, 50);
     }, { passive: true });
   }
@@ -1110,10 +1128,16 @@ function initProductPage() {
       thumbs.forEach(b => b.classList.remove('active'));
       thumb.classList.add('active');
 
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === idx);
+      });
+
       if (mediaTrack && slides[idx]) {
         const slideLeft = slides[idx].offsetLeft;
         mediaTrack.scrollTo({ left: slideLeft, behavior: 'smooth' });
       }
+
+      pauseOtherVideos(idx);
     });
   });
 
@@ -1145,7 +1169,9 @@ function initProductPage() {
       const activeSlide = document.querySelector('.pdp-media-slide.active') || slides[0];
       const img = activeSlide?.querySelector('img');
       const idx = activeSlide?.dataset.mediaIndex || 1;
-      openLightbox(img?.src, idx);
+      if (img && img.src) {
+        openLightbox(img.src, idx);
+      }
     });
   }
 
