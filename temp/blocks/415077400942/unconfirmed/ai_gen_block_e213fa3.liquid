@@ -1,6 +1,665 @@
+{% doc %}
+  @prompt
+    My Shopify store theme does not display product videos on the product page. I have uploaded a video directly to a product's media section in Shopify admin, and the video status shows 'Ready', but it is not appearing on the product page on my storefront. Please update the theme code so that product videos are displayed in the product media gallery alongside images, with video playback support directly on the product page.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-media-gallery-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-product-media-main-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    background-color: {{ block.settings.media_background }};
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .ai-product-media-item-{{ ai_gen_id }} {
+    display: none;
+    width: 100%;
+    aspect-ratio: {{ block.settings.aspect_ratio }};
+  }
+
+  .ai-product-media-item-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-product-media-item-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ block.settings.image_fit }};
+  }
+
+  .ai-product-media-item-{{ ai_gen_id }} video {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ block.settings.image_fit }};
+  }
+
+  .ai-product-media-item-{{ ai_gen_id }} model-viewer {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ai-product-media-item-{{ ai_gen_id }} iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .ai-product-media-controls-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    pointer-events: none;
+  }
+
+  .ai-product-media-nav-btn-{{ ai_gen_id }} {
+    background-color: {{ block.settings.nav_button_bg }};
+    color: {{ block.settings.nav_button_color }};
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+  }
+
+  .ai-product-media-nav-btn-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .ai-product-media-nav-btn-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-product-media-nav-btn-{{ ai_gen_id }}:disabled:hover {
+    transform: scale(1);
+  }
+
+  .ai-product-media-thumbnails-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px;
+    scrollbar-width: thin;
+  }
+
+  .ai-product-media-thumbnails-{{ ai_gen_id }}::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .ai-product-media-thumbnails-{{ ai_gen_id }}::-webkit-scrollbar-track {
+    background: {{ block.settings.media_background }};
+    border-radius: 3px;
+  }
+
+  .ai-product-media-thumbnails-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
+    background: {{ block.settings.nav_button_bg }};
+    border-radius: 3px;
+  }
+
+  .ai-product-media-thumb-{{ ai_gen_id }} {
+    position: relative;
+    flex-shrink: 0;
+    width: {{ block.settings.thumbnail_size }}px;
+    height: {{ block.settings.thumbnail_size }}px;
+    border-radius: {{ block.settings.thumbnail_border_radius }}px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    background-color: {{ block.settings.media_background }};
+  }
+
+  .ai-product-media-thumb-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.thumbnail_hover_border }};
+  }
+
+  .ai-product-media-thumb-{{ ai_gen_id }}.active {
+    border-color: {{ block.settings.thumbnail_active_border }};
+  }
+
+  .ai-product-media-thumb-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-product-media-thumb-icon-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .ai-product-media-thumb-icon-{{ ai_gen_id }} svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ai-product-media-zoom-{{ ai_gen_id }} {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: {{ block.settings.nav_button_bg }};
+    color: {{ block.settings.nav_button_color }};
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+
+  .ai-product-media-zoom-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .ai-product-media-zoom-{{ ai_gen_id }} svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ai-product-media-counter-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
+
+  .ai-product-media-empty-{{ ai_gen_id }} {
+    aspect-ratio: {{ block.settings.aspect_ratio }};
+    background-color: {{ block.settings.media_background }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-product-media-empty-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-media-gallery-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-product-media-nav-btn-{{ ai_gen_id }} {
+      width: 32px;
+      height: 32px;
+    }
+
+    .ai-product-media-thumb-{{ ai_gen_id }} {
+      width: {{ block.settings.thumbnail_size | times: 0.8 }}px;
+      height: {{ block.settings.thumbnail_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<product-media-gallery-{{ ai_gen_id }}
+  class="ai-product-media-gallery-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  {% if product.media.size > 0 %}
+    <div class="ai-product-media-main-{{ ai_gen_id }}">
+      {% for media in product.media %}
+        <div
+          class="ai-product-media-item-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+          data-media-index="{{ forloop.index0 }}"
+          data-media-type="{{ media.media_type }}"
+        >
+          {% case media.media_type %}
+            {% when 'image' %}
+              <img
+                src="{{ media | image_url: width: 1200 }}"
+                alt="{{ media.alt | escape }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                width="{{ media.width }}"
+                height="{{ media.height }}"
+              >
+            {% when 'video' %}
+              <video
+                controls
+                playsinline
+                {% if block.settings.autoplay_video %}autoplay muted loop{% endif %}
+                preload="metadata"
+              >
+                {% for source in media.sources %}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {% endfor %}
+                Your browser does not support the video tag.
+              </video>
+            {% when 'external_video' %}
+              <iframe
+                src="{% if media.host == 'youtube' %}https://www.youtube.com/embed/{{ media.external_id }}?enablejsapi=1{% elsif media.host == 'vimeo' %}https://player.vimeo.com/video/{{ media.external_id }}{% endif %}"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ media.alt | escape }}"
+              ></iframe>
+            {% when 'model' %}
+              <model-viewer
+                src="{{ media.sources[1].url }}"
+                alt="{{ media.alt | escape }}"
+                camera-controls
+                auto-rotate
+                ar
+              ></model-viewer>
+          {% endcase %}
+        </div>
+      {% endfor %}
+
+      {% if block.settings.show_navigation and product.media.size > 1 %}
+        <div class="ai-product-media-controls-{{ ai_gen_id }}">
+          <button
+            class="ai-product-media-nav-btn-{{ ai_gen_id }}"
+            data-direction="prev"
+            aria-label="Previous media"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button
+            class="ai-product-media-nav-btn-{{ ai_gen_id }}"
+            data-direction="next"
+            aria-label="Next media"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      {% endif %}
+
+      {% if block.settings.show_zoom %}
+        <button
+          class="ai-product-media-zoom-{{ ai_gen_id }}"
+          aria-label="Zoom image"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </button>
+      {% endif %}
+
+      {% if block.settings.show_counter and product.media.size > 1 %}
+        <div class="ai-product-media-counter-{{ ai_gen_id }}">
+          <span class="current">1</span> / {{ product.media.size }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if block.settings.show_thumbnails and product.media.size > 1 %}
+      <div class="ai-product-media-thumbnails-{{ ai_gen_id }}">
+        {% for media in product.media %}
+          <div
+            class="ai-product-media-thumb-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+            data-thumb-index="{{ forloop.index0 }}"
+            role="button"
+            tabindex="0"
+            aria-label="View {{ media.media_type }} {{ forloop.index }}"
+          >
+            <img
+              src="{{ media.preview_image | image_url: width: 200 }}"
+              alt="{{ media.alt | escape }}"
+              loading="lazy"
+            >
+            {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+              <span class="ai-product-media-thumb-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </span>
+            {% elsif media.media_type == 'model' %}
+              <span class="ai-product-media-thumb-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+              </span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="ai-product-media-empty-{{ ai_gen_id }}">
+      {{ 'product-1' | placeholder_svg_tag }}
+    </div>
+  {% endif %}
+</product-media-gallery-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductMediaGallery{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.mediaItems = [];
+        this.thumbnails = [];
+      }
+
+      connectedCallback() {
+        this.mediaItems = Array.from(this.querySelectorAll('.ai-product-media-item-{{ ai_gen_id }}'));
+        this.thumbnails = Array.from(this.querySelectorAll('.ai-product-media-thumb-{{ ai_gen_id }}'));
+        this.counter = this.querySelector('.ai-product-media-counter-{{ ai_gen_id }} .current');
+        
+        this.setupNavigation();
+        this.setupThumbnails();
+        this.setupZoom();
+        this.setupVideoHandling();
+      }
+
+      setupNavigation() {
+        const prevBtn = this.querySelector('[data-direction="prev"]');
+        const nextBtn = this.querySelector('[data-direction="next"]');
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => this.navigate(-1));
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => this.navigate(1));
+        }
+
+        this.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.navigate(-1);
+          if (e.key === 'ArrowRight') this.navigate(1);
+        });
+      }
+
+      setupThumbnails() {
+        this.thumbnails.forEach((thumb, index) => {
+          thumb.addEventListener('click', () => this.goToSlide(index));
+          thumb.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.goToSlide(index);
+            }
+          });
+        });
+      }
+
+      setupZoom() {
+        const zoomBtn = this.querySelector('.ai-product-media-zoom-{{ ai_gen_id }}');
+        if (zoomBtn) {
+          zoomBtn.addEventListener('click', () => {
+            const currentMedia = this.mediaItems[this.currentIndex];
+            const img = currentMedia.querySelector('img');
+            if (img) {
+              window.open(img.src, '_blank');
+            }
+          });
+        }
+      }
+
+      setupVideoHandling() {
+        this.mediaItems.forEach((item) => {
+          const video = item.querySelector('video');
+          if (video) {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting && !video.paused) {
+                  video.pause();
+                }
+              });
+            }, { threshold: 0.5 });
+            
+            observer.observe(item);
+          }
+        });
+      }
+
+      navigate(direction) {
+        const newIndex = this.currentIndex + direction;
+        if (newIndex >= 0 && newIndex < this.mediaItems.length) {
+          this.goToSlide(newIndex);
+        }
+      }
+
+      goToSlide(index) {
+        const previousItem = this.mediaItems[this.currentIndex];
+        const previousVideo = previousItem.querySelector('video');
+        if (previousVideo) {
+          previousVideo.pause();
+        }
+
+        this.mediaItems[this.currentIndex].classList.remove('active');
+        this.thumbnails[this.currentIndex]?.classList.remove('active');
+
+        this.currentIndex = index;
+
+        this.mediaItems[this.currentIndex].classList.add('active');
+        this.thumbnails[this.currentIndex]?.classList.add('active');
+
+        if (this.counter) {
+          this.counter.textContent = this.currentIndex + 1;
+        }
+
+        this.thumbnails[this.currentIndex]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
+
+    customElements.define('product-media-gallery-{{ ai_gen_id }}', ProductMediaGallery{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Product media gallery",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "4/3",
+          "label": "Standard (4:3)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "16/9",
+          "label": "Widescreen (16:9)"
+        },
+        {
+          "value": "auto",
+          "label": "Adapt to media"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Media fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_thumbnails",
+      "label": "Show thumbnails",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_counter",
+      "label": "Show media counter",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_zoom",
+      "label": "Show zoom button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_video",
+      "label": "Autoplay videos",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Thumbnails"
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_size",
+      "label": "Thumbnail size",
+      "min": 50,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_border_radius",
+      "label": "Thumbnail border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "thumbnail_hover_border",
+      "label": "Thumbnail hover border",
+      "default": "#C5A059"
+    },
+    {
+      "type": "color",
+      "id": "thumbnail_active_border",
+      "label": "Thumbnail active border",
+      "default": "#C5A059"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "media_background",
+      "label": "Background",
+      "default": "#F4EFEA"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_bg",
+      "label": "Navigation button background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Navigation button icon",
+      "default": "#2C1D11"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product media gallery"
+    }
+  ]
+}
 {% endschema %}
