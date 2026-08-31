@@ -9809,3 +9809,80 @@ body {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 }
+
+/* ==========================================================================
+   Multi-Axis 3D Perspective & Interactive Card Tilt Physics
+   ========================================================================== */
+:root {
+  --perspective-3d: 1200px;
+}
+
+.lush-theme-body {
+  perspective: var(--perspective-3d);
+}
+
+.card-3d-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.35s ease;
+  will-change: transform;
+  position: relative;
+}
+
+/* 3D Depth Layers inside Product & Category Cards */
+.card-3d-tilt .product-card-img-wrap,
+.card-3d-tilt .category-card-img,
+.card-3d-tilt .reel-video-container {
+  transform: translateZ(16px);
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-3d-tilt .card-badge-discount,
+.card-3d-tilt .card-rating-pill,
+.card-3d-tilt .btn-quick-add {
+  transform: translateZ(26px);
+  transform-style: preserve-3d;
+}
+
+.card-3d-tilt:hover {
+  box-shadow: 0 24px 48px rgba(31, 22, 16, 0.14),
+              0 0 25px rgba(197, 160, 89, 0.25);
+}
+
+/* Specular 3D Glare Lighting Effect */
+.glare-3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+/* 3D Multi-Axis Floating Depth */
+@keyframes float3DDepth {
+  0% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(2.5deg) rotateY(-3.5deg) translateY(-8px);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px);
+  }
+}
+
+.hero-video-card,
+.collection-verified-pill {
+  animation: float3DDepth 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.hero-video-card:hover {
+  animation-play-state: paused;
+}

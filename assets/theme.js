@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWishlist();
   initMobileAppDock();
   initCollectionFilters();
+  init3DMultiAxisTilt();
 });
 
 /* --------------------------------------------------------------------------
@@ -2443,5 +2444,89 @@ function initCollectionFilters() {
     availInput.checked = true;
     if (panel) panel.style.display = 'block';
     if (toggleBtn) toggleBtn.classList.add('active');
+  }
+}
+
+/* --------------------------------------------------------------------------
+   19. Multi-Axis 3D Animation & Interactive Parallax Physics
+   -------------------------------------------------------------------------- */
+function init3DMultiAxisTilt() {
+  const cards = document.querySelectorAll(
+    '.lush-product-card, .hero-video-card, .category-card, .testimonial-card, .store-experience-card, .partner-card-layout, .collection-luxury-card, .brand-dir-card, .wallet-hero-card'
+  );
+
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+  cards.forEach(card => {
+    card.classList.add('card-3d-tilt');
+
+    // Create dynamic specular light reflection element if not present
+    if (!card.querySelector('.glare-3d')) {
+      const glare = document.createElement('div');
+      glare.className = 'glare-3d';
+      card.appendChild(glare);
+    }
+
+    const glare = card.querySelector('.glare-3d');
+    let rafId = null;
+
+    const handleMouseMove = (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Multi-axis 3D tilt calculation (-10 to +10 degrees)
+      const rotateX = ((y - centerY) / centerY) * -9;
+      const rotateY = ((x - centerX) / centerX) * 9;
+      const glareX = (x / rect.width) * 100;
+      const glareY = (y / rect.height) * 100;
+
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(8px)`;
+        if (glare) {
+          glare.style.opacity = '1';
+          glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.3) 0%, rgba(197, 160, 89, 0.15) 35%, transparent 70%)`;
+        }
+      });
+    };
+
+    const handleMouseLeave = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      if (glare) {
+        glare.style.opacity = '0';
+      }
+    };
+
+    if (!isTouch) {
+      card.addEventListener('mousemove', handleMouseMove, { passive: true });
+      card.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    }
+  });
+
+  // Mobile Gyroscope 3D Tilt on device orientation
+  if (window.DeviceOrientationEvent && isTouch) {
+    let lastTilt = 0;
+    window.addEventListener('deviceorientation', (e) => {
+      const now = Date.now();
+      if (now - lastTilt < 60) return;
+      lastTilt = now;
+
+      const gamma = e.gamma;
+      const beta = e.beta;
+
+      if (gamma === null || beta === null) return;
+
+      const clampedGamma = Math.min(12, Math.max(-12, gamma));
+      const clampedBeta = Math.min(12, Math.max(-12, beta - 45));
+
+      const hero = document.querySelector('.hero-video-card');
+      if (hero) {
+        hero.style.transform = `perspective(1000px) rotateY(${(clampedGamma * 0.35).toFixed(1)}deg) rotateX(${(-clampedBeta * 0.35).toFixed(1)}deg)`;
+      }
+    }, { passive: true });
   }
 }
