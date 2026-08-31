@@ -1772,17 +1772,9 @@ function initStickyMobileBar() {
 }
 
 /* --------------------------------------------------------------------------
-   16. Luxury Scroll Reveal Animations (Intersection Observer)
+   16. Luxury Scroll Reveal Animations (Intersection Observer & Staggered Reveal)
    -------------------------------------------------------------------------- */
 function initScrollAnimations() {
-  if (!('IntersectionObserver' in window)) {
-    // Fallback if browser doesn't support IntersectionObserver
-    document.querySelectorAll('.lush-reveal, .section-header-center, .lush-product-card, .testimonial-card, .faq-accordion-item, .category-card, .reel-card-item, .store-experience-card, .partner-card-layout').forEach(el => {
-      el.classList.add('is-revealed');
-    });
-    return;
-  }
-
   const revealTargets = [
     '.section-header-center',
     '.hero-content',
@@ -1791,18 +1783,30 @@ function initScrollAnimations() {
     '.testimonial-card',
     '.faq-accordion-item',
     '.category-card',
+    '.collection-running-card',
     '.reel-card-item',
     '.store-experience-card',
     '.partner-card-layout',
     '.promotional-offer-card',
+    '.brand-dir-card',
+    '.blog-grid-card',
+    '.blog-featured-hero-card',
+    '.collection-luxury-card',
     '.lush-reveal'
   ];
+
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll(revealTargets.join(', ')).forEach(el => {
+      el.classList.add('is-revealed');
+    });
+    return;
+  }
 
   const isMobile = window.innerWidth < 768;
   const observerOptions = {
     root: null,
-    rootMargin: isMobile ? '0px 0px -25px 0px' : '0px 0px -60px 0px',
-    threshold: isMobile ? 0.05 : 0.12
+    rootMargin: isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px',
+    threshold: isMobile ? 0.04 : 0.08
   };
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -1814,30 +1818,34 @@ function initScrollAnimations() {
     });
   }, observerOptions);
 
-  document.querySelectorAll(revealTargets.join(', ')).forEach((el, index) => {
+  document.querySelectorAll(revealTargets.join(', ')).forEach(el => {
     el.classList.add('lush-reveal');
     
     // Add staggered delay to child cards in grids
-    const parentGrid = el.closest('.products-grid-4, .testimonials-grid-3, .categories-grid-4, .reels-grid-track');
+    const parentGrid = el.closest('.products-grid-4, .testimonials-grid-3, .categories-grid-4, .reels-grid-track, .collections-grid-container, .brands-dir-grid');
     if (parentGrid) {
       const siblings = Array.from(parentGrid.children);
       const childIndex = siblings.indexOf(el);
       if (childIndex >= 0) {
-        el.style.transitionDelay = `${childIndex * (isMobile ? 0.05 : 0.08)}s`;
+        el.style.transitionDelay = `${(childIndex % 6) * (isMobile ? 0.04 : 0.07)}s`;
       }
     }
     
     revealObserver.observe(el);
   });
+
+  // Enable Smooth Mouse Drag-to-Scroll on all horizontal tracks
+  initSmoothDragScroll();
 }
 
 /* --------------------------------------------------------------------------
-   17. Scroll Progress Bar & Floating Back-To-Top Button
+   17. Scroll Progress Bar, Parallax & Floating Back-To-Top Button
    -------------------------------------------------------------------------- */
 function initScrollProgressAndBackToTop() {
   const progressBar = document.getElementById('ScrollProgressBar');
   const backToTopBtn = document.getElementById('BackToTopBtn');
   const header = document.querySelector('.lush-sticky-header');
+  const heroGlow = document.querySelector('.hero-bg-glow');
 
   let ticking = false;
 
@@ -1851,16 +1859,21 @@ function initScrollProgressAndBackToTop() {
       progressBar.style.width = progressPercent + '%';
     }
 
-    // 2. Header elevation on scroll
+    // 2. Header Glassmorphism Elevation
     if (header) {
-      if (scrollTop > 30) {
+      if (scrollTop > 25) {
         header.classList.add('header-scrolled');
       } else {
         header.classList.remove('header-scrolled');
       }
     }
 
-    // 3. Floating Back-to-Top Button
+    // 3. Subtle Hero Parallax Depth
+    if (heroGlow && scrollTop < 800) {
+      heroGlow.style.transform = `translate3d(0, ${scrollTop * 0.25}px, 0)`;
+    }
+
+    // 4. Floating Back-to-Top Button
     if (backToTopBtn) {
       if (scrollTop > 350) {
         backToTopBtn.classList.add('is-visible');
@@ -1879,10 +1892,8 @@ function initScrollProgressAndBackToTop() {
     }
   }, { passive: true });
 
-  // Initial check
   onScroll();
 
-  // Back to Top click with smooth physics
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
       window.scrollTo({
@@ -1891,6 +1902,45 @@ function initScrollProgressAndBackToTop() {
       });
     });
   }
+}
+
+/* --------------------------------------------------------------------------
+   18. Momentum Mouse Drag-To-Scroll for Carousels & Tracks
+   -------------------------------------------------------------------------- */
+function initSmoothDragScroll() {
+  const tracks = document.querySelectorAll('.collection-marquee-track, .brands-track-container, .reels-grid-track, .trending-filter-chips, .pdp-thumbnails-strip, .brands-alphabet-bar');
+  
+  tracks.forEach(slider => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.style.cursor = 'grabbing';
+      slider.style.userSelect = 'none';
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.style.cursor = '';
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.style.cursor = '';
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  });
 }
 
 /* --------------------------------------------------------------------------

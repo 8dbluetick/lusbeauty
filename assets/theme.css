@@ -9749,3 +9749,63 @@ h1, h2, h3, h4, .font-serif {
 .thumb-video-badge svg {
   margin-left: 1px;
 }
+
+/* ==========================================================================
+   Ultra-Smooth Momentum Scrolling & Luxury Reveal Dynamics
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced Scroll Reveal Physics */
+.lush-reveal {
+  opacity: 0;
+  transform: translateY(26px) scale(0.985);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.lush-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Dynamic Ambient Scroll Progress Bar Glow */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #C5A059 0%, #E6C786 50%, #C5A059 100%);
+  z-index: 10001;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(197, 160, 89, 0.8);
+  transition: width 0.12s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Glassmorphism Header Elevation on Scroll */
+.lush-sticky-header.header-scrolled {
+  background: rgba(250, 247, 242, 0.92) !important;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 8px 32px rgba(31, 22, 16, 0.08);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Touch & Drag Smooth Sliders */
+.collection-marquee-track,
+.brands-track-container,
+.reels-grid-track,
+.trending-filter-chips,
+.pdp-thumbnails-strip {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
