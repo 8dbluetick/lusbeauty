@@ -8,7 +8,7 @@
         <a href="{{ section.settings.promo_banner_link | default: '/collections/all' }}" class="hero-promo-banner-link" aria-label="{{ section.settings.promo_banner_alt | default: 'Lush Beauty Mart Festive Promotion' | escape }}">
           <img
             src="{{ section.settings.promo_banner_image }}"
-            alt="{{ section.settings.promo_banner_alt | default: 'Lush Beauty Mart Raksha Bandhan Festive Special Offer' | escape }}"
+            alt="{{ section.settings.promo_banner_alt | default: 'Lush Beauty Mart Luxury Special Offer' | escape }}"
             class="hero-promo-banner-img"
             width="1280"
             height="720"
@@ -134,13 +134,12 @@
       "type": "checkbox",
       "id": "show_promo_banner",
       "label": "Show Promotional Banner",
-      "default": true
+      "default": false
     },
     {
       "type": "text",
       "id": "promo_banner_image",
-      "label": "Promotional Banner Image URL",
-      "default": "https://res.cloudinary.com/dsqxboxoc/image/upload/v1787898064/WhatsApp_Image_2026-08-28_at_11.48.58_AM_bb4zgm.jpg"
+      "label": "Promotional Banner Image URL"
     },
     {
       "type": "url",
@@ -152,7 +151,7 @@
       "type": "text",
       "id": "promo_banner_alt",
       "label": "Banner Alt Text",
-      "default": "Lush Beauty Mart Raksha Bandhan Festive Special Collection"
+      "default": "Lush Beauty Mart Special Collection"
     },
     {
       "type": "header",
