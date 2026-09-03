@@ -9886,3 +9886,284 @@ body {
 .hero-video-card:hover {
   animation-play-state: paused;
 }
+
+/* ==========================================================================
+   Product Page Smart Auto-Parsing Luxury Tabs (Overview, Ingredients, How to Use)
+   ========================================================================== */
+.pdp-smart-tabs-card {
+  background: #FAF7F2;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 20px 0;
+  box-shadow: 0 4px 18px rgba(31, 22, 16, 0.04);
+}
+
+.pdp-tabs-nav {
+  display: flex;
+  background: #F3ECE2;
+  border-bottom: 1.5px solid #EAE3DA;
+  padding: 6px;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pdp-tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.pdp-tab-btn {
+  flex: 1;
+  min-width: max-content;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: #6E5E52;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.pdp-tab-btn:hover {
+  color: #1F1610;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.pdp-tab-btn.active {
+  background: #FFFFFF;
+  color: #1F1610;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(31, 22, 16, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+}
+
+.pdp-tab-panel {
+  padding: 22px 20px;
+  animation: fadeInTab 0.3s ease;
+}
+
+@keyframes fadeInTab {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pdp-tab-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #EAE3DA;
+}
+
+.pdp-tab-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid #EAE3DA;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1F1610;
+}
+
+.ingredient-info-card {
+  background: #FFFFFF;
+  border: 1px solid #EAE3DA;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.ingredient-info-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F3EDE7;
+}
+
+.ingredient-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.ingredient-info-header strong {
+  font-size: 0.95rem;
+  color: #1F1610;
+  display: block;
+}
+
+.ingredient-info-header p {
+  font-size: 0.78rem;
+  color: #8A7363;
+  margin: 2px 0 0;
+}
+
+.ingredients-text-body {
+  font-size: 0.85rem;
+  color: #4A3B32;
+  line-height: 1.6;
+}
+
+.ingredients-consult-box {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed #EAE3DA;
+}
+
+.ingredients-consult-box p {
+  font-size: 0.78rem;
+  color: #6E5E52;
+  margin: 0 0 8px;
+}
+
+.btn-ingredients-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FAF7F2;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  color: #1F1610;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-ingredients-wa:hover {
+  background: #C5A059;
+  color: #FFFFFF;
+}
+
+.routine-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.routine-step-card {
+  display: flex;
+  gap: 14px;
+  background: #FFFFFF;
+  border: 1px solid #EAE3DA;
+  border-radius: 12px;
+  padding: 14px 16px;
+  align-items: flex-start;
+}
+
+.routine-step-num {
+  width: 28px;
+  height: 28px;
+  background: #1F1610;
+  color: #C5A059;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.routine-step-info strong {
+  font-size: 0.88rem;
+  color: #1F1610;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.routine-step-info p {
+  font-size: 0.82rem;
+  color: #6E5E52;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.authenticity-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-guarantee-card,
+.auth-showroom-card {
+  background: #FFFFFF;
+  border: 1px solid #EAE3DA;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.auth-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.auth-icon {
+  font-size: 1.4rem;
+}
+
+.auth-header strong {
+  font-size: 0.92rem;
+  color: #1F1610;
+  display: block;
+}
+
+.auth-header p {
+  font-size: 0.75rem;
+  color: #8A7363;
+  margin: 0;
+}
+
+.auth-desc,
+.auth-address {
+  font-size: 0.82rem;
+  color: #4A3B32;
+  line-height: 1.55;
+  margin: 0 0 12px;
+}
+
+.auth-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-auth-map,
+.btn-auth-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  color: #1F1610;
+  transition: all 0.2s;
+}
+
+.btn-auth-map:hover,
+.btn-auth-call:hover {
+  background: #1F1610;
+  color: #C5A059;
+}

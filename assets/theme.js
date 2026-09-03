@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileAppDock();
   initCollectionFilters();
   init3DMultiAxisTilt();
+  initProductSmartTabs();
 });
 
 /* --------------------------------------------------------------------------
@@ -2528,5 +2529,105 @@ function init3DMultiAxisTilt() {
         hero.style.transform = `perspective(1000px) rotateY(${(clampedGamma * 0.35).toFixed(1)}deg) rotateX(${(-clampedBeta * 0.35).toFixed(1)}deg)`;
       }
     }, { passive: true });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. Smart Auto-Parsing Product Details & Luxury Tabs (Overview, Ingredients, How to Use)
+   -------------------------------------------------------------------------- */
+function initProductSmartTabs() {
+  const tabsNav = document.querySelector('.pdp-tabs-nav');
+  const tabBtns = document.querySelectorAll('.pdp-tab-btn');
+  const tabPanels = document.querySelectorAll('.pdp-tab-panel');
+  const rawDescEl = document.getElementById('PdpRawDescription');
+  const ingredientsTarget = document.getElementById('IngredientsTextBody');
+  const howToUseTarget = document.getElementById('HowToUseTextBody');
+
+  if (!tabsNav || tabBtns.length === 0) return;
+
+  // 1. Interactive Tab Switching
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-tab-target');
+      if (!targetId) return;
+
+      tabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      tabPanels.forEach(p => {
+        p.classList.remove('active');
+        p.style.display = 'none';
+      });
+
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const activePanel = document.getElementById(targetId);
+      if (activePanel) {
+        activePanel.classList.add('active');
+        activePanel.style.display = 'block';
+      }
+    });
+  });
+
+  // 2. Intelligent Auto-Parsing from Description HTML
+  if (rawDescEl) {
+    const rawHtml = rawDescEl.innerHTML;
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = rawHtml;
+
+    let foundIngredients = '';
+    let foundHowToUse = '';
+
+    const headings = tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6, strong, b, p');
+    
+    headings.forEach(h => {
+      const text = h.textContent.trim().toLowerCase();
+      
+      // Look for Ingredients keyword
+      if (/^(key\s*)?ingredients?(:|\b)|composition(:|\b)|actives?(:|\b)/i.test(text) && !foundIngredients) {
+        let content = '';
+        let curr = h.nextElementSibling;
+        while (curr && !/^(H1|H2|H3|H4|H5|H6)$/i.test(curr.tagName) && !/^(how\s*to\s*use|directions|usage|routine|benefits|authenticity)/i.test(curr.textContent.trim())) {
+          content += curr.outerHTML;
+          const toRemove = curr;
+          curr = curr.nextElementSibling;
+          toRemove.remove();
+        }
+        if (content) {
+          foundIngredients = content;
+          h.remove();
+        }
+      }
+
+      // Look for How to Use / Directions keyword
+      if (/^how\s*to\s*use(:|\b)|directions?(:|\b)|application(:|\b)|usage(:|\b)|routine(:|\b)/i.test(text) && !foundHowToUse) {
+        let content = '';
+        let curr = h.nextElementSibling;
+        while (curr && !/^(H1|H2|H3|H4|H5|H6)$/i.test(curr.tagName) && !/^(ingredients|composition|benefits|authenticity)/i.test(curr.textContent.trim())) {
+          content += curr.outerHTML;
+          const toRemove = curr;
+          curr = curr.nextElementSibling;
+          toRemove.remove();
+        }
+        if (content) {
+          foundHowToUse = content;
+          h.remove();
+        }
+      }
+    });
+
+    // If auto-parsed ingredients were found in description, populate the tab!
+    if (foundIngredients && ingredientsTarget) {
+      ingredientsTarget.innerHTML = `<div class="parsed-ingredients-body" style="font-size: 0.88rem; line-height: 1.6; color: #4A3B32;">${foundIngredients}</div>`;
+      rawDescEl.innerHTML = tempDiv.innerHTML;
+    }
+
+    // If auto-parsed how-to-use was found in description, populate the tab!
+    if (foundHowToUse && howToUseTarget) {
+      howToUseTarget.innerHTML = `<div class="parsed-how-to-use-body" style="font-size: 0.88rem; line-height: 1.6; color: #4A3B32;">${foundHowToUse}</div>`;
+      rawDescEl.innerHTML = tempDiv.innerHTML;
+    }
   }
 }

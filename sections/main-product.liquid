@@ -255,18 +255,178 @@
               </div>
 
             {%- when 'description' -%}
-              <!-- Product Description Card (Styled like Price Block) -->
-              {%- if product.description != blank -%}
-                <div class="product-description-card" {{ block.shopify_attributes }}>
-                  <div class="description-card-header">
-                    <span class="desc-card-icon">{{ block.settings.icon | default: '🌿' }}</span>
-                    <h3 class="desc-card-title">{{ block.settings.heading | default: 'Product Description & Details' }}</h3>
+              <!-- ====================================================================
+                   SMART AUTO-PARSING LUXURY TABS: OVERVIEW, INGREDIENTS, HOW TO USE
+                   ==================================================================== -->
+              <div class="pdp-smart-tabs-card" {{ block.shopify_attributes }}>
+                <!-- Tab Navigation Pills -->
+                <div class="pdp-tabs-nav" role="tablist" aria-label="Product Information">
+                  <button type="button" class="pdp-tab-btn active" role="tab" aria-selected="true" data-tab-target="TabOverview">
+                    <span class="tab-btn-icon">📝</span>
+                    <span class="tab-btn-text">Overview</span>
+                  </button>
+
+                  <button type="button" class="pdp-tab-btn" role="tab" aria-selected="false" data-tab-target="TabIngredients">
+                    <span class="tab-btn-icon">🧪</span>
+                    <span class="tab-btn-text">Ingredients</span>
+                  </button>
+
+                  <button type="button" class="pdp-tab-btn" role="tab" aria-selected="false" data-tab-target="TabHowToUse">
+                    <span class="tab-btn-icon">✨</span>
+                    <span class="tab-btn-text">How to Use</span>
+                  </button>
+
+                  <button type="button" class="pdp-tab-btn" role="tab" aria-selected="false" data-tab-target="TabAuthenticity">
+                    <span class="tab-btn-icon">🛡️</span>
+                    <span class="tab-btn-text">Authenticity</span>
+                  </button>
+                </div>
+
+                <!-- Tab 1: Overview & Details -->
+                <div class="pdp-tab-panel active" id="TabOverview" role="tabpanel">
+                  <div class="product-description-rte" id="PdpRawDescription">
+                    {%- if product.description != blank -%}
+                      {{ product.description }}
+                    {%- else -%}
+                      <p>Discover authentic luxury at <strong>Lush Beauty Mart</strong>. Sourced directly from authorized brand partners with 100% genuine formulation guarantees.</p>
+                    {%- endif -%}
                   </div>
-                  <div class="product-description-rte">
-                    {{ product.description }}
+
+                  <!-- Quick Trust Badges inside Overview -->
+                  <div class="pdp-tab-trust-grid">
+                    <div class="pdp-tab-trust-item">
+                      <span class="pdp-tab-trust-icon">🌟</span>
+                      <span class="pdp-tab-trust-label">100% Original & Batch-Sealed</span>
+                    </div>
+                    <div class="pdp-tab-trust-item">
+                      <span class="pdp-tab-trust-icon">🔬</span>
+                      <span class="pdp-tab-trust-label">Dermatologically Verified</span>
+                    </div>
+                    <div class="pdp-tab-trust-item">
+                      <span class="pdp-tab-trust-icon">⚡</span>
+                      <span class="pdp-tab-trust-label">Nagpur Same-Day Delivery</span>
+                    </div>
                   </div>
                 </div>
-              {%- endif -%}
+
+                <!-- Tab 2: Ingredients & Key Actives (Auto-Parsed from Description or Metafields) -->
+                <div class="pdp-tab-panel" id="TabIngredients" role="tabpanel" style="display: none;">
+                  <div id="PdpIngredientsContent">
+                    {%- if product.metafields.custom.ingredients != blank -%}
+                      <div class="metafield-ingredients-content">
+                        {{ product.metafields.custom.ingredients | metafield_tag }}
+                      </div>
+                    {%- elsif product.metafields.my_fields.ingredients != blank -%}
+                      <div class="metafield-ingredients-content">
+                        {{ product.metafields.my_fields.ingredients }}
+                      </div>
+                    {%- else -%}
+                      <!-- Auto-Parse Target / Fallback Container -->
+                      <div class="ingredients-auto-container" id="IngredientsAutoTarget">
+                        <div class="ingredient-info-card">
+                          <div class="ingredient-info-header">
+                            <span class="ingredient-icon">🧪</span>
+                            <div>
+                              <strong>Key Actives & Complete Formulation</strong>
+                              <p>100% authentic, certified ingredients as formulated by {{ product.vendor | default: "the manufacturer" }}.</p>
+                            </div>
+                          </div>
+                          <div class="ingredients-text-body" id="IngredientsTextBody">
+                            <p>Complete official formulation is printed on the original manufacturer batch-sealed box. Free from unverified adulterations.</p>
+                          </div>
+                          <div class="ingredients-consult-box">
+                            <p>💡 <em>Have specific ingredient sensitivities or allergic questions?</em></p>
+                            <a href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text=Hello%20Lush%20Beauty%20Mart!%20I%20have%20an%20ingredients%20query%20regarding%20{{ product.title | escape }}" target="_blank" rel="noopener noreferrer" class="btn-ingredients-wa">
+                              💬 Ask Our Nagpur Beauty Consultant on WhatsApp
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+
+                <!-- Tab 3: How to Use & Routine (Auto-Parsed from Description or Metafields) -->
+                <div class="pdp-tab-panel" id="TabHowToUse" role="tabpanel" style="display: none;">
+                  <div id="PdpHowToUseContent">
+                    {%- if product.metafields.custom.how_to_use != blank -%}
+                      <div class="metafield-how-to-use-content">
+                        {{ product.metafields.custom.how_to_use | metafield_tag }}
+                      </div>
+                    {%- elsif product.metafields.my_fields.how_to_use != blank -%}
+                      <div class="metafield-how-to-use-content">
+                        {{ product.metafields.my_fields.how_to_use }}
+                      </div>
+                    {%- else -%}
+                      <!-- Auto-Parse Target / Fallback 3-Step Routine Guide -->
+                      <div class="how-to-use-auto-container" id="HowToUseAutoTarget">
+                        <div class="routine-steps-list" id="HowToUseTextBody">
+                          <div class="routine-step-card">
+                            <span class="routine-step-num">1</span>
+                            <div class="routine-step-info">
+                              <strong>Step 1: Prep & Cleanse</strong>
+                              <p>Cleanse your skin or prepare application area with lukewarm water and pat gently dry.</p>
+                            </div>
+                          </div>
+                          <div class="routine-step-card">
+                            <span class="routine-step-num">2</span>
+                            <div class="routine-step-info">
+                              <strong>Step 2: Apply & Gently Massage</strong>
+                              <p>Take an adequate amount and apply evenly. Massage or dab gently using upward strokes until fully absorbed.</p>
+                            </div>
+                          </div>
+                          <div class="routine-step-card">
+                            <span class="routine-step-num">3</span>
+                            <div class="routine-step-info">
+                              <strong>Step 3: Lock & Protect</strong>
+                              <p>Follow with your favorite moisturizer or sunscreen (AM routine) to lock in hydration and benefits.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+
+                <!-- Tab 4: Authenticity & Nagpur Showroom Pickup -->
+                <div class="pdp-tab-panel" id="TabAuthenticity" role="tabpanel" style="display: none;">
+                  <div class="authenticity-tab-content">
+                    <div class="auth-guarantee-card">
+                      <div class="auth-header">
+                        <span class="auth-icon">🛡️</span>
+                        <div>
+                          <strong>100% Authentic Guarantee</strong>
+                          <p>Direct Authorized Partner Sourcing</p>
+                        </div>
+                      </div>
+                      <p class="auth-desc">
+                        Every bottle and product sold at <strong>Lush Beauty Mart</strong> carries verified batch numbers, factory hologram seals, and is stored in climate-controlled temperature settings at our Nagpur flagship showroom.
+                      </p>
+                    </div>
+
+                    <div class="auth-showroom-card">
+                      <div class="auth-header">
+                        <span class="auth-icon">🏬</span>
+                        <div>
+                          <strong>Nagpur Flagship Showroom</strong>
+                          <p>Visit us for in-person shade matching & instant trial</p>
+                        </div>
+                      </div>
+                      <p class="auth-address">
+                        📍 Below Hotel Maitrayee, Near Lad Square (Metro Pillar 213–214), North Ambazari Road, Gandhi Nagar, Nagpur – 440 010.
+                      </p>
+                      <div class="auth-actions">
+                        <a href="https://maps.google.com/?q=Lush+Beauty+Mart+Nagpur" target="_blank" rel="noopener noreferrer" class="btn-auth-map">
+                          🗺️ Open in Google Maps
+                        </a>
+                        <a href="tel:9119595951" class="btn-auth-call">
+                          📞 Call Showroom (+91 91195 95951)
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             {%- when 'variant_picker' -%}
               <!-- Variant / Option Selector Pills -->
