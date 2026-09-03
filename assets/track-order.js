@@ -163,6 +163,27 @@
     if (backdropCloseModal) backdropCloseModal.addEventListener('click', closeTrackModal);
 
     // Tab switching inside modal
+    
+    var modalTabPortal = document.getElementById('ModalTabPortal');
+    var modalPanePortal = document.getElementById('ModalPanePortal');
+
+    if (modalTabPortal && modalTabOrderId) {
+      modalTabPortal.addEventListener('click', function() {
+        modalTabPortal.classList.add('active');
+        modalTabOrderId.classList.remove('active');
+        if (modalPanePortal) modalPanePortal.style.display = 'block';
+        if (modalPaneOrderId) modalPaneOrderId.style.display = 'none';
+        if (modalResults) modalResults.style.display = 'none';
+      });
+
+      modalTabOrderId.addEventListener('click', function() {
+        modalTabOrderId.classList.add('active');
+        modalTabPortal.classList.remove('active');
+        if (modalPaneOrderId) modalPaneOrderId.style.display = 'block';
+        if (modalPanePortal) modalPanePortal.style.display = 'none';
+      });
+    }
+
     if (modalTabAwb && modalTabOrderId) {
       modalTabAwb.addEventListener('click', function() {
         modalTabAwb.classList.add('active');

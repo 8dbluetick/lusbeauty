@@ -1,60 +1,62 @@
 {% comment %}
   Lush Beauty Mart — Live Shadowfax 360 Order Tracking Modal
-  Opens instantly anywhere on the site with zero 404 risk
+  Features Direct Embedded Official Shadowfax Portal (https://www.shadowfax.in/track)
 {% endcomment %}
 
 <div class="lush-track-modal-overlay" id="LushTrackModalOverlay" aria-hidden="true" role="dialog" aria-label="Track Order Live">
   <div class="track-modal-backdrop" id="BtnCloseTrackModalBackdrop"></div>
   
-  <div class="track-modal-card">
+  <div class="track-modal-card track-modal-card-embedded">
     <button type="button" class="btn-close-track-modal" id="BtnCloseTrackModal" aria-label="Close tracking popup">&times;</button>
     
     <div class="track-modal-header">
-      <span class="track-modal-badge">🚚 SHADOWFAX 360 LIVE TRACKING</span>
+      <span class="track-modal-badge">🚚 OFFICIAL SHADOWFAX 360 TRACKING</span>
       <h2 class="track-modal-title">Track Your Order Live</h2>
-      <p class="track-modal-subtitle">Enter your Shadowfax AWB tracking number or Shopify Order ID to get real-time delivery status.</p>
+      <p class="track-modal-subtitle">Direct live tracking powered by our official logistics partner Shadowfax 360.</p>
     </div>
 
     <!-- Tabs inside Modal -->
     <div class="track-modal-tabs">
-      <button type="button" class="track-modal-tab-btn active" id="ModalTabAwb">
-        <span>📦 By Shadowfax AWB</span>
+      <button type="button" class="track-modal-tab-btn active" id="ModalTabPortal">
+        <span>🌐 Official Shadowfax Portal</span>
       </button>
       <button type="button" class="track-modal-tab-btn" id="ModalTabOrderId">
-        <span>🏷️ By Order ID & Phone</span>
+        <span>🏷️ Track By Order ID</span>
       </button>
     </div>
 
-    <!-- Form 1: AWB Tracker -->
-    <div class="track-modal-pane active" id="ModalPaneAwb">
-      <form id="ModalFormTrackAwb" class="track-modal-form">
-        <div class="track-modal-input-wrap">
-          <span class="track-modal-input-icon">🔍</span>
-          <input
-            type="text"
-            id="ModalInputAwb"
-            class="track-modal-input"
-            placeholder="e.g. SFX102938475 or 143214569871"
-            required
-            autocomplete="off"
-          >
+    <!-- Pane 1: Embedded Live Shadowfax Portal (https://www.shadowfax.in/track) -->
+    <div class="track-modal-pane active" id="ModalPanePortal">
+      <div class="shadowfax-embedded-container">
+        <div class="shadowfax-frame-header">
+          <div class="shadowfax-brand-pill">
+            <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788442633/0x0_usqks6.png" alt="Shadowfax Delivery Partner" height="22">
+            <span>Official Live Tracker</span>
+          </div>
+          <a href="https://www.shadowfax.in/track" target="_blank" rel="noopener noreferrer" class="btn-open-external-shadowfax" title="Open full screen in new tab">
+            Open in Full Screen ↗
+          </a>
         </div>
-        <button type="submit" class="btn-track-modal-submit" id="BtnModalTrackAwb">
-          <span>🚀 TRACK LIVE ON SHADOWFAX</span>
-        </button>
-      </form>
+        <iframe
+          src="https://www.shadowfax.in/track"
+          title="Shadowfax Live Order Tracking"
+          class="shadowfax-track-iframe"
+          loading="lazy"
+          allow="geolocation"
+        ></iframe>
+      </div>
     </div>
 
-    <!-- Form 2: Order ID Tracker -->
+    <!-- Pane 2: Order ID & WhatsApp Lookup -->
     <div class="track-modal-pane" id="ModalPaneOrderId" style="display: none;">
-      <form id="ModalFormTrackOrderId" class="track-modal-form">
-        <div class="track-modal-input-wrap" style="margin-bottom: 10px;">
+      <form id="ModalFormTrackOrderId" class="track-modal-form" style="margin-top: 14px;">
+        <div class="track-modal-input-wrap" style="margin-bottom: 12px;">
           <span class="track-modal-input-icon">#</span>
           <input
             type="text"
             id="ModalInputOrderId"
             class="track-modal-input"
-            placeholder="e.g. 1024 or #LUSH-1024"
+            placeholder="Shopify Order ID (e.g. 1024 or #LUSH-1024)"
             required
           >
         </div>
@@ -64,11 +66,11 @@
             type="text"
             id="ModalInputPhone"
             class="track-modal-input"
-            placeholder="Mobile number (e.g. 9119595951)"
+            placeholder="Registered Mobile Number"
           >
         </div>
         <button type="submit" class="btn-track-modal-submit" id="BtnModalTrackOrderId">
-          <span>🚀 SEARCH & TRACK ORDER</span>
+          <span>🚀 CHECK ORDER STATUS</span>
         </button>
       </form>
     </div>
@@ -76,15 +78,15 @@
     <!-- Dynamic Modal Results Container -->
     <div class="track-modal-results" id="ModalTrackResults" style="display: none;"></div>
 
-    <div class="track-modal-account-link" style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #EAE3DA;">
+    <div class="track-modal-account-link" style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed #EAE3DA;">
       <a href="{% if customer %}/account{% else %}/account/login{% endif %}" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.82rem; font-weight: 700; color: #1F1610; text-decoration: none;">
-        <span>📦 Looking for past orders?</span>
+        <span>📦 Looking for your past order history?</span>
         <span style="color: #C5A059; text-decoration: underline;">View My Orders →</span>
       </a>
     </div>
 
     <div class="track-modal-footer">
-      <span>Need help? <a href="https://wa.me/919119595951?text=Namaste%20Lush%20Beauty%20Mart!%20%F0%9F%8C%B8%20I%20need%20help%20tracking%20my%20order." target="_blank" rel="noopener noreferrer">WhatsApp Support (+91 91195 95951)</a></span>
+      <span>Need instant assistance? <a href="https://wa.me/919119595951?text=Namaste%20Lush%20Beauty%20Mart!%20%F0%9F%8C%B8%20Please%20help%20me%20track%20my%20order." target="_blank" rel="noopener noreferrer">WhatsApp Helpdesk (+91 91195 95951)</a></span>
     </div>
   </div>
 </div>
