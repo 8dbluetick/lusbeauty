@@ -387,8 +387,8 @@ async function updateCartDrawer() {
       }
     });
 
-    // 5. Handle empty cart page reload if on /cart
-    if (window.location.pathname === '/cart' && cart.item_count === 0) {
+    // 5. Handle empty cart page reload ONLY if user just removed the last item while viewing active cart items
+    if (window.location.pathname === '/cart' && cart.item_count === 0 && document.getElementById('CartPageItemsList')) {
       window.location.reload();
     }
   } catch (e) {}

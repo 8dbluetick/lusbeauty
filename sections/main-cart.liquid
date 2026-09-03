@@ -12,22 +12,60 @@
     </div>
 
     {%- if cart.item_count == 0 -%}
-      <div class="cart-page-empty-card">
-        <div class="empty-bag-animation">
-          <div class="empty-icon-circle">
-            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
+      <div class="cart-page-empty-wrap">
+        <div class="cart-page-empty-card">
+          <div class="empty-bag-animation">
+            <div class="empty-icon-circle">
+              <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </div>
+          </div>
+          <span class="empty-eyebrow-badge">✨ LUXURY BEAUTY MART</span>
+          <h2 class="empty-headline">Your Shopping Bag is Empty</h2>
+          <p class="empty-subtitle">Discover premium skincare, professional makeup, luxury designer handbags and fragrances from our Nagpur flagship showroom.</p>
+
+          <div class="empty-cart-actions">
+            <a href="/collections/all" class="btn-start-shopping">
+              <span>🛍️ Explore All Collections</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+
+          <!-- Quick Category Discovery Chips -->
+          <div class="empty-cart-categories-strip">
+            <span class="categories-strip-label">Popular Categories:</span>
+            <div class="empty-category-chips">
+              <a href="/collections/all" class="empty-chip">💄 Makeup</a>
+              <a href="/collections/all" class="empty-chip">🧴 Skincare</a>
+              <a href="/collections/all" class="empty-chip">🌸 Fragrances</a>
+              <a href="/collections/all" class="empty-chip">👜 Luxury Bags</a>
+              <a href="/collections/all" class="empty-chip">💇‍♀️ Hair Care</a>
+              <a href="/collections/all" class="empty-chip">🎁 Special Combos</a>
+            </div>
           </div>
         </div>
-        <h2 class="empty-headline">Your Shopping Bag is Empty</h2>
-        <p class="empty-subtitle">Discover premium skincare, high-definition cosmetics, luxury designer handbags and fragrances from our Nagpur showroom.</p>
-        <a href="/collections/all" class="btn-start-shopping">
-          <span>Explore All Collections</span>
-          <span class="btn-arrow">→</span>
-        </a>
+
+        <!-- Recommended / Trending Products Grid -->
+        {%- assign rec_collection = collections['all'] | default: collections.first -%}
+        {%- if rec_collection != blank and rec_collection.products_count > 0 -%}
+          <div class="cart-recommended-section">
+            <div class="cart-rec-header">
+              <div>
+                <span class="cart-rec-badge">🔥 POPULAR IN NAGPUR</span>
+                <h3 class="cart-rec-title">Trending Luxury Picks For You</h3>
+              </div>
+              <a href="/collections/all" class="cart-rec-link">View All →</a>
+            </div>
+            <div class="cart-rec-grid">
+              {%- for product in rec_collection.products limit: 4 -%}
+                {% render 'product-card', product: product, lazy: false %}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
       </div>
     {%- else -%}
       <!-- Free Shipping Animated Progress Bar -->
