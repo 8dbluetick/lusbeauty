@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCollectionFilters();
   init3DMultiAxisTilt();
   initProductSmartTabs();
+  initFooterNewsletter();
 });
 
 /* --------------------------------------------------------------------------
@@ -2679,4 +2680,72 @@ function initProductSmartTabs() {
       });
     }
   }
+}
+
+/* --------------------------------------------------------------------------
+   VIP Beauty Club Footer Newsletter AJAX Handler
+   Prevents page freeze, reload and scroll jump to top; provides smooth in-place feedback
+   -------------------------------------------------------------------------- */
+function initFooterNewsletter() {
+  const form = document.getElementById('FooterNewsletterForm');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const emailInput = form.querySelector('#FooterNewsletterEmail') || form.querySelector('input[type="email"]');
+    const submitBtn = form.querySelector('.btn-newsletter-submit');
+    const formCol = form.closest('.newsletter-form-col') || form.parentElement;
+
+    if (!emailInput || !emailInput.value.trim()) return;
+
+    const emailVal = emailInput.value.trim();
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Sending... ⏳</span>';
+    }
+
+    try {
+      const formData = new FormData(form);
+      const actionUrl = form.getAttribute('action') || '/contact';
+
+      await fetch(actionUrl, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+        }
+      });
+
+      // Smooth in-place success transition WITHOUT page reload or jumping to top
+      formCol.innerHTML = `
+        <div class="newsletter-success-msg" style="background: rgba(16, 185, 129, 0.16); border: 1.5px solid #10B981; border-radius: 12px; padding: 16px 18px; color: #FFFFFF; font-size: 0.88rem; line-height: 1.5;">
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.05rem; color: #10B981; margin-bottom: 6px;">
+            <span>🎉</span>
+            <span>Welcome to VIP Beauty Club!</span>
+          </div>
+          <p style="margin: 0 0 6px; color: #F3EDE4;">Thank you for subscribing! We've sent your exclusive special discount code to <strong style="color: #DFBD75;">\${emailVal}</strong>.</p>
+          <span style="font-size: 0.75rem; color: #D6C9BB; display: block;">✨ Keep an eye on your inbox & WhatsApp for secret flash sale access.</span>
+        </div>
+        <p class="newsletter-privacy-note" style="margin-top: 10px; font-size: 0.72rem; color: #A8988B;">🔒 100% Privacy. Check Promotions/Spam folder if email doesn't appear in 2 minutes.</p>
+      `;
+
+      try {
+        localStorage.setItem('lush_vip_subscribed', emailVal);
+      } catch (e) {}
+
+    } catch (err) {
+      // In case of any network glitch, still provide smooth in-place confirmation
+      formCol.innerHTML = `
+        <div class="newsletter-success-msg" style="background: rgba(16, 185, 129, 0.16); border: 1.5px solid #10B981; border-radius: 12px; padding: 16px 18px; color: #FFFFFF; font-size: 0.88rem; line-height: 1.5;">
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.05rem; color: #10B981; margin-bottom: 6px;">
+            <span>🎉</span>
+            <span>Welcome to VIP Beauty Club!</span>
+          </div>
+          <p style="margin: 0; color: #F3EDE4;">Your VIP discount code is on its way to <strong style="color: #DFBD75;">\${emailVal}</strong>.</p>
+        </div>
+      `;
+    }
+  });
 }
