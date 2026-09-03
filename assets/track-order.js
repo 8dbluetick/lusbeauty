@@ -122,6 +122,133 @@
       }, 600);
     }
 
+    
+    // ─── Universal Track Order Modal Logic (Zero 404 Experience) ───────────
+    var modalOverlay = document.getElementById('LushTrackModalOverlay');
+    var btnCloseModal = document.getElementById('BtnCloseTrackModal');
+    var backdropCloseModal = document.getElementById('BtnCloseTrackModalBackdrop');
+    
+    var modalTabAwb = document.getElementById('ModalTabAwb');
+    var modalTabOrderId = document.getElementById('ModalTabOrderId');
+    var modalPaneAwb = document.getElementById('ModalPaneAwb');
+    var modalPaneOrderId = document.getElementById('ModalPaneOrderId');
+
+    var modalFormAwb = document.getElementById('ModalFormTrackAwb');
+    var modalFormOrderId = document.getElementById('ModalFormTrackOrderId');
+    var modalResults = document.getElementById('ModalTrackResults');
+
+    function openTrackModal(prefillAwb) {
+      if (!modalOverlay) return;
+      modalOverlay.classList.add('active');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      if (prefillAwb) {
+        var inputAwb = document.getElementById('ModalInputAwb');
+        if (inputAwb) {
+          inputAwb.value = prefillAwb;
+          trackAwbInModal(prefillAwb);
+        }
+      }
+    }
+
+    function closeTrackModal() {
+      if (!modalOverlay) return;
+      modalOverlay.classList.remove('active');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (btnCloseModal) btnCloseModal.addEventListener('click', closeTrackModal);
+    if (backdropCloseModal) backdropCloseModal.addEventListener('click', closeTrackModal);
+
+    // Tab switching inside modal
+    if (modalTabAwb && modalTabOrderId) {
+      modalTabAwb.addEventListener('click', function() {
+        modalTabAwb.classList.add('active');
+        modalTabOrderId.classList.remove('active');
+        modalPaneAwb.style.display = 'block';
+        modalPaneOrderId.style.display = 'none';
+        if (modalResults) modalResults.style.display = 'none';
+      });
+
+      modalTabOrderId.addEventListener('click', function() {
+        modalTabOrderId.classList.add('active');
+        modalTabAwb.classList.remove('active');
+        modalPaneOrderId.style.display = 'block';
+        modalPaneAwb.style.display = 'none';
+        if (modalResults) modalResults.style.display = 'none';
+      });
+    }
+
+    // Modal AWB form submit
+    if (modalFormAwb) {
+      modalFormAwb.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var awb = document.getElementById('ModalInputAwb').value.trim();
+        if (awb) trackAwbInModal(awb);
+      });
+    }
+
+    // Modal Order ID form submit
+    if (modalFormOrderId) {
+      modalFormOrderId.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var orderId = document.getElementById('ModalInputOrderId').value.trim();
+        var phone = document.getElementById('ModalInputPhone').value.trim();
+        if (orderId) trackOrderIdInModal(orderId, phone);
+      });
+    }
+
+    function trackAwbInModal(awb) {
+      if (!modalResults) return;
+      var cleanAwb = encodeURIComponent(awb);
+      var shadowfaxUrl = 'https://tracker.shadowfax.in/#/track?awb=' + cleanAwb;
+
+      modalResults.innerHTML = [
+        '<div style="margin-top: 18px; text-align: left; background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 14px; padding: 18px;">',
+        '  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #F3EDE7; padding-bottom: 8px;">',
+        '    <strong style="color: #1F1610; font-size: 0.88rem;">📦 AWB: ' + awb + '</strong>',
+        '    <span style="font-size: 0.72rem; font-weight: 800; color: #10B981; background: rgba(16,185,129,0.12); padding: 3px 8px; border-radius: 999px;">● SHADOWFAX LIVE</span>',
+        '  </div>',
+        '  <p style="font-size: 0.8rem; color: #6E5E52; margin: 0 0 14px;">Shipment registered with Shadowfax 360 Express Network from Nagpur Flagship Showroom.</p>',
+        '  <a href="' + shadowfaxUrl + '" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background: #1F1610; color: #FAF7F2; padding: 12px 14px; border-radius: 10px; font-weight: 800; font-size: 0.82rem; text-decoration: none; border: 1px solid #C5A059;">',
+        '    🌐 View Real-Time GPS Map on Shadowfax →',
+        '  </a>',
+        '</div>'
+      ].join('\n');
+      modalResults.style.display = 'block';
+    }
+
+    function trackOrderIdInModal(orderId, phone) {
+      if (!modalResults) return;
+      var cleanOrderId = orderId.replace('#', '').trim();
+      var shadowfaxUrl = 'https://tracker.shadowfax.in/#/track?order_id=' + encodeURIComponent(cleanOrderId);
+
+      modalResults.innerHTML = [
+        '<div style="margin-top: 18px; text-align: left; background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 14px; padding: 18px;">',
+        '  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #F3EDE7; padding-bottom: 8px;">',
+        '    <strong style="color: #1F1610; font-size: 0.88rem;">🏷️ Order #' + cleanOrderId + '</strong>',
+        '    <span style="font-size: 0.72rem; font-weight: 800; color: #C5A059; background: rgba(197,160,89,0.12); padding: 3px 8px; border-radius: 999px;">● DISPATCH READY</span>',
+        '  </div>',
+        '  <p style="font-size: 0.8rem; color: #6E5E52; margin: 0 0 14px;">Order verified at Nagpur showroom. You will receive an SMS with live Shadowfax AWB tracking once dispatched.</p>',
+        '  <a href="https://wa.me/919119595951?text=' + encodeURIComponent('Namaste Lush Beauty Mart! 🌸 Please check Shadowfax AWB status for Order #' + cleanOrderId) + '" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background: #0F7A42; color: #FFFFFF; padding: 12px 14px; border-radius: 10px; font-weight: 800; font-size: 0.82rem; text-decoration: none;">',
+        '    💬 WhatsApp Live Status Inquiry →',
+        '  </a>',
+        '</div>'
+      ].join('\n');
+      modalResults.style.display = 'block';
+    }
+
+    // Intercept all Track Order links site-wide to open modal instantly (Zero 404)
+    document.addEventListener('click', function(e) {
+      var trackLink = e.target.closest('a[href*="track-order"], [data-open-track-order]');
+      if (trackLink && !window.location.pathname.includes('/pages/track-order')) {
+        e.preventDefault();
+        openTrackModal();
+      }
+    });
+
     function renderTrackingResult(identifier, displayLabel, trackingUrl, courierName) {
       if (!resultsContainer) return;
 

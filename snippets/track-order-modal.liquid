@@ -1,0 +1,83 @@
+{% comment %}
+  Lush Beauty Mart — Live Shadowfax 360 Order Tracking Modal
+  Opens instantly anywhere on the site with zero 404 risk
+{% endcomment %}
+
+<div class="lush-track-modal-overlay" id="LushTrackModalOverlay" aria-hidden="true" role="dialog" aria-label="Track Order Live">
+  <div class="track-modal-backdrop" id="BtnCloseTrackModalBackdrop"></div>
+  
+  <div class="track-modal-card">
+    <button type="button" class="btn-close-track-modal" id="BtnCloseTrackModal" aria-label="Close tracking popup">&times;</button>
+    
+    <div class="track-modal-header">
+      <span class="track-modal-badge">🚚 SHADOWFAX 360 LIVE TRACKING</span>
+      <h2 class="track-modal-title">Track Your Order Live</h2>
+      <p class="track-modal-subtitle">Enter your Shadowfax AWB tracking number or Shopify Order ID to get real-time delivery status.</p>
+    </div>
+
+    <!-- Tabs inside Modal -->
+    <div class="track-modal-tabs">
+      <button type="button" class="track-modal-tab-btn active" id="ModalTabAwb">
+        <span>📦 By Shadowfax AWB</span>
+      </button>
+      <button type="button" class="track-modal-tab-btn" id="ModalTabOrderId">
+        <span>🏷️ By Order ID & Phone</span>
+      </button>
+    </div>
+
+    <!-- Form 1: AWB Tracker -->
+    <div class="track-modal-pane active" id="ModalPaneAwb">
+      <form id="ModalFormTrackAwb" class="track-modal-form">
+        <div class="track-modal-input-wrap">
+          <span class="track-modal-input-icon">🔍</span>
+          <input
+            type="text"
+            id="ModalInputAwb"
+            class="track-modal-input"
+            placeholder="e.g. SFX102938475 or 143214569871"
+            required
+            autocomplete="off"
+          >
+        </div>
+        <button type="submit" class="btn-track-modal-submit" id="BtnModalTrackAwb">
+          <span>🚀 TRACK LIVE ON SHADOWFAX</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Form 2: Order ID Tracker -->
+    <div class="track-modal-pane" id="ModalPaneOrderId" style="display: none;">
+      <form id="ModalFormTrackOrderId" class="track-modal-form">
+        <div class="track-modal-input-wrap" style="margin-bottom: 10px;">
+          <span class="track-modal-input-icon">#</span>
+          <input
+            type="text"
+            id="ModalInputOrderId"
+            class="track-modal-input"
+            placeholder="e.g. 1024 or #LUSH-1024"
+            required
+          >
+        </div>
+        <div class="track-modal-input-wrap">
+          <span class="track-modal-input-icon">📱</span>
+          <input
+            type="text"
+            id="ModalInputPhone"
+            class="track-modal-input"
+            placeholder="Mobile number (e.g. 9119595951)"
+          >
+        </div>
+        <button type="submit" class="btn-track-modal-submit" id="BtnModalTrackOrderId">
+          <span>🚀 SEARCH & TRACK ORDER</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Dynamic Modal Results Container -->
+    <div class="track-modal-results" id="ModalTrackResults" style="display: none;"></div>
+
+    <div class="track-modal-footer">
+      <span>Need help? <a href="https://wa.me/919119595951?text=Namaste%20Lush%20Beauty%20Mart!%20%F0%9F%8C%B8%20I%20need%20help%20tracking%20my%20order." target="_blank" rel="noopener noreferrer">WhatsApp Support (+91 91195 95951)</a></span>
+    </div>
+  </div>
+</div>

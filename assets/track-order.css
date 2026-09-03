@@ -491,3 +491,200 @@
     justify-content: center;
   }
 }
+
+
+/* ==========================================================================
+   Universal Live Shadowfax 360 Order Tracking Modal Popup
+   ========================================================================== */
+.lush-track-modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.3s ease, visibility 0.3s ease !important;
+  box-sizing: border-box !important;
+}
+
+.lush-track-modal-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.track-modal-backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(31, 22, 16, 0.75) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.track-modal-card {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  background: #FAF7F2 !important;
+  border: 1.5px solid #EAE3DA !important;
+  border-radius: 24px !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), 0 0 35px rgba(197, 160, 89, 0.25) !important;
+  padding: 32px 24px 28px !important;
+  text-align: center !important;
+  transform: scale(0.92) translateY(20px) !important;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  box-sizing: border-box !important;
+}
+
+.lush-track-modal-overlay.active .track-modal-card {
+  transform: scale(1) translateY(0) !important;
+}
+
+.btn-close-track-modal {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  border: 1px solid #EAE3DA !important;
+  color: #6E5E52 !important;
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  z-index: 10 !important;
+}
+
+.btn-close-track-modal:hover {
+  background: #1F1610 !important;
+  color: #FFFFFF !important;
+}
+
+.track-modal-badge {
+  display: inline-block !important;
+  background: rgba(197, 160, 89, 0.15) !important;
+  color: #C5A059 !important;
+  border: 1px solid rgba(197, 160, 89, 0.4) !important;
+  padding: 5px 14px !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 10px !important;
+}
+
+.track-modal-title {
+  font-family: var(--font-serif) !important;
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  color: #1F1610 !important;
+  margin: 0 0 6px !important;
+}
+
+.track-modal-subtitle {
+  font-size: 0.82rem !important;
+  color: #6E5E52 !important;
+  line-height: 1.4 !important;
+  margin: 0 auto 20px !important;
+  max-width: 400px !important;
+}
+
+.track-modal-tabs {
+  display: flex !important;
+  background: rgba(31, 22, 16, 0.06) !important;
+  border-radius: 12px !important;
+  padding: 4px !important;
+  margin-bottom: 20px !important;
+  gap: 6px !important;
+}
+
+.track-modal-tab-btn {
+  flex: 1 !important;
+  padding: 9px 12px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 9px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: #6E5E52 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.track-modal-tab-btn.active {
+  background: #FFFFFF !important;
+  color: #1F1610 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.track-modal-input-wrap {
+  display: flex !important;
+  align-items: center !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #EAE3DA !important;
+  border-radius: 12px !important;
+  padding: 4px 14px !important;
+  margin-bottom: 14px !important;
+  transition: all 0.25s ease !important;
+}
+
+.track-modal-input-wrap:focus-within {
+  border-color: #C5A059 !important;
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2) !important;
+}
+
+.track-modal-input-icon {
+  font-size: 1.1rem !important;
+  margin-right: 10px !important;
+}
+
+.track-modal-input {
+  flex: 1 !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 10px 0 !important;
+  font-size: 0.9rem !important;
+  outline: none !important;
+  font-family: inherit !important;
+  color: #1F1610 !important;
+}
+
+.btn-track-modal-submit {
+  width: 100% !important;
+  background: linear-gradient(135deg, #1F1610, #3D2D20) !important;
+  color: #FAF7F2 !important;
+  border: 1.5px solid #C5A059 !important;
+  padding: 13px 20px !important;
+  border-radius: 12px !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-track-modal-submit:hover {
+  background: linear-gradient(135deg, #C5A059, #DFBD75) !important;
+  color: #1F1610 !important;
+  transform: translateY(-1px) !important;
+}
+
+.track-modal-footer {
+  margin-top: 18px !important;
+  font-size: 0.76rem !important;
+  color: #8C7B6E !important;
+}
+
+.track-modal-footer a {
+  color: #0F7A42 !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
