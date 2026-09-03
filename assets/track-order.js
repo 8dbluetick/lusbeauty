@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Lush Beauty Mart — Live Order Tracking Script
  * Supports Shiprocket AWB live lookup, Order ID search, and dynamic timeline
  */
@@ -90,16 +90,18 @@
       if (resultsContainer) resultsContainer.style.display = 'none';
       if (loadingState) loadingState.style.display = 'block';
 
+      var cleanAwb = encodeURIComponent(awb);
+
       // Update WhatsApp link with AWB
       if (btnWaHelp) {
-        var cleanAwb = encodeURIComponent(awb);
-        btnWaHelp.href = 'https://wa.me/919119595951?text=' + encodeURIComponent('Namaste Lush Beauty Mart! 🌸 I am tracking AWB Number: ' + awb + '. Please update me on my delivery status.');
+        btnWaHelp.href = 'https://wa.me/919119595951?text=' + encodeURIComponent('Namaste Lush Beauty Mart! 🌸 I am tracking Shadowfax AWB: ' + awb + '. Please update me on delivery status.');
       }
 
       setTimeout(function () {
         if (loadingState) loadingState.style.display = 'none';
-        renderTrackingResult(awb, 'AWB: ' + awb, 'https://shiprocket.co/tracking/' + encodeURIComponent(awb));
-      }, 700);
+        var shadowfaxUrl = 'https://tracker.shadowfax.in/#/track?awb=' + cleanAwb;
+        renderTrackingResult(awb, 'Shadowfax AWB: ' + awb, shadowfaxUrl, 'Shadowfax 360');
+      }, 600);
     }
 
     function trackOrderId(orderId, phone) {
@@ -110,16 +112,17 @@
 
       // Update WhatsApp link with Order ID
       if (btnWaHelp) {
-        btnWaHelp.href = 'https://wa.me/919119595951?text=' + encodeURIComponent('Namaste Lush Beauty Mart! 🌸 Please check status for Order #' + cleanOrderId + ' (Phone: ' + phone + ').');
+        btnWaHelp.href = 'https://wa.me/919119595951?text=' + encodeURIComponent('Namaste Lush Beauty Mart! 🌸 Please check Shadowfax shipping status for Order #' + cleanOrderId + ' (Phone: ' + phone + ').');
       }
 
       setTimeout(function () {
         if (loadingState) loadingState.style.display = 'none';
-        renderTrackingResult(cleanOrderId, 'Order #' + cleanOrderId, 'https://shiprocket.co/tracking/' + encodeURIComponent(cleanOrderId));
-      }, 700);
+        var trackingUrl = 'https://tracker.shadowfax.in/#/track?order_id=' + encodeURIComponent(cleanOrderId);
+        renderTrackingResult(cleanOrderId, 'Shopify Order #' + cleanOrderId, trackingUrl, 'Shadowfax 360 Express');
+      }, 600);
     }
 
-    function renderTrackingResult(identifier, displayLabel, trackingUrl) {
+    function renderTrackingResult(identifier, displayLabel, trackingUrl, courierName) {
       if (!resultsContainer) return;
 
       resultsContainer.innerHTML = `
@@ -127,8 +130,8 @@
           <div class="status-awb-badge">
             <span>📦 ${displayLabel}</span>
           </div>
-          <div class="status-live-pill">
-            <span>● LIVE SHIPMENT IN TRANSIT</span>
+          <div class="status-live-pill" style="background: rgba(16, 185, 129, 0.15); color: #0F7A42; border: 1px solid rgba(16, 185, 129, 0.4);">
+            <span>● LIVE SHADOWFAX SHIPMENT IN TRANSIT</span>
           </div>
         </div>
 
@@ -137,15 +140,15 @@
             <div class="stage-dot">✓</div>
             <div class="stage-info">
               <strong>Order Confirmed & Payment Verified</strong>
-              <span>Lush Beauty Mart Central Hub, Nagpur</span>
+              <span>Lush Beauty Mart Flagship Hub, Nagpur</span>
             </div>
           </div>
 
           <div class="track-stage-row completed">
             <div class="stage-dot">✓</div>
             <div class="stage-info">
-              <strong>Packed & Dispatched via Shiprocket Courier</strong>
-              <span>Lad Square Logistics Desk • Batch Sealed</span>
+              <strong>Picked Up by Shadowfax Logistics Rider</strong>
+              <span>Lad Square Hub, Nagpur • Security Sealed & Barcode Assigned</span>
             </div>
           </div>
 
@@ -153,21 +156,21 @@
             <div class="stage-dot">●</div>
             <div class="stage-info">
               <strong>In Transit / Reached Destination Hub</strong>
-              <span>Shiprocket Air Express Network (BlueDart / Delhivery)</span>
+              <span>Shadowfax 360 Express Air & Surface Network</span>
             </div>
           </div>
 
           <div class="track-stage-row">
             <div class="stage-dot"></div>
             <div class="stage-info">
-              <strong>Out for Delivery</strong>
-              <span>Will be delivered directly to your doorstep</span>
+              <strong>Out for Delivery (Shadowfax Delivery Associate)</strong>
+              <span>Will be delivered directly to your doorstep with OTP verification</span>
             </div>
           </div>
         </div>
 
-        <a href="${trackingUrl}" target="_blank" rel="noopener noreferrer" class="btn-open-shiprocket-live">
-          <span>🌐 View Real-Time GPS Map on Shiprocket Courier Portal →</span>
+        <a href="${trackingUrl}" target="_blank" rel="noopener noreferrer" class="btn-open-shiprocket-live" style="background: linear-gradient(135deg, #1F1610, #3D2D20); border: 1.5px solid #C5A059; color: #FFFDF9;">
+          <span>🌐 View Real-Time GPS Location on Shadowfax 360 Tracker →</span>
         </a>
       `;
 

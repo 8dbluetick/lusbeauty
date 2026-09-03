@@ -1,6 +1,6 @@
-﻿{% comment %}
+{% comment %}
   Lush Beauty Mart — Luxury Live Order Tracking Section
-  Integrates with Shiprocket, BlueDart, Delhivery & Local Nagpur Showroom Dispatch
+  Integrates with Shadowfax 360, Shiprocket, BlueDart, Delhivery & Local Nagpur Showroom Dispatch
 {% endcomment %}
 
 <div class="lush-track-page-wrap">
@@ -8,10 +8,10 @@
     <!-- Header Hero Banner -->
     <div class="track-hero-card">
       <div class="track-badge-pill">
-        <span>🚚 LIVE COURIER TRACKING</span>
+        <span>🚚 LIVE SHADOWFAX 360 COURIER TRACKING</span>
       </div>
       <h1 class="track-page-title">{{ section.settings.heading | default: 'Track Your Order' }}</h1>
-      <p class="track-page-subtitle">{{ section.settings.subheading | default: 'Enter your Shiprocket AWB tracking number or Shopify Order ID to get real-time live location updates.' }}</p>
+      <p class="track-page-subtitle">{{ section.settings.subheading | default: 'Enter your Shadowfax AWB tracking number or Shopify Order ID to get real-time live location and delivery updates.' }}</p>
     </div>
 
     <!-- Main Tracker Card -->
@@ -19,7 +19,7 @@
       <!-- Tabs: AWB Number vs Order ID -->
       <div class="track-tab-switcher" role="tablist">
         <button type="button" class="track-tab-btn active" id="TabAwb" role="tab" aria-selected="true" data-tab-target="paneAwb">
-          <span>📦 By Tracking / AWB Number</span>
+          <span>📦 By Shadowfax AWB Number</span>
         </button>
         <button type="button" class="track-tab-btn" id="TabOrderId" role="tab" aria-selected="false" data-tab-target="paneOrderId">
           <span>🏷️ By Order ID & Phone</span>
@@ -30,23 +30,23 @@
       <div class="track-tab-pane active" id="PaneAwb">
         <form id="FormTrackAwb" class="track-form">
           <div class="track-input-group">
-            <label for="InputAwbNumber" class="track-input-label">Shiprocket / Courier AWB Number:</label>
+            <label for="InputAwbNumber" class="track-input-label">Shadowfax / Courier AWB Tracking Number:</label>
             <div class="track-input-wrap">
               <span class="track-input-icon">🔍</span>
               <input
                 type="text"
                 id="InputAwbNumber"
                 class="track-text-input"
-                placeholder="e.g. 143214569871 or SR1024"
+                placeholder="e.g. SFX102938475 or 143214569871"
                 required
                 autocomplete="off"
               >
             </div>
-            <p class="track-input-hint">Found in the SMS / WhatsApp tracking message sent after order dispatch.</p>
+            <p class="track-input-hint">Found in the SMS / WhatsApp tracking message sent after order dispatch from our Nagpur store.</p>
           </div>
 
           <button type="submit" class="btn-track-submit" id="BtnTrackAwb">
-            <span>🚀 TRACK ORDER LIVE</span>
+            <span>🚀 TRACK ON SHADOWFAX 360 LIVE</span>
           </button>
         </form>
       </div>
@@ -93,7 +93,7 @@
       <!-- Live Tracking Loading State -->
       <div class="track-loading-state" id="TrackLoadingState" style="display: none;">
         <div class="track-spinner"></div>
-        <p>Connecting to Shiprocket Tracking Server...</p>
+        <p>Connecting to Shadowfax 360 Logistics Server...</p>
       </div>
 
       <!-- Embedded / Dynamic Results Container -->
@@ -116,8 +116,8 @@
         <div class="journey-step-item">
           <div class="step-num-badge">2</div>
           <div class="step-icon">⚡</div>
-          <h4>Dispatched via Shiprocket</h4>
-          <p>Handed over to BlueDart, Delhivery or DTDC Express.</p>
+          <h4>Dispatched via Shadowfax</h4>
+          <p>Handed over to Shadowfax 360 Express Rider Desk.</p>
         </div>
 
         <div class="journey-step-item">
@@ -131,7 +131,7 @@
           <div class="step-num-badge">4</div>
           <div class="step-icon">🎁</div>
           <h4>Doorstep Delivery</h4>
-          <p>Delivered safely to your hands in temperature-sealed box.</p>
+          <p>Delivered safely to your hands with OTP verification.</p>
         </div>
       </div>
     </div>
@@ -172,13 +172,13 @@
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Enter your Shiprocket AWB tracking number or Order ID to get real-time location updates directly from our courier network."
+      "default": "Enter your Shadowfax AWB tracking number or Order ID to get real-time location updates directly from our courier network."
     },
     {
       "type": "text",
-      "id": "shiprocket_domain",
-      "label": "Shiprocket Branded Domain",
-      "default": "lushbeautymart.shiprocket.co"
+      "id": "courier_name",
+      "label": "Primary Courier Partner",
+      "default": "Shadowfax 360"
     }
   ],
   "presets": [
