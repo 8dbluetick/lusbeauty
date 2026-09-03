@@ -10221,3 +10221,109 @@ body {
   height: 28px;
   border-radius: 4px;
 }
+
+/* ==========================================================================
+   Accepted Payment Methods Infinite Running Marquee in Footer
+   ========================================================================== */
+.footer-payments-marquee-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.footer-payments-marquee-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.footer-payments-sparkle {
+  font-size: 0.9rem;
+}
+
+.footer-payments-marquee-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C5A059;
+}
+
+.footer-payments-marquee-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  padding: 6px 0;
+}
+
+.footer-payments-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  animation: paymentInfiniteMarquee 22s linear infinite;
+  will-change: transform;
+}
+
+.footer-payments-marquee-viewport:hover .footer-payments-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes paymentInfiniteMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.payment-marquee-badge {
+  background: #FFFFFF;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 8px;
+  height: 38px;
+  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.payment-marquee-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.4);
+  border-color: #C5A059;
+}
+
+.payment-marquee-badge img {
+  max-height: 26px;
+  width: auto;
+  max-width: 68px;
+  object-fit: contain;
+  display: block;
+}
+
+.payment-cod-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(197, 160, 89, 0.5);
+  color: #E6C786;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0 14px;
+}
+
+.payment-cod-badge span {
+  color: #E6C786;
+}
