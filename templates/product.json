@@ -38,12 +38,6 @@
           "type": "buy_buttons",
           "settings": {}
         },
-        "delivery_checker": {
-          "type": "delivery_checker",
-          "settings": {
-            "title": "Check Delivery Availability"
-          }
-        },
         "trust_badges": {
           "type": "trust_badges",
           "settings": {}
@@ -62,7 +56,6 @@
         "description",
         "variant_picker",
         "buy_buttons",
-        "delivery_checker",
         "trust_badges",
         "accordions"
       ],

@@ -146,26 +146,6 @@
                 </div>
 
                 <div class="product-header-actions-wrap">
-                  <!-- Share Product Pill Button -->
-                  <button
-                    type="button"
-                    class="btn-pdp-share-pill"
-                    data-share-btn
-                    data-share-title="{{ product.title | escape }}"
-                    data-share-url="{{ shop.url }}{{ product.url }}"
-                    title="Share this product"
-                    aria-label="Share this product"
-                  >
-                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="18" cy="5" r="3"></circle>
-                      <circle cx="6" cy="12" r="3"></circle>
-                      <circle cx="18" cy="19" r="3"></circle>
-                      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                    </svg>
-                    <span>Share</span>
-                  </button>
-
                   <!-- Wishlist Product Pill Button -->
                   <button
                     type="button"
@@ -498,12 +478,6 @@
                     <button type="button" class="btn-pdp-secondary-buy" id="BtnBuyNow" {% unless current_variant.available %}style="display: none;"{% endunless %}>
                       <span>BUY NOW</span>
                     </button>
-
-                    <!-- Tertiary Action: Direct WhatsApp Enquiry -->
-                    {%- assign wa_enquiry_text = 'Namaste Lush Beauty Mart Nagpur! 🌸 I want to order: ' | append: product.title | append: ' (' | append: current_variant.price | money | append: '). Is this available for pickup / delivery?' -%}
-                    <a href="https://wa.me/{{ settings.store_whatsapp | default: '919119595951' }}?text={{ wa_enquiry_text | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-pdp-tertiary-whatsapp">
-                      <span>💬 Order / Enquire on WhatsApp</span>
-                    </a>
                   </div>
 
                   <!-- ==========================================================
@@ -511,33 +485,6 @@
                        ========================================================== -->
                   {% render 'pdp-offers-card' %}
                 {%- endform -%}
-              </div>
-
-            {%- when 'delivery_checker' -%}
-              <!-- Real Shiprocket-Backed Delivery Serviceability Section -->
-              <div class="pdp-delivery-box" id="ShiprocketDeliveryBox" data-product-price="{{ current_variant.price }}" data-product-weight="{{ product.variants.first.weight | default: 500 }}" {{ block.shopify_attributes }}>
-                <div class="delivery-box-header">
-                  <span class="delivery-box-icon">🚚</span>
-                  <span class="delivery-box-title">{{ block.settings.title | default: 'Check Delivery Availability' }}</span>
-                </div>
-                <div class="delivery-input-row">
-                  <input type="text" id="DeliveryPincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode (e.g. 440010)" class="pincode-input" aria-label="Delivery Pincode" inputmode="numeric" pattern="[0-9]*">
-                  <button type="button" id="BtnCheckPincode" class="btn-pincode-check">
-                    <span class="btn-pincode-label">CHECK</span>
-                    <span class="btn-pincode-loader" style="display: none;"></span>
-                  </button>
-                </div>
-                <div id="PincodeResult" class="pincode-result-msg" style="display: none;"></div>
-                <div class="delivery-default-perks" id="DeliveryDefaultPerks">
-                  <div class="perk-item">
-                    <span class="perk-dot">⚡</span>
-                    <span><strong>Nagpur Local:</strong> Same-Day / Next-Day Delivery & Lad Sq. Pickup</span>
-                  </div>
-                  <div class="perk-item">
-                    <span class="perk-dot">🚚</span>
-                    <span><strong>Pan-India Shipping:</strong> 3–5 Days tracked courier dispatch via Shiprocket</span>
-                  </div>
-                </div>
               </div>
 
             {%- when 'trust_badges' -%}
@@ -736,19 +683,6 @@
       "limit": 1
     },
     {
-      "type": "delivery_checker",
-      "name": "Delivery Pincode Checker",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Check Delivery Availability"
-        }
-      ]
-    },
-    {
       "type": "trust_badges",
       "name": "Trust & Authenticity Badges",
       "limit": 1
@@ -795,9 +729,6 @@
       },
       {
         "type": "buy_buttons"
-      },
-      {
-        "type": "delivery_checker"
       },
       {
         "type": "trust_badges"
