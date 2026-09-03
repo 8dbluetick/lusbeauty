@@ -105,8 +105,10 @@
 
         <!-- Right Column: Interactive Google Maps Location Card -->
         <div class="store-location-card">
+          <!-- Card Header with Luxury Eyebrow and Live Status -->
           <div class="location-card-header">
             <div>
+              <span class="location-eyebrow-pill">📍 NAGPUR FLAGSHIP SHOWROOM</span>
               <h3 class="location-brand-name">{{ section.settings.store_name | default: settings.store_name | default: "Lush Beauty Mart" }}</h3>
               <p class="location-area">{{ section.settings.area | default: "Gandhi Nagar, North Ambazari Road, Nagpur" }}</p>
             </div>
@@ -118,57 +120,73 @@
             {%- endif -%}
           </div>
 
+          <!-- Structured Luxury Info Grid -->
           <div class="location-details-list">
+            <!-- 1. Address Card -->
             <div class="location-detail-item">
               <div class="detail-icon">📍</div>
               <div class="detail-text">
-                <strong>Store Address:</strong>
-                <p>{{ section.settings.address | default: settings.store_address | default: "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010" }}</p>
+                <span class="detail-label">Store Address:</span>
+                <p class="detail-value">{{ section.settings.address | default: settings.store_address | default: "Below Hotel Maitrayee, Near Lad Square, Metro Station Pillar No. 213, 214, North Ambazari Road, Gandhi Nagar, Nagpur – 440 010" }}</p>
               </div>
             </div>
 
+            <!-- 2. Metro Landmark Card -->
             {%- if section.settings.landmark != blank -%}
-              <div class="location-detail-item">
+              <div class="location-detail-item highlight-item">
                 <div class="detail-icon">🚇</div>
                 <div class="detail-text">
-                  <strong>Metro Landmark:</strong>
-                  <p class="text-landmark">{{ section.settings.landmark }}</p>
+                  <span class="detail-label">Prime Metro Landmark:</span>
+                  <div class="landmark-badge">
+                    <span class="landmark-dot"></span>
+                    <span class="landmark-text">{{ section.settings.landmark }}</span>
+                  </div>
                 </div>
               </div>
             {%- endif -%}
 
+            <!-- 3. Timings Card -->
             {%- if section.settings.timings != blank -%}
               <div class="location-detail-item">
                 <div class="detail-icon">⏰</div>
                 <div class="detail-text">
-                  <strong>Store Timings:</strong>
-                  <p>{{ section.settings.timings }}</p>
+                  <span class="detail-label">Store Timings:</span>
+                  <p class="detail-value timings-value">{{ section.settings.timings }} <span class="tag-open-all">Open All 7 Days</span></p>
                 </div>
               </div>
             {%- endif -%}
           </div>
 
-          <!-- Google Maps Visual Embed / Action Card -->
-          <a href="{{ section.settings.map_link | default: settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="map-interactive-preview">
-            <div class="map-grid-pattern"></div>
-            <div class="map-pill-badge">
+          <!-- Interactive Google Maps Real Embed & Live Pin Container -->
+          <div class="map-interactive-wrapper">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.282928090547!2d79.0572113!3d21.1396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0603f9e8a71%3A0x2f976a4df9e00000!2sHotel%20Maitrayee!5e0!3m2!1sen!2sin!4v1700000000000"
+              width="100%"
+              height="200"
+              style="border:0; display:block; border-radius:12px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Lush Beauty Mart Nagpur Showroom Google Map"
+            ></iframe>
+            <a href="{{ section.settings.map_link | default: settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="map-floating-cta">
               <span class="pin-bounce">📍</span>
-              <span>View on Google Maps (Lad Square) ↗</span>
-            </div>
-          </a>
+              <span>Open in Google Maps (Lad Square) ↗</span>
+            </a>
+          </div>
 
           <!-- Action Buttons: Call, WhatsApp, Get Directions -->
           <div class="store-action-buttons">
+            <a href="{{ section.settings.map_link | default: settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-dir">
+              <span>🧭 Directions</span>
+            </a>
+
             <a href="tel:{{ section.settings.phone | default: settings.store_phone | default: '9119595951' }}" class="btn-store-action btn-store-call">
-              <span>{{ section.settings.call_btn_text | default: "📞 Call Store" }}</span>
+              <span>📞 Call Store</span>
             </a>
 
             <a href="https://wa.me/{{ section.settings.whatsapp | default: settings.store_whatsapp | default: '919119595951' }}?text={{ 'Hi Lush Beauty Mart! I want to visit your store at Lad Square today.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-wa">
-              <span>{{ section.settings.whatsapp_btn_text | default: "💬 WhatsApp Us" }}</span>
-            </a>
-
-            <a href="{{ section.settings.map_link | default: settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-dir">
-              <span>{{ section.settings.directions_btn_text | default: "🧭 Get Directions" }}</span>
+              <span>💬 WhatsApp</span>
             </a>
           </div>
         </div>
