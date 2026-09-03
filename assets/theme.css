@@ -10167,3 +10167,57 @@ body {
   background: #1F1610;
   color: #C5A059;
 }
+
+/* ==========================================================================
+   Accepted Payment Methods Badges in Footer
+   ========================================================================== */
+.footer-payments-wrapper {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.footer-payments-heading {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C5A059;
+  margin-bottom: 14px;
+}
+
+.footer-payment-icons-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.payment-badge-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 6px;
+  padding: 2px 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.payment-badge-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.4);
+  border-color: #C5A059;
+}
+
+.payment-badge-card svg {
+  display: block;
+  width: 44px;
+  height: 28px;
+  border-radius: 4px;
+}
