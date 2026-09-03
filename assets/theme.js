@@ -2379,20 +2379,30 @@ function initMobileAppDock() {
   const currentPath = window.location.pathname;
   const items = dock.querySelectorAll('.app-dock-item');
 
-  // Highlight active tab
-  items.forEach(item => {
-    const href = item.getAttribute('href');
-    if (href && href !== '#' && href === currentPath) {
-      items.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    }
-  });
+  // Highlight active tab stably
+  if (currentPath === '/cart') {
+    items.forEach(i => i.classList.remove('active'));
+    const bagItem = dock.querySelector('.app-dock-item:last-child');
+    if (bagItem) bagItem.classList.add('active');
+  } else if (currentPath.startsWith('/search')) {
+    items.forEach(i => i.classList.remove('active'));
+    const searchItem = dock.querySelector('[data-search-trigger]');
+    if (searchItem) searchItem.classList.add('active');
+  } else if (currentPath === '/' || currentPath === '') {
+    items.forEach(i => i.classList.remove('active'));
+    const homeItem = dock.querySelector('.app-dock-item:first-child');
+    if (homeItem) homeItem.classList.add('active');
+  } else if (currentPath.startsWith('/collections')) {
+    items.forEach(i => i.classList.remove('active'));
+    const catItem = dock.querySelector('[data-drawer-open="mobile-nav"]');
+    if (catItem) catItem.classList.add('active');
+  }
 
-  // Tap vibration / tactile feel on supported mobile devices
+  // Tactile feel on tap
   items.forEach(item => {
     item.addEventListener('click', () => {
       if (window.navigator && window.navigator.vibrate) {
-        try { window.navigator.vibrate(15); } catch (e) {}
+        try { window.navigator.vibrate(12); } catch (e) {}
       }
     });
   });
