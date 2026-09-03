@@ -292,6 +292,18 @@
                     {%- endif -%}
                   </div>
 
+                  {%- if product.description contains '<img' or product.description contains 'src=' -%}
+                    <div class="pdp-manufacturer-jump-banner">
+                      <a href="#FromManufacturerSection" class="btn-scroll-manufacturer">
+                        <span class="jump-sparkle">✨</span>
+                        <div class="jump-body">
+                          <strong>From the manufacturer</strong>
+                          <span>View full-width visual infographic guide below ↓</span>
+                        </div>
+                      </a>
+                    </div>
+                  {%- endif -%}
+
                   <!-- Quick Trust Badges inside Overview -->
                   <div class="pdp-tab-trust-grid">
                     <div class="pdp-tab-trust-item">
@@ -602,22 +614,21 @@
   </div>
 
   <!-- ====================================================================
-       FULL-WIDTH LUXURY PRODUCT STORY & A+ INFOGRAPHIC SHOWCASE (BELOW BUY BOX)
+       FROM THE MANUFACTURER / FULL-WIDTH A+ BRAND STORY (AMAZON STYLE)
        ==================================================================== -->
-  <section class="pdp-fullwidth-showcase-section" id="PdpFullWidthShowcase" style="display: none;">
-    <div class="page-width">
-      <div class="pdp-showcase-card">
-        <div class="pdp-showcase-header">
-          <span class="pdp-showcase-eyebrow">✨ PRODUCT STORY & VISUAL DETAILS</span>
-          <h2 class="pdp-showcase-title">Complete Visual Guide & Features</h2>
-          <p class="pdp-showcase-subtitle">Explore authentic formulation, application ritual, and key highlights in detail.</p>
+  {%- if product.description contains '<img' or product.description contains 'src=' -%}
+    <section class="pdp-from-manufacturer-section page-width" id="FromManufacturerSection">
+      <div class="from-manufacturer-inner">
+        <div class="from-manufacturer-header">
+          <h2 class="from-manufacturer-title">From the manufacturer</h2>
+          <span class="from-manufacturer-badge">✨ Verified Brand Visual Guide</span>
         </div>
-        <div class="pdp-showcase-content" id="PdpShowcaseImagesContainer">
-          <!-- Dynamically populated from description images by JS -->
+        <div class="from-manufacturer-body" id="FromManufacturerBody">
+          {{ product.description }}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  {%- endif -%}
 
   <!-- ====================================================================
        COMPACT MOBILE STICKY BOTTOM PURCHASE BAR

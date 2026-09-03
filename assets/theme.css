@@ -10923,3 +10923,128 @@ body {
   height: auto !important;
   border-radius: 12px;
 }
+
+/* ==========================================================================
+   From the Manufacturer Section (Amazon Style Full-Width Layout)
+   ========================================================================== */
+.pdp-from-manufacturer-section {
+  width: 100%;
+  margin: 40px auto 60px;
+  clear: both;
+}
+
+.from-manufacturer-inner {
+  border-top: 2px solid #EAE3DA;
+  padding-top: 26px;
+}
+
+.from-manufacturer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #F3EDE7;
+  padding-bottom: 14px;
+}
+
+.from-manufacturer-title {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #1F1610;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.from-manufacturer-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8A6D3B;
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.from-manufacturer-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.from-manufacturer-body img {
+  width: 100% !important;
+  max-width: 1280px !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto 20px !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(31, 22, 16, 0.06);
+}
+
+/* In the side smart tabs card, HIDE images so they NEVER get squeezed in the corner */
+.pdp-smart-tabs-card .product-description-rte img {
+  display: none !important;
+}
+
+/* Jump notice in the side card */
+.pdp-manufacturer-jump-banner {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed #EAE3DA;
+}
+
+.btn-scroll-manufacturer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 1.5px solid #C5A059;
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.12);
+}
+
+.btn-scroll-manufacturer:hover {
+  background: #1F1610;
+  border-color: #1F1610;
+  transform: translateY(-2px);
+}
+
+.btn-scroll-manufacturer:hover .jump-body strong {
+  color: #C5A059;
+}
+
+.btn-scroll-manufacturer:hover .jump-body span {
+  color: #D1C7BD;
+}
+
+.jump-sparkle {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.jump-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.jump-body strong {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #1F1610;
+  transition: color 0.2s ease;
+}
+
+.jump-body span {
+  font-size: 0.7rem;
+  color: #8A7363;
+  margin-top: 1px;
+  transition: color 0.2s ease;
+}

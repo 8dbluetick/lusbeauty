@@ -2630,39 +2630,16 @@ function initProductSmartTabs() {
       rawDescEl.innerHTML = tempDiv.innerHTML;
     }
 
-    // 3. Extract Banner / Infographic Images to Full-Width Bottom Showcase
-    const showcaseSection = document.getElementById('PdpFullWidthShowcase');
-    const showcaseContainer = document.getElementById('PdpShowcaseImagesContainer');
-    
-    // Check for images in the raw description
-    const descImages = Array.from(rawDescEl.querySelectorAll('img'));
-    if (descImages.length > 0 && showcaseSection && showcaseContainer) {
-      showcaseContainer.innerHTML = '';
-      
-      descImages.forEach((img, idx) => {
-        const fullImg = document.createElement('img');
-        fullImg.src = img.src;
-        fullImg.alt = img.alt || 'Product Feature & Visual Guide';
-        fullImg.className = 'pdp-showcase-img';
-        fullImg.loading = 'lazy';
-        showcaseContainer.appendChild(fullImg);
-
-        // In the right-hand column, replace the giant image with an elegant jump pill
-        const pillWrap = document.createElement('div');
-        pillWrap.className = 'pdp-story-jump-card';
-        pillWrap.innerHTML = `
-          <a href="#PdpFullWidthShowcase" class="btn-jump-story">
-            <span class="jump-icon">🖼️</span>
-            <div class="jump-text">
-              <strong>View Complete Visual Infographic Guide</strong>
-              <span>Full-width details & features rendered below ↓</span>
-            </div>
-          </a>
-        `;
-        img.parentNode.replaceChild(pillWrap, img);
+    // 3. Process Amazon-style "From the manufacturer" Section
+    const mfgBody = document.getElementById('FromManufacturerBody');
+    if (mfgBody) {
+      // In the full-width manufacturer section, keep only images/media elements
+      const childElements = Array.from(mfgBody.children);
+      childElements.forEach(el => {
+        if (!el.querySelector('img') && el.tagName !== 'IMG') {
+          el.remove();
+        }
       });
-
-      showcaseSection.style.display = 'block';
     }
   }
 }
