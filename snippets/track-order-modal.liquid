@@ -76,6 +76,13 @@
     <!-- Dynamic Modal Results Container -->
     <div class="track-modal-results" id="ModalTrackResults" style="display: none;"></div>
 
+    <div class="track-modal-account-link" style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #EAE3DA;">
+      <a href="{% if customer %}/account{% else %}/account/login{% endif %}" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.82rem; font-weight: 700; color: #1F1610; text-decoration: none;">
+        <span>📦 Looking for past orders?</span>
+        <span style="color: #C5A059; text-decoration: underline;">View My Orders →</span>
+      </a>
+    </div>
+
     <div class="track-modal-footer">
       <span>Need help? <a href="https://wa.me/919119595951?text=Namaste%20Lush%20Beauty%20Mart!%20%F0%9F%8C%B8%20I%20need%20help%20tracking%20my%20order." target="_blank" rel="noopener noreferrer">WhatsApp Support (+91 91195 95951)</a></span>
     </div>
