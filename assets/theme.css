@@ -13472,3 +13472,144 @@ img[loading="lazy"] {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.02); }
 }
+
+
+/* ==========================================================================
+   IDEA 1: UNIFIED DUAL TRUST & LOGISTICS SHOWCASE IN FOOTER
+   ========================================================================== */
+.footer-unified-trust-section {
+  margin-top: 36px !important;
+  padding-top: 28px !important;
+  border-top: 1px solid rgba(197, 160, 89, 0.25) !important;
+}
+
+.unified-trust-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 22px !important;
+}
+
+@media (max-width: 900px) {
+  .unified-trust-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+.unified-trust-card {
+  background: rgba(31, 22, 16, 0.65) !important;
+  border: 1.5px solid rgba(197, 160, 89, 0.35) !important;
+  border-radius: 16px !important;
+  padding: 20px 22px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+  transition: border-color 0.3s ease, transform 0.3s ease !important;
+  box-sizing: border-box !important;
+}
+
+.unified-trust-card:hover {
+  border-color: rgba(197, 160, 89, 0.7) !important;
+  transform: translateY(-2px) !important;
+}
+
+.trust-card-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-bottom: 10px !important;
+}
+
+.trust-card-badge {
+  font-size: 0.74rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  color: #C5A059 !important;
+  text-transform: uppercase !important;
+}
+
+.trust-card-partner-name {
+  font-size: 0.72rem !important;
+  color: #A89587 !important;
+  font-weight: 600 !important;
+}
+
+.trust-card-body {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.trust-logo-box {
+  background: #FFFFFF !important;
+  border-radius: 10px !important;
+  padding: 8px 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: flex-start !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.shadowfax-trust-logo {
+  height: 32px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+.trust-payments-badges-wrap {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.trust-pay-badge {
+  background: #FFFFFF !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 32px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+.trust-pay-badge img {
+  height: 18px !important;
+  max-width: 54px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+.trust-cod-chip {
+  background: #251B14 !important;
+  border: 1px solid rgba(197, 160, 89, 0.4) !important;
+  color: #C5A059 !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  padding: 6px 12px !important;
+}
+
+.trust-perks-row {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px 12px !important;
+}
+
+.trust-perk-chip {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #E2D9D0 !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 999px !important;
+  padding: 4px 10px !important;
+  white-space: nowrap !important;
+}
