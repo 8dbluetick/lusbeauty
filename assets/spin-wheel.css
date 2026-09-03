@@ -177,16 +177,18 @@
 /* Golden Ticker Needle */
 .wheel-ticker-needle {
   position: absolute;
-  top: -10px;
+  top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 5;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-  transition: transform 0.1s ease;
+  transform-origin: 50% 18%; /* Center of pivot pin */
+  z-index: 8;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.38));
+  transition: transform 0.05s linear;
+  pointer-events: none;
 }
 
 .wheel-ticker-needle.ticking {
-  transform: translateX(-50%) rotate(-12deg);
+  transform: translateX(-50%) rotate(-20deg);
 }
 
 /* Rotating Wheel Disc */
@@ -435,30 +437,56 @@
   color: #1F1610;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
+/* Mobile Responsiveness & Flawless Placement Above Bottom Navigation Dock */
+@media (max-width: 767px) {
+  .lush-wheel-floating-launcher {
+    position: fixed !important;
+    bottom: calc(56px + max(12px, env(safe-area-inset-bottom, 0px)) + 14px) !important;
+    left: 14px !important;
+    z-index: 9998 !important; /* Floats safely above dock, below modal */
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 8px 14px !important;
+    font-size: 0.76rem !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #1F1610 0%, #35261B 100%) !important;
+    border: 1.5px solid #C5A059 !important;
+    box-shadow: 0 6px 20px rgba(31, 22, 16, 0.35), 0 0 12px rgba(197, 160, 89, 0.45) !important;
+    max-width: 145px !important;
+    box-sizing: border-box !important;
+  }
+
+  .lush-wheel-modal-overlay {
+    padding: 10px !important;
+  }
+
   .lush-wheel-container {
-    padding: 26px 16px 20px;
-    border-radius: 20px;
+    padding: 22px 14px 18px !important;
+    border-radius: 20px !important;
+    max-width: calc(100vw - 20px) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .wheel-stage-container {
-    width: 240px;
-    height: 240px;
+    width: min(250px, 68vw) !important;
+    height: min(250px, 68vw) !important;
+    margin: 0 auto 12px !important;
   }
 
   .wheel-modal-title {
-    font-size: 1.35rem;
+    font-size: clamp(1.2rem, 4.5vw, 1.4rem) !important;
+    margin-bottom: 4px !important;
+  }
+
+  .wheel-modal-subtitle {
+    font-size: 0.74rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 12px !important;
   }
 
   .win-heading {
-    font-size: 1.55rem;
-  }
-
-  .lush-wheel-floating-launcher {
-    bottom: 80px; /* Above bottom sticky bar */
-    left: 16px;
-    padding: 8px 14px;
-    font-size: 0.76rem;
+    font-size: 1.45rem !important;
   }
 }

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Lush Beauty Mart — Spin to Win Fortune Wheel Logic
  * Canvas-based wheel, physics rotation, confetti celebration & discount application
  */
@@ -82,8 +82,22 @@
       ctx.beginPath();
       ctx.arc(0, 0, radius, 0, 2 * Math.PI);
       ctx.strokeStyle = '#C5A059';
-      ctx.lineWidth = 8;
+      ctx.lineWidth = 10;
       ctx.stroke();
+
+      // Metallic 3D Gold Pegs at each slice boundary
+      for (var j = 0; j < numSlices; j++) {
+        var pegAngle = j * sliceAngle;
+        var px = (radius - 5) * Math.cos(pegAngle);
+        var py = (radius - 5) * Math.sin(pegAngle);
+        ctx.beginPath();
+        ctx.arc(px, py, 4.5, 0, 2 * Math.PI);
+        ctx.fillStyle = '#FFFDF9';
+        ctx.fill();
+        ctx.strokeStyle = '#8A6D3B';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
 
       ctx.restore();
     }
@@ -157,47 +171,73 @@
 
       // Physics Calculation:
       // Ticker is at the top (angle: -Math.PI / 2 or 270 deg)
-      // We want the winning slice center to align with the top needle
-      var minSpins = 6; // Full 360 rotations
+      // Winning slice center aligns perfectly with the top needle
+      var minSpins = 7; // Full 360 rotations for exciting suspense
       var targetAngleForSlice = (numSlices - winningIndex - 0.5) * sliceAngle - (Math.PI / 2);
       
-      var targetRotation = (minSpins * 2 * Math.PI) + targetAngleForSlice + (Math.random() * 0.2 - 0.1);
+      var targetRotation = (minSpins * 2 * Math.PI) + targetAngleForSlice + (Math.random() * 0.16 - 0.08);
 
       var startTime = null;
-      var duration = 4500; // 4.5 seconds spin
+      var duration = 4800; // 4.8 seconds realistic casino spin
       var startRotation = currentRotation % (2 * Math.PI);
       var totalRotationDelta = targetRotation - startRotation;
 
       var ticker = document.getElementById('WheelTicker');
-      var lastSlicePass = 0;
+      var lastSlicePass = -1;
 
-      function easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
+      // Realistic 3-Phase Casino Physics Easing:
+      // Phase 1: Rapid power surge acceleration
+      // Phase 2: High velocity cruise
+      // Phase 3: Natural exponential friction decay
+      function easeWheel(t) {
+        if (t < 0.12) {
+          return 0.12 * Math.pow(t / 0.12, 2.2);
+        } else {
+          var p = (t - 0.12) / 0.88;
+          return 0.12 + 0.88 * (1 - Math.pow(1 - p, 4.2));
+        }
       }
 
       function animateSpin(timestamp) {
         if (!startTime) startTime = timestamp;
         var elapsed = timestamp - startTime;
         var progress = Math.min(elapsed / duration, 1);
-        var easeProgress = easeOutCubic(progress);
+        var easeProgress = easeWheel(progress);
 
         currentRotation = startRotation + totalRotationDelta * easeProgress;
         drawWheel(currentRotation);
 
-        // Ticker wobble animation
-        var currentSliceProg = Math.floor(currentRotation / sliceAngle);
-        if (currentSliceProg !== lastSlicePass && ticker) {
-          ticker.classList.add('ticking');
-          setTimeout(function () {
-            ticker.classList.remove('ticking');
-          }, 80);
-          lastSlicePass = currentSliceProg;
+        // Real-Time Physical Ticker Needle Deflection
+        // Needle deflects back as each peg engages, then snaps forward
+        var normAngle = (currentRotation + Math.PI / 2) % sliceAngle;
+        if (normAngle < 0) normAngle += sliceAngle;
+        var pegDist = normAngle / sliceAngle;
+
+        var needleAngle = 0;
+        if (pegDist < 0.32) {
+          needleAngle = -22 * Math.sin((pegDist / 0.32) * Math.PI);
+        }
+
+        if (ticker) {
+          ticker.style.transform = 'translateX(-50%) rotate(' + needleAngle.toFixed(1) + 'deg)';
+        }
+
+        // Haptic feel on each peg pass
+        var currentPeg = Math.floor((currentRotation + Math.PI / 2) / sliceAngle);
+        if (currentPeg !== lastSlicePass) {
+          if (window.navigator && window.navigator.vibrate) {
+            try { window.navigator.vibrate(8); } catch(e) {}
+          }
+          lastSlicePass = currentPeg;
         }
 
         if (progress < 1) {
           requestAnimationFrame(animateSpin);
         } else {
           isSpinning = false;
+          if (ticker) {
+            ticker.style.transform = 'translateX(-50%) rotate(0deg)';
+          }
           localStorage.setItem('lush_wheel_has_spun', 'true');
           showWinResult(winningPrize);
         }
