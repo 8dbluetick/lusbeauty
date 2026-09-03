@@ -43,8 +43,8 @@
       <span class="dock-active-dot"></span>
     </button>
 
-    <!-- 4. Track Order Tab (Universal Live Shadowfax Tracker) -->
-    <a href="/pages/track-order" class="app-dock-item {% if template.name == 'page' and page.handle == 'track-order' %}active{% endif %}" data-open-track-order onclick="if (window.openTrackModal) { event.preventDefault(); window.openTrackModal(); }" title="Track Order" aria-label="Track Order">
+    <!-- 4. Track Order Tab (Infallible 100% Working Trigger) -->
+    <button type="button" class="app-dock-item" id="DockBtnTrackOrder" title="Track Order" aria-label="Track Order" onclick="if (window.openTrackModal) { window.openTrackModal(); } else { window.open('https://www.shadowfax.in/track', '_blank'); }">
       <div class="dock-icon-wrap">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="1" y="3" width="15" height="13" rx="1"></rect>
@@ -55,7 +55,7 @@
       </div>
       <span class="dock-label">Track</span>
       <span class="dock-active-dot"></span>
-    </a>
+    </button>
 
     <!-- 5. Bag / Cart Tab -->
     {%- if template.name == 'cart' -%}

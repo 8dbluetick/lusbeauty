@@ -13613,3 +13613,41 @@ img[loading="lazy"] {
   padding: 4px 10px !important;
   white-space: nowrap !important;
 }
+
+
+/* ==========================================================================
+   DEFINITIVE PERMANENT REMOVAL: SHARE STRIP & DELIVERY CHECKER ON PDP
+   ========================================================================== */
+.pdp-share-strip,
+.share-strip-label,
+.share-strip-buttons,
+.btn-share-icon,
+.btn-share-native,
+.btn-share-wa,
+.btn-copy-link,
+.pdp-delivery-box,
+#ShiprocketDeliveryBox,
+.delivery-box-header,
+.delivery-input-row,
+.btn-pincode-check,
+#PincodeResult,
+.delivery-default-perks,
+.pdp-share-product-box,
+.btn-pdp-share-pill[data-share-btn],
+.btn-pdp-tertiary-whatsapp,
+[data-share-btn],
+[data-copy-link],
+.btn-share-whatsapp,
+.btn-share-copy {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}

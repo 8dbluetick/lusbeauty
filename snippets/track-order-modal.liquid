@@ -28,6 +28,12 @@
     <!-- Pane 1: Embedded Live Shadowfax Portal (https://www.shadowfax.in/track) -->
     <div class="track-modal-pane active" id="ModalPanePortal">
       <div class="shadowfax-embedded-container">
+        <div class="shadowfax-quick-search-bar" style="padding: 12px 16px; background: #FFFDF9; border-bottom: 1px solid #EAE3DA;">
+          <form onsubmit="event.preventDefault(); var a = document.getElementById('QuickTrackAwbInput').value.trim(); if(a) { window.open('https://tracker.shadowfax.in/#/track?awb=' + encodeURIComponent(a), '_blank'); }" style="display: flex; gap: 8px;">
+            <input type="text" id="QuickTrackAwbInput" placeholder="Enter Shadowfax AWB Number..." style="flex: 1; padding: 10px 14px; border: 1.5px solid #C5A059; border-radius: 8px; font-size: 0.85rem; color: #1F1610; outline: none;" required>
+            <button type="submit" style="background: #1F1610; color: #FFFDF9; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 800; font-size: 0.82rem; cursor: pointer; white-space: nowrap;">TRACK 🚀</button>
+          </form>
+        </div>
         <div class="shadowfax-frame-header">
           <div class="shadowfax-brand-pill">
             <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788442633/0x0_usqks6.png" alt="Shadowfax Delivery Partner" height="22">

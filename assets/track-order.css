@@ -773,3 +773,22 @@
     height: 440px !important;
   }
 }
+
+
+/* ==========================================================================
+   MODAL DISPLAY OVERRIDE (Zero Ghost Clicks & 100% Instant View)
+   ========================================================================== */
+.lush-track-modal-overlay {
+  display: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000000 !important;
+}
+
+.lush-track-modal-overlay.active {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
