@@ -12894,3 +12894,139 @@ body, body.lush-theme-body {
   font-weight: 800;
   flex-shrink: 0;
 }
+\n
+/* ==========================================================================
+   Footer Official Delivery Partner (Shadowfax) Trust Section
+   ========================================================================== */
+.footer-delivery-partner-section {
+  margin-top: 36px;
+  padding: 24px 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(197, 160, 89, 0.1) 100%);
+  border: 1.5px solid rgba(197, 160, 89, 0.35);
+  border-radius: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.delivery-partner-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.delivery-partner-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.partner-icon {
+  font-size: 0.95rem;
+}
+
+.partner-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C5A059;
+}
+
+.delivery-partner-badge-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.partner-logo-box {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.partner-logo-box:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(197, 160, 89, 0.4);
+}
+
+.shadowfax-footer-logo {
+  max-height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.partner-trust-features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.partner-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #FAF7F2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.partner-feature-pill .feature-dot {
+  color: #10B981;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .footer-delivery-partner-section {
+    padding: 18px 14px;
+    margin-top: 26px;
+    border-radius: 14px;
+  }
+
+  .delivery-partner-badge-card {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .partner-logo-box {
+    width: 100%;
+    max-width: 220px;
+    padding: 10px 16px;
+  }
+
+  .shadowfax-footer-logo {
+    max-height: 34px;
+  }
+
+  .partner-trust-features {
+    gap: 8px;
+    width: 100%;
+  }
+
+  .partner-feature-pill {
+    font-size: 0.72rem;
+    padding: 6px 12px;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
