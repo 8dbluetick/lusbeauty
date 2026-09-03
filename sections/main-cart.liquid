@@ -47,25 +47,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Recommended / Trending Products Grid -->
-        {%- assign rec_collection = collections['all'] | default: collections.first -%}
-        {%- if rec_collection != blank and rec_collection.products_count > 0 -%}
-          <div class="cart-recommended-section">
-            <div class="cart-rec-header">
-              <div>
-                <span class="cart-rec-badge">🔥 POPULAR IN NAGPUR</span>
-                <h3 class="cart-rec-title">Trending Luxury Picks For You</h3>
-              </div>
-              <a href="/collections/all" class="cart-rec-link">View All →</a>
-            </div>
-            <div class="cart-rec-grid">
-              {%- for product in rec_collection.products limit: 4 -%}
-                {% render 'product-card', product: product, lazy: false %}
-              {%- endfor -%}
-            </div>
-          </div>
-        {%- endif -%}
       </div>
     {%- else -%}
       <!-- Free Shipping Animated Progress Bar -->

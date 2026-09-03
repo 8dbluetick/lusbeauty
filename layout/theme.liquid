@@ -89,7 +89,7 @@
     <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}?v={{ 'now' | date: '%s' }}">
   </head>
 
-  <body class="lush-theme-body">
+  <body class="lush-theme-body template-{{ template.name | handle }}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       Skip to content
     </a>
