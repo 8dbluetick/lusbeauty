@@ -13720,3 +13720,50 @@ img[loading="lazy"] {
     box-shadow: 0 0 6px rgba(197, 160, 89, 0.6) !important;
   }
 }
+
+
+/* ==========================================================================
+   ENHANCED COMFORTABLE SIZES: MOBILE BOTTOM DOCK (BIGGER ICONS & LABELS)
+   ========================================================================== */
+@media (max-width: 767px) {
+  .lush-mobile-app-dock {
+    height: calc(62px + max(8px, env(safe-area-inset-bottom, 0px))) !important;
+    padding: 6px 8px max(8px, env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .dock-icon-wrap {
+    width: 32px !important;
+    height: 30px !important;
+    min-width: 32px !important;
+    min-height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 2px !important;
+  }
+
+  .dock-icon-wrap svg {
+    width: 24px !important;
+    height: 24px !important;
+    stroke-width: 2.2 !important;
+  }
+
+  .dock-label {
+    font-size: 0.74rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.01em !important;
+    color: #6E5E52 !important;
+    line-height: 1.1 !important;
+  }
+
+  .app-dock-item.active .dock-label {
+    font-size: 0.76rem !important;
+    font-weight: 800 !important;
+    color: #1F1610 !important;
+  }
+
+  .app-dock-item.active .dock-icon-wrap svg {
+    width: 25px !important;
+    height: 25px !important;
+  }
+}

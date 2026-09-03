@@ -792,3 +792,83 @@
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+
+/* ==========================================================================
+   FULL LUXURY BOTTOM SHEET: SHADOWFAX TRACKER POPUP ON MOBILE
+   ========================================================================== */
+@media (max-width: 767px) {
+  .lush-track-modal-overlay {
+    padding: 0 !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+  }
+
+  .track-modal-card,
+  .track-modal-card-embedded {
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: 92vh !important;
+    max-height: 92vh !important;
+    border-radius: 26px 26px 0 0 !important;
+    padding: 24px 16px calc(65px + max(10px, env(safe-area-inset-bottom, 0px))) !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(100%) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .lush-track-modal-overlay.active .track-modal-card,
+  .lush-track-modal-overlay.active .track-modal-card-embedded {
+    transform: translateY(0) !important;
+  }
+
+  .btn-close-track-modal {
+    top: 14px !important;
+    right: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.4rem !important;
+  }
+
+  .track-modal-title {
+    font-size: 1.4rem !important;
+    margin: 4px 0 6px !important;
+  }
+
+  .track-modal-subtitle {
+    font-size: 0.8rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .shadowfax-embedded-container {
+    margin-top: 10px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Full spacious height for live tracking iframe */
+  .shadowfax-track-iframe {
+    width: 100% !important;
+    height: calc(92vh - 240px) !important;
+    min-height: 480px !important;
+    display: block !important;
+  }
+
+  .shadowfax-frame-header {
+    padding: 10px 14px !important;
+  }
+
+  .shadowfax-brand-pill {
+    font-size: 0.82rem !important;
+  }
+
+  .shadowfax-brand-pill img {
+    height: 22px !important;
+  }
+
+  .btn-open-external-shadowfax {
+    font-size: 0.74rem !important;
+    padding: 5px 10px !important;
+  }
+}
