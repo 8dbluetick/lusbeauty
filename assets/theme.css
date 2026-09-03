@@ -13030,3 +13030,292 @@ body, body.lush-theme-body {
     box-sizing: border-box;
   }
 }
+\n
+/* ==========================================================================
+   FOOTER LUXURY SPACING & SHADOWFAX CENTERED LAYOUT MASTER OVERHAUL
+   1. Shadowfax logo centered in the middle
+   2. 3 Verified delivery pills centered directly beneath logo
+   3. Expanded 4-column spacing, clear vertical gaps, zero text overlap
+   ========================================================================== */
+
+/* --- 1. Shadowfax Delivery Partner Centered Layout --- */
+.footer-delivery-partner-section {
+  margin: 44px auto 32px !important;
+  padding: 26px 24px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(197, 160, 89, 0.09) 100%) !important;
+  border: 1.5px solid rgba(197, 160, 89, 0.35) !important;
+  border-radius: 18px !important;
+  text-align: center !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.delivery-partner-container {
+  max-width: 960px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.delivery-partner-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-bottom: 18px !important;
+}
+
+.delivery-partner-header .partner-title {
+  font-size: clamp(0.72rem, 2.5vw, 0.8rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #C5A059 !important;
+}
+
+/* Stacks logo on top centered, and features directly below centered */
+.delivery-partner-badge-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+.partner-logo-box {
+  background: #FFFFFF !important;
+  border-radius: 14px !important;
+  padding: 10px 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+  margin: 0 auto !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.partner-logo-box:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 8px 24px rgba(197, 160, 89, 0.45) !important;
+}
+
+.shadowfax-footer-logo {
+  max-height: 40px !important;
+  width: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+.partner-trust-features {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px 16px !important;
+  width: 100% !important;
+  margin-top: 4px !important;
+}
+
+.partner-feature-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(197, 160, 89, 0.3) !important;
+  border-radius: 999px !important;
+  padding: 8px 18px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: #FAF7F2 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18) !important;
+  transition: all 0.2s ease !important;
+}
+
+.partner-feature-pill:hover {
+  background: rgba(197, 160, 89, 0.15) !important;
+  border-color: #C5A059 !important;
+  color: #FFFFFF !important;
+}
+
+.partner-feature-pill .feature-dot {
+  color: #10B981 !important;
+  font-weight: 900 !important;
+  font-size: 0.9rem !important;
+}
+
+/* --- 2. Footer Main Grid Spacing & Column Un-Cluttering --- */
+.footer-main-grid {
+  display: grid !important;
+  gap: 36px 42px !important;
+  margin-top: 36px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 1024px) {
+  .footer-main-grid {
+    grid-template-columns: 1.35fr 1fr 1.15fr 1.35fr !important;
+    gap: 44px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .footer-main-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 36px 32px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+/* Column Titles */
+.footer-col-title {
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  color: #C5A059 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin: 0 0 16px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1.5px solid rgba(197, 160, 89, 0.3) !important;
+  display: block !important;
+}
+
+/* Links lists spacing */
+.footer-links-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important; /* Generous breathing space between links */
+}
+
+.footer-links-list li {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.45 !important;
+}
+
+.footer-links-list li a {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #D6C9BB !important;
+  font-size: 0.84rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  word-break: break-word !important;
+}
+
+.footer-links-list li a:hover {
+  color: #C5A059 !important;
+  transform: translateX(4px) !important;
+}
+
+/* Column 4: Customer Support & Address Block spacing */
+.footer-address-block {
+  font-size: 0.84rem !important;
+  line-height: 1.65 !important;
+  color: #D6C9BB !important;
+}
+
+.footer-store-name {
+  margin: 0 0 8px !important;
+  font-size: 0.92rem !important;
+  color: #FFFDF9 !important;
+}
+
+.footer-address-text {
+  margin: 0 0 16px !important;
+  line-height: 1.7 !important;
+  color: #B8A89A !important;
+}
+
+.footer-contact-item {
+  margin: 0 0 11px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 0.84rem !important;
+  color: #FAF7F2 !important;
+}
+
+.footer-contact-item a {
+  color: #FAF7F2 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.footer-contact-item a:hover {
+  color: #C5A059 !important;
+  text-decoration: underline !important;
+}
+
+.footer-timings-text {
+  margin-top: 16px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #DFBD75 !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+/* Col 1: Brand Info */
+.footer-brand-col .brand-summary {
+  font-size: 0.84rem !important;
+  line-height: 1.65 !important;
+  color: #B8A89A !important;
+  margin: 10px 0 16px !important;
+  max-width: 320px !important;
+}
+
+.footer-brand-col .footer-social-wrap {
+  margin-top: 20px !important;
+}
+
+/* --- 3. Marquee Section spacing --- */
+.footer-payments-marquee-section {
+  margin-top: 36px !important;
+  padding-top: 24px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+@media (max-width: 640px) {
+  .footer-delivery-partner-section {
+    padding: 20px 14px !important;
+    margin: 32px auto 24px !important;
+    border-radius: 14px !important;
+  }
+
+  .partner-logo-box {
+    padding: 8px 18px !important;
+  }
+
+  .partner-trust-features {
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .partner-feature-pill {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 7px 12px !important;
+    font-size: 0.76rem !important;
+    box-sizing: border-box !important;
+  }
+}
