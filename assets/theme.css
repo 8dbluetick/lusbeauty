@@ -12826,3 +12826,71 @@ body, body.lush-theme-body {
     margin: 16px auto 0 !important;
   }
 }
+\n
+/* ==========================================================================
+   Mobile Nav Drawer: My Orders & Track Order Quick Actions
+   ========================================================================== */
+.mobile-account-quick-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 16px 14px;
+}
+
+.mobile-account-quick-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 12px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #1F1610;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(31, 22, 16, 0.04);
+  box-sizing: border-box;
+}
+
+.mobile-account-quick-card:active,
+.mobile-account-quick-card:hover {
+  border-color: #C5A059;
+  background: #FAF7F2;
+  transform: translateY(-1px);
+}
+
+.quick-card-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.quick-card-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.quick-card-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #1F1610;
+  line-height: 1.2;
+}
+
+.quick-card-sub {
+  font-size: 0.65rem;
+  color: #8C7B6E;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.quick-card-arrow {
+  font-size: 0.85rem;
+  color: #C5A059;
+  font-weight: 800;
+  flex-shrink: 0;
+}

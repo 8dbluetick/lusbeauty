@@ -334,6 +334,26 @@
         {%- comment -%} Loyalty Wallet Badge — shown only to logged-in customers {%- endcomment -%}
         {%- render 'loyalty-points-badge' -%}
 
+        <!-- My Orders & Live Tracking Quick Strip -->
+        <div class="mobile-account-quick-strip">
+          <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="mobile-account-quick-card" title="View My Orders">
+            <span class="quick-card-icon">📦</span>
+            <div class="quick-card-text">
+              <span class="quick-card-title">My Orders</span>
+              <span class="quick-card-sub">{% if customer %}View purchases{% else %}Sign in to view{% endif %}</span>
+            </div>
+            <span class="quick-card-arrow">→</span>
+          </a>
+          <a href="/pages/track-order" class="mobile-account-quick-card" title="Track Live Order">
+            <span class="quick-card-icon">🚚</span>
+            <div class="quick-card-text">
+              <span class="quick-card-title">Track Order</span>
+              <span class="quick-card-sub">Live Courier status</span>
+            </div>
+            <span class="quick-card-arrow">→</span>
+          </a>
+        </div>
+
         <ul class="mobile-nav-links">
           <!-- 1. Mobile Skincare Accordion -->
           <li class="mobile-nav-item has-accordion">
