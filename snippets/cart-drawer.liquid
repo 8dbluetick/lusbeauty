@@ -27,7 +27,7 @@
             <span class="shipping-unlocked">🎉 <strong>FREE Express Nagpur Delivery</strong> Unlocked!</span>
           {%- else -%}
             {%- assign needed = threshold | minus: current_total -%}
-            <span>Add <strong>{{ needed | money }}</strong> more for <strong>FREE Nagpur Express Delivery</strong></span>
+            <span>Add <strong>{{ needed | money }}</strong> more to unlock <strong>FREE Delivery!</strong></span>
           {%- endif -%}
         </div>
       </div>
@@ -96,19 +96,25 @@
       </div>
 
       <div class="cart-shipping-row">
-        <span>Nagpur Delivery</span>
+        <span>Standard Delivery</span>
         <span class="cart-shipping-val">
           {%- if cart.total_price >= threshold -%}
             <strong class="text-unlocked-badge">FREE</strong>
           {%- else -%}
-            ₹50 (Free on ₹999+)
+            ₹59 <span style="font-size: 0.72rem; color: #8C7B6E;">(Free on ₹999+)</span>
           {%- endif -%}
         </span>
       </div>
+      {%- if cart.total_price < threshold -%}
+        {%- assign drawer_needed = threshold | minus: cart.total_price -%}
+        <div class="drawer-free-shipping-nudge" style="background: rgba(197, 160, 89, 0.12); border: 1px dashed #C5A059; border-radius: 8px; padding: 6px 10px; margin-bottom: 8px; font-size: 0.74rem; text-align: center; color: #1F1610;">
+          <span>✨ Add <strong>{{ drawer_needed | money }}</strong> more to unlock <strong>FREE Delivery!</strong></span>
+        </div>
+      {%- endif -%}
 
       <div class="cart-total-row">
         <span>Estimated Total</span>
-        <span class="cart-total-val" data-cart-total>{{ cart.total_price | money }}</span>
+        <span class="cart-total-val" data-cart-total>{% if cart.total_price >= threshold %}{{ cart.total_price | money }}{% else %}{{ cart.total_price | plus: 5900 | money }}{% endif %}</span>
       </div>
 
       <!-- Checkout CTAs with Razorpay Magic Checkout Support -->

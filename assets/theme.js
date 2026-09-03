@@ -356,23 +356,27 @@ async function updateCartDrawer() {
       }
     }
 
-    // 3. Update drawer totals & subtotal
+    // 3. Update drawer totals & subtotal with ₹59 delivery (FREE above ₹999)
     const subtotalEl = document.querySelector('[data-cart-subtotal]');
     const totalEl = document.querySelector('[data-cart-total]');
     const shippingValEl = document.querySelector('.cart-shipping-val');
-    const formattedTotal = '₹' + (cart.total_price / 100).toFixed(0);
-    if (subtotalEl) subtotalEl.textContent = formattedTotal;
+    const isFreeShipping = cart.total_price >= 99900;
+    const shippingAmount = isFreeShipping ? 0 : 5900;
+    const formattedSubtotal = '₹' + (cart.total_price / 100).toFixed(0);
+    const formattedTotal = '₹' + ((cart.total_price + shippingAmount) / 100).toFixed(0);
+
+    if (subtotalEl) subtotalEl.textContent = formattedSubtotal;
     if (totalEl) totalEl.textContent = formattedTotal;
     if (shippingValEl) {
-      if (cart.total_price >= 99900) {
+      if (isFreeShipping) {
         shippingValEl.innerHTML = '<strong class="text-unlocked-badge">FREE</strong>';
       } else {
-        shippingValEl.textContent = '₹50';
+        shippingValEl.innerHTML = '₹59 <span style="font-size:0.72rem;color:#8C7B6E;">(Free on ₹999+)</span>';
       }
     }
 
     // 4. Update threshold banner & progress bars
-    const shippingTextEls = document.querySelectorAll('[data-shipping-text]');
+    const shippingTextEls = document.querySelectorAll('[data-shipping-text], [data-shipping-msg]');
     const progressBars = document.querySelectorAll('.shipping-progress-bar, .drawer-progress-bar');
     const percent = Math.min(100, (cart.total_price / 99900) * 100);
 
@@ -381,11 +385,11 @@ async function updateCartDrawer() {
     });
 
     shippingTextEls.forEach(shippingTextEl => {
-      if (cart.total_price >= 99900) {
-        shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You have unlocked <strong>FREE Delivery in Nagpur</strong>!</span>';
+      if (isFreeShipping) {
+        shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You unlocked <strong>FREE Delivery!</strong></span>';
       } else {
         const needed = ((99900 - cart.total_price) / 100).toFixed(0);
-        shippingTextEl.innerHTML = `<span>Add <strong>₹${needed}</strong> more for <strong>FREE Delivery</strong></span>`;
+        shippingTextEl.innerHTML = `<span>Add <strong>₹${needed}</strong> more to unlock <strong>FREE Delivery!</strong></span>`;
       }
     });
 

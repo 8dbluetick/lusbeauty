@@ -59,14 +59,14 @@
             <span class="shipping-truck-icon">🚚</span>
             <span class="shipping-msg-text">
               {%- if current_total >= threshold -%}
-                <strong class="text-unlocked">🎉 Congratulations! You qualify for FREE Express Delivery in Nagpur & PAN India!</strong>
+                <strong class="text-unlocked">🎉 Congratulations! You unlocked FREE Delivery!</strong>
               {%- else -%}
                 {%- assign remaining = threshold | minus: current_total -%}
-                <span>Add <strong>{{ remaining | money }}</strong> more for <strong>FREE Express Delivery</strong></span>
+                <span>Add <strong>{{ remaining | money }}</strong> more to unlock <strong>FREE Delivery!</strong></span>
               {%- endif -%}
             </span>
           </div>
-          <span class="shipping-target-pill">Target: ₹999</span>
+          <span class="shipping-target-pill">Target: ₹999 (FREE Delivery)</span>
         </div>
         <div class="shipping-progress-track">
           <div class="shipping-progress-bar" style="width: {{ progress_percent }}%;"></div>
@@ -168,15 +168,21 @@
                 <strong>{{ cart.total_price | money }}</strong>
               </div>
               <div class="summary-row">
-                <span>Nagpur Delivery</span>
+                <span>Standard Delivery</span>
                 <span>
                   {%- if cart.total_price >= threshold -%}
                     <strong class="text-unlocked-badge">FREE</strong>
                   {%- else -%}
-                    ₹50
+                    ₹59 <span style="font-size: 0.72rem; color: #8C7B6E;">(Free on ₹999+)</span>
                   {%- endif -%}
                 </span>
               </div>
+              {%- if cart.total_price < threshold -%}
+                {%- assign remaining_nudge = threshold | minus: cart.total_price -%}
+                <div class="summary-free-shipping-nudge">
+                  <span>✨ Add <strong>{{ remaining_nudge | money }}</strong> more to unlock <strong>FREE Delivery!</strong></span>
+                </div>
+              {%- endif -%}
               <div class="summary-row">
                 <span>Taxes & Packaging</span>
                 <span class="text-muted">Included</span>
@@ -189,7 +195,7 @@
                   <span class="total-title">Total Amount</span>
                   <span class="total-sub">Includes all taxes</span>
                 </div>
-                <span class="total-amount-val">{{ cart.total_price | money }}</span>
+                <span class="total-amount-val">{% if cart.total_price >= threshold %}{{ cart.total_price | money }}{% else %}{{ cart.total_price | plus: 5900 | money }}{% endif %}</span>
               </div>
             </div>
 
