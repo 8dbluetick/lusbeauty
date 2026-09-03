@@ -12,6 +12,10 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="dns-prefetch" href="https://res.cloudinary.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -86,7 +90,7 @@
     </script>
 
     <!-- Theme Stylesheet -->
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}?v={{ 'now' | date: '%s' }}">
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body class="lush-theme-body template-{{ template.name | handle }}">
@@ -143,7 +147,7 @@
     {%- if template.name == 'index' -%}
       {{ 'spin-wheel.css' | asset_url | stylesheet_tag }}
       {% section 'spin-wheel-popup' %}
-      {{ 'spin-wheel.js' | asset_url | script_tag }}
+      <script src="{{ 'spin-wheel.js' | asset_url }}" defer></script>
     {%- endif -%}
 
     <!-- Loyalty Wallet Stylesheet -->
@@ -151,15 +155,15 @@
 
     <!-- Live Order Tracking Stylesheet & Script -->
     {{ 'track-order.css' | asset_url | stylesheet_tag }}
-    {{ 'track-order.js' | asset_url | script_tag }}
+    <script src="{{ 'track-order.js' | asset_url }}" defer></script>
 
     <!-- Mobile Native App Bottom Dock (iOS/Android App Navigation) -->
     {% render 'mobile-app-dock' %}
 
     <!-- Theme JavaScript -->
-    <script src="{{ 'theme.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer></script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
     <!-- Loyalty Wallet JavaScript -->
-    {{ 'wallet.js' | asset_url | script_tag }}
+    <script src="{{ 'wallet.js' | asset_url }}" defer></script>
   </body>
 </html>

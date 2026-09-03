@@ -13319,3 +13319,34 @@ body, body.lush-theme-body {
     box-sizing: border-box !important;
   }
 }
+
+
+/* ==========================================================================
+   PERFORMANCE & INSTANT PAGE RENDERING ACCELERATION
+   ========================================================================== */
+/* GPU render containment for offscreen luxury sections */
+.testimonials-section,
+.home-reels-section,
+.store-experience-section,
+.faq-section,
+.footer-delivery-partner-section,
+.footer-payments-marquee-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 450px;
+}
+
+/* Hardware accelerated smooth GPU scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Prevent layout shifts on lazy-loaded images */
+img[loading="lazy"] {
+  content-visibility: auto;
+}

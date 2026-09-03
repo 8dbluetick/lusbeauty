@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   init3DMultiAxisTilt();
   initProductSmartTabs();
   initFooterNewsletter();
+  initInstantNavigation();
 });
 
 /* --------------------------------------------------------------------------
@@ -2748,4 +2749,40 @@ function initFooterNewsletter() {
       `;
     }
   });
+}
+
+
+/* --------------------------------------------------------------------------
+   Instant Page Navigation Preloader (Ultra-Fast Instant Page Transitions)
+   Prefetches internal links on hover/touch so next page opens instantaneously
+   -------------------------------------------------------------------------- */
+function initInstantNavigation() {
+  const prefetchedUrls = new Set();
+  const prefetch = (url) => {
+    if (!url || prefetchedUrls.has(url)) return;
+    try {
+      const parsed = new URL(url, window.location.origin);
+      if (parsed.origin !== window.location.origin) return;
+      // Skip cart / checkout / dynamic action endpoints
+      if (parsed.pathname.includes('/cart') || parsed.pathname.includes('/checkout') || parsed.pathname.includes('/contact')) return;
+      prefetchedUrls.add(url);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = url;
+      link.as = 'document';
+      document.head.appendChild(link);
+    } catch (e) {}
+  };
+
+  // Prefetch on desktop hover
+  document.addEventListener('mouseover', (e) => {
+    const a = e.target.closest('a[href^="/"]');
+    if (a && a.href) prefetch(a.href);
+  }, { passive: true });
+
+  // Prefetch on mobile touchstart
+  document.addEventListener('touchstart', (e) => {
+    const a = e.target.closest('a[href^="/"]');
+    if (a && a.href) prefetch(a.href);
+  }, { passive: true });
 }
