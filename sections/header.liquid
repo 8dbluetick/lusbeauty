@@ -1,7 +1,7 @@
 <header class="lush-header-sticky" id="LushHeader" style="background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};">
   <!-- TOP TIER: Main Branding & Actions Header Row -->
   <div class="header-main-row">
-    <div class="page-width header-container">
+    <div class="page-width header-container" style="padding-left: clamp(20px, 4vw, 44px); padding-right: clamp(20px, 4vw, 44px);">
       <!-- Mobile: Hamburger Menu Button -->
       <div class="header-mobile-toggle">
         <button type="button" class="btn-hamburger" id="BtnMobileMenuToggle" aria-label="Open menu" title="Open menu" style="color: {{ section.settings.text_color | default: '#1F1610' }};">
@@ -15,13 +15,13 @@
 
       <!-- LEFT: Brand Logo / Wordmark -->
       <div class="header-logo-wrap">
-        <a href="/" class="header-brand-link">
+        <a href="/" class="header-brand-link" style="margin-left: 0; padding-left: 4px;">
           {%- if section.settings.logo != blank -%}
             <img
               src="{{ section.settings.logo | image_url: width: 160 }}"
               alt="{{ section.settings.store_title | default: shop.name | escape }}"
               class="header-logo-img"
-              style="width: {{ section.settings.logo_width | default: 42 }}px; height: auto;"
+              style="width: {{ section.settings.logo_width | default: 42 }}px; height: {{ section.settings.logo_width | default: 42 }}px; border-radius: 50% !important; object-fit: cover; border: 1.5px solid #C5A059; box-shadow: 0 2px 8px rgba(31,22,16,0.12);"
               width="{{ section.settings.logo_width | default: 42 }}"
               height="{{ section.settings.logo_width | default: 42 }}"
             >
@@ -30,6 +30,7 @@
               src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300623/lushbeautymart_14050530_135102335_bdtk3h.jpg"
               alt="{{ section.settings.store_title | default: 'Lush Beauty Mart' }}"
               class="header-logo-img"
+              style="width: 42px; height: 42px; border-radius: 50% !important; object-fit: cover; border: 1.5px solid #C5A059; box-shadow: 0 2px 8px rgba(31,22,16,0.12);"
               width="42"
               height="42"
             >
@@ -114,7 +115,7 @@
 
   <!-- BOTTOM TIER: Dedicated Full-Width Collection Navigation Bar ("Neche Block") -->
   <nav class="header-bottom-nav-bar" aria-label="Primary Collections Navigation">
-    <div class="page-width header-bottom-nav-container">
+    <div class="page-width header-bottom-nav-container" style="padding-left: clamp(20px, 4vw, 44px); padding-right: clamp(20px, 4vw, 44px);">
       <ul class="nav-links-list">
         {%- assign use_custom_menu = section.settings.use_custom_menu -%}
         {%- assign nav_menu = linklists[section.settings.menu] -%}
