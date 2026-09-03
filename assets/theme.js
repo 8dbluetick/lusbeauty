@@ -2630,14 +2630,41 @@ function initProductSmartTabs() {
       rawDescEl.innerHTML = tempDiv.innerHTML;
     }
 
-    // 3. Process Amazon-style "From the manufacturer" Section
+    // 3. Universal Amazon-Style "From the manufacturer" Processing Across ALL Products
+    const mfgSection = document.getElementById('FromManufacturerSection');
     const mfgBody = document.getElementById('FromManufacturerBody');
     if (mfgBody) {
-      // In the full-width manufacturer section, keep only images/media elements
-      const childElements = Array.from(mfgBody.children);
-      childElements.forEach(el => {
-        if (!el.querySelector('img') && el.tagName !== 'IMG') {
-          el.remove();
+      // Find all images within From the Manufacturer
+      const allMfgImgs = Array.from(mfgBody.querySelectorAll('img'));
+      if (allMfgImgs.length > 0) {
+        // Create a pristine, full-width container for the images
+        const cleanGrid = document.createElement('div');
+        cleanGrid.className = 'from-manufacturer-images-wrap';
+
+        allMfgImgs.forEach(img => {
+          const newImg = document.createElement('img');
+          newImg.src = img.src;
+          newImg.alt = img.alt || 'Product Brand Story & Infographic Guide';
+          newImg.className = 'from-mfg-banner-img';
+          newImg.loading = 'lazy';
+          cleanGrid.appendChild(newImg);
+        });
+
+        // Replace the body content with the pure full-width images grid
+        mfgBody.innerHTML = '';
+        mfgBody.appendChild(cleanGrid);
+        if (mfgSection) mfgSection.style.display = 'block';
+      } else if (mfgSection) {
+        // If no images found, safely hide section
+        mfgSection.style.display = 'none';
+      }
+    }
+
+    // Clean up empty paragraphs in side description card
+    if (rawDescEl) {
+      Array.from(rawDescEl.querySelectorAll('p')).forEach(p => {
+        if (!p.textContent.trim() && !p.querySelector('img, iframe, video')) {
+          p.remove();
         }
       });
     }

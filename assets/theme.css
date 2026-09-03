@@ -11048,3 +11048,25 @@ body {
   margin-top: 1px;
   transition: color 0.2s ease;
 }
+
+/* Universal Infographic Banner Image Grid Across All Products */
+.from-manufacturer-images-wrap {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  align-items: center !important;
+}
+
+.from-mfg-banner-img {
+  width: 100% !important;
+  max-width: 1280px !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+  border-radius: 14px !important;
+  box-shadow: 0 6px 26px rgba(31, 22, 16, 0.06) !important;
+  border: 1px solid #EAE3DA !important;
+  object-fit: contain !important;
+  background: #FFFFFF !important;
+}
