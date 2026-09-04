@@ -1,0 +1,122 @@
+{% comment %}
+  Lush Beauty Mart — "Write a Review" Modal Dialog & Photo Lightbox
+{% endcomment %}
+
+<!-- 1. Write a Review Modal -->
+<div class="lush-review-modal-overlay" id="LushWriteReviewModal" aria-hidden="true" role="dialog" aria-labelledby="ReviewModalTitle">
+  <div class="review-modal-backdrop" id="BtnCloseReviewModalBackdrop"></div>
+  
+  <div class="review-modal-card">
+    <button type="button" class="btn-close-review-modal" id="BtnCloseReviewModal" aria-label="Close review dialog">&times;</button>
+    
+    <div class="review-modal-header">
+      <span class="review-modal-badge">⭐ SHARE YOUR GLOW</span>
+      <h3 class="review-modal-title" id="ReviewModalTitle">Write a Review</h3>
+      <p class="review-modal-subtitle">How was your experience with <strong>{{ product.title | escape }}</strong>?</p>
+    </div>
+
+    <form id="LushReviewForm" class="review-modal-form">
+      <!-- Interactive Star Rating Selector -->
+      <div class="form-group rating-select-group">
+        <label class="form-label">Overall Rating <span class="required-star">*</span></label>
+        <div class="star-rating-selector" id="StarRatingSelector" role="radiogroup" aria-label="Select star rating">
+          <button type="button" class="star-choice" data-star="1" title="1 Star - Poor" aria-label="1 star">★</button>
+          <button type="button" class="star-choice" data-star="2" title="2 Stars - Fair" aria-label="2 stars">★</button>
+          <button type="button" class="star-choice" data-star="3" title="3 Stars - Good" aria-label="3 stars">★</button>
+          <button type="button" class="star-choice" data-star="4" title="4 Stars - Very Good" aria-label="4 stars">★</button>
+          <button type="button" class="star-choice active" data-star="5" title="5 Stars - Excellent!" aria-label="5 stars">★</button>
+        </div>
+        <span class="rating-feedback-text" id="RatingFeedbackText">5.0 - Excellent! Highly recommended.</span>
+        <input type="hidden" name="rating" id="InputSelectedRating" value="5">
+      </div>
+
+      <!-- Optional Image Attachment Dropzone -->
+      <div class="form-group photo-upload-group">
+        <label class="form-label">Add Product Photos <span class="optional-pill">Optional</span></label>
+        <div class="photo-dropzone" id="PhotoDropzone">
+          <input type="file" id="InputReviewPhoto" accept="image/*" class="photo-file-input">
+          <div class="dropzone-idle-content" id="DropzoneIdle">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#C5A059" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span class="dropzone-main-hint"><strong>Tap to upload photo</strong> or drag here</span>
+            <span class="dropzone-sub-hint">PNG, JPG, WebP (Show how it looks or results!)</span>
+          </div>
+          <div class="dropzone-preview-wrap" id="DropzonePreview" style="display: none;">
+            <img id="ReviewPhotoPreviewImg" src="" alt="Customer review photo preview" class="preview-thumb">
+            <button type="button" id="BtnRemovePhoto" class="btn-remove-photo" title="Remove photo">&times;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviewer Name & City Row -->
+      <div class="form-row-two-col">
+        <div class="form-group">
+          <label class="form-label" for="ReviewInputName">Your Name <span class="required-star">*</span></label>
+          <input type="text" id="ReviewInputName" class="form-input" placeholder="e.g. Priya Sharma" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ReviewInputCity">City / Location <span class="optional-pill">Optional</span></label>
+          <input type="text" id="ReviewInputCity" class="form-input" placeholder="e.g. Nagpur, MH">
+        </div>
+      </div>
+
+      <!-- Reviewer Email (Private, not displayed) -->
+      <div class="form-group">
+        <label class="form-label" for="ReviewInputEmail">Your Email <span class="optional-pill">Not displayed publicly</span></label>
+        <input type="email" id="ReviewInputEmail" class="form-input" placeholder="e.g. priya@gmail.com">
+      </div>
+
+      <!-- Review Headline / Title -->
+      <div class="form-group">
+        <label class="form-label" for="ReviewInputTitle">Review Title <span class="required-star">*</span></label>
+        <input type="text" id="ReviewInputTitle" class="form-input" placeholder="e.g. Absolutely loved the texture & fragrance!" required>
+      </div>
+
+      <!-- Detailed Review Message -->
+      <div class="form-group">
+        <label class="form-label" for="ReviewInputBody">Review Message <span class="required-star">*</span></label>
+        <textarea id="ReviewInputBody" class="form-textarea" rows="4" placeholder="Tell other beauty lovers what you loved about this product, how it worked for your skin, and how fast it arrived..." required></textarea>
+      </div>
+
+      <!-- Submit Button & Guarantee Note -->
+      <div class="review-form-actions">
+        <button type="submit" class="btn-submit-review" id="BtnSubmitReview">
+          <span>Submit Verified Review ✨</span>
+        </button>
+        <p class="review-form-policy">
+          🔒 By submitting, you confirm you are sharing an authentic customer experience.
+        </p>
+      </div>
+    </form>
+
+    <!-- Success Celebration State -->
+    <div class="review-success-card" id="ReviewSuccessCard" style="display: none;">
+      <div class="success-icon-circle">✓</div>
+      <h4 class="success-title">Thank You For Your Review!</h4>
+      <p class="success-desc">Your verified review has been recorded and is now live for all beauty lovers on Lush Beauty Mart.</p>
+      <button type="button" class="btn-done-review" id="BtnDoneReview">View Review</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- 2. Full-Screen Photo Lightbox Modal -->
+<div class="lush-photo-lightbox-overlay" id="LushPhotoLightbox" aria-hidden="true">
+  <div class="lightbox-backdrop" id="BtnCloseLightboxBackdrop"></div>
+  <div class="lightbox-content-box">
+    <button type="button" class="btn-close-lightbox" id="BtnCloseLightbox" aria-label="Close photo">&times;</button>
+    <div class="lightbox-image-wrap">
+      <img id="LightboxActiveImg" src="" alt="Customer Review Photo" class="lightbox-full-img">
+    </div>
+    <div class="lightbox-caption" id="LightboxCaption">
+      <div class="lightbox-user-row">
+        <strong id="LightboxUserName">Customer Name</strong>
+        <span class="lightbox-verified-badge">✓ Verified Buyer</span>
+      </div>
+      <p id="LightboxUserText" class="lightbox-text">Review details...</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+{% comment %}
+  Lush Beauty Mart — Native Luxury Product Reviews & Ratings Showcase
+  100% In-House, Zero Subscriptions, Real Customer Photo Support
+{% endcomment %}
+
+<div class="lush-reviews-wrapper" id="LushProductReviews" data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}">
+  <div class="lush-reviews-container">
+    
+    <!-- Header: Title & Write Review Button -->
+    <div class="lush-reviews-header">
+      <div class="reviews-header-title-box">
+        <span class="reviews-eyebrow">AUTHENTIC CUSTOMER EXPERIENCES</span>
+        <h2 class="reviews-main-title">Verified Customer Reviews</h2>
+        <p class="reviews-subtitle">Real experiences shared by verified beauty lovers across Nagpur and India.</p>
+      </div>
+      <div class="reviews-header-cta">
+        <button type="button" class="btn-write-review" id="BtnOpenWriteReview">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span>Write a Review</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Rating Summary Dashboard Card -->
+    <div class="reviews-summary-card">
+      <div class="summary-score-col">
+        <div class="summary-big-score" id="LushAvgScore">4.9</div>
+        <div class="summary-stars-wrap">
+          <div class="summary-stars-visual" id="LushStarsVisual">★★★★★</div>
+          <span class="summary-total-count" id="LushTotalReviewsCount">Based on 138 Reviews</span>
+        </div>
+        <div class="summary-recommend-badge">
+          <span class="recommend-icon">✓</span>
+          <span class="recommend-text"><strong>98%</strong> of customers recommend this</span>
+        </div>
+      </div>
+
+      <!-- Star Distribution Bars -->
+      <div class="summary-bars-col">
+        <div class="rating-bar-row" data-star="5">
+          <span class="bar-label">5 ★</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="BarFill5" style="width: 88%;"></div>
+          </div>
+          <span class="bar-count" id="BarCount5">122</span>
+        </div>
+        <div class="rating-bar-row" data-star="4">
+          <span class="bar-label">4 ★</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="BarFill4" style="width: 9%;"></div>
+          </div>
+          <span class="bar-count" id="BarCount4">12</span>
+        </div>
+        <div class="rating-bar-row" data-star="3">
+          <span class="bar-label">3 ★</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="BarFill3" style="width: 2%;"></div>
+          </div>
+          <span class="bar-count" id="BarCount3">3</span>
+        </div>
+        <div class="rating-bar-row" data-star="2">
+          <span class="bar-label">2 ★</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="BarFill2" style="width: 1%;"></div>
+          </div>
+          <span class="bar-count" id="BarCount2">1</span>
+        </div>
+        <div class="rating-bar-row" data-star="1">
+          <span class="bar-label">1 ★</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="BarFill1" style="width: 0%;"></div>
+          </div>
+          <span class="bar-count" id="BarCount1">0</span>
+        </div>
+      </div>
+
+      <!-- Trust Badges Col -->
+      <div class="summary-trust-col">
+        <div class="summary-trust-item">
+          <span class="trust-emoji">🛡️</span>
+          <div>
+            <strong>100% Genuine Reviews</strong>
+            <p>Verified purchase check from Nagpur store & online</p>
+          </div>
+        </div>
+        <div class="summary-trust-item">
+          <span class="trust-emoji">📷</span>
+          <div>
+            <strong>Real Customer Photos</strong>
+            <p>Unfiltered real product pictures</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Photos Strip (Horizontal Scroll) -->
+    <div class="reviews-photos-section" id="LushCustomerPhotosSection">
+      <div class="photos-section-header">
+        <h3 class="photos-section-title">
+          <span>Customer Photos</span>
+          <span class="photos-count-badge" id="LushPhotoCountBadge">8 Photos</span>
+        </h3>
+        <span class="photos-scroll-hint">Tap any photo to expand ↗</span>
+      </div>
+      <div class="reviews-photos-gallery no-scrollbar" id="LushPhotosGallery">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- Filter & Sort Strip -->
+    <div class="reviews-filters-bar">
+      <div class="reviews-filter-pills no-scrollbar">
+        <button type="button" class="review-filter-pill active" data-filter="all">All (<span id="FilterCountAll">138</span>)</button>
+        <button type="button" class="review-filter-pill" data-filter="photos">📷 With Photos (<span id="FilterCountPhotos">8</span>)</button>
+        <button type="button" class="review-filter-pill" data-filter="5star">5 Stars</button>
+        <button type="button" class="review-filter-pill" data-filter="4star">4 Stars</button>
+        <button type="button" class="review-filter-pill" data-filter="verified">✓ Verified Only</button>
+      </div>
+      <div class="reviews-sort-box">
+        <select id="LushReviewSortSelect" class="reviews-sort-select" aria-label="Sort reviews">
+          <option value="newest">Most Recent</option>
+          <option value="highest">Highest Rating</option>
+          <option value="helpful">Most Helpful</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Live Customer Reviews Feed -->
+    <div class="reviews-feed-list" id="LushReviewsList">
+      <!-- Reviews rendered dynamically by JS -->
+      <div class="reviews-loading-state">
+        <div class="reviews-spinner"></div>
+        <span>Loading authentic customer reviews...</span>
+      </div>
+    </div>
+
+    <!-- Load More Reviews Button -->
+    <div class="reviews-load-more-wrap" id="LushLoadMoreWrap" style="display: none;">
+      <button type="button" class="btn-reviews-load-more" id="BtnLoadMoreReviews">
+        <span>Load More Customer Reviews</span>
+      </button>
+    </div>
+
+  </div>
+</div>

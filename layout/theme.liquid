@@ -163,6 +163,11 @@
     <!-- Theme JavaScript -->
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
+    
+    <!-- Lush In-House Customer Reviews & Star Ratings -->
+    {{ 'lush-reviews.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'lush-reviews.js' | asset_url }}" defer></script>
+
     <!-- Loyalty Wallet JavaScript -->
     <script src="{{ 'wallet.js' | asset_url }}" defer></script>
   </body>
