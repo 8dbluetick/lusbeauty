@@ -3,6 +3,11 @@
   100% In-House, Zero Subscriptions, Real Customer Photo Support
 {% endcomment %}
 
+<script>
+  window.LUSH_SUPABASE_URL = window.LUSH_SUPABASE_URL || "{{ settings.supabase_url | default: '' }}";
+  window.LUSH_SUPABASE_ANON_KEY = window.LUSH_SUPABASE_ANON_KEY || "{{ settings.supabase_anon_key | default: '' }}";
+</script>
+
 <div class="lush-reviews-wrapper" id="LushProductReviews" data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}">
   <div class="lush-reviews-container">
     

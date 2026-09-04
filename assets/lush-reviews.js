@@ -73,7 +73,119 @@
   var currentSort = 'newest';
   var currentPhotoBase64 = null;
   var productId = null;
+  var productTitle = '';
   var allReviews = [];
+
+  
+  // =========================================================================
+  // SUPABASE REALTIME CLOUD DATABASE ENGINE
+  // =========================================================================
+  var SUPABASE_URL = window.LUSH_SUPABASE_URL || '';
+  var SUPABASE_ANON_KEY = window.LUSH_SUPABASE_ANON_KEY || '';
+
+  function isSupabaseConfigured() {
+    return SUPABASE_URL && SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY && SUPABASE_ANON_KEY.length > 20;
+  }
+
+  function fetchReviewsFromSupabase() {
+    if (!isSupabaseConfigured()) return;
+
+    var endpoint = SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/product_reviews?product_id=eq.' + encodeURIComponent(productId) + '&is_approved=eq.true&order=created_at.desc';
+    fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error('Supabase fetch failed: ' + res.status);
+      return res.json();
+    })
+    .then(function (rows) {
+      if (Array.isArray(rows) && rows.length > 0) {
+        var cloudReviews = rows.map(function (r) {
+          return {
+            id: String(r.id),
+            name: r.reviewer_name || 'Customer',
+            city: r.reviewer_city || 'Nagpur, MH',
+            rating: parseInt(r.rating, 10) || 5,
+            title: r.review_title || '',
+            body: r.review_body || '',
+            photo: r.photo_url || '',
+            date: formatRelativeDate(r.created_at),
+            verified: r.verified_buyer !== false,
+            helpful: parseInt(r.helpful_count, 10) || 0
+          };
+        });
+
+        // Merge Supabase reviews at the top of default reviews
+        allReviews = cloudReviews.concat(DEFAULT_REVIEWS);
+        renderAll();
+      }
+    })
+    .catch(function (err) {
+      console.warn('Supabase fetch error:', err);
+    });
+  }
+
+  function pushReviewToSupabase(newRev, email) {
+    if (!isSupabaseConfigured()) return;
+
+    var endpoint = SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/product_reviews';
+    var payload = {
+      product_id: String(productId),
+      product_title: productTitle || '',
+      reviewer_name: newRev.name,
+      reviewer_city: newRev.city || 'Nagpur, MH',
+      reviewer_email: email || null,
+      rating: parseInt(newRev.rating, 10),
+      review_title: newRev.title,
+      review_body: newRev.body,
+      photo_url: newRev.photo || null,
+      verified_buyer: true,
+      helpful_count: 0,
+      is_approved: true
+    };
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      console.log('Lush Review synced to Supabase database ✓:', data);
+    })
+    .catch(function (err) {
+      console.warn('Failed to push review to Supabase:', err);
+    });
+  }
+
+  function formatRelativeDate(dateStr) {
+    if (!dateStr) return 'Recent';
+    try {
+      var d = new Date(dateStr);
+      var diffMs = Date.now() - d.getTime();
+      var diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+      if (diffHours < 1) return 'Just now';
+      if (diffHours < 24) return diffHours + ' hours ago';
+      var diffDays = Math.floor(diffHours / 24);
+      if (diffDays === 1) return 'Yesterday';
+      if (diffDays < 30) return diffDays + ' days ago';
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    } catch (e) {
+      return 'Recent';
+    }
+  }
 
   function initLushReviews() {
     var wrappers = document.querySelectorAll('#LushProductReviews');
@@ -86,9 +198,11 @@
     var wrapper = wrappers[0];
 
     productId = wrapper.getAttribute('data-product-id') || 'default_product';
+    productTitle = wrapper.getAttribute('data-product-title') || '';
 
     // Load saved reviews from localStorage
     loadReviewsData();
+    fetchReviewsFromSupabase();
 
     // Render summary, photos, and list
     renderAll();
@@ -411,6 +525,7 @@
           };
 
           saveUserReview(newReview);
+          pushReviewToSupabase(newReview, document.getElementById('ReviewInputEmail') ? document.getElementById('ReviewInputEmail').value : null);
 
           if (form) form.style.display = 'none';
           if (successCard) successCard.style.display = 'block';
