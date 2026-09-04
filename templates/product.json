@@ -74,10 +74,15 @@
     "store_experience": {
       "type": "store-experience",
       "settings": {}
+    },
+    "product_reviews": {
+      "type": "product-reviews",
+      "settings": {}
     }
   },
   "order": [
     "main_product",
+    "product_reviews",
     "related_products",
     "store_experience"
   ]

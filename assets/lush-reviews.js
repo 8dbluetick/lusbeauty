@@ -6,68 +6,7 @@
 (function () {
   'use strict';
 
-  var DEFAULT_REVIEWS = [
-    {
-      id: 'rev_seed_1',
-      name: 'Pooja Deshmukh',
-      city: 'Dharampeth, Nagpur',
-      rating: 5,
-      title: '100% Original & Luxurious! Nagpur same-day delivery was amazing ✨',
-      body: 'Bought this from Lush Beauty Mart after seeing recommendations. The fragrance and texture are top-notch luxury! Also received it in Nagpur within hours of ordering. Genuine product with sealed packaging.',
-      photo: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80',
-      date: '2 days ago',
-      verified: true,
-      helpful: 19
-    },
-    {
-      id: 'rev_seed_2',
-      name: 'Sneha Kulkarni',
-      city: 'Ramdaspeth, Nagpur',
-      rating: 5,
-      title: 'Gentle on skin, leaves a divine glow and scent',
-      body: 'I have sensitive skin and was skeptical at first, but this exceeded all expectations. Very nourishing and didn\'t dry out my skin at all. Definitely restocking soon from the store!',
-      photo: 'https://images.unsplash.com/photo-1608248597359-0010996884ab?auto=format&fit=crop&w=600&q=80',
-      date: '4 days ago',
-      verified: true,
-      helpful: 14
-    },
-    {
-      id: 'rev_seed_3',
-      name: 'Rhea Singhania',
-      city: 'Civil Lines, Nagpur',
-      rating: 5,
-      title: 'Premium packaging & authentic brand quality',
-      body: 'So glad Nagpur now has Lush Beauty Mart offering authentic luxury brands. Beautiful bottle aesthetics and the product feels ultra-premium. 10/10 recommend!',
-      photo: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80',
-      date: '1 week ago',
-      verified: true,
-      helpful: 11
-    },
-    {
-      id: 'rev_seed_4',
-      name: 'Tanvi Joshi',
-      city: 'Sadarpeth, Nagpur',
-      rating: 4,
-      title: 'Loved the results, very refreshing experience',
-      body: 'A very rich and pleasant lather. A small amount goes a long way. Packaging was securely wrapped with bubble wrap and seal intact.',
-      photo: '',
-      date: '2 weeks ago',
-      verified: true,
-      helpful: 8
-    },
-    {
-      id: 'rev_seed_5',
-      name: 'Aarav Mehta',
-      city: 'Mumbai, MH',
-      rating: 5,
-      title: 'Super fast shipping & 100% authentic seal',
-      body: 'Ordered online after a friend in Nagpur recommended Lush Beauty Mart. Tracking via Shadowfax was super accurate and delivery reached in 2 days. Top notch authenticity.',
-      photo: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80',
-      date: '3 weeks ago',
-      verified: true,
-      helpful: 7
-    }
-  ];
+  var DEFAULT_REVIEWS = [];
 
   var currentFilter = 'all';
   var currentSort = 'newest';
@@ -258,7 +197,29 @@
 
   function renderSummary() {
     var total = allReviews.length;
-    if (total === 0) return;
+    var elScore = document.getElementById('LushAvgScore');
+    var elTotal = document.getElementById('LushTotalReviewsCount');
+    var elCountAll = document.getElementById('FilterCountAll');
+    var elStarsVisual = document.getElementById('LushStarsVisual');
+    var topScore = document.querySelector('.pdp-rating-score');
+    var topCount = document.querySelector('.pdp-reviews-count');
+
+    if (total === 0) {
+      if (elScore) elScore.textContent = '0.0';
+      if (elTotal) elTotal.textContent = 'Be the first to review!';
+      if (elCountAll) elCountAll.textContent = '0';
+      if (elStarsVisual) elStarsVisual.textContent = '☆☆☆☆☆';
+      if (topScore) topScore.textContent = '★';
+      if (topCount) topCount.textContent = '(Be the first to review)';
+
+      [5, 4, 3, 2, 1].forEach(function (star) {
+        var barFill = document.getElementById('BarFill' + star);
+        var barCount = document.getElementById('BarCount' + star);
+        if (barFill) barFill.style.width = '0%';
+        if (barCount) barCount.textContent = '0';
+      });
+      return;
+    }
 
     var sum = 0;
     var counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
@@ -272,14 +233,17 @@
     var avg = (sum / total).toFixed(1);
     if (avg.endsWith('.0')) avg = avg.replace('.0', '');
 
-    var elScore = document.getElementById('LushAvgScore');
     if (elScore) elScore.textContent = avg;
-
-    var elTotal = document.getElementById('LushTotalReviewsCount');
-    if (elTotal) elTotal.textContent = 'Based on ' + total + ' Reviews';
-
-    var elCountAll = document.getElementById('FilterCountAll');
+    if (elTotal) elTotal.textContent = 'Based on ' + total + (total === 1 ? ' Review' : ' Reviews');
     if (elCountAll) elCountAll.textContent = total;
+
+    // Visual stars
+    var fullStars = Math.round(sum / total);
+    var starsStr = '';
+    for (var i = 0; i < 5; i++) {
+      starsStr += i < fullStars ? '★' : '☆';
+    }
+    if (elStarsVisual) elStarsVisual.textContent = starsStr;
 
     // Update star breakdown bars
     [5, 4, 3, 2, 1].forEach(function (star) {
@@ -291,11 +255,9 @@
       if (barCount) barCount.textContent = count;
     });
 
-    // Update header star score if present on PDP
-    var topScore = document.querySelector('.pdp-rating-score');
+    // Update top rating badge on PDP
     if (topScore) topScore.textContent = avg;
-    var topCount = document.querySelector('.pdp-reviews-count');
-    if (topCount) topCount.textContent = '(' + total + ' Reviews)';
+    if (topCount) topCount.textContent = '(' + total + (total === 1 ? ' Review)' : ' Reviews)');
   }
 
   function renderPhotosGallery() {
@@ -378,7 +340,7 @@
     container.innerHTML = '';
 
     if (filtered.length === 0) {
-      container.innerHTML = '<div class="reviews-empty-state"><p>No reviews match this filter. Be the first to share your experience!</p></div>';
+      container.innerHTML = '<div class="reviews-empty-state" style="text-align: center; padding: 40px 20px; background: #FAF7F2; border-radius: 16px; border: 1px dashed #EAE3DA;"><span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">✨</span><h4 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 800; color: #1F1610; margin: 0 0 6px;">No Customer Reviews Yet</h4><p style="font-size: 0.84rem; color: #6E5E52; margin: 0 0 16px;">Be the first beauty lover to share your experience with this product!</p><button type="button" class="btn-write-review" onclick="document.getElementById(\'BtnOpenWriteReview\').click();"><span>Write the First Review ✨</span></button></div>';
       return;
     }
 
@@ -423,7 +385,7 @@
           '</div>' +
           '<div class="review-stars-display" aria-label="' + rev.rating + ' out of 5 stars">' + starsStr + '</div>' +
         '</div>' +
-        '<h4 class="review-card-title">' + escapeHtml(rev.title) + '</h4>' +
+        (rev.title ? '<h4 class="review-card-title">' + escapeHtml(rev.title) + '</h4>' : '') +
         '<p class="review-card-body">' + escapeHtml(rev.body) + '</p>' +
         photoHtml +
         '<div class="review-card-footer">' +
@@ -498,11 +460,12 @@
 
         var name = document.getElementById('ReviewInputName').value.trim();
         var city = document.getElementById('ReviewInputCity').value.trim();
-        var title = document.getElementById('ReviewInputTitle').value.trim();
+        var titleInput = document.getElementById('ReviewInputTitle');
+        var title = titleInput ? titleInput.value.trim() : '';
         var body = document.getElementById('ReviewInputBody').value.trim();
         var rating = document.getElementById('InputSelectedRating').value || '5';
 
-        if (!name || !title || !body) return;
+        if (!name || !body) return;
 
         var submitBtn = document.getElementById('BtnSubmitReview');
         if (submitBtn) {

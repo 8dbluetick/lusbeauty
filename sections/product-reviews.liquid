@@ -1,0 +1,23 @@
+{% comment %}
+  Lush Beauty Mart — Native Customer Reviews Section (Shopify OS 2.0)
+  Rendered directly beneath Product Description / Details
+{% endcomment %}
+
+<div class="product-reviews-section-wrap" style="width: 100%; clear: both;">
+  {% render 'lush-product-reviews' %}
+  {% render 'lush-review-modal' %}
+</div>
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "tag": "section",
+  "class": "section-product-reviews",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Customer Reviews"
+    }
+  ]
+}
+{% endschema %}
