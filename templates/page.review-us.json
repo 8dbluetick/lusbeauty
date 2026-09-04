@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "connect": {
+      "type": "connect-hub",
+      "settings": {}
+    }
+  },
+  "order": [
+    "connect"
+  ]
+}

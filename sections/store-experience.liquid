@@ -175,14 +175,18 @@
             </a>
           </div>
 
-          <!-- Action Buttons: Call, WhatsApp, Get Directions -->
+          <!-- Action Buttons: Directions, Rate on Google, Call, WhatsApp -->
           <div class="store-action-buttons">
+            <a href="https://share.google/sWmPw0Ml2x1f3NPjo" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-google-review" style="background: #FFF9EE; border-color: #C5A059; color: #8C6D2D;">
+              <span>⭐ Rate on Google</span>
+            </a>
+
             <a href="{{ section.settings.map_link | default: settings.store_map_link | default: 'https://maps.google.com/?q=Hotel+Maitrayee+North+Ambazari+Road+Nagpur+440010' }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-dir">
               <span>🧭 Directions</span>
             </a>
 
             <a href="tel:{{ section.settings.phone | default: settings.store_phone | default: '9119595951' }}" class="btn-store-action btn-store-call">
-              <span>📞 Call Store</span>
+              <span>📞 Call</span>
             </a>
 
             <a href="https://wa.me/{{ section.settings.whatsapp | default: settings.store_whatsapp | default: '919119595951' }}?text={{ 'Hi Lush Beauty Mart! I want to visit your store at Lad Square today.' | url_encode }}" target="_blank" rel="noopener noreferrer" class="btn-store-action btn-store-wa">
