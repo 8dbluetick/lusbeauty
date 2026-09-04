@@ -126,6 +126,30 @@
     }
   }
 
+  function repositionReviewsSection(wrapper) {
+    if (!wrapper) return;
+    try {
+      // Find main product section or related products section to position reviews right below product description / details
+      var mainSec = document.querySelector('.shopify-section-main-product') ||
+                    document.getElementById('shopify-section-template--28845978124654__main_product') ||
+                    document.querySelector('[id*="__main_product"]') ||
+                    document.querySelector('.product-main-section');
+                    
+      var relatedSec = document.querySelector('.shopify-section-related-products') ||
+                       document.querySelector('[id*="__related_products"]') ||
+                       document.getElementById('shopify-section-template--28845978124654__related_products') ||
+                       document.querySelector('.related-products');
+
+      if (mainSec && mainSec.parentNode && mainSec.nextSibling !== wrapper) {
+        mainSec.parentNode.insertBefore(wrapper, mainSec.nextSibling);
+      } else if (relatedSec && relatedSec.parentNode) {
+        relatedSec.parentNode.insertBefore(wrapper, relatedSec);
+      }
+    } catch (e) {
+      console.warn('Lush reviews reposition error:', e);
+    }
+  }
+
   function initLushReviews() {
     var wrappers = document.querySelectorAll('#LushProductReviews');
     if (!wrappers || wrappers.length === 0) return;
@@ -135,6 +159,9 @@
       }
     }
     var wrapper = wrappers[0];
+
+    // Automatically reposition reviews section directly below product description & accordions, above related products
+    repositionReviewsSection(wrapper);
 
     productId = wrapper.getAttribute('data-product-id') || 'default_product';
     productTitle = wrapper.getAttribute('data-product-title') || '';
