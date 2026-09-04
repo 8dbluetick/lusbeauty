@@ -76,8 +76,14 @@
   var allReviews = [];
 
   function initLushReviews() {
-    var wrapper = document.getElementById('LushProductReviews');
-    if (!wrapper) return;
+    var wrappers = document.querySelectorAll('#LushProductReviews');
+    if (!wrappers || wrappers.length === 0) return;
+    if (wrappers.length > 1) {
+      for (var i = 1; i < wrappers.length; i++) {
+        wrappers[i].parentNode.removeChild(wrappers[i]);
+      }
+    }
+    var wrapper = wrappers[0];
 
     productId = wrapper.getAttribute('data-product-id') || 'default_product';
 

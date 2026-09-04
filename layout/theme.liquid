@@ -107,6 +107,12 @@
     <!-- Main Content Area -->
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
+
+      {%- if template.name == 'product' -%}
+        <!-- Native Luxury Customer Reviews & Ratings Showcase -->
+        {% render 'lush-product-reviews' %}
+        {% render 'lush-review-modal' %}
+      {%- endif -%}
     </main>
 
     <!-- Footer -->
