@@ -1,11 +1,10 @@
-﻿{%- if request.path contains 'connect' or request.path contains 'review' -%}
-  <div id="ConnectHubWrapper" style="width: 100%;">
-    {% render 'connect-hub' %}
-  </div>
-{%- else -%}
-  <div id="DynamicPolicyContainer" style="display: none;"></div>
+﻿<div id="ConnectHubTemplate" style="display: none;">
+  {% render 'connect-hub' %}
+</div>
 
-  <section class="lush-404-section" id="Default404Section">
+<div id="DynamicPolicyContainer" style="display: none;"></div>
+
+<section class="lush-404-section" id="Default404Section">
   <div class="page-width text-center">
     <span class="error-badge">404</span>
     <h1 class="error-title">Page Not Found</h1>
@@ -13,15 +12,18 @@
     <a href="/collections/all" class="btn-hero-primary">Explore All Collections →</a>
   </div>
 </section>
-{%- endif -%}
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname.toLowerCase();
   const container = document.getElementById('DynamicPolicyContainer');
   const default404 = document.getElementById('Default404Section');
+  const connectHub = document.getElementById('ConnectHubTemplate');
+
   if (path.includes('connect') || path.includes('review')) {
     document.title = "Connect & Review — Lush Beauty Mart";
+    if (default404) default404.style.display = 'none';
+    if (connectHub) connectHub.style.display = 'block';
     return;
   }
   if (!container || !default404) return;
