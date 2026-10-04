@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_bg_cream": "#FAF7F2",
@@ -13,6 +22,78 @@
     "store_timings": "Monday - Sunday: 10:30 AM to 9:30 PM",
     "social_instagram_handle": "@lushbeautymart",
     "social_instagram_link": "https://instagram.com/lushbeautymart",
-    "social_facebook_link": "https://facebook.com"
+    "social_facebook_link": "https://facebook.com",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_announcement": true,
+          "speed": 28,
+          "bg_color": "#1f1610",
+          "text_color": "#f7efe1"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/LushBeautyMartLogo.jpg",
+          "logo_width": 42,
+          "store_title": "LUSH BEAUTY MART",
+          "store_tagline": "WHERE BEAUTY MEETS QUALITY",
+          "use_custom_menu": false,
+          "menu": "main-menu",
+          "show_search": true,
+          "show_wishlist": true,
+          "show_account": true,
+          "show_cart": true,
+          "bg_color": "#ffffff",
+          "text_color": "#1f1610"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "logo_width": 44,
+          "store_title": "LUSH BEAUTY MART",
+          "store_tagline": "Where Beauty Meets Quality",
+          "description": "Nagpur’s premier luxury destination for genuine dermatological skincare, cosmetics, designer handbags, fragrances, and beauty accessories.",
+          "address": "Below Hotel Maitrayee, Near Lad Square,\nMetro Pillar No. 213, 214,\nNorth Ambazari Road, Gandhi Nagar,\nNagpur – 440 010",
+          "phone": "9119595951",
+          "whatsapp": "919119595951",
+          "instagram_link": "",
+          "facebook_link": "",
+          "menu_categories": "",
+          "menu_support": "",
+          "copyright_text": "Lush Beauty Mart. All Rights Reserved."
+        }
+      },
+      "spin-wheel-popup": {
+        "type": "spin-wheel-popup",
+        "settings": {
+          "enable_spin_wheel": true,
+          "auto_open": true,
+          "delay_seconds": 3,
+          "show_floating_launcher": true,
+          "launcher_text": "Spin & Win",
+          "badge_text": "LUCKY REWARDS",
+          "heading": "Spin & Win Luxury Deals! ✨",
+          "subheading": "Try your luck to win exclusive discount coupons, free gifts & express shipping vouchers!",
+          "button_text": "TAP TO SPIN THE WHEEL",
+          "slice_1_text": "₹100 OFF",
+          "slice_1_code": "LUSH100",
+          "slice_2_text": "10% OFF",
+          "slice_2_code": "LUSH10",
+          "slice_3_text": "FREE SHIPPING",
+          "slice_3_code": "FREESHIP",
+          "slice_4_text": "₹200 OFF",
+          "slice_4_code": "LUSH200",
+          "slice_5_text": "15% OFF",
+          "slice_5_code": "LUSH15",
+          "slice_6_text": "SURPRISE GIFT",
+          "slice_6_code": "LUSHGIFT"
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
