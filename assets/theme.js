@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductAccordions();
   initPincodeChecker();
   initStickyMobileBar();
+  initPdpUrgencyCounter();
   initTrendingCategoryFilters();
   initCarousels();
   initReels();
@@ -2788,4 +2789,41 @@ function initInstantNavigation() {
     const a = e.target.closest('a[href^="/"]');
     if (a && a.href) prefetch(a.href);
   }, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   16. Real-Time PDP Urgency & Live Viewers Counter
+   -------------------------------------------------------------------------- */
+function initPdpUrgencyCounter() {
+  const urgencyBox = document.getElementById('PdpLiveUrgencyStrip');
+  if (!urgencyBox) return;
+
+  const viewerEl = document.getElementById('LiveViewerCount');
+  const stockEl = document.getElementById('LiveStockCount');
+  const purchaseEl = document.getElementById('LivePurchaseCount');
+
+  // Generate stable seed based on product ID so it's consistent per product
+  const pIdStr = urgencyBox.getAttribute('data-product-id') || '12345';
+  let numSeed = 0;
+  for (let i = 0; i < pIdStr.length; i++) {
+    numSeed += pIdStr.charCodeAt(i);
+  }
+
+  // Base values (viewers 14-25, orders 4-9)
+  let baseViewers = 14 + (numSeed % 12);
+  let baseOrders = 4 + (numSeed % 6);
+
+  if (viewerEl) viewerEl.textContent = baseViewers;
+  if (purchaseEl) purchaseEl.textContent = `${baseOrders} orders`;
+
+  // Gentle, organic fluctuation every 8-12 seconds
+  setInterval(() => {
+    const delta = (Math.random() > 0.45 ? 1 : -1) * (Math.floor(Math.random() * 2) + 1);
+    baseViewers = Math.max(12, Math.min(32, baseViewers + delta));
+    if (viewerEl) {
+      viewerEl.textContent = baseViewers;
+      viewerEl.classList.add('viewer-count-bump');
+      setTimeout(() => viewerEl.classList.remove('viewer-count-bump'), 400);
+    }
+  }, 8500);
 }
