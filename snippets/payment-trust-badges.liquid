@@ -50,11 +50,5 @@
     </svg>
 
   {%- when 'shadowfax' -%}
-    <svg viewBox="0 0 170 38" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shadowfax Express Logistics">
-      <!-- Lightning Wing Icon -->
-      <path d="M12 7L4 21H16L12 31L26 15H15L20 7H12Z" fill="#FF6B00"/>
-      <!-- Shadowfax Wordmark -->
-      <text x="34" y="24" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="900" letter-spacing="1" fill="#1A1F2C">SHADOWFAX</text>
-      <text x="35" y="34" font-family="'Montserrat', sans-serif" font-size="7" font-weight="700" letter-spacing="2.5" fill="#FF6B00">EXPRESS LOGISTICS</text>
-    </svg>
+    <img src="{{ 'shadowfax.png' | asset_url }}" alt="Shadowfax Express Logistics" height="30" style="height:30px;width:auto;object-fit:contain;" loading="lazy">
 {%- endcase -%}

@@ -15,7 +15,7 @@
     {%- elsif collection.handle == 'cetaphil' or collection.title contains 'Cetaphil' or collection.title contains 'cetaphil' -%}
       <div class="collection-brand-hero-banner banner-cetaphil">
         <img
-          src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1600&auto=format&fit=crop"
+          src="{{ 'banner-cetaphil.jpg' | asset_url }}"
           alt="Cetaphil Dermatological Skincare - Lush Beauty Mart"
           class="collection-hero-img collection-hero-img-cetaphil"
           width="1600"
@@ -26,7 +26,7 @@
     {%- elsif collection.handle == 'body-wash-shower-gel' or collection.handle == 'body-wash' or collection.handle == 'body-washes' or collection.title contains 'Body Wash' -%}
       <div class="collection-brand-hero-banner banner-bodywash">
         <img
-          src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1600&auto=format&fit=crop"
+          src="{{ 'banner-bodywash.jpg' | asset_url }}"
           alt="Body Wash & Shower Gel Luxury Collection - Lush Beauty Mart"
           class="collection-hero-img collection-hero-img-bodywash"
           width="1600"

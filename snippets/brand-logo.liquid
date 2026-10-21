@@ -1,119 +1,62 @@
 {% comment %}
-  Lush Beauty Mart — Brand Logo Vector Snippet
+  Lush Beauty Mart — Brand Logo Official Asset Snippet
   Usage: {% render 'brand-logo', brand: 'brand-handle', class: 'custom-class' %}
 {% endcomment %}
-{%- assign b_class = class | default: 'brand-vector-logo' -%}
+{%- assign b_class = class | default: 'brand-logo-img' -%}
 {%- assign b_handle = brand | downcase | replace: ' ', '-' | replace: '&', 'and' | replace: '·', '' | replace: '.', '' | replace: "'", '' | replace: 'é', 'e' | replace: 'ē', 'e' -%}
 
 {%- case b_handle -%}
   {%- when 'dot-and-key' or 'dot-key' or 'dotandkey' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dot & Key">
-      <circle cx="16" cy="20" r="5" fill="#FF7599"/>
-      <circle cx="144" cy="20" r="5" fill="#FFB039"/>
-      <text x="80" y="25" text-anchor="middle" font-family="'Montserrat', 'Century Gothic', sans-serif" font-size="16" font-weight="800" letter-spacing="3" fill="#1F1610">DOT &amp; KEY</text>
-      <text x="80" y="36" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="7" font-weight="600" letter-spacing="4" fill="#8B7E74">SKINCARE</text>
-    </svg>
+    <img src="{{ 'brand-dot-and-key.jpg' | asset_url }}" alt="Dot & Key" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'kay-beauty' or 'kaybeauty' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 150 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kay Beauty">
-      <text x="32" y="27" font-family="'Playfair Display', 'Didot', Georgia, serif" font-size="24" font-weight="900" font-style="italic" fill="#C35355" letter-spacing="1">Kay</text>
-      <text x="85" y="26" font-family="'Montserrat', sans-serif" font-size="16" font-weight="700" fill="#1F1610" letter-spacing="2">BEAUTY</text>
-      <line x1="85" y1="31" x2="145" y2="31" stroke="#C35355" stroke-width="1.5"/>
-    </svg>
+    <img src="{{ 'brand-kay-beauty.png' | asset_url }}" alt="Kay Beauty" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'lakme' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lakmé">
-      <text x="70" y="26" text-anchor="middle" font-family="'Futura', 'Trebuchet MS', 'Arial Black', sans-serif" font-size="21" font-weight="900" letter-spacing="4" fill="#000000">LAKMÉ</text>
-      <line x1="42" y1="33" x2="98" y2="33" stroke="#D32F2F" stroke-width="2"/>
-    </svg>
+    <img src="{{ 'brand-lakme.jpg' | asset_url }}" alt="Lakmé" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'loreal-professionnel' or 'loreal-pro' or 'l_oreal_professionnel' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="L'Oréal Professionnel">
-      <text x="80" y="20" text-anchor="middle" font-family="'Didot', 'Bodoni MT', 'Cinzel', serif" font-size="16" font-weight="800" letter-spacing="2.5" fill="#000000">L'ORÉAL</text>
-      <text x="80" y="32" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="7.5" font-weight="700" letter-spacing="2" fill="#333333">PROFESSIONNEL PARIS</text>
-    </svg>
+    <img src="{{ 'brand-loreal-pro.jpg' | asset_url }}" alt="L'Oréal Professionnel" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'minimalist' or 'be-minimalist' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 150 38" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Minimalist">
-      <rect x="10" y="5" width="130" height="28" rx="4" fill="#F8F8F8" stroke="#1F1610" stroke-width="1.2"/>
-      <text x="75" y="24" text-anchor="middle" font-family="'Space Grotesk', 'Courier New', monospace, sans-serif" font-size="15" font-weight="700" letter-spacing="1" fill="#1F1610">[ Minimalist ]</text>
-    </svg>
+    <img src="{{ 'brand-minimalist.webp' | asset_url }}" alt="Minimalist" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'cetaphil' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 145 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cetaphil">
-      <rect x="12" y="6" width="121" height="28" rx="14" fill="#00778B"/>
-      <text x="72" y="25" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="800" letter-spacing="0.5" fill="#FFFFFF">Cetaphil</text>
-    </svg>
+    <img src="{{ 'brand-cetaphil.png' | asset_url }}" alt="Cetaphil" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'mac' or 'mac-cosmetics' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 130 38" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="M·A·C Cosmetics">
-      <text x="65" y="27" text-anchor="middle" font-family="'Arial', 'Helvetica', sans-serif" font-size="22" font-weight="900" letter-spacing="6" fill="#000000">M · A · C</text>
-    </svg>
+    <img src="{{ 'brand-mac.png' | asset_url }}" alt="M·A·C Cosmetics" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'loreal-paris' or 'loreal' or 'l_oreal_paris' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 150 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="L'Oréal Paris">
-      <text x="75" y="22" text-anchor="middle" font-family="'Didot', 'Bodoni MT', 'Cinzel', serif" font-size="18" font-weight="800" letter-spacing="3" fill="#000000">L'ORÉAL</text>
-      <text x="75" y="34" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="7" font-weight="600" letter-spacing="4" fill="#666666">PARIS</text>
-    </svg>
+    <img src="{{ 'brand-loreal-paris.jpg' | asset_url }}" alt="L'Oréal Paris" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'elf' or 'elf-cosmetics' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 120 38" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="e.l.f. Cosmetics">
-      <text x="60" y="25" text-anchor="middle" font-family="'Avenir', 'Helvetica Neue', sans-serif" font-size="22" font-weight="800" letter-spacing="2" fill="#000000">e.l.f.</text>
-      <text x="60" y="34" text-anchor="middle" font-family="'Avenir', sans-serif" font-size="5.5" font-weight="600" letter-spacing="2" fill="#555555">eyes lips face</text>
-    </svg>
+    <img src="{{ 'brand-elf.png' | asset_url }}" alt="e.l.f. Cosmetics" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'the-ordinary' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 160 38" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Ordinary.">
-      <text x="80" y="22" text-anchor="middle" font-family="'Helvetica Neue', 'Arial', sans-serif" font-size="17" font-weight="800" letter-spacing="0.5" fill="#111111">The Ordinary.</text>
-      <text x="80" y="32" text-anchor="middle" font-family="'Helvetica Neue', sans-serif" font-size="6" font-weight="500" letter-spacing="1.5" fill="#666666">Clinical Formulations with Integrity.</text>
-    </svg>
+    <img src="{{ 'brand-the-ordinary.jpg' | asset_url }}" alt="The Ordinary" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'laneige' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 145 38" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Laneige">
-      <text x="72" y="26" text-anchor="middle" font-family="'Didot', 'Bodoni MT', 'Cinzel', Georgia, serif" font-size="20" font-weight="700" letter-spacing="4" fill="#0E2F56">LANEIGE</text>
-    </svg>
+    <img src="{{ 'brand-laneige.png' | asset_url }}" alt="Laneige" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'charlotte-tilbury' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 165 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Charlotte Tilbury">
-      <text x="82" y="19" text-anchor="middle" font-family="'Playfair Display', 'Baskerville', serif" font-size="14" font-weight="700" letter-spacing="2" fill="#752B36">Charlotte Tilbury</text>
-      <path d="M72 26L82.5 31L93 26" stroke="#C5A059" stroke-width="1.2" fill="none"/>
-      <circle cx="82.5" cy="24" r="2" fill="#C5A059"/>
-    </svg>
+    <img src="{{ 'brand-charlotte-tilbury.jpg' | asset_url }}" alt="Charlotte Tilbury" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'dove' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 120 38" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dove">
-      <path d="M22 18C28 14 36 12 44 14C38 18 34 22 30 25C26 23 23 20 22 18Z" fill="#2E4887"/>
-      <circle cx="40" cy="14" r="1.5" fill="#CBA461"/>
-      <text x="78" y="26" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="21" font-weight="700" font-style="italic" fill="#2E4887" letter-spacing="1">Dove</text>
-    </svg>
+    <img src="{{ 'brand-dove.png' | asset_url }}" alt="Dove" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'kerastase' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 150 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kérastase">
-      <text x="75" y="21" text-anchor="middle" font-family="'Cinzel', 'Didot', serif" font-size="17" font-weight="800" letter-spacing="3" fill="#1F1610">KÉRASTASE</text>
-      <text x="75" y="32" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="6.5" font-weight="600" letter-spacing="4" fill="#C5A059">PARIS</text>
-    </svg>
+    <img src="{{ 'brand-kerastase.png' | asset_url }}" alt="Kérastase" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'estee-lauder' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Estée Lauder">
-      <text x="80" y="25" text-anchor="middle" font-family="'Optima', 'Didot', Georgia, serif" font-size="16" font-weight="700" letter-spacing="3" fill="#0A1C3E">ESTĒE LAUDER</text>
-      <line x1="35" y1="31" x2="125" y2="31" stroke="#0A1C3E" stroke-width="0.75"/>
-    </svg>
+    <img src="{{ 'brand-estee-lauder.png' | asset_url }}" alt="Estée Lauder" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'love-beauty-planet' or 'lbp' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 165 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Love Beauty and Planet">
-      <path d="M20 18C17 15 13 16 13 19C13 23 20 27 20 27C20 27 27 23 27 19C27 16 23 15 20 18Z" fill="#5F886B"/>
-      <text x="96" y="20" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="10.5" font-weight="800" letter-spacing="0.8" fill="#2E4A35">love beauty</text>
-      <text x="96" y="32" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="10.5" font-weight="800" letter-spacing="0.8" fill="#2E4A35">&amp; planet</text>
-    </svg>
+    <img src="{{ 'brand-love-beauty-planet.png' | asset_url }}" alt="Love Beauty & Planet" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- when 'bath-and-body-works' or 'bath-body-works' or 'bbw' -%}
-    <svg class="{{ b_class }}" viewBox="0 0 165 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bath & Body Works">
-      <text x="82" y="17" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="11" font-weight="800" letter-spacing="0.5" fill="#003580">Bath &amp; Body</text>
-      <text x="82" y="31" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="12" font-weight="900" letter-spacing="2" fill="#003580">WORKS</text>
-    </svg>
+    <img src="{{ 'brand-bath-and-body-works.png' | asset_url }}" alt="Bath & Body Works" class="{{ b_class }}" loading="lazy" width="140" height="40">
 
   {%- else -%}
-    <svg class="{{ b_class }}" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="70" y="24" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#1F1610">{{ brand | escape }}</text>
-    </svg>
+    <span class="{{ b_class }} brand-name-fallback">{{ brand | escape }}</span>
 {%- endcase -%}
