@@ -191,31 +191,6 @@
                 </p>
               </div>
 
-            {%- when 'urgency_counter' -%}
-              <!-- Dedicated Urgency & Live Viewers Counter Block -->
-              <div class="pdp-live-urgency-strip" id="PdpLiveUrgencyStrip" data-product-id="{{ product.id }}" {{ block.shopify_attributes }}>
-                <div class="urgency-item urgency-viewers">
-                  <span class="live-dot-pulse"></span>
-                  <span class="urgency-label">
-                    <strong id="LiveViewerCount">18</strong> people viewing right now
-                  </span>
-                </div>
-                <span class="urgency-dot-sep">•</span>
-                <div class="urgency-item urgency-stock">
-                  <span class="urgency-fire">🔥</span>
-                  <span class="urgency-label">
-                    Only <strong class="stock-highlight" id="LiveStockCount">{% if current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= 10 %}{{ current_variant.inventory_quantity }} left{% else %}3 left{% endif %}</strong> in Nagpur stock!
-                  </span>
-                </div>
-                <span class="urgency-dot-sep">•</span>
-                <div class="urgency-item urgency-purchases">
-                  <span class="urgency-truck">⚡</span>
-                  <span class="urgency-label">
-                    <strong id="LivePurchaseCount">6 orders</strong> in last 24 hrs
-                  </span>
-                </div>
-              </div>
-
             {%- when 'rating' -%}
               <!-- Star Rating / Reviews Block with Judge.me Integration -->
               <div class="pdp-rating-below-price" {{ block.shopify_attributes }}>

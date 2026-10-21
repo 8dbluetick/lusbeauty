@@ -45,12 +45,6 @@
         "accordions": {
           "type": "accordions",
           "settings": {}
-        },
-        "urgency_counter": {
-          "type": "urgency_counter",
-          "settings": {
-            "low_stock_text": "Only 3 left in Nagpur stock!"
-          }
         }
       },
       "block_order": [
@@ -59,7 +53,6 @@
         "price",
         "judgeme_badge",
         "rating",
-        "urgency_counter",
         "description",
         "variant_picker",
         "buy_buttons",
