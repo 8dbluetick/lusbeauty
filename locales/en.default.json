@@ -22,8 +22,9 @@
     "subtotal": "Bag Subtotal",
     "savings": "Coupon Savings",
     "shipping": "Delivery (Nagpur & PAN India)",
-    "free_shipping_unlocked": "Congratulations! You have unlocked FREE Delivery in Nagpur!",
-    "free_shipping_needed": "Add {{ amount }} more for FREE Nagpur Delivery",
+    "free_shipping_unlocked": "Congratulations! You have unlocked FREE Delivery on your order!",
+    "free_shipping_needed": "100% FREE Delivery on all orders",
+    "free_delivery_all": "100% FREE Delivery Unlocked",
     "checkout": "Proceed to Checkout",
     "order_via_whatsapp": "Order via WhatsApp (Nagpur Store)"
   },

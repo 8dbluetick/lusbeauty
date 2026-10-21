@@ -356,41 +356,29 @@ async function updateCartDrawer() {
       }
     }
 
-    // 3. Update drawer totals & subtotal with ₹59 delivery (FREE above ₹999)
+    // 3. Update drawer totals & subtotal - 100% FREE DELIVERY ON ALL ORDERS
     const subtotalEl = document.querySelector('[data-cart-subtotal]');
     const totalEl = document.querySelector('[data-cart-total]');
     const shippingValEl = document.querySelector('.cart-shipping-val');
-    const isFreeShipping = cart.total_price >= 99900;
-    const shippingAmount = isFreeShipping ? 0 : 5900;
     const formattedSubtotal = '₹' + (cart.total_price / 100).toFixed(0);
-    const formattedTotal = '₹' + ((cart.total_price + shippingAmount) / 100).toFixed(0);
+    const formattedTotal = formattedSubtotal;
 
     if (subtotalEl) subtotalEl.textContent = formattedSubtotal;
     if (totalEl) totalEl.textContent = formattedTotal;
     if (shippingValEl) {
-      if (isFreeShipping) {
-        shippingValEl.innerHTML = '<strong class="text-unlocked-badge">FREE</strong>';
-      } else {
-        shippingValEl.innerHTML = '₹59 <span style="font-size:0.72rem;color:#8C7B6E;">(Free on ₹999+)</span>';
-      }
+      shippingValEl.innerHTML = '<strong class="text-unlocked-badge" style="color:#0F7A42; font-weight:800;">FREE</strong>';
     }
 
-    // 4. Update threshold banner & progress bars
+    // 4. Update banner & progress bars
     const shippingTextEls = document.querySelectorAll('[data-shipping-text], [data-shipping-msg]');
     const progressBars = document.querySelectorAll('.shipping-progress-bar, .drawer-progress-bar');
-    const percent = Math.min(100, (cart.total_price / 99900) * 100);
 
     progressBars.forEach(b => {
-      b.style.width = percent + '%';
+      b.style.width = '100%';
     });
 
     shippingTextEls.forEach(shippingTextEl => {
-      if (isFreeShipping) {
-        shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You unlocked <strong>FREE Delivery!</strong></span>';
-      } else {
-        const needed = ((99900 - cart.total_price) / 100).toFixed(0);
-        shippingTextEl.innerHTML = `<span>Add <strong>₹${needed}</strong> more to unlock <strong>FREE Delivery!</strong></span>`;
-      }
+      shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You have unlocked <strong>FREE Delivery!</strong></span>';
     });
 
     // 5. Handle empty cart page reload ONLY if user just removed the last item while viewing active cart items
@@ -1670,13 +1658,13 @@ function initPincodeChecker() {
         if (data.serviceable) {
           result.className = 'pincode-result-msg success';
           const etaText = data.estimated_days ? `Estimated delivery: <strong>${data.estimated_days}</strong>` : 'Estimated delivery: <strong>2–4 business days</strong>';
-          const shippingFee = (price >= 999 || data.is_free) ? '<span style="color:#0F7A42; font-weight:800;">FREE</span>' : `₹${data.shipping_rate || 70}`;
+          const shippingFee = '<span style="color:#0F7A42; font-weight:800;">FREE</span>';
           const courierInfo = data.courier_name ? ` via ${data.courier_name}` : ' via Shiprocket Tracked Courier';
 
           if (isNagpurLocal) {
             result.innerHTML = `⚡ <strong>Nagpur Local Delivery:</strong> FREE Same-Day / Next-Day Delivery available for PIN code ${code}!<br>🏬 Also ready for <strong>instant pickup</strong> at our Lad Square Showroom.`;
           } else {
-            result.innerHTML = `✓ <strong>Delivery Available for ${code}</strong><br>🚚 ${etaText}${courierInfo}<br>📦 Shipping: ${shippingFee} (Free above ₹999)`;
+            result.innerHTML = `✓ <strong>Delivery Available for ${code}</strong><br>🚚 ${etaText}${courierInfo}<br>📦 Shipping: ${shippingFee} (100% Free on all orders)`;
           }
         } else {
           result.className = 'pincode-result-msg error';
@@ -1695,7 +1683,7 @@ function initPincodeChecker() {
         result.innerHTML = `⚡ <strong>Nagpur Express Delivery:</strong> FREE Same-Day / Next-Day Delivery available for PIN code ${code}!<br>🏬 Also available for <strong>instant showroom pickup</strong> at Lad Square.`;
       } else {
         result.className = 'pincode-result-msg success';
-        const freeNote = price >= 999 ? '<span style="color:#0F7A42; font-weight:800;">FREE SHIPPING</span>' : 'Standard courier charges apply (FREE above ₹999)';
+        const freeNote = '<span style="color:#0F7A42; font-weight:800;">100% FREE SHIPPING</span>';
         result.innerHTML = `✓ <strong>Delivery Available for ${code}</strong><br>🚚 Estimated delivery: <strong>3–5 business days</strong> via Shiprocket Tracked Courier.<br>📦 ${freeNote}.`;
       }
     }
@@ -1967,10 +1955,7 @@ function generateWhatsAppOrderUrl(cartData) {
   }).join('\n\n');
 
   const subtotal = (cartData.total_price / 100).toFixed(0);
-  const isFreeDelivery = cartData.total_price >= 99900;
-  const deliveryStatus = isFreeDelivery
-    ? '🎉 FREE EXPRESS DELIVERY UNLOCKED (Nagpur)!'
-    : '₹50 Standard Delivery (Free on ₹999+)';
+  const deliveryStatus = '🎉 100% FREE EXPRESS DELIVERY (All Orders)!';
 
   const message = `🌸 *NAMASTE LUSH BEAUTY MART NAGPUR!* 🌸\n` +
     `I would like to place an instant order for the following items:\n\n` +

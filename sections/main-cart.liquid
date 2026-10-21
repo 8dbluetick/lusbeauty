@@ -49,27 +49,19 @@
         </div>
       </div>
     {%- else -%}
-      <!-- Free Shipping Animated Progress Bar -->
-      {%- assign threshold = 99900 -%}
-      {%- assign current_total = cart.total_price -%}
-      {%- assign progress_percent = current_total | times: 100.0 | divided_by: threshold | at_most: 100 -%}
+      <!-- Free Shipping Animated Banner - 100% FREE DELIVERY -->
       <div class="cart-free-shipping-card">
         <div class="shipping-progress-header">
           <div class="shipping-msg-wrap">
             <span class="shipping-truck-icon">🚚</span>
             <span class="shipping-msg-text">
-              {%- if current_total >= threshold -%}
-                <strong class="text-unlocked">🎉 Congratulations! You unlocked FREE Delivery!</strong>
-              {%- else -%}
-                {%- assign remaining = threshold | minus: current_total -%}
-                <span>Add <strong>{{ remaining | money }}</strong> more to unlock <strong>FREE Delivery!</strong></span>
-              {%- endif -%}
+              <strong class="text-unlocked">🎉 Congratulations! You have unlocked 100% FREE Delivery on this order!</strong>
             </span>
           </div>
-          <span class="shipping-target-pill">Target: ₹999 (FREE Delivery)</span>
+          <span class="shipping-target-pill" style="background: #0F7A42; color: #FFFFFF; font-weight: 700;">100% FREE DELIVERY</span>
         </div>
         <div class="shipping-progress-track">
-          <div class="shipping-progress-bar" style="width: {{ progress_percent }}%;"></div>
+          <div class="shipping-progress-bar" style="width: 100%;"></div>
         </div>
       </div>
 
@@ -170,19 +162,9 @@
               <div class="summary-row">
                 <span>Standard Delivery</span>
                 <span>
-                  {%- if cart.total_price >= threshold -%}
-                    <strong class="text-unlocked-badge">FREE</strong>
-                  {%- else -%}
-                    ₹59 <span style="font-size: 0.72rem; color: #8C7B6E;">(Free on ₹999+)</span>
-                  {%- endif -%}
+                  <strong class="text-unlocked-badge" style="color: #0F7A42; font-weight: 800;">FREE</strong>
                 </span>
               </div>
-              {%- if cart.total_price < threshold -%}
-                {%- assign remaining_nudge = threshold | minus: cart.total_price -%}
-                <div class="summary-free-shipping-nudge">
-                  <span>✨ Add <strong>{{ remaining_nudge | money }}</strong> more to unlock <strong>FREE Delivery!</strong></span>
-                </div>
-              {%- endif -%}
               <div class="summary-row">
                 <span>Taxes & Packaging</span>
                 <span class="text-muted">Included</span>
@@ -195,7 +177,7 @@
                   <span class="total-title">Total Amount</span>
                   <span class="total-sub">Includes all taxes</span>
                 </div>
-                <span class="total-amount-val">{% if cart.total_price >= threshold %}{{ cart.total_price | money }}{% else %}{{ cart.total_price | plus: 5900 | money }}{% endif %}</span>
+                <span class="total-amount-val">{{ cart.total_price | money }}</span>
               </div>
             </div>
 

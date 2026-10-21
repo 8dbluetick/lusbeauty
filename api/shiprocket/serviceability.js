@@ -85,7 +85,7 @@ module.exports = async function handler(req, res) {
       estimated_days: 'Same-Day / Next-Day',
       courier_name: 'Nagpur Local Showroom Express',
       shipping_rate: declared_value >= 999 ? 0 : 49,
-      is_free: declared_value >= 999,
+      is_free: true,
       city: 'Nagpur',
       state: 'Maharashtra',
       pickup_ready: true,
@@ -101,7 +101,7 @@ module.exports = async function handler(req, res) {
       is_nagpur_local: false,
       estimated_days: '3–5 business days',
       courier_name: 'Shiprocket Tracked Courier',
-      shipping_rate: declared_value >= 999 ? 0 : 79,
+      shipping_rate: 0,
       is_free: declared_value >= 999,
     });
   }
@@ -146,7 +146,7 @@ module.exports = async function handler(req, res) {
     const etdHours = parseInt(bestCourier.etd_hours || '72', 10);
     const etdDays = Math.max(2, Math.ceil(etdHours / 24));
     const rawRate = parseFloat(bestCourier.rate || '79');
-    const isFree = declared_value >= 999;
+    const isFree = true;
 
     return res.status(200).json({
       serviceable: true,
