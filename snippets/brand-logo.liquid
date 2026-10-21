@@ -1,5 +1,5 @@
 {% comment %}
-  Lush Beauty Mart — Brand Logo Official Asset Snippet
+  Lush Beauty Mart — Brand Logo Official Cloudinary CDN Snippet
   Usage: {% render 'brand-logo', brand: 'brand-handle', class: 'custom-class', loading: 'eager' %}
 {% endcomment %}
 {%- assign b_class = class | default: 'brand-logo-img' -%}
@@ -8,55 +8,55 @@
 
 {%- case b_handle -%}
   {%- when 'dot-and-key' or 'dot-key' or 'dotandkey' -%}
-    <img src="{{ 'brand-dot-and-key.jpg' | asset_url }}" alt="Dot & Key" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dot-and-key.png.jpg" alt="Dot & Key" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'kay-beauty' or 'kaybeauty' -%}
-    <img src="{{ 'brand-kay-beauty.png' | asset_url }}" alt="Kay Beauty" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/kay-beauty.png.png" alt="Kay Beauty" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'lakme' -%}
-    <img src="{{ 'brand-lakme.jpg' | asset_url }}" alt="Lakmé" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/lakme.png.jpg" alt="Lakmé" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'loreal-professionnel' or 'loreal-pro' or 'l_oreal_professionnel' -%}
-    <img src="{{ 'brand-loreal-pro.jpg' | asset_url }}" alt="L'Oréal Professionnel" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/loreal-pro.png.jpg" alt="L'Oréal Professionnel" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'minimalist' or 'be-minimalist' -%}
-    <img src="{{ 'brand-minimalist.webp' | asset_url }}" alt="Minimalist" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/minimalist.webp" alt="Minimalist" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'cetaphil' -%}
-    <img src="{{ 'brand-cetaphil.png' | asset_url }}" alt="Cetaphil" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/cetaphil.png.png" alt="Cetaphil" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'mac' or 'mac-cosmetics' -%}
-    <img src="{{ 'brand-mac.png' | asset_url }}" alt="M·A·C Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/mac.png.png" alt="M·A·C Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'loreal-paris' or 'loreal' or 'l_oreal_paris' -%}
-    <img src="{{ 'brand-loreal-paris.jpg' | asset_url }}" alt="L'Oréal Paris" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/loreal-paris.png.jpg" alt="L'Oréal Paris" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'elf' or 'elf-cosmetics' -%}
-    <img src="{{ 'brand-elf.png' | asset_url }}" alt="e.l.f. Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/elf.png.png" alt="e.l.f. Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'the-ordinary' -%}
-    <img src="{{ 'brand-the-ordinary.jpg' | asset_url }}" alt="The Ordinary" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566819/the-ordinary.png.jpg" alt="The Ordinary" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'laneige' -%}
-    <img src="{{ 'brand-laneige.png' | asset_url }}" alt="Laneige" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/laneige.png.png" alt="Laneige" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'charlotte-tilbury' -%}
-    <img src="{{ 'brand-charlotte-tilbury.jpg' | asset_url }}" alt="Charlotte Tilbury" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/charlotte-tilbury.png.jpg" alt="Charlotte Tilbury" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'dove' -%}
-    <img src="{{ 'brand-dove.png' | asset_url }}" alt="Dove" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dove.png.png" alt="Dove" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'kerastase' -%}
-    <img src="{{ 'brand-kerastase.png' | asset_url }}" alt="Kérastase" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566822/kerastase.png.png" alt="Kérastase" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'estee-lauder' -%}
-    <img src="{{ 'brand-estee-lauder.png' | asset_url }}" alt="Estée Lauder" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/estee-lauder.png.png" alt="Estée Lauder" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'love-beauty-planet' or 'lbp' -%}
-    <img src="{{ 'brand-love-beauty-planet.png' | asset_url }}" alt="Love Beauty & Planet" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/love-beauty-planet.png.png" alt="Love Beauty & Planet" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- when 'bath-and-body-works' or 'bath-body-works' or 'bbw' -%}
-    <img src="{{ 'brand-bath-and-body-works.png' | asset_url }}" alt="Bath & Body Works" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/bath-and-body-works.png" alt="Bath & Body Works" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
   {%- else -%}
     <span class="{{ b_class }} brand-name-fallback">{{ brand | escape }}</span>
