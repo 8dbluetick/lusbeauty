@@ -1,0 +1,177 @@
+{% comment %}
+  Lush Beauty Mart - Complete Analytics, Heatmaps & E-Commerce Drop-off Tracking
+  Integrates:
+  1. Google Analytics 4 (GA4) with Enhanced E-commerce
+  2. Microsoft Clarity (100% Free Heatmaps, Scroll Maps & Session Screen Recordings)
+  3. Funnel Drop-off & Cart Abandonment Tracker
+{% endcomment %}
+
+{%- assign ga4_id = settings.ga4_measurement_id | strip -%}
+{%- assign clarity_id = settings.clarity_project_id | strip -%}
+
+<!-- 1. Google Analytics 4 (GA4) -->
+{%- if ga4_id != blank -%}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ ga4_id }}', {
+      send_page_view: true,
+      currency: 'INR'
+    });
+  </script>
+{%- endif -%}
+
+<!-- 2. Microsoft Clarity (Heatmaps & Session Recordings) -->
+{%- if clarity_id != blank -%}
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "{{ clarity_id }}");
+  </script>
+{%- endif -%}
+
+<!-- 3. Lush Advanced E-commerce & Click Tracking Engine -->
+<script>
+(function() {
+  window.lushAnalytics = {
+    track: function(eventName, params) {
+      params = params || {};
+      params.send_to = '{{ ga4_id }}';
+
+      // 1. Send to Google Analytics 4
+      if (typeof window.gtag === 'function' && '{{ ga4_id }}' !== '') {
+        try {
+          window.gtag('event', eventName, params);
+        } catch(e) {}
+      }
+
+      // 2. Send to Microsoft Clarity
+      if (typeof window.clarity === 'function') {
+        try {
+          window.clarity('event', eventName);
+          if (params.value) {
+            window.clarity('set', 'cart_value', String(params.value));
+          }
+        } catch(e) {}
+      }
+
+      // 3. Optional Console log in development
+      if (window.location.hostname === 'localhost' || window.location.search.includes('debug_analytics=1')) {
+        console.log('[Lush Analytics Event]', eventName, params);
+      }
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // A. Track Product Views on Product Pages
+    {%- if template.name == 'product' and product -%}
+      window.lushAnalytics.track('view_item', {
+        currency: 'INR',
+        value: {{ product.selected_or_first_available_variant.price | divided_by: 100.0 }},
+        items: [{
+          item_id: '{{ product.selected_or_first_available_variant.id }}',
+          item_name: {{ product.title | json }},
+          item_brand: {{ product.vendor | json }},
+          item_category: {{ product.type | json }},
+          price: {{ product.selected_or_first_available_variant.price | divided_by: 100.0 }},
+          quantity: 1
+        }]
+      });
+    {%- endif -%}
+
+    // B. Track Cart Page View
+    {%- if template.name == 'cart' -%}
+      window.lushAnalytics.track('view_cart', {
+        currency: 'INR',
+        value: {{ cart.total_price | divided_by: 100.0 }},
+        items_count: {{ cart.item_count }}
+      });
+    {%- endif -%}
+
+    // C. Click Tracking: Checkout Buttons (Cart Drawer & Cart Page)
+    document.addEventListener('click', function(e) {
+      const checkoutBtn = e.target.closest('#checkout, #CartDrawer-Checkout, [data-checkout-button]');
+      if (checkoutBtn) {
+        window.lushAnalytics.track('begin_checkout', {
+          location: checkoutBtn.id === 'CartDrawer-Checkout' ? 'cart_drawer' : 'cart_page',
+          time_clicked: new Date().toISOString()
+        });
+        if (typeof window.clarity === 'function') {
+          window.clarity('set', 'checkout_initiated', 'yes');
+        }
+      }
+
+      // Track WhatsApp Inquiries & Direct Order Clicks
+      const waLink = e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]');
+      if (waLink) {
+        window.lushAnalytics.track('whatsapp_chat_click', {
+          link_url: waLink.href,
+          page_path: window.location.pathname
+        });
+      }
+
+      // Track PIN Code Checker Queries
+      const pinBtn = e.target.closest('#BtnCheckPincode');
+      if (pinBtn) {
+        const pinInput = document.getElementById('PincodeCheckInput');
+        const pinVal = pinInput ? pinInput.value : '';
+        window.lushAnalytics.track('pincode_check_click', {
+          pincode: pinVal
+        });
+      }
+
+      // Track Coupon Copy / Apply Clicks
+      const couponBtn = e.target.closest('.btn-copy-code, .offer-card-btn, [data-coupon-code]');
+      if (couponBtn) {
+        const code = couponBtn.getAttribute('data-coupon-code') || couponBtn.textContent.trim();
+        window.lushAnalytics.track('coupon_copy_click', {
+          coupon_code: code
+        });
+      }
+    });
+
+    // D. Cart Abandonment & Drop-Off Detection (Exit Intent)
+    var cartCount = {{ cart.item_count | default: 0 }};
+    var cartValue = {{ cart.total_price | default: 0 }} / 100;
+    var abandonmentTracked = false;
+
+    if (cartCount > 0) {
+      // Exit intent on Desktop (mouse moving out of browser window)
+      document.addEventListener('mouseleave', function(e) {
+        if (e.clientY < 10 && !abandonmentTracked) {
+          abandonmentTracked = true;
+          window.lushAnalytics.track('cart_abandonment_intent', {
+            cart_items: cartCount,
+            cart_value_inr: cartValue,
+            exit_type: 'desktop_mouseleave',
+            current_page: window.location.pathname
+          });
+          if (typeof window.clarity === 'function') {
+            window.clarity('set', 'cart_abandoned', 'true');
+          }
+        }
+      });
+
+      // Page Unload / Tab Close detection
+      window.addEventListener('beforeunload', function() {
+        if (!abandonmentTracked && !sessionStorage.getItem('checkout_completed')) {
+          abandonmentTracked = true;
+          window.lushAnalytics.track('cart_session_closed', {
+            cart_items: cartCount,
+            cart_value_inr: cartValue,
+            current_page: window.location.pathname
+          });
+        }
+      });
+    }
+  });
+})();
+</script>
+
+{%- if settings.custom_head_tracking != blank -%}
+  {{ settings.custom_head_tracking }}
+{%- endif -%}

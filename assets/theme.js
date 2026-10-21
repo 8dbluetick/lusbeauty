@@ -89,6 +89,20 @@ function initCartDrawer() {
           // 1. Trigger Flying Parabolic Product Image to Cart Icon
           animateFlyToCart(form, addedItem);
 
+          // Track Add to Cart in GA4 & Clarity
+          if (window.lushAnalytics) {
+            window.lushAnalytics.track('add_to_cart', {
+              currency: 'INR',
+              value: (addedItem.final_price || addedItem.price) / 100,
+              items: [{
+                item_id: String(addedItem.id || addedItem.variant_id),
+                item_name: addedItem.title || addedItem.product_title,
+                price: (addedItem.final_price || addedItem.price) / 100,
+                quantity: addedItem.quantity || 1
+              }]
+            });
+          }
+
           // 2. Button Micro-Interaction (Success Checkmark + Pop)
           if (submitBtn) {
             submitBtn.classList.add('btn-add-success');

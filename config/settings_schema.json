@@ -108,5 +108,42 @@
         "label": "Facebook URL"
       }
     ]
+  },
+  {
+    "name": "Analytics & Heatmaps Tracking",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Google Analytics 4 (GA4)"
+      },
+      {
+        "type": "text",
+        "id": "ga4_measurement_id",
+        "label": "GA4 Measurement ID",
+        "placeholder": "G-XXXXXXXXXX",
+        "info": "Enter your Google Analytics 4 Measurement ID (format: G-XXXXXXXXXX) to track visitors, sales, and conversions."
+      },
+      {
+        "type": "header",
+        "content": "Microsoft Clarity (Free Heatmaps & Screen Replays)"
+      },
+      {
+        "type": "text",
+        "id": "clarity_project_id",
+        "label": "Microsoft Clarity Project ID",
+        "placeholder": "e.g. abc123xyz",
+        "info": "100% Free tool by Microsoft for Heatmaps, Click Maps, Scroll Depth and Live User Screen Recordings. Get free ID at clarity.microsoft.com"
+      },
+      {
+        "type": "header",
+        "content": "Custom Tracking & Pixels"
+      },
+      {
+        "type": "textarea",
+        "id": "custom_head_tracking",
+        "label": "Additional Head Tracking Code",
+        "info": "Paste any additional custom scripts or tracking tags to be loaded in the <head>."
+      }
+    ]
   }
 ]
