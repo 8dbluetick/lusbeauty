@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductAccordions();
   initPincodeChecker();
   initStickyMobileBar();
-  initPdpUrgencyCounter();
   initTrendingCategoryFilters();
   initCarousels();
   initReels();
