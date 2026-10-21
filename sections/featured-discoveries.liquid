@@ -1,0 +1,151 @@
+{%- if section.settings.enable_section -%}
+  <section class="lush-discoveries-section" style="background: {{ section.settings.bg_color | default: '#FAF7F2' }}; padding: 60px 0 70px; border-top: 1px solid #EAE3DA; border-bottom: 1px solid #EAE3DA;">
+    <div class="page-width">
+      <!-- Section Header -->
+      <div class="section-header-discoveries" style="text-align: center; max-width: 820px; margin: 0 auto 40px;">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-badge" style="display: inline-block; background: rgba(197, 160, 89, 0.15); color: #8A6D3B; border: 1px solid rgba(197, 160, 89, 0.4); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; margin-bottom: 14px;">
+            {{ section.settings.badge }}
+          </span>
+        {%- endif -%}
+
+        <h2 class="section-title" style="font-family: var(--font-heading-family, serif); font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 700; color: #1F1610; margin-bottom: 10px; line-height: 1.25;">
+          {{ section.settings.heading | default: "Curated Picks You Might Have Missed ✨" }}
+        </h2>
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-subtitle" style="font-size: 0.95rem; color: #6E5E52; line-height: 1.6; margin: 0 auto 18px;">
+            {{ section.settings.subtitle }}
+          </p>
+        {%- endif -%}
+
+        <!-- Feature Trust Pills -->
+        <div class="discoveries-pills-row" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px;">
+          <span style="display: inline-flex; align-items: center; gap: 6px; background: #FFFFFF; border: 1px solid #E8DFD5; padding: 5px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; color: #1F1610;">
+            <span>🚚</span> 100% Free Express Delivery
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; background: #FFFFFF; border: 1px solid #E8DFD5; padding: 5px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; color: #1F1610;">
+            <span>🛡️</span> 100% Authentic Authorized Stock
+          </span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; background: #FFFFFF; border: 1px solid #E8DFD5; padding: 5px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; color: #1F1610;">
+            <span>✨</span> Handpicked Beauty Essentials
+          </span>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid-4">
+        {%- if section.settings.products != blank and section.settings.products.count > 0 -%}
+          {%- for product in section.settings.products limit: section.settings.products_to_show -%}
+            {%- assign is_lazy = true -%}
+            {%- if forloop.index <= 4 -%}
+              {%- assign is_lazy = false -%}
+            {%- endif -%}
+            {% render 'product-card', product: product, lazy: is_lazy %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign fallback_col = collections[section.settings.fallback_collection] | default: collections.all -%}
+          {%- if fallback_col != blank and fallback_col.products_count > 0 -%}
+            {%- for product in fallback_col.products limit: section.settings.products_to_show -%}
+              {%- assign is_lazy = true -%}
+              {%- if forloop.index <= 4 -%}
+                {%- assign is_lazy = false -%}
+              {%- endif -%}
+              {% render 'product-card', product: product, lazy: is_lazy %}
+            {%- endfor -%}
+          {%- else -%}
+            <div class="no-products-message" style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #FFFFFF; border-radius: 12px; border: 1px dashed #C5A059;">
+              <p style="margin: 0; color: #6E5E52; font-size: 0.95rem;">Please select products in the theme customizer to showcase here.</p>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      <!-- Bottom Button CTA -->
+      {%- if section.settings.btn_text != blank -%}
+        <div class="section-footer-center" style="text-align: center; margin-top: 45px;">
+          <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="btn-view-all-shop" style="display: inline-flex; align-items: center; gap: 10px; background: #1F1610; color: #FFFFFF; padding: 14px 34px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.25s ease; box-shadow: 0 4px 15px rgba(31, 22, 16, 0.15);">
+            <span>{{ section.settings.btn_text }}</span>
+            <span class="btn-arrow" style="color: #C5A059;">→</span>
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured Discoveries",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FAF7F2"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Section Badge",
+      "default": "💎 HIDDEN GEMS & DISCOVERIES"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Curated Picks You Might Have Missed ✨"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Discover premium skincare, rejuvenating kits & daily grooming essentials waiting to be loved."
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Handpick Products to Highlight",
+      "info": "Select the exact products you want to feature (e.g. Bodywise Roll-On, O3+ Facial Kits, Moti Packs). You can reorder them by dragging."
+    },
+    {
+      "type": "collection",
+      "id": "fallback_collection",
+      "label": "Or Select Collection (Optional Fallback)",
+      "info": "Used automatically if no individual products are handpicked above."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "default": 8,
+      "label": "Number of Products to Show"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Explore All Hidden Gems"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Discoveries"
+    }
+  ]
+}
+{% endschema %}
