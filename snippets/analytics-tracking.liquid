@@ -7,7 +7,7 @@
 {% endcomment %}
 
 {%- assign ga4_id = settings.ga4_measurement_id | strip -%}
-{%- assign clarity_id = settings.clarity_project_id | strip -%}
+{%- assign clarity_id = settings.clarity_project_id | default: 'z14zdnv7j8' | strip -%}
 
 <!-- 1. Google Analytics 4 (GA4) -->
 {%- if ga4_id != blank -%}
