@@ -1,4 +1,121 @@
 {%- if section.settings.enable_section -%}
+  <style>
+  .lush-brand-marquee-section {
+    padding: 28px 0 34px !important;
+    background-color: #FAF7F2 !important;
+    border-top: 1px solid #EAE3DA !important;
+    border-bottom: 1px solid #EAE3DA !important;
+    overflow: hidden !important;
+    position: relative !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  .brand-marquee-header-wrap {
+    text-align: center !important;
+    margin-bottom: 18px !important;
+  }
+  .brand-marquee-badge {
+    display: inline-flex !important;
+    padding: 4px 12px !important;
+    background: rgba(197, 160, 89, 0.15) !important;
+    border: 1px solid rgba(197, 160, 89, 0.4) !important;
+    border-radius: 999px !important;
+    color: #8B6F3E !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 8px !important;
+  }
+  .brand-marquee-heading {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 1.85rem !important;
+    font-weight: 800 !important;
+    color: #1F1610 !important;
+    margin: 0 0 6px !important;
+  }
+  .brand-marquee-sub {
+    font-size: 0.88rem !important;
+    color: #6E5E52 !important;
+    margin: 0 auto !important;
+    max-width: 560px !important;
+  }
+  .brand-marquee-container {
+    width: 100% !important;
+    overflow: hidden !important;
+    position: relative !important;
+    padding: 8px 0 !important;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+  .brand-marquee-track {
+    display: flex !important;
+    width: max-content !important;
+    animation: brandMarqueeScroll 28s linear infinite !important;
+    -webkit-animation: brandMarqueeScroll 28s linear infinite !important;
+    will-change: transform !important;
+  }
+  .brand-marquee-container:hover .brand-marquee-track {
+    animation-play-state: paused !important;
+    -webkit-animation-play-state: paused !important;
+  }
+  @keyframes brandMarqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @-webkit-keyframes brandMarqueeScroll {
+    0% { -webkit-transform: translateX(0); }
+    100% { -webkit-transform: translateX(-50%); }
+  }
+  .brand-marquee-content {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding-right: 16px !important;
+    flex-shrink: 0 !important;
+  }
+  .brand-logo-card {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 8px 20px !important;
+    height: 56px !important;
+    min-width: 135px !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #EAE3DA !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(31, 22, 16, 0.04) !important;
+    flex-shrink: 0 !important;
+    cursor: default !important;
+    user-select: none !important;
+  }
+  .brand-marquee-logo-img {
+    max-height: 38px !important;
+    max-width: 115px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+  @media (max-width: 767px) {
+    .lush-brand-marquee-section {
+      padding: 24px 0 28px !important;
+    }
+    .brand-marquee-heading {
+      font-size: 1.35rem !important;
+    }
+    .brand-logo-card {
+      height: 48px !important;
+      padding: 6px 14px !important;
+      min-width: 105px !important;
+    }
+    .brand-marquee-logo-img {
+      max-height: 30px !important;
+      max-width: 95px !important;
+    }
+  }
+  </style>
+
   <!-- 1. Luxury Brand Partner Logos Infinite Running Marquee -->
   <div class="lush-brand-marquee-section" id="BrandMarqueeSection">
     <div class="page-width brand-marquee-header-wrap">
