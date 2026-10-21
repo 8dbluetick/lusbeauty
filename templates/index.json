@@ -71,33 +71,33 @@
           "type": "reel_item",
           "settings": {
             "media_type": "video",
-            "video_url": "https://www.instagram.com/reel/DcNv_khI90X/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNj",
-            "label": "▶ Reel",
+            "video_url": "https://res.cloudinary.com/hsg3gdjc/video/upload/v1792581960/Video-37769.mp4",
+            "label": "▶ Live Reel",
             "caption": "Store walkthrough & exclusive beauty shopping at Nagpur store ✨",
             "author": "@explore.with_shruti × @lushbeautymart",
-            "link": ""
+            "link": "https://www.instagram.com/reel/DcNv_khI90X/"
           }
         },
         "reel_2": {
           "type": "reel_item",
           "settings": {
-            "media_type": "video",
+            "media_type": "image",
             "video_url": "",
-            "label": "▶ Reel",
+            "label": "✨ Trending Look",
             "caption": "Bridal jewellery & cosmetics glamour look 💫",
             "author": "@angelpeterr_ × @lushbeautymart",
-            "link": ""
+            "link": "https://www.instagram.com/lushbeautymart/"
           }
         },
         "reel_3": {
           "type": "reel_item",
           "settings": {
-            "media_type": "video",
+            "media_type": "image",
             "video_url": "",
-            "label": "📷 Post",
+            "label": "💎 In-Store Pick",
             "caption": "Unboxing premium jewellery & cosmetics in-store 💎",
             "author": "@lushbeautymart",
-            "link": ""
+            "link": "https://www.instagram.com/lushbeautymart/"
           }
         }
       },
@@ -111,7 +111,7 @@
         "badge": "📸 SOCIAL GALLERY",
         "heading": "Follow @lushbeautymart",
         "subheading": "Real unboxings, store walkthroughs, and beauty updates straight from our Nagpur showroom.",
-        "instagram_link": "",
+        "instagram_link": "https://www.instagram.com/lushbeautymart/",
         "follow_btn_text": "Follow @lushbeautymart on Instagram"
       }
     },
@@ -122,7 +122,7 @@
         "badge": "🏬 Flagship Experience Center",
         "heading": "Visit Lush Beauty Mart",
         "text": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place.",
-        "video_url": "",
+        "video_url": "https://res.cloudinary.com/hsg3gdjc/video/upload/v1792581960/Video-37769.mp4",
         "store_name": "Lush Beauty Mart",
         "area": "Gandhi Nagar, North Ambazari Road, Nagpur",
         "open_status": "Open Today (10:30 AM - 9:30 PM)",
