@@ -67,32 +67,6 @@
           "menu_support": "",
           "copyright_text": "Lush Beauty Mart. All Rights Reserved."
         }
-      },
-      "spin-wheel-popup": {
-        "type": "spin-wheel-popup",
-        "settings": {
-          "enable_spin_wheel": true,
-          "auto_open": true,
-          "delay_seconds": 3,
-          "show_floating_launcher": true,
-          "launcher_text": "Spin & Win",
-          "badge_text": "LUCKY REWARDS",
-          "heading": "Spin & Win Luxury Deals! ✨",
-          "subheading": "Try your luck to win exclusive discount coupons, free gifts & express shipping vouchers!",
-          "button_text": "TAP TO SPIN THE WHEEL",
-          "slice_1_text": "₹100 OFF",
-          "slice_1_code": "LUSH100",
-          "slice_2_text": "10% OFF",
-          "slice_2_code": "LUSH10",
-          "slice_3_text": "FREE SHIPPING",
-          "slice_3_code": "FREESHIP",
-          "slice_4_text": "₹200 OFF",
-          "slice_4_code": "LUSH200",
-          "slice_5_text": "15% OFF",
-          "slice_5_code": "LUSH15",
-          "slice_6_text": "SURPRISE GIFT",
-          "slice_6_code": "LUSHGIFT"
-        }
       }
     },
     "content_for_index": []

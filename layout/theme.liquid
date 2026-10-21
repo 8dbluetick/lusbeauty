@@ -148,12 +148,7 @@
       </svg>
     </button>
 
-    <!-- Spin to Win Fortune Wheel (Home Page Only) -->
-    {%- if template.name == 'index' -%}
-      {{ 'spin-wheel.css' | asset_url | stylesheet_tag }}
-      {% section 'spin-wheel-popup' %}
-      <script src="{{ 'spin-wheel.js' | asset_url }}" defer></script>
-    {%- endif -%}
+
 
     <!-- Loyalty Wallet Stylesheet -->
     {{ 'wallet.css' | asset_url | stylesheet_tag }}
