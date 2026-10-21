@@ -91,7 +91,7 @@
           "type": "reel_item",
           "settings": {
             "media_type": "video",
-            "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787300962/angelpeterr__14050530_135035349_b9xjrn.mp4",
+            "video_url": "",
             "label": "▶ Reel",
             "caption": "Bridal jewellery & cosmetics glamour look 💫",
             "author": "@angelpeterr_ × @lushbeautymart",
@@ -102,7 +102,7 @@
           "type": "reel_item",
           "settings": {
             "media_type": "video",
-            "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov",
+            "video_url": "",
             "label": "📷 Post",
             "caption": "Unboxing premium jewellery & cosmetics in-store 💎",
             "author": "@lushbeautymart",
@@ -131,7 +131,7 @@
         "badge": "🏬 Flagship Experience Center",
         "heading": "Visit Lush Beauty Mart",
         "text": "Explore our collection in-store and discover beauty, jewellery, handbags and accessories all in one place.",
-        "video_url": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787322005/IMG_0003_fzslae.mov",
+        "video_url": "",
         "store_name": "Lush Beauty Mart",
         "area": "Gandhi Nagar, North Ambazari Road, Nagpur",
         "open_status": "Open Today (10:30 AM - 9:30 PM)",

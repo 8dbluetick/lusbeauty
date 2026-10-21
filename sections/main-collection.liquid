@@ -1,25 +1,36 @@
 <section class="lush-collection-section">
   <div class="page-width">
     <!-- Dedicated Brand Collection Hero Banner -->
-    {%- if collection.handle == 'cetaphil' or collection.title contains 'Cetaphil' or collection.title contains 'cetaphil' -%}
+    {%- if collection.image != blank -%}
+      <div class="collection-brand-hero-banner">
+        <img
+          src="{{ collection.image | image_url: width: 1920 }}"
+          alt="{{ collection.title | escape }} - Lush Beauty Mart"
+          class="collection-hero-img"
+          width="1920"
+          height="500"
+          loading="eager"
+        >
+      </div>
+    {%- elsif collection.handle == 'cetaphil' or collection.title contains 'Cetaphil' or collection.title contains 'cetaphil' -%}
       <div class="collection-brand-hero-banner banner-cetaphil">
         <img
-          src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788168288/MobileSize1280-480_eltvak.jpg"
+          src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1600&auto=format&fit=crop"
           alt="Cetaphil Dermatological Skincare - Lush Beauty Mart"
           class="collection-hero-img collection-hero-img-cetaphil"
-          width="1280"
-          height="480"
+          width="1600"
+          height="500"
           loading="eager"
         >
       </div>
     {%- elsif collection.handle == 'body-wash-shower-gel' or collection.handle == 'body-wash' or collection.handle == 'body-washes' or collection.title contains 'Body Wash' -%}
       <div class="collection-brand-hero-banner banner-bodywash">
         <img
-          src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788513567/VIG_2029_jgni7s.webp"
+          src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1600&auto=format&fit=crop"
           alt="Body Wash & Shower Gel Luxury Collection - Lush Beauty Mart"
           class="collection-hero-img collection-hero-img-bodywash"
-          width="1920"
-          height="565"
+          width="1600"
+          height="500"
           loading="eager"
         >
       </div>

@@ -93,13 +93,7 @@
               height="{{ section.settings.logo_width | default: 44 }}"
             >
           {%- else -%}
-            <img
-              src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1787300623/lushbeautymart_14050530_135102335_bdtk3h.jpg"
-              alt="Lush Beauty Mart"
-              class="footer-logo-img"
-              width="44"
-              height="44"
-            >
+            <div class="footer-logo-svg-fallback" style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #C5A059 0%, #8B6F3E 100%); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; font-weight: 800; font-family: 'Playfair Display', Georgia, serif; font-size: 16px; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);">LBM</div>
           {%- endif -%}
           <div>
             <div class="brand-wordmark">
@@ -230,14 +224,7 @@
           </div>
           <div class="trust-card-body">
             <div class="trust-logo-box" title="Shadowfax Technologies Official Delivery Partner">
-              <img
-                src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788442633/0x0_usqks6.png"
-                alt="Shadowfax Delivery Partner - Lush Beauty Mart"
-                class="shadowfax-trust-logo"
-                width="160"
-                height="34"
-                loading="lazy"
-              >
+              {% render 'payment-trust-badges', type: 'shadowfax' %}
             </div>
             <div class="trust-perks-row">
               <span class="trust-perk-chip">✓ Same-Day Nagpur Dispatch</span>
@@ -256,26 +243,30 @@
           <div class="trust-card-body">
             <div class="trust-payments-badges-wrap">
               <div class="trust-pay-badge" title="UPI">
-                <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788415632/UPI_logo.svg_afwyla.svg" alt="UPI" height="18" loading="lazy">
+                {% render 'payment-trust-badges', type: 'upi' %}
               </div>
               <div class="trust-pay-badge" title="Google Pay">
-                <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788415766/ARGoCZk-5QCKPpyTsGhn1WahhPbVMa95T1U7clwnI8gjtW-YNY96rAANqFkuENbU35IbYF2Gjg2UjZXA495x0A_czcswp.png" alt="Google Pay" height="18" loading="lazy">
+                {% render 'payment-trust-badges', type: 'gpay' %}
               </div>
               <div class="trust-pay-badge" title="PhonePe">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe" height="18" loading="lazy">
+                {% render 'payment-trust-badges', type: 'phonepe' %}
               </div>
               <div class="trust-pay-badge" title="Paytm">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm" height="16" loading="lazy">
+                {% render 'payment-trust-badges', type: 'paytm' %}
               </div>
               <div class="trust-pay-badge" title="Visa">
-                <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788415656/Visa_Grey.png_jlenap.jpg" alt="Visa" height="16" loading="lazy">
+                {% render 'payment-trust-badges', type: 'visa' %}
               </div>
               <div class="trust-pay-badge" title="Mastercard">
-                <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788415727/Mastercard_2019_logo.svg_df2ltw.svg" alt="Mastercard" height="18" loading="lazy">
+                {% render 'payment-trust-badges', type: 'mastercard' %}
               </div>
               <div class="trust-pay-badge" title="RuPay">
-                <img src="https://res.cloudinary.com/dsqxboxoc/image/upload/v1788415697/Rupay-Logo.png_mdqyrn.png" alt="RuPay" height="16" loading="lazy">
+                {% render 'payment-trust-badges', type: 'rupay' %}
               </div>
+              <div class="trust-pay-badge trust-cod-chip" title="Cash on Delivery">
+                <span>💵 CASH ON DELIVERY</span>
+              </div>
+            </div>
               <div class="trust-pay-badge trust-cod-chip" title="Cash on Delivery">
                 <span>💵 CASH ON DELIVERY</span>
               </div>

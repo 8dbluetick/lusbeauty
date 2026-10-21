@@ -91,7 +91,7 @@
       <div class="hero-media">
         {%- assign show_video = false -%}
         {%- if section.settings.media_type == 'video' or section.settings.media_type == blank -%}
-          {%- if section.settings.video_url != blank -%}
+          {%- if section.settings.video_url != blank and section.settings.video_url contains 'dsqxboxoc' == false -%}
             {%- assign show_video = true -%}
           {%- endif -%}
         {%- endif -%}
@@ -100,7 +100,7 @@
           <div class="hero-video-card">
             <video
               class="hero-video-media"
-              src="{{ section.settings.video_url | default: 'https://res.cloudinary.com/dsqxboxoc/video/upload/v1787312722/angelpeterr__14050530_171336862_qanvrp.mp4' }}"
+              src="{{ section.settings.video_url }}"
               autoplay
               muted
               loop
@@ -215,8 +215,8 @@
     {
       "type": "text",
       "id": "video_url",
-      "label": "Hero Video URL (MP4 / Cloudinary)",
-      "default": "https://res.cloudinary.com/dsqxboxoc/video/upload/v1787312722/angelpeterr__14050530_171336862_qanvrp.mp4"
+      "label": "Hero Video URL (MP4 / Shopify Files)",
+      "default": ""
     },
     {
       "type": "image_picker",
