@@ -13,7 +13,7 @@
 {%- assign card_img = product.featured_media | default: product.featured_image | default: product.media.first | default: product.images.first -%}
 {%- assign secondary_img = product.media[1] | default: product.images[1] -%}
 
-<div class="lush-product-card group" data-product-id="{{ product.id }}" data-category="{{ product.type | downcase }} {{ product.tags | join: ' ' | downcase }}">
+<div class="lush-product-card group" data-product-id="{{ product.id }}" data-category="{{ product.type | downcase }} {{ product.tags | join: ' ' | downcase }} {{ product.title | downcase }} {{ product.vendor | downcase }} skincare">
   <!-- 1. Product Image Container (Consistent 4:5 Aspect Ratio) -->
   <div class="card-media-wrapper">
     <a href="{{ product.url }}" class="card-image-link" aria-label="{{ product.title | escape }}">

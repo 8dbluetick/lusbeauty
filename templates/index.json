@@ -54,14 +54,14 @@
       "type": "trending-products",
       "settings": {
         "enable_section": true,
-        "badge": "🔥 Most Loved in Nagpur",
-        "title": "Trending Now",
-        "subtitle": "Top rated skincare, beauty essentials, luxury handbags & sparkling jewellery.",
-        "collection": "",
+        "badge": "✨ Viral K-Beauty Range",
+        "title": "Trending Korean Skincare",
+        "subtitle": "Viral Korean skincare essentials — Anua, COSRX, Some By Mi & more straight to your doorstep.",
+        "collection": "korean-skincare",
         "products_to_show": 8,
         "show_filters": true,
-        "btn_text": "Explore Full Collection",
-        "view_all_link": "/collections/all"
+        "btn_text": "Explore All Korean Skincare",
+        "view_all_link": "/collections/korean-skincare"
       }
     },
     "instagram_feed": {

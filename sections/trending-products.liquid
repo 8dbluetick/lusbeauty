@@ -14,26 +14,44 @@
 
         {%- if section.settings.show_filters -%}
           <div class="category-filter-pills" id="TrendingCategoryFilters">
-            <button type="button" class="filter-pill active" data-category-filter="all">All Picks</button>
-            <button type="button" class="filter-pill" data-category-filter="skincare">Skincare</button>
-            <button type="button" class="filter-pill" data-category-filter="cosmetics">Cosmetics</button>
-            <button type="button" class="filter-pill" data-category-filter="handbag">Handbags</button>
-            <button type="button" class="filter-pill" data-category-filter="hair">Hair Care</button>
-            <button type="button" class="filter-pill" data-category-filter="fragrance">Fragrances</button>
+            {%- if section.settings.collection == 'korean-skincare' or section.settings.title contains 'Korean' or section.settings.title contains 'K-Beauty' -%}
+              <button type="button" class="filter-pill active" data-category-filter="all">All K-Beauty</button>
+              <button type="button" class="filter-pill" data-category-filter="serum">Serums</button>
+              <button type="button" class="filter-pill" data-category-filter="toner">Toners</button>
+              <button type="button" class="filter-pill" data-category-filter="sun">Sun Care</button>
+              <button type="button" class="filter-pill" data-category-filter="cleans">Cleansers</button>
+            {%- else -%}
+              <button type="button" class="filter-pill active" data-category-filter="all">All Picks</button>
+              <button type="button" class="filter-pill" data-category-filter="skincare">Skincare</button>
+              <button type="button" class="filter-pill" data-category-filter="cosmetics">Cosmetics</button>
+              <button type="button" class="filter-pill" data-category-filter="handbag">Handbags</button>
+              <button type="button" class="filter-pill" data-category-filter="hair">Hair Care</button>
+              <button type="button" class="filter-pill" data-category-filter="fragrance">Fragrances</button>
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
 
       <!-- Product Grid -->
       <div class="products-grid-4">
-        {%- assign featured_collection = collections[section.settings.collection] | default: collections.all -%}
+        {%- assign featured_collection = collections[section.settings.collection] | default: collections['korean-skincare'] | default: collections.all -%}
         {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
-          {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+          {%- assign shown_count = 0 -%}
+          {%- for product in featured_collection.products -%}
+            {%- assign p_title = product.title | downcase -%}
+            {%- assign p_type = product.type | downcase -%}
+            {%- if p_title contains 'body wash' or p_title contains 'soap' or p_title contains 'shower gel' or p_type contains 'body wash' -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- assign shown_count = shown_count | plus: 1 -%}
             {%- assign is_lazy = true -%}
-            {%- if forloop.index <= 4 -%}
+            {%- if shown_count <= 4 -%}
               {%- assign is_lazy = false -%}
             {%- endif -%}
             {% render 'product-card', product: product, lazy: is_lazy %}
+            {%- if shown_count >= section.settings.products_to_show -%}
+              {%- break -%}
+            {%- endif -%}
           {%- endfor -%}
         {%- else -%}
           <div class="no-products-message">
