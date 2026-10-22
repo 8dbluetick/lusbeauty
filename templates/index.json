@@ -136,12 +136,27 @@
         "whatsapp_btn_text": "💬 WhatsApp Us",
         "directions_btn_text": "🧭 Get Directions"
       }
+    },
+    "partner_ventures": {
+      "type": "partner-ventures",
+      "settings": {
+        "enable_section": true,
+        "badge": "🏥 OUR HEALTHCARE & PHARMACY VENTURE",
+        "title": "Seva Surgicals & Drugs",
+        "tagline": "Nagpur’s Trusted Medical, Surgical & Pharmacy Destination",
+        "description": "Looking for authentic prescription medicines, surgical instruments, hospital equipment, healthcare devices, or diagnostic supplies in Nagpur? Visit our dedicated pharmacy and surgical supply store in Dhantoli, Nagpur.",
+        "website_url": "https://sevasurgicalsanddrugs.vercel.app/",
+        "btn_text": "Visit Seva Surgicals Website ↗",
+        "whatsapp_number": "919119595951",
+        "bg_color": "#0C1E35"
+      }
     }
   },
   "order": [
     "hero_banner",
     "trending_products",
     "instagram_feed",
+    "partner_ventures",
     "store_experience"
   ]
 }
