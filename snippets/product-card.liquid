@@ -6,23 +6,42 @@
   - lazy: {Boolean} Whether to lazy load the image (default: true)
 {% endcomment %}
 
-{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign current_variant = product.selected_or_first_available_variant | default: product.variants.first -%}
 {%- assign price = current_variant.price -%}
 {%- assign compare_at_price = current_variant.compare_at_price -%}
 {%- assign vendor = product.vendor | default: product.collections.first.title | default: 'LUSH' -%}
 {%- assign card_img = product.featured_media | default: product.featured_image | default: product.media.first | default: product.images.first -%}
 {%- assign secondary_img = product.media[1] | default: product.images[1] -%}
 
-<div class="lush-product-card group" data-product-id="{{ product.id }}" data-category="{{ product.type | downcase }} {{ product.tags | join: ' ' | downcase }} {{ product.title | downcase }} {{ product.vendor | downcase }} skincare">
+{%- assign product_display_title = product.title -%}
+{%- assign custom_armaf_img = blank -%}
+{%- if product.handle == 'armaf-club-de-nuit-men-intense-deo' -%}
+  {%- assign product_display_title = 'Armaf Club De Nuit Intense Man 200ml Deo' -%}
+  {%- assign custom_armaf_img = 'armaf-club-de-nuit-men-intense-200ml-deo.jpg' | asset_url -%}
+  {%- assign secondary_img = blank -%}
+{%- endif -%}
+
+<div class="lush-product-card group" data-product-id="{{ product.id }}" data-category="{{ product.type | downcase }} {{ product.tags | join: ' ' | downcase }} {{ product.title | downcase }} {{ product.vendor | downcase }} fragrance deo">
   <!-- 1. Product Image Container (Consistent 4:5 Aspect Ratio) -->
   <div class="card-media-wrapper">
-    <a href="{{ product.url }}" class="card-image-link" aria-label="{{ product.title | escape }}">
-      {%- if card_img != blank -%}
+    <a href="{{ product.url }}" class="card-image-link" aria-label="{{ product_display_title | escape }}">
+      {%- if custom_armaf_img != blank -%}
+        <img
+          src="{{ custom_armaf_img }}"
+          alt="{{ product_display_title | escape }}"
+          class="card-primary-image"
+          loading="{% if lazy == false %}eager{% else %}lazy{% endif %}"
+          decoding="async"
+          width="500"
+          height="625"
+          style="object-fit: contain; padding: 12px;"
+        >
+      {%- elsif card_img != blank -%}
         <img
           src="{{ card_img | image_url: width: 540 }}"
           srcset="{{ card_img | image_url: width: 320 }} 320w, {{ card_img | image_url: width: 480 }} 480w, {{ card_img | image_url: width: 640 }} 640w, {{ card_img | image_url: width: 800 }} 800w"
           sizes="(max-width: 480px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          alt="{{ card_img.alt | default: product.title | escape }}"
+          alt="{{ card_img.alt | default: product_display_title | escape }}"
           class="card-primary-image"
           loading="{% if lazy == false %}eager{% else %}lazy{% endif %}"
           {% if lazy == false %}fetchpriority="high"{% endif %}
@@ -30,6 +49,7 @@
           width="500"
           height="625"
         >
+      {%- endif -%}
         {%- if secondary_img != blank -%}
           <img
             src="{{ secondary_img | image_url: width: 540 }}"
@@ -131,11 +151,11 @@
 
     <!-- Product Title (Clamped to 2 lines) -->
     <h3 class="card-title">
-      <a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title }}</a>
+      <a href="{{ product.url }}" title="{{ product_display_title | escape }}">{{ product_display_title }}</a>
     </h3>
 
     <!-- Short Description (Clamped to 2 lines, graceful fallback) -->
-    {%- assign raw_desc = product.description | strip_html | strip -%}
+    {%- assign raw_desc = product.description | replace: 'Each (Pack of 2)', '(200ml Single Can)' | replace: 'Pack of 2', '200ml Single' | strip_html | strip -%}
     {%- if raw_desc != blank -%}
       <p class="card-description">{{ raw_desc | truncate: 85 }}</p>
     {%- else -%}
@@ -154,13 +174,13 @@
     <div class="card-cta-wrap">
       {%- if product.available -%}
         {%- if product.variants.size > 1 -%}
-          <a href="{{ product.url }}" class="btn-card-add-to-cart" aria-label="Select Options for {{ product.title | escape }}">
+          <a href="{{ product.url }}" class="btn-card-add-to-cart" aria-label="Select Options for {{ product_display_title | escape }}">
             <span>Select Options</span>
           </a>
         {%- else -%}
           <form method="post" action="/cart/add" class="card-form">
             <input type="hidden" name="id" value="{{ current_variant.id }}">
-            <button type="submit" class="btn-card-add-to-cart" aria-label="Add {{ product.title | escape }} to Bag">
+            <button type="submit" class="btn-card-add-to-cart" aria-label="Add {{ product_display_title | escape }} to Bag">
               <span>+ Add to Bag</span>
             </button>
           </form>
