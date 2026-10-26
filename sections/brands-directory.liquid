@@ -284,7 +284,7 @@
         </div>
         <h3 class="brand-dir-name">SKIN1004 Madagascar Centella</h3>
         <span class="brand-dir-cat">Korean Soothing Cica Skincare</span>
-        <a href="/collections/skin1004" class="btn-brand-explore">
+        <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% elsif collections['centella'] != blank %}{{ collections['centella'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="btn-brand-explore">
           <span>Shop SKIN1004</span>
           <span>→</span>
         </a>

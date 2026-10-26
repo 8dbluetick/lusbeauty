@@ -1,4 +1,4 @@
-﻿<div id="ConnectHubTemplate" style="display: none;">
+<div id="ConnectHubTemplate" style="display: none;">
   {% render 'connect-hub' %}
 </div>
 
@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
   if (!container || !default404) return;
+
+  if (path.includes('skin1004') || path.includes('centella')) {
+    window.location.replace('/collections/all?filter.p.vendor=SKIN1004');
+    return;
+  }
 
   if (path.includes('brand')) {
     window.location.href = '/collections/all';

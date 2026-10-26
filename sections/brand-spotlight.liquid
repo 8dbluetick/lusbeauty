@@ -58,7 +58,7 @@
           {%- endfor -%}
         {%- else -%}
           <!-- Default Top Brands -->
-          <a href="/collections/skin1004" class="brand-card-item">
+          <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% elsif collections['centella'] != blank %}{{ collections['centella'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
             <div class="brand-logo-area"><span class="brand-card-name">SKIN1004 CENTELLA</span></div>
             <div class="brand-offer-tag"><span>Flat 20% OFF • K-Beauty</span></div>
