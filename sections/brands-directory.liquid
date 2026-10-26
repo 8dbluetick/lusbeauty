@@ -18,7 +18,7 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
         <input type="text" id="BrandSearchInput" class="brands-search-input" placeholder="Search brand by name (e.g. Minimalist, MAC, Dot & Key, L'Oreal)..." autocomplete="off">
-        <span class="brands-count-pill" id="BrandCountPill">17 Brands</span>
+        <span class="brands-count-pill" id="BrandCountPill">18 Brands</span>
       </div>
 
       <!-- Alphabet Letter Filter Bar -->
@@ -31,6 +31,7 @@
         <button type="button" class="letter-btn" data-letter="K">K</button>
         <button type="button" class="letter-btn" data-letter="L">L</button>
         <button type="button" class="letter-btn" data-letter="M">M</button>
+        <button type="button" class="letter-btn" data-letter="S">S</button>
         <button type="button" class="letter-btn" data-letter="T">T</button>
       </div>
     </div>
@@ -274,6 +275,20 @@
           <span>→</span>
         </a>
       </div>
+
+      <!-- 18. SKIN1004 Madagascar Centella -->
+      <div class="brand-dir-card" data-brand-name="Centella SKIN1004 Madagascar Centella" data-brand-letter="C" data-brand-letter-alt="S" data-brand-cat="Korean Skincare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'skin1004', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">SKIN1004 Madagascar Centella</h3>
+        <span class="brand-dir-cat">Korean Soothing Cica Skincare</span>
+        <a href="/collections/skin1004" class="btn-brand-explore">
+          <span>Shop SKIN1004</span>
+          <span>→</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -294,10 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(card => {
       const name = (card.getAttribute('data-brand-name') || '').toLowerCase();
       const letter = card.getAttribute('data-brand-letter') || '';
+      const letterAlt = card.getAttribute('data-brand-letter-alt') || '';
       const cat = (card.getAttribute('data-brand-cat') || '').toLowerCase();
 
       const matchQuery = !query || name.includes(query) || cat.includes(query);
-      const matchLetter = activeLetter === 'ALL' || letter === activeLetter;
+      const matchLetter = activeLetter === 'ALL' || letter === activeLetter || letterAlt === activeLetter;
 
       if (matchQuery && matchLetter) {
         card.style.display = 'flex';
