@@ -7,6 +7,9 @@
 {%- assign b_handle = brand | downcase | replace: ' ', '-' | replace: '&', 'and' | replace: '·', '' | replace: '.', '' | replace: "'", '' | replace: 'é', 'e' | replace: 'ē', 'e' -%}
 
 {%- case b_handle -%}
+  {%- when 'skin1004' or 'centella' or 'madagascar-centella' or 'skin-1004' -%}
+    <img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004 Madagascar Centella" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+
   {%- when 'dot-and-key' or 'dot-key' or 'dotandkey' -%}
     <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dot-and-key.png.jpg" alt="Dot & Key" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 
