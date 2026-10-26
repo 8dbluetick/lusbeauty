@@ -370,29 +370,42 @@ async function updateCartDrawer() {
       }
     }
 
-    // 3. Update drawer totals & subtotal - 100% FREE DELIVERY ON ALL ORDERS
+    // 3. Update drawer totals & subtotal with ₹49 delivery charges under ₹499
     const subtotalEl = document.querySelector('[data-cart-subtotal]');
     const totalEl = document.querySelector('[data-cart-total]');
     const shippingValEl = document.querySelector('.cart-shipping-val');
-    const formattedSubtotal = '₹' + (cart.total_price / 100).toFixed(0);
-    const formattedTotal = formattedSubtotal;
+    const subtotalRupees = Math.round(cart.total_price / 100);
+    const freeShippingThreshold = 499;
+    const deliveryCharge = 49;
+    const isFree = subtotalRupees >= freeShippingThreshold;
+    const finalTotal = isFree ? subtotalRupees : (subtotalRupees + deliveryCharge);
 
-    if (subtotalEl) subtotalEl.textContent = formattedSubtotal;
-    if (totalEl) totalEl.textContent = formattedTotal;
+    if (subtotalEl) subtotalEl.textContent = '₹' + subtotalRupees.toLocaleString('en-IN');
+    if (totalEl) totalEl.textContent = '₹' + finalTotal.toLocaleString('en-IN');
     if (shippingValEl) {
-      shippingValEl.innerHTML = '<strong class="text-unlocked-badge" style="color:#0F7A42; font-weight:800;">FREE</strong>';
+      if (isFree) {
+        shippingValEl.innerHTML = '<strong class="text-unlocked-badge" style="color:#0F7A42; font-weight:800;">FREE</strong>';
+      } else {
+        shippingValEl.innerHTML = '<span class="text-shipping-charge" style="color:#1F1610; font-weight:700;">₹49</span>';
+      }
     }
 
     // 4. Update banner & progress bars
     const shippingTextEls = document.querySelectorAll('[data-shipping-text], [data-shipping-msg]');
     const progressBars = document.querySelectorAll('.shipping-progress-bar, .drawer-progress-bar');
+    const progressPct = Math.min(100, Math.round((subtotalRupees / freeShippingThreshold) * 100));
 
     progressBars.forEach(b => {
-      b.style.width = '100%';
+      b.style.width = progressPct + '%';
     });
 
     shippingTextEls.forEach(shippingTextEl => {
-      shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You have unlocked <strong>FREE Delivery!</strong></span>';
+      if (isFree) {
+        shippingTextEl.innerHTML = '<span class="shipping-unlocked">🎉 You have unlocked <strong>FREE Delivery!</strong></span>';
+      } else {
+        const remaining = freeShippingThreshold - subtotalRupees;
+        shippingTextEl.innerHTML = `<span>Add <strong>₹${remaining}</strong> more to unlock <strong>FREE Delivery!</strong></span>`;
+      }
     });
 
     // 5. Handle empty cart page reload ONLY if user just removed the last item while viewing active cart items

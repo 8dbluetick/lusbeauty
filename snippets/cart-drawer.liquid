@@ -15,16 +15,34 @@
       <button type="button" class="cart-drawer-close" data-close-cart aria-label="Close cart">&times;</button>
     </div>
 
-    <!-- Free Delivery Animated Banner in Drawer - 100% FREE DELIVERY -->
+    {%- assign free_shipping_threshold = 49900 -%}
+    {%- assign delivery_charge = 4900 -%}
+    {%- assign cart_total = cart.total_price -%}
+    {%- if cart_total >= free_shipping_threshold -%}
+      {%- assign is_free_shipping = true -%}
+      {%- assign progress_pct = 100 -%}
+      {%- assign final_drawer_total = cart_total -%}
+    {%- else -%}
+      {%- assign is_free_shipping = false -%}
+      {%- assign progress_pct = cart_total | times: 100 | divided_by: free_shipping_threshold -%}
+      {%- assign remaining_to_free = free_shipping_threshold | minus: cart_total -%}
+      {%- assign final_drawer_total = cart_total | plus: delivery_charge -%}
+    {%- endif -%}
+
+    <!-- Free Delivery Animated Banner in Drawer (₹499 Threshold) -->
     <div class="cart-shipping-banner" id="DrawerShippingBanner">
       <div class="shipping-msg-wrap">
         <span class="shipping-icon">🚚</span>
         <div class="shipping-text" data-shipping-text>
-          <span class="shipping-unlocked">🎉 <strong>100% FREE Express Delivery Unlocked!</strong></span>
+          {%- if is_free_shipping -%}
+            <span class="shipping-unlocked">🎉 <strong>100% FREE Express Delivery Unlocked!</strong></span>
+          {%- else -%}
+            <span>Add <strong>{{ remaining_to_free | money }}</strong> more to unlock <strong>FREE Delivery!</strong></span>
+          {%- endif -%}
         </div>
       </div>
       <div class="drawer-progress-track">
-        <div class="drawer-progress-bar" style="width: 100%;"></div>
+        <div class="drawer-progress-bar" style="width: {{ progress_pct }}%;"></div>
       </div>
     </div>
 
@@ -88,15 +106,19 @@
       </div>
 
       <div class="cart-shipping-row">
-        <span>Standard Delivery</span>
+        <span>Delivery Charges</span>
         <span class="cart-shipping-val">
-          <strong class="text-unlocked-badge" style="color: #0F7A42; font-weight: 800;">FREE</strong>
+          {%- if is_free_shipping -%}
+            <strong class="text-unlocked-badge" style="color: #0F7A42; font-weight: 800;">FREE</strong>
+          {%- else -%}
+            <span class="text-shipping-charge" style="color: #1F1610; font-weight: 700;">₹49</span>
+          {%- endif -%}
         </span>
       </div>
 
       <div class="cart-total-row">
         <span>Estimated Total</span>
-        <span class="cart-total-val" data-cart-total>{{ cart.total_price | money }}</span>
+        <span class="cart-total-val" data-cart-total>{{ final_drawer_total | money }}</span>
       </div>
 
       <!-- Checkout CTAs with Razorpay Magic Checkout Support -->

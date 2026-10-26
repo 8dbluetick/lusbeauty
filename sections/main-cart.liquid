@@ -49,19 +49,39 @@
         </div>
       </div>
     {%- else -%}
-      <!-- Free Shipping Animated Banner - 100% FREE DELIVERY -->
+      {%- assign free_shipping_threshold = 49900 -%}
+      {%- assign delivery_charge = 4900 -%}
+      {%- assign cart_total = cart.total_price -%}
+      {%- if cart_total >= free_shipping_threshold -%}
+        {%- assign is_free_shipping = true -%}
+        {%- assign progress_pct = 100 -%}
+        {%- assign final_cart_total = cart_total -%}
+      {%- else -%}
+        {%- assign is_free_shipping = false -%}
+        {%- assign progress_pct = cart_total | times: 100 | divided_by: free_shipping_threshold -%}
+        {%- assign remaining_to_free = free_shipping_threshold | minus: cart_total -%}
+        {%- assign final_cart_total = cart_total | plus: delivery_charge -%}
+      {%- endif -%}
+
+      <!-- Free Shipping Animated Banner (₹499 Threshold) -->
       <div class="cart-free-shipping-card">
         <div class="shipping-progress-header">
           <div class="shipping-msg-wrap">
             <span class="shipping-truck-icon">🚚</span>
             <span class="shipping-msg-text">
-              <strong class="text-unlocked">🎉 Congratulations! You have unlocked 100% FREE Delivery on this order!</strong>
+              {%- if is_free_shipping -%}
+                <strong class="text-unlocked">🎉 Congratulations! You have unlocked 100% FREE Delivery on this order!</strong>
+              {%- else -%}
+                <span>Add <strong>{{ remaining_to_free | money }}</strong> more to unlock <strong>FREE Delivery!</strong> (Flat ₹49 under ₹499)</span>
+              {%- endif -%}
             </span>
           </div>
-          <span class="shipping-target-pill" style="background: #0F7A42; color: #FFFFFF; font-weight: 700;">100% FREE DELIVERY</span>
+          <span class="shipping-target-pill" style="{% if is_free_shipping %}background: #0F7A42; color: #FFFFFF;{% else %}background: rgba(197, 160, 89, 0.2); color: #8B6F3E;{% endif %} font-weight: 700;">
+            {%- if is_free_shipping -%}FREE DELIVERY UNLOCKED{%- else -%}FREE OVER ₹499{%- endif -%}
+          </span>
         </div>
         <div class="shipping-progress-track">
-          <div class="shipping-progress-bar" style="width: 100%;"></div>
+          <div class="shipping-progress-bar" style="width: {{ progress_pct }}%;"></div>
         </div>
       </div>
 
@@ -160,9 +180,13 @@
                 <strong>{{ cart.total_price | money }}</strong>
               </div>
               <div class="summary-row">
-                <span>Standard Delivery</span>
+                <span>Delivery Charges</span>
                 <span>
-                  <strong class="text-unlocked-badge" style="color: #0F7A42; font-weight: 800;">FREE</strong>
+                  {%- if is_free_shipping -%}
+                    <strong class="text-unlocked-badge" style="color: #0F7A42; font-weight: 800;">FREE</strong>
+                  {%- else -%}
+                    <strong style="color: #1F1610; font-weight: 700;">₹49</strong>
+                  {%- endif -%}
                 </span>
               </div>
               <div class="summary-row">
@@ -177,7 +201,7 @@
                   <span class="total-title">Total Amount</span>
                   <span class="total-sub">Includes all taxes</span>
                 </div>
-                <span class="total-amount-val">{{ cart.total_price | money }}</span>
+                <span class="total-amount-val">{{ final_cart_total | money }}</span>
               </div>
             </div>
 
