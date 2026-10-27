@@ -7,6 +7,9 @@
 {%- assign b_handle = brand | downcase | replace: ' ', '-' | replace: '&', 'and' | replace: '·', '' | replace: '.', '' | replace: "'", '' | replace: 'é', 'e' | replace: 'ē', 'e' -%}
 
 {%- case b_handle -%}
+  {%- when 'vgr' or 'vgr-india' or 'vgr-voyager' -%}
+    <img src="{{ 'vgr-logo.png' | asset_url }}" alt="VGR Professional" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+
   {%- when 'skin1004' or 'centella' or 'madagascar-centella' or 'skin-1004' -%}
     <img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004 Madagascar Centella" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
 

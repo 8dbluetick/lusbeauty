@@ -228,6 +228,7 @@
             <ul class="header-dropdown-menu">
               <li><a href="/collections" class="header-dropdown-link header-dropdown-all text-gold font-bold">👑 View All Brands Directory (A-Z) →</a></li>
               <li><a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% elsif collections['centella'] != blank %}{{ collections['centella'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="header-dropdown-link font-bold text-gold">✨ SKIN1004 Madagascar Centella</a></li>
+              <li><a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="header-dropdown-link font-bold text-gold">✨ VGR Professional Appliances</a></li>
               <li><a href="/collections/minimalist" class="header-dropdown-link">Minimalist</a></li>
               <li><a href="/collections/the-ordinary" class="header-dropdown-link">The Ordinary</a></li>
               <li><a href="/collections/dot-and-key" class="header-dropdown-link">Dot & Key</a></li>
@@ -413,6 +414,7 @@
             <ul class="mobile-sublinks" style="display: none;">
               <li><a href="/collections" class="mobile-sublink font-bold text-gold">👑 View All Brands Directory (A-Z) →</a></li>
               <li><a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% elsif collections['centella'] != blank %}{{ collections['centella'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="mobile-sublink font-bold text-gold">✨ SKIN1004 Madagascar Centella</a></li>
+              <li><a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="mobile-sublink font-bold text-gold">✨ VGR Professional Appliances</a></li>
               <li><a href="/collections/minimalist" class="mobile-sublink">Minimalist</a></li>
               <li><a href="/collections/the-ordinary" class="mobile-sublink">The Ordinary</a></li>
               <li><a href="/collections/dot-and-key" class="mobile-sublink">Dot & Key</a></li>

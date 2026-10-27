@@ -18,7 +18,7 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
         <input type="text" id="BrandSearchInput" class="brands-search-input" placeholder="Search brand by name (e.g. Minimalist, MAC, Dot & Key, L'Oreal)..." autocomplete="off">
-        <span class="brands-count-pill" id="BrandCountPill">18 Brands</span>
+        <span class="brands-count-pill" id="BrandCountPill">19 Brands</span>
       </div>
 
       <!-- Alphabet Letter Filter Bar -->
@@ -33,6 +33,7 @@
         <button type="button" class="letter-btn" data-letter="M">M</button>
         <button type="button" class="letter-btn" data-letter="S">S</button>
         <button type="button" class="letter-btn" data-letter="T">T</button>
+        <button type="button" class="letter-btn" data-letter="V">V</button>
       </div>
     </div>
 
@@ -273,6 +274,20 @@
         <a href="/collections/bath-and-body-works" class="btn-brand-explore">
           <span>Shop Bath & Body Works</span>
           <span>→</span>
+        </a>
+      </div>
+
+      <!-- 19. VGR Professional -->
+      <div class="brand-dir-card" data-brand-name="VGR Professional Hair Care Appliances" data-brand-letter="V" data-brand-cat="Hair Appliances">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'vgr', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">VGR Professional</h3>
+        <span class="brand-dir-cat">Hair Styling &amp; Grooming Tools</span>
+        <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="btn-brand-explore">
+          <span>Shop VGR</span>
+          <span>&rarr;</span>
         </a>
       </div>
 
