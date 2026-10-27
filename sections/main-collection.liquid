@@ -33,6 +33,16 @@
           loading="eager"
         >
       </div>
+    {%- elsif collection.handle == 'vgr' or collection.title contains 'VGR' or collection.title contains 'vgr' -%}
+      <div class="collection-brand-hero-banner banner-vgr" style="background:#FAF7F2; padding:32px 20px; border-radius:16px; margin-bottom:24px; text-align:center; border:1px solid #EAE3DA;">
+        <img
+          src="{{ 'vgr-logo.png' | asset_url }}"
+          alt="VGR Professional - Lush Beauty Mart"
+          class="collection-hero-img"
+          style="max-height:75px; width:auto; margin:0 auto; display:block;"
+          loading="eager"
+        >
+      </div>
     {%- elsif collection.handle == 'body-wash-shower-gel' or collection.handle == 'body-wash' or collection.handle == 'body-washes' or collection.title contains 'Body Wash' -%}
       <div class="collection-brand-hero-banner banner-bodywash">
         <img
@@ -68,6 +78,20 @@
             <img
               src="{{ 'skin1004-centella-logo.png' | asset_url }}"
               alt="SKIN1004 Madagascar Centella"
+              class="collection-brand-logo-img"
+              width="150"
+              height="60"
+              loading="eager"
+            >
+          </div>
+          <span class="collection-verified-pill">🌟 100% ORIGINAL & AUTHORIZED BRAND PARTNER</span>
+        </div>
+      {%- elsif collection.handle == 'vgr' or collection.title contains 'VGR' or collection.title contains 'vgr' -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card">
+            <img
+              src="{{ 'vgr-logo.png' | asset_url }}"
+              alt="VGR Professional"
               class="collection-brand-logo-img"
               width="150"
               height="60"
