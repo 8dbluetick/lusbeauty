@@ -184,6 +184,7 @@
               <li><a href="/collections/hair-serums" class="header-dropdown-link">Hair Serums (3)</a></li>
               <li><a href="/collections/hair-oils" class="header-dropdown-link">Hair Oils (2)</a></li>
               <li><a href="/collections/hair-growth-anti-hair-fall" class="header-dropdown-link">Hair Growth & Anti-Fall (4)</a></li>
+              <li><a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="header-dropdown-link text-gold font-bold">✨ Hair Styling Appliances (VGR)</a></li>
             </ul>
           </li>
 
@@ -370,6 +371,7 @@
               <li><a href="/collections/hair-serums" class="mobile-sublink">Hair Serums (3)</a></li>
               <li><a href="/collections/hair-oils" class="mobile-sublink">Hair Oils (2)</a></li>
               <li><a href="/collections/hair-growth-anti-hair-fall" class="mobile-sublink">Hair Growth & Anti-Fall (4)</a></li>
+              <li><a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="mobile-sublink text-gold font-bold">✨ Hair Styling Appliances (VGR)</a></li>
             </ul>
           </li>
 
