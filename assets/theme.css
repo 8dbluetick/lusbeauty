@@ -13962,3 +13962,17 @@ body.lush-theme-body {
 
 
 
+
+/* Luxury Shade Swatches Styling */
+.variant-shade-swatch {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.variant-shade-swatch:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.variant-radio:checked + .variant-shade-swatch {
+  box-shadow: 0 0 0 2.5px #1F1610, 0 4px 10px rgba(0,0,0,0.2) !important;
+  transform: scale(1.04);
+}

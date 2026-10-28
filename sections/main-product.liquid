@@ -467,6 +467,23 @@
                       </div>
                       <div class="variant-pill-row">
                         {%- for value in option.values -%}
+                          {%- assign opt_lower = option.name | downcase -%}
+                          {%- assign val_lower = value | downcase -%}
+                          {%- assign swatch_bg = '' -%}
+                          {%- if val_lower contains '#f5d6c1' or val_lower contains '01' -%}
+                            {%- assign swatch_bg = '#F5D6C1' -%}
+                          {%- elsif val_lower contains '#dcae8b' or val_lower contains '02' -%}
+                            {%- assign swatch_bg = '#DCAE8B' -%}
+                          {%- elsif val_lower contains '#e8c3a9' or val_lower contains '03' -%}
+                            {%- assign swatch_bg = '#E8C3A9' -%}
+                          {%- elsif val_lower contains '#c68c5c' or val_lower contains '05' -%}
+                            {%- assign swatch_bg = '#C68C5C' -%}
+                          {%- elsif val_lower contains '#' -%}
+                            {%- assign hex_parts = value | split: '#' -%}
+                            {%- assign hex_clean = hex_parts[1] | split: ')' | first | split: ' ' | first -%}
+                            {%- assign swatch_bg = '#' | append: hex_clean -%}
+                          {%- endif -%}
+
                           <label class="variant-pill-label">
                             <input
                               type="radio"
@@ -477,7 +494,12 @@
                               data-option-position="{{ option.position }}"
                               data-option-name="{{ option.name | escape }}"
                             >
-                            <span class="variant-pill-btn">{{ value }}</span>
+                            <span class="variant-pill-btn {% if swatch_bg != blank %}variant-shade-swatch{% endif %}" {% if swatch_bg != blank %}style="background-color: {{ swatch_bg }} !important; border-color: rgba(0,0,0,0.2) !important; color: {% if val_lower contains '05' or val_lower contains '#c68c5c' %}#FFFFFF{% else %}#2A170A{% endif %} !important; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;"{% endif %}>
+                              {%- if swatch_bg != blank -%}
+                                <span class="shade-dot" style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background-color: {{ swatch_bg }}; border: 1.5px solid {% if val_lower contains '05' or val_lower contains '#c68c5c' %}#FFFFFF{% else %}#2A170A{% endif %}; flex-shrink: 0;"></span>
+                              {%- endif -%}
+                              {{ value }}
+                            </span>
                           </label>
                         {%- endfor -%}
                       </div>
