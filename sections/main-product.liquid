@@ -232,7 +232,7 @@
         {%- form 'product', product, id: 'MainProductForm', class: 'product-form' -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" id="ProductVariantId">
 
-          <!-- Variant / Option Selector Pills (with Dynamic Shade Swatches & Bullets) -->
+          <!-- Variant / Option Selector (Radio Buttons with Dynamic Shade Swatches) -->
           {%- unless product.has_only_default_variant -%}
             <div class="product-variants-wrap" data-variant-selectors>
               {%- for option in product.options_with_values -%}
@@ -243,7 +243,7 @@
                       <strong class="selected-option-value" data-selected-val-for="{{ option.position }}">{{ option.selected_value }}</strong>
                     </label>
                   </div>
-                  <div class="variant-pill-row variant-pills-container" role="radiogroup" aria-labelledby="OptionLabel-{{ option.position }}">
+                  <div class="variant-radio-list variant-radio-grid" role="radiogroup" aria-labelledby="OptionLabel-{{ option.position }}">
                     {%- for value in option.values -%}
                       {%- assign opt_lower = option.name | downcase -%}
                       {%- assign val_lower = value | downcase -%}
@@ -287,7 +287,7 @@
                       {%- endif -%}
 
                       <label
-                        class="variant-pill-label variant-pill-item {% if swatch_bg != blank %}variant-shade-item variant-shade-pill{% endif %} {% if is_dark_swatch %}variant-dark-shade{% endif %}"
+                        class="variant-radio-item {% if swatch_bg != blank %}variant-shade-item{% endif %} {% if is_dark_swatch %}variant-dark-shade{% endif %}"
                         {% if swatch_bg != blank %}style="--shade-bg: {{ swatch_bg }}; --shade-text: {% if is_dark_swatch %}#FFFFFF{% else %}#2A170A{% endif %};"{% endif %}
                       >
                         <input
@@ -300,12 +300,19 @@
                           data-option-name="{{ option.name | escape }}"
                           id="Option-{{ option.position }}-{{ forloop.index0 }}"
                         >
-                        <span class="variant-pill-btn variant-pill-badge {% if swatch_bg != blank %}has-shade-bg variant-shade-swatch{% endif %}">
+                        <span class="variant-radio-card {% if swatch_bg != blank %}has-shade-bg{% endif %}">
+                          <!-- Visible Luxury Circular Radio Button Indicator -->
+                          <span class="custom-radio-circle" aria-hidden="true">
+                            <span class="custom-radio-dot"></span>
+                          </span>
+
                           {%- if swatch_bg != blank -%}
-                            <!-- Swatch Bullet for Shades -->
-                            <span class="pill-shade-bullet shade-dot" style="background-color: {{ swatch_bg }};" aria-hidden="true"></span>
+                            <!-- Swatch Dot Badge Indicator -->
+                            <span class="variant-shade-dot" style="background-color: {{ swatch_bg }};" aria-hidden="true"></span>
                           {%- endif -%}
-                          <span class="pill-text">{{ value }}</span>
+
+                          <!-- Variant Option Value Text -->
+                          <span class="variant-radio-text">{{ value }}</span>
                         </span>
                       </label>
                     {%- endfor -%}
