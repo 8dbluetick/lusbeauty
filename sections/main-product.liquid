@@ -305,12 +305,11 @@
                             id="Option-{{ option.position }}-{{ forloop.index0 }}"
                           >
                           <span
-                            class="circular-shade-radio-btn"
-                            style="background-color: {{ swatch_bg }} !important;"
+                            class="circular-shade-radio-btn" style="background-color: {{ swatch_bg }} !important; border-radius: 100% !important;"
                             aria-label="{{ value | escape }}"
                           >
                             <!-- Inner Radio Check Indicator Circle -->
-                            <span class="shade-radio-inner-dot {% if is_dark_swatch %}dot-light{% else %}dot-dark{% endif %}" aria-hidden="true">
+                            <span class="shade-radio-inner-dot {% if is_dark_swatch %}dot-light{% else %}dot-dark{% endif %}" style="border-radius: 100% !important;" aria-hidden="true">
                               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shade-check-icon">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                               </svg>
