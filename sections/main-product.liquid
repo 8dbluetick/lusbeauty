@@ -232,7 +232,7 @@
         {%- form 'product', product, id: 'MainProductForm', class: 'product-form' -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" id="ProductVariantId">
 
-          <!-- Variant / Option Selector (Radio Buttons with Dynamic Shade Swatches) -->
+          <!-- Variant / Option Selector (Circular Radio Swatches for Shades & Standard Radios) -->
           {%- unless product.has_only_default_variant -%}
             <div class="product-variants-wrap" data-variant-selectors>
               {%- for option in product.options_with_values -%}
@@ -253,14 +253,19 @@
                       {%- endif -%}
 
                       {%- assign swatch_bg = '' -%}
+                      {%- assign shade_num = '' -%}
                       {%- if val_lower contains '#f5d6c1' or (is_shade_opt and (val_lower contains '01' or val_lower == '1' or val_lower contains 'fair' or val_lower contains 'ivory')) -%}
                         {%- assign swatch_bg = '#F5D6C1' -%}
+                        {%- assign shade_num = '01' -%}
                       {%- elsif val_lower contains '#dcae8b' or (is_shade_opt and (val_lower contains '02' or val_lower == '2' or val_lower contains 'natural' or val_lower contains 'beige')) -%}
                         {%- assign swatch_bg = '#DCAE8B' -%}
+                        {%- assign shade_num = '02' -%}
                       {%- elsif val_lower contains '#e8c3a9' or (is_shade_opt and (val_lower contains '03' or val_lower == '3' or val_lower contains 'warm' or val_lower contains 'honey' or val_lower contains 'sand')) -%}
                         {%- assign swatch_bg = '#E8C3A9' -%}
+                        {%- assign shade_num = '03' -%}
                       {%- elsif val_lower contains '#c68c5c' or (is_shade_opt and (val_lower contains '05' or val_lower == '5' or val_lower contains 'caramel' or val_lower contains 'tan' or val_lower contains 'bronze' or val_lower contains 'deep')) -%}
                         {%- assign swatch_bg = '#C68C5C' -%}
+                        {%- assign shade_num = '05' -%}
                       {%- elsif val_lower contains '#' -%}
                         {%- assign hex_parts = value | split: '#' -%}
                         {%- assign hex_clean = hex_parts[1] | split: ')' | first | split: ' ' | first | split: ',' | first -%}
@@ -286,35 +291,57 @@
                         {%- assign is_dark_swatch = true -%}
                       {%- endif -%}
 
-                      <label
-                        class="variant-radio-item {% if swatch_bg != blank %}variant-shade-item{% endif %} {% if is_dark_swatch %}variant-dark-shade{% endif %}"
-                        {% if swatch_bg != blank %}style="--shade-bg: {{ swatch_bg }}; --shade-text: {% if is_dark_swatch %}#FFFFFF{% else %}#2A170A{% endif %};"{% endif %}
-                      >
-                        <input
-                          type="radio"
-                          name="option-{{ option.position }}"
-                          value="{{ value | escape }}"
-                          {% if option.selected_value == value %}checked{% endif %}
-                          class="variant-radio"
-                          data-option-position="{{ option.position }}"
-                          data-option-name="{{ option.name | escape }}"
-                          id="Option-{{ option.position }}-{{ forloop.index0 }}"
-                        >
-                        <span class="variant-radio-card {% if swatch_bg != blank %}has-shade-bg{% endif %}">
-                          <!-- Visible Luxury Circular Radio Button Indicator -->
-                          <span class="custom-radio-circle" aria-hidden="true">
-                            <span class="custom-radio-dot"></span>
+                      {%- if swatch_bg != blank -%}
+                        <!-- CIRCULAR SHADE RADIO BUTTON (Exact Swatch Background & Round Circle) -->
+                        <label class="variant-shade-circular-label" title="{{ value | escape }}">
+                          <input
+                            type="radio"
+                            name="option-{{ option.position }}"
+                            value="{{ value | escape }}"
+                            {% if option.selected_value == value %}checked{% endif %}
+                            class="variant-radio"
+                            data-option-position="{{ option.position }}"
+                            data-option-name="{{ option.name | escape }}"
+                            id="Option-{{ option.position }}-{{ forloop.index0 }}"
+                          >
+                          <span
+                            class="circular-shade-radio-btn"
+                            style="background-color: {{ swatch_bg }} !important;"
+                            aria-label="{{ value | escape }}"
+                          >
+                            <!-- Inner Radio Check Indicator Circle -->
+                            <span class="shade-radio-inner-dot {% if is_dark_swatch %}dot-light{% else %}dot-dark{% endif %}" aria-hidden="true">
+                              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shade-check-icon">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                              </svg>
+                            </span>
+                            {%- if shade_num != blank -%}
+                              <span class="shade-num-badge {% if is_dark_swatch %}text-light{% else %}text-dark{% endif %}">{{ shade_num }}</span>
+                            {%- endif -%}
                           </span>
-
-                          {%- if swatch_bg != blank -%}
-                            <!-- Swatch Dot Badge Indicator -->
-                            <span class="variant-shade-dot" style="background-color: {{ swatch_bg }};" aria-hidden="true"></span>
-                          {%- endif -%}
-
-                          <!-- Variant Option Value Text -->
-                          <span class="variant-radio-text">{{ value }}</span>
-                        </span>
-                      </label>
+                          <span class="circular-shade-caption">{{ value }}</span>
+                        </label>
+                      {%- else -%}
+                        <!-- STANDARD RADIO BUTTON FOR SIZES / VOLUMES -->
+                        <label class="variant-radio-item">
+                          <input
+                            type="radio"
+                            name="option-{{ option.position }}"
+                            value="{{ value | escape }}"
+                            {% if option.selected_value == value %}checked{% endif %}
+                            class="variant-radio"
+                            data-option-position="{{ option.position }}"
+                            data-option-name="{{ option.name | escape }}"
+                            id="Option-{{ option.position }}-{{ forloop.index0 }}"
+                          >
+                          <span class="variant-radio-card">
+                            <span class="custom-radio-circle" aria-hidden="true">
+                              <span class="custom-radio-dot"></span>
+                            </span>
+                            <span class="variant-radio-text">{{ value }}</span>
+                          </span>
+                        </label>
+                      {%- endif -%}
                     {%- endfor -%}
                   </div>
                 </div>
