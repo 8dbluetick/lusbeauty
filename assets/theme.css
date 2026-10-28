@@ -14198,19 +14198,145 @@ body.lush-theme-body {
 
 
 /* ====================================================================
-   CIRCULAR SHADE RADIO BUTTONS & SWATCH SELECTOR
+   CIRCULAR SHADE RADIO BUTTONS & HOVER TOOLTIP
    ==================================================================== */
 .variant-shade-circular-label {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  position: relative;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  padding: 6px 3px;
+}
+
+.circular-shade-radio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50% !important;
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: relative;
-  text-align: center;
-  padding: 4px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* Hover effect on circle */
+.variant-shade-circular-label:hover .circular-shade-radio-btn {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  border-color: #1F1610 !important;
+}
+
+/* Floating Tooltip displaying Shade Name on Hover */
+.shade-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1F1610;
+  color: #FFFFFF;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(31, 22, 16, 0.28);
+  z-index: 30;
+  letter-spacing: 0.02em;
+}
+
+.shade-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1F1610;
+}
+
+/* Reveal tooltip on hover and keyboard focus */
+.variant-shade-circular-label:hover .shade-tooltip,
+.variant-radio:focus-visible ~ .shade-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Shade number badge inside circular button */
+.shade-num-badge {
+  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.shade-num-badge.text-dark {
+  color: #2A170A !important;
+}
+
+.shade-num-badge.text-light {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Inner radio checkmark / dot */
+.shade-radio-inner-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.shade-radio-inner-dot.dot-dark {
+  background: #2A170A;
+  color: #FFFFFF;
+}
+
+.shade-radio-inner-dot.dot-light {
+  background: #FFFFFF;
+  color: #1F1610;
+}
+
+.shade-check-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Checked State for Circular Shade Radio Buttons */
+.variant-radio:checked + .circular-shade-radio-btn {
+  border-color: #1F1610 !important;
+  box-shadow: 0 0 0 2.5px #FFFFFF, 0 0 0 5.5px #1F1610, 0 8px 22px rgba(31, 22, 16, 0.35) !important;
+  transform: translateY(-3px) scale(1.08);
+}
+
+.variant-radio:checked + .circular-shade-radio-btn .shade-num-badge {
+  opacity: 0;
+}
+
+.variant-radio:checked + .circular-shade-radio-btn .shade-radio-inner-dot {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .circular-shade-radio-btn {

@@ -232,7 +232,7 @@
         {%- form 'product', product, id: 'MainProductForm', class: 'product-form' -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" id="ProductVariantId">
 
-          <!-- Variant / Option Selector (Circular Radio Swatches for Shades & Standard Radios) -->
+          <!-- Variant / Option Selector (Circular Shade Radio Buttons with Hover Tooltip) -->
           {%- unless product.has_only_default_variant -%}
             <div class="product-variants-wrap" data-variant-selectors>
               {%- for option in product.options_with_values -%}
@@ -292,7 +292,7 @@
                       {%- endif -%}
 
                       {%- if swatch_bg != blank -%}
-                        <!-- CIRCULAR SHADE RADIO BUTTON (Exact Swatch Background & Round Circle) -->
+                        <!-- CIRCULAR SHADE RADIO BUTTON (Exact Swatch Background & Hover Tooltip) -->
                         <label class="variant-shade-circular-label" title="{{ value | escape }}">
                           <input
                             type="radio"
@@ -319,7 +319,9 @@
                               <span class="shade-num-badge {% if is_dark_swatch %}text-light{% else %}text-dark{% endif %}">{{ shade_num }}</span>
                             {%- endif -%}
                           </span>
-                          <span class="circular-shade-caption">{{ value }}</span>
+
+                          <!-- Floating Tooltip Showing Shade Name On Hover -->
+                          <span class="shade-tooltip" role="tooltip">{{ value }}</span>
                         </label>
                       {%- else -%}
                         <!-- STANDARD RADIO BUTTON FOR SIZES / VOLUMES -->

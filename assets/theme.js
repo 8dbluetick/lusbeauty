@@ -1127,6 +1127,28 @@ function initProductVariantSelector() {
       });
     });
 
+    // Bind hover effect to preview shade name on label
+    section.querySelectorAll('.variant-shade-circular-label').forEach(label => {
+      const radio = label.querySelector('.variant-radio');
+      if (!radio) return;
+      const pos = radio.getAttribute('data-option-position');
+      const selectedValLabel = section.querySelector(`[data-selected-val-for="${pos}"]`);
+
+      label.addEventListener('mouseenter', () => {
+        if (selectedValLabel) {
+          selectedValLabel.textContent = radio.value;
+        }
+      });
+
+      label.addEventListener('mouseleave', () => {
+        const checkedRadio = section.querySelector(`.variant-radio[data-option-position="${pos}"]:checked`);
+        if (selectedValLabel && checkedRadio) {
+          selectedValLabel.textContent = checkedRadio.value;
+        }
+      });
+    });
+
+
     // Bind event listeners to select dropdown options
     section.querySelectorAll('select.variant-select').forEach(select => {
       select.addEventListener('change', () => {
