@@ -486,11 +486,7 @@
       </div>
     </div>
   </div>
-{%- unless product.has_only_default_variant -%}
-  {%- for option in product.options_with_values -%}
-    <!-- Your variant option rendering code (radio/select) -->
-  {%- endfor -%}
-{%- endunless -%}
+
 
   <!-- Embedded Product JSON Data for Real-Time Variant Synchronization -->
   <script type="application/json" id="ProductJson-{{ product.id }}">
