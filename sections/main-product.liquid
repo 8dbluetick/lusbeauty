@@ -454,55 +454,123 @@
               </div>
 
             {%- when 'variant_picker' -%}
-              <!-- Variant / Option Selector Pills -->
+              <!-- Variant / Option Selector with Radio Buttons & Shade Swatches -->
               {%- unless product.has_only_default_variant -%}
+                {%- assign picker_type = block.settings.picker_type | default: 'radio' -%}
+                {%- assign enable_shades = block.settings.enable_shade_backgrounds -%}
+                {%- if enable_shades == nil -%}
+                  {%- assign enable_shades = true -%}
+                {%- endif -%}
+
                 <div class="product-variants-wrap" data-variant-selectors {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                     <div class="variant-option-group" data-option-group="{{ option.position }}">
                       <div class="variant-label-row">
-                        <label class="variant-label" for="Option-{{ option.position }}">
-                          Select {{ option.name }}:
+                        <label class="variant-label" for="Option-{{ option.position }}" id="OptionLabel-{{ option.position }}">
+                          <span>Select {{ option.name }}:</span>
                           <strong class="selected-option-value" data-selected-val-for="{{ option.position }}">{{ option.selected_value }}</strong>
                         </label>
                       </div>
-                      <div class="variant-pill-row">
-                        {%- for value in option.values -%}
-                          {%- assign opt_lower = option.name | downcase -%}
-                          {%- assign val_lower = value | downcase -%}
-                          {%- assign swatch_bg = '' -%}
-                          {%- if val_lower contains '#f5d6c1' or val_lower contains '01' -%}
-                            {%- assign swatch_bg = '#F5D6C1' -%}
-                          {%- elsif val_lower contains '#dcae8b' or val_lower contains '02' -%}
-                            {%- assign swatch_bg = '#DCAE8B' -%}
-                          {%- elsif val_lower contains '#e8c3a9' or val_lower contains '03' -%}
-                            {%- assign swatch_bg = '#E8C3A9' -%}
-                          {%- elsif val_lower contains '#c68c5c' or val_lower contains '05' -%}
-                            {%- assign swatch_bg = '#C68C5C' -%}
-                          {%- elsif val_lower contains '#' -%}
-                            {%- assign hex_parts = value | split: '#' -%}
-                            {%- assign hex_clean = hex_parts[1] | split: ')' | first | split: ' ' | first -%}
-                            {%- assign swatch_bg = '#' | append: hex_clean -%}
-                          {%- endif -%}
 
-                          <label class="variant-pill-label">
-                            <input
-                              type="radio"
-                              name="option-{{ option.position }}"
-                              value="{{ value | escape }}"
-                              {% if option.selected_value == value %}checked{% endif %}
-                              class="variant-radio"
-                              data-option-position="{{ option.position }}"
-                              data-option-name="{{ option.name | escape }}"
-                            >
-                            <span class="variant-pill-btn {% if swatch_bg != blank %}variant-shade-swatch{% endif %}" {% if swatch_bg != blank %}style="background-color: {{ swatch_bg }} !important; border-color: rgba(0,0,0,0.2) !important; color: {% if val_lower contains '05' or val_lower contains '#c68c5c' %}#FFFFFF{% else %}#2A170A{% endif %} !important; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;"{% endif %}>
-                              {%- if swatch_bg != blank -%}
-                                <span class="shade-dot" style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background-color: {{ swatch_bg }}; border: 1.5px solid {% if val_lower contains '05' or val_lower contains '#c68c5c' %}#FFFFFF{% else %}#2A170A{% endif %}; flex-shrink: 0;"></span>
+                      {%- if picker_type == 'dropdown' -%}
+                        <!-- Dropdown Selector Style -->
+                        <div class="variant-select-wrapper">
+                          <select
+                            id="Option-{{ option.position }}"
+                            name="options[{{ option.name | escape }}]"
+                            class="variant-select"
+                            data-option-position="{{ option.position }}"
+                            data-option-name="{{ option.name | escape }}"
+                          >
+                            {%- for value in option.values -%}
+                              <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                {{ value }}
+                              </option>
+                            {%- endfor -%}
+                          </select>
+                          <div class="variant-select-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                          </div>
+                        </div>
+                      {%- else -%}
+                        <!-- Luxury Radio Button Selector Style -->
+                        <div class="variant-radio-list" role="radiogroup" aria-labelledby="OptionLabel-{{ option.position }}">
+                          {%- for value in option.values -%}
+                            {%- assign opt_lower = option.name | downcase -%}
+                            {%- assign val_lower = value | downcase -%}
+                            {%- assign is_shade_opt = false -%}
+                            {%- if opt_lower contains 'shade' or opt_lower contains 'color' or opt_lower contains 'colour' or opt_lower contains 'tone' or product.title contains 'BB' or product.title contains 'Foundation' -%}
+                              {%- assign is_shade_opt = true -%}
+                            {%- endif -%}
+
+                            {%- assign swatch_bg = '' -%}
+                            {%- if enable_shades -%}
+                              {%- if val_lower contains '#f5d6c1' or (is_shade_opt and (val_lower contains '01' or val_lower == '1' or val_lower contains 'fair' or val_lower contains 'ivory')) -%}
+                                {%- assign swatch_bg = '#F5D6C1' -%}
+                              {%- elsif val_lower contains '#dcae8b' or (is_shade_opt and (val_lower contains '02' or val_lower == '2' or val_lower contains 'natural' or val_lower contains 'beige')) -%}
+                                {%- assign swatch_bg = '#DCAE8B' -%}
+                              {%- elsif val_lower contains '#e8c3a9' or (is_shade_opt and (val_lower contains '03' or val_lower == '3' or val_lower contains 'warm' or val_lower contains 'honey' or val_lower contains 'sand')) -%}
+                                {%- assign swatch_bg = '#E8C3A9' -%}
+                              {%- elsif val_lower contains '#c68c5c' or (is_shade_opt and (val_lower contains '05' or val_lower == '5' or val_lower contains 'caramel' or val_lower contains 'tan' or val_lower contains 'bronze' or val_lower contains 'deep')) -%}
+                                {%- assign swatch_bg = '#C68C5C' -%}
+                              {%- elsif val_lower contains '#' -%}
+                                {%- assign hex_parts = value | split: '#' -%}
+                                {%- assign hex_clean = hex_parts[1] | split: ')' | first | split: ' ' | first | split: ',' | first -%}
+                                {%- assign swatch_bg = '#' | append: hex_clean -%}
+                              {%- elsif val_lower contains 'nude' -%}
+                                {%- assign swatch_bg = '#E5B899' -%}
+                              {%- elsif val_lower contains 'pink' -%}
+                                {%- assign swatch_bg = '#F48FB1' -%}
+                              {%- elsif val_lower contains 'red' -%}
+                                {%- assign swatch_bg = '#C2185B' -%}
+                              {%- elsif val_lower contains 'peach' -%}
+                                {%- assign swatch_bg = '#FFAB91' -%}
+                              {%- elsif val_lower contains 'coral' -%}
+                                {%- assign swatch_bg = '#FF7043' -%}
+                              {%- elsif val_lower contains 'black' -%}
+                                {%- assign swatch_bg = '#212121' -%}
+                              {%- elsif val_lower contains 'white' -%}
+                                {%- assign swatch_bg = '#FFFFFF' -%}
                               {%- endif -%}
-                              {{ value }}
-                            </span>
-                          </label>
-                        {%- endfor -%}
-                      </div>
+                            {%- endif -%}
+
+                            {%- assign is_dark_swatch = false -%}
+                            {%- if swatch_bg == '#C68C5C' or val_lower contains '05' or val_lower contains '#c68c5c' or val_lower contains 'black' or val_lower contains 'dark' or val_lower contains 'red' -%}
+                              {%- assign is_dark_swatch = true -%}
+                            {%- endif -%}
+
+                            <label
+                              class="variant-radio-item {% if swatch_bg != blank %}variant-shade-item{% endif %} {% if is_dark_swatch %}variant-dark-shade{% endif %}"
+                              {% if swatch_bg != blank %}style="--shade-bg: {{ swatch_bg }}; --shade-text: {% if is_dark_swatch %}#FFFFFF{% else %}#2A170A{% endif %};"{% endif %}
+                            >
+                              <input
+                                type="radio"
+                                name="option-{{ option.position }}"
+                                value="{{ value | escape }}"
+                                {% if option.selected_value == value %}checked{% endif %}
+                                class="variant-radio"
+                                data-option-position="{{ option.position }}"
+                                data-option-name="{{ option.name | escape }}"
+                                id="Option-{{ option.position }}-{{ forloop.index0 }}"
+                              >
+                              <span class="variant-radio-card {% if swatch_bg != blank %}has-shade-bg{% endif %}">
+                                <!-- Visible Custom Radio Button Circle -->
+                                <span class="custom-radio-circle" aria-hidden="true">
+                                  <span class="custom-radio-dot"></span>
+                                </span>
+
+                                {%- if swatch_bg != blank -%}
+                                  <!-- Swatch Dot Badge Indicator -->
+                                  <span class="variant-shade-dot" style="background-color: {{ swatch_bg }};" aria-hidden="true"></span>
+                                {%- endif -%}
+
+                                <!-- Variant Option Value Text -->
+                                <span class="variant-radio-text">{{ value }}</span>
+                              </span>
+                            </label>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
                     </div>
                   {%- endfor -%}
                 </div>
@@ -738,7 +806,32 @@
     {
       "type": "variant_picker",
       "name": "Variant Selector",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "label": "Selector Display Style",
+          "options": [
+            {
+              "value": "radio",
+              "label": "Radio Buttons (Luxury Swatches & Cards)"
+            },
+            {
+              "value": "dropdown",
+              "label": "Classic Dropdown List"
+            }
+          ],
+          "default": "radio"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_shade_backgrounds",
+          "label": "Dynamic Shade Backgrounds",
+          "default": true,
+          "info": "Applies real shade background colors (#F5D6C1, #DCAE8B, #E8C3A9, #C68C5C) to shade radio cards."
+        }
+      ]
     },
     {
       "type": "buy_buttons",

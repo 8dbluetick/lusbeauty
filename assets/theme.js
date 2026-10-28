@@ -574,21 +574,52 @@ function initQuickViewModal() {
       const initialPrice = formatMoney(initialVariant.price);
       const initialCompare = initialVariant.compare_at_price > initialVariant.price ? formatMoney(initialVariant.compare_at_price) : '';
 
-      // Build options HTML if product has variants
+      // Build options HTML if product has variants with luxury radio swatches
       let variantsHtml = '';
       if (prod.options && prod.options.length > 0 && prod.variants.length > 1) {
-        variantsHtml = '<div class="qv-variants-wrap" style="margin: 12px 0; display: flex; flex-direction: column; gap: 8px;">';
+        variantsHtml = '<div class="qv-variants-wrap" style="margin: 12px 0; display: flex; flex-direction: column; gap: 10px;">';
         prod.options.forEach((opt, optIdx) => {
+          const optLower = (opt.name || '').toLowerCase();
+          const isShadeOpt = optLower.includes('shade') || optLower.includes('color') || optLower.includes('tone') || (prod.title || '').includes('BB') || (prod.title || '').includes('Foundation');
+
           variantsHtml += `
             <div class="qv-option-group">
-              <label style="font-size: 0.72rem; font-weight: 700; color: #8A7363; text-transform: uppercase; margin-bottom: 4px; display: block;">${opt.name}:</label>
-              <div class="qv-pill-row" style="display: flex; flex-wrap: wrap; gap: 6px;">
-                ${opt.values.map((val, valIdx) => `
-                  <label class="qv-pill-label" style="cursor: pointer;">
-                    <input type="radio" name="qv-opt-${optIdx + 1}" value="${val}" ${valIdx === 0 ? 'checked' : ''} class="qv-variant-radio" data-opt-pos="${optIdx + 1}" style="display: none;">
-                    <span class="qv-pill-btn ${valIdx === 0 ? 'active' : ''}" style="display: inline-block; padding: 5px 12px; border-radius: 999px; border: 1px solid #EAE3DA; font-size: 0.72rem; font-weight: 600; background: ${valIdx === 0 ? '#1F1610' : '#FFFFFF'}; color: ${valIdx === 0 ? '#FFFFFF' : '#1F1610'};">${val}</span>
-                  </label>
-                `).join('')}
+              <label style="font-size: 0.75rem; font-weight: 700; color: #5C4A3E; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                <span>Select ${opt.name}:</span>
+                <strong class="qv-selected-val-${optIdx + 1}" style="color: #1F1610; font-weight: 800; background: #FAF7F2; padding: 1px 8px; border-radius: 4px; border: 1px solid #EAE3DA;">${opt.values[0]}</strong>
+              </label>
+              <div class="qv-pill-row" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                ${opt.values.map((val, valIdx) => {
+                  const valLower = String(val).toLowerCase();
+                  let swatchBg = '';
+                  if (valLower.includes('#f5d6c1') || (isShadeOpt && (valLower.includes('01') || valLower === '1'))) swatchBg = '#F5D6C1';
+                  else if (valLower.includes('#dcae8b') || (isShadeOpt && (valLower.includes('02') || valLower === '2'))) swatchBg = '#DCAE8B';
+                  else if (valLower.includes('#e8c3a9') || (isShadeOpt && (valLower.includes('03') || valLower === '3'))) swatchBg = '#E8C3A9';
+                  else if (valLower.includes('#c68c5c') || (isShadeOpt && (valLower.includes('05') || valLower === '5'))) swatchBg = '#C68C5C';
+                  else if (valLower.includes('#')) {
+                    const match = val.match(/#[0-9A-Fa-f]{6}/);
+                    if (match) swatchBg = match[0];
+                  }
+
+                  const isDark = swatchBg === '#C68C5C' || valLower.includes('05') || valLower.includes('#c68c5c') || valLower.includes('black');
+                  const textColor = swatchBg ? (isDark ? '#FFFFFF' : '#2A170A') : (valIdx === 0 ? '#FFFFFF' : '#1F1610');
+                  const bgColor = swatchBg ? swatchBg : (valIdx === 0 ? '#1F1610' : '#FFFFFF');
+                  const borderCol = valIdx === 0 ? '#1F1610' : (swatchBg ? 'rgba(0,0,0,0.2)' : '#E0D7CB');
+                  const extraShadow = (valIdx === 0 && swatchBg) ? 'box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 3.5px #1F1610;' : '';
+
+                  return `
+                    <label class="qv-pill-label" style="cursor: pointer; display: inline-flex; position: relative;">
+                      <input type="radio" name="qv-opt-${optIdx + 1}" value="${val}" ${valIdx === 0 ? 'checked' : ''} class="qv-variant-radio" data-opt-pos="${optIdx + 1}" style="position: absolute; opacity: 0; pointer-events: none;">
+                      <span class="qv-pill-btn ${valIdx === 0 ? 'active' : ''}" data-swatch="${swatchBg}" data-dark="${isDark}" style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 8px; border: 1.5px solid ${borderCol}; font-size: 0.76rem; font-weight: 700; background: ${bgColor}; color: ${textColor}; transition: all 0.2s ease; ${extraShadow}">
+                        <span class="custom-radio-circle" style="width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid ${textColor}; display: inline-flex; align-items: center; justify-content: center; background: ${valIdx === 0 ? textColor : 'transparent'};">
+                          <span style="width: 6px; height: 6px; border-radius: 50%; background: ${valIdx === 0 ? (isDark ? '#1F1610' : '#FFFFFF') : 'transparent'};"></span>
+                        </span>
+                        ${swatchBg ? `<span style="width: 11px; height: 11px; border-radius: 50%; background: ${swatchBg}; border: 1.5px solid ${textColor}; flex-shrink: 0;"></span>` : ''}
+                        <span>${val}</span>
+                      </span>
+                    </label>
+                  `;
+                }).join('')}
               </div>
             </div>
           `;
@@ -626,17 +657,70 @@ function initQuickViewModal() {
       if (qvRadios.length) {
         qvRadios.forEach(radio => {
           radio.addEventListener('change', () => {
-            // Update button styles
+            // Update button styles with swatch awareness
             const parentGroup = radio.closest('.qv-option-group');
+            const pos = radio.getAttribute('data-opt-pos');
             if (parentGroup) {
+              const selectedLabel = parentGroup.querySelector(`.qv-selected-val-${pos}`);
+              if (selectedLabel) selectedLabel.textContent = radio.value;
+
               parentGroup.querySelectorAll('.qv-pill-btn').forEach(btn => {
-                btn.style.background = '#FFFFFF';
-                btn.style.color = '#1F1610';
+                const swatch = btn.getAttribute('data-swatch');
+                const isDark = btn.getAttribute('data-dark') === 'true';
+                const circle = btn.querySelector('.custom-radio-circle');
+                const dot = circle ? circle.querySelector('span') : null;
+
+                if (swatch) {
+                  btn.style.background = swatch;
+                  btn.style.color = isDark ? '#FFFFFF' : '#2A170A';
+                  btn.style.borderColor = 'rgba(0,0,0,0.2)';
+                  btn.style.boxShadow = 'none';
+                  if (circle) {
+                    circle.style.borderColor = isDark ? '#FFFFFF' : '#2A170A';
+                    circle.style.background = 'transparent';
+                  }
+                  if (dot) dot.style.background = 'transparent';
+                } else {
+                  btn.style.background = '#FFFFFF';
+                  btn.style.color = '#1F1610';
+                  btn.style.borderColor = '#E0D7CB';
+                  btn.style.boxShadow = 'none';
+                  if (circle) {
+                    circle.style.borderColor = '#C4B5A5';
+                    circle.style.background = 'transparent';
+                  }
+                  if (dot) dot.style.background = 'transparent';
+                }
               });
+
               const activeBtn = radio.parentElement.querySelector('.qv-pill-btn');
               if (activeBtn) {
-                activeBtn.style.background = '#1F1610';
-                activeBtn.style.color = '#FFFFFF';
+                const swatch = activeBtn.getAttribute('data-swatch');
+                const isDark = activeBtn.getAttribute('data-dark') === 'true';
+                const circle = activeBtn.querySelector('.custom-radio-circle');
+                const dot = circle ? circle.querySelector('span') : null;
+
+                if (swatch) {
+                  activeBtn.style.background = swatch;
+                  activeBtn.style.color = isDark ? '#FFFFFF' : '#2A170A';
+                  activeBtn.style.borderColor = '#1F1610';
+                  activeBtn.style.boxShadow = '0 0 0 2px #FFFFFF, 0 0 0 3.5px #1F1610';
+                  if (circle) {
+                    circle.style.borderColor = isDark ? '#FFFFFF' : '#2A170A';
+                    circle.style.background = isDark ? '#FFFFFF' : '#2A170A';
+                  }
+                  if (dot) dot.style.background = isDark ? '#1F1610' : '#FFFFFF';
+                } else {
+                  activeBtn.style.background = '#1F1610';
+                  activeBtn.style.color = '#FFFFFF';
+                  activeBtn.style.borderColor = '#1F1610';
+                  activeBtn.style.boxShadow = '0 3px 10px rgba(31,22,16,0.18)';
+                  if (circle) {
+                    circle.style.borderColor = '#C5A059';
+                    circle.style.background = '#1F1610';
+                  }
+                  if (dot) dot.style.background = '#C5A059';
+                }
               }
             }
 
