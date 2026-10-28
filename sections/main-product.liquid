@@ -247,28 +247,26 @@
                     {%- for value in option.values -%}
                       {%- assign opt_lower = option.name | downcase -%}
                       {%- assign val_lower = value | downcase -%}
-                      {%- assign is_shade_opt = false -%}
-                      {%- if opt_lower contains 'shade' or opt_lower contains 'color' or opt_lower contains 'colour' or opt_lower contains 'tone' or product.title contains 'BB' or product.title contains 'Foundation' -%}
-                        {%- assign is_shade_opt = true -%}
-                      {%- endif -%}
 
+                      {%- comment -%} Universal Shade & Color Background Detection {%- endcomment -%}
                       {%- assign swatch_bg = '' -%}
                       {%- assign shade_num = '' -%}
-                      {%- if val_lower contains '#f5d6c1' or (is_shade_opt and (val_lower contains '01' or val_lower == '1' or val_lower contains 'fair' or val_lower contains 'ivory')) -%}
+
+                      {%- if val_lower contains 'f5d6c1' or val_lower contains '01' or val_lower == '1' or val_lower contains 'fair' or val_lower contains 'ivory' -%}
                         {%- assign swatch_bg = '#F5D6C1' -%}
                         {%- assign shade_num = '01' -%}
-                      {%- elsif val_lower contains '#dcae8b' or (is_shade_opt and (val_lower contains '02' or val_lower == '2' or val_lower contains 'natural' or val_lower contains 'beige')) -%}
+                      {%- elsif val_lower contains 'dcae8b' or val_lower contains '02' or val_lower == '2' or val_lower contains 'natural' or val_lower contains 'beige' -%}
                         {%- assign swatch_bg = '#DCAE8B' -%}
                         {%- assign shade_num = '02' -%}
-                      {%- elsif val_lower contains '#e8c3a9' or (is_shade_opt and (val_lower contains '03' or val_lower == '3' or val_lower contains 'warm' or val_lower contains 'honey' or val_lower contains 'sand')) -%}
+                      {%- elsif val_lower contains 'e8c3a9' or val_lower contains '03' or val_lower == '3' or val_lower contains 'warm' or val_lower contains 'honey' or val_lower contains 'sand' -%}
                         {%- assign swatch_bg = '#E8C3A9' -%}
                         {%- assign shade_num = '03' -%}
-                      {%- elsif val_lower contains '#c68c5c' or (is_shade_opt and (val_lower contains '05' or val_lower == '5' or val_lower contains 'caramel' or val_lower contains 'tan' or val_lower contains 'bronze' or val_lower contains 'deep')) -%}
+                      {%- elsif val_lower contains 'c68c5c' or val_lower contains '05' or val_lower == '5' or val_lower contains 'caramel' or val_lower contains 'tan' or val_lower contains 'bronze' or val_lower contains 'deep' -%}
                         {%- assign swatch_bg = '#C68C5C' -%}
                         {%- assign shade_num = '05' -%}
                       {%- elsif val_lower contains '#' -%}
                         {%- assign hex_parts = value | split: '#' -%}
-                        {%- assign hex_clean = hex_parts[1] | split: ')' | first | split: ' ' | first | split: ',' | first -%}
+                        {%- assign hex_clean = hex_parts[1] | strip | split: ')' | first | split: ' ' | first | split: ',' | first | split: '-' | first -%}
                         {%- assign swatch_bg = '#' | append: hex_clean -%}
                       {%- elsif val_lower contains 'nude' -%}
                         {%- assign swatch_bg = '#E5B899' -%}
@@ -287,8 +285,13 @@
                       {%- endif -%}
 
                       {%- assign is_dark_swatch = false -%}
-                      {%- if swatch_bg == '#C68C5C' or val_lower contains '05' or val_lower contains '#c68c5c' or val_lower contains 'black' or val_lower contains 'dark' or val_lower contains 'red' -%}
+                      {%- if swatch_bg == '#C68C5C' or val_lower contains '05' or val_lower contains 'c68c5c' or val_lower contains 'black' or val_lower contains 'dark' or val_lower contains 'deep' or val_lower contains 'red' -%}
                         {%- assign is_dark_swatch = true -%}
+                      {%- endif -%}
+
+                      {%- assign text_color = '#2A170A' -%}
+                      {%- if is_dark_swatch -%}
+                        {%- assign text_color = '#FFFFFF' -%}
                       {%- endif -%}
 
                       {%- if swatch_bg != blank -%}
@@ -305,7 +308,9 @@
                             id="Option-{{ option.position }}-{{ forloop.index0 }}"
                           >
                           <span
-                            class="circular-shade-radio-btn" style="background-color: {{ swatch_bg }} !important; border-radius: 100% !important;"
+                            class="circular-shade-radio-btn"
+                            style="background-color: {{ swatch_bg }} !important; --shade-bg: {{ swatch_bg }}; border-radius: 100% !important; color: {{ text_color }} !important;"
+                            data-shade-color="{{ swatch_bg }}"
                             aria-label="{{ value | escape }}"
                           >
                             <!-- Inner Radio Check Indicator Circle -->
@@ -323,8 +328,8 @@
                           <span class="shade-tooltip" role="tooltip">{{ value }}</span>
                         </label>
                       {%- else -%}
-                        <!-- STANDARD RADIO BUTTON FOR SIZES / VOLUMES -->
-                        <label class="variant-radio-item">
+                        <!-- STANDARD RADIO BUTTON / PILLS (100% Border Radius & Hover Tooltip) -->
+                        <label class="variant-radio-item" title="{{ value | escape }}">
                           <input
                             type="radio"
                             name="option-{{ option.position }}"
@@ -335,12 +340,14 @@
                             data-option-name="{{ option.name | escape }}"
                             id="Option-{{ option.position }}-{{ forloop.index0 }}"
                           >
-                          <span class="variant-radio-card" style="border-radius: 100% !important;">
-                            <span class="custom-radio-circle" style="border-radius: 100% !important;" aria-hidden="true">
-                              <span class="custom-radio-dot"></span>
+                          <span class="variant-radio-card" style="border-radius: 100% !important;{% if swatch_bg != blank %} background-color: {{ swatch_bg }} !important; --shade-bg: {{ swatch_bg }}; color: {{ text_color }} !important; border-color: rgba(0, 0, 0, 0.2) !important;{% endif %}" {% if swatch_bg != blank %}data-shade-color="{{ swatch_bg }}"{% endif %}>
+                            <span class="custom-radio-circle" style="border-radius: 100% !important;{% if swatch_bg != blank and is_dark_swatch %} border-color: #FFFFFF !important;{% endif %}" aria-hidden="true">
+                              <span class="custom-radio-dot" style="border-radius: 100% !important;{% if swatch_bg != blank and is_dark_swatch %} background-color: #FFFFFF !important;{% endif %}"></span>
                             </span>
                             <span class="variant-radio-text">{{ value }}</span>
                           </span>
+                          <!-- Floating Tooltip Showing Variant Name On Hover -->
+                          <span class="shade-tooltip" role="tooltip">{{ value }}</span>
                         </label>
                       {%- endif -%}
                     {%- endfor -%}

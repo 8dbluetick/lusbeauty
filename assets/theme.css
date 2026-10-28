@@ -5721,10 +5721,17 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .variant-shade-item .variant-radio-card.has-shade-bg,
-.variant-pill-btn.variant-shade-swatch {
-  background-color: var(--shade-bg) !important;
+.variant-pill-btn.variant-shade-swatch,
+.variant-radio-card[data-shade-color],
+.variant-radio-card[style*="background-color"],
+.variant-pill-btn[data-shade-color],
+.variant-pill-btn[style*="background-color"],
+.circular-shade-radio-btn[data-shade-color],
+.circular-shade-radio-btn[style*="background-color"] {
+  background-color: var(--shade-bg, inherit) !important;
   color: var(--shade-text, #2A170A) !important;
   border-color: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 100% !important;
   font-weight: 800;
   min-height: 44px;
   padding: 8px 18px;
@@ -5747,12 +5754,31 @@ h1, h2, h3, h4, .font-serif {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* Checked state for Shade Radio Cards */
+/* Checked state for Shade Radio Cards (Strictly Preserves Shade Background Color!) */
 .variant-shade-item .variant-radio:checked + .variant-radio-card,
-.variant-shade-item .variant-radio:checked + .variant-pill-btn {
+.variant-shade-item .variant-radio:checked + .variant-pill-btn,
+.variant-radio:checked + .variant-radio-card[data-shade-color],
+.variant-radio:checked + .variant-radio-card[style*="background-color"],
+.variant-radio:checked + .variant-pill-btn[data-shade-color],
+.variant-radio:checked + .variant-pill-btn[style*="background-color"],
+.variant-radio:checked + .circular-shade-radio-btn[data-shade-color],
+.variant-radio:checked + .circular-shade-radio-btn[style*="background-color"] {
+  background-color: var(--shade-bg, inherit) !important;
   border-color: #1F1610 !important;
-  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4.5px #1F1610, 0 6px 18px rgba(31, 22, 16, 0.35) !important;
+  box-shadow: 0 0 0 2.5px #FFFFFF, 0 0 0 5.5px #1F1610, 0 8px 22px rgba(31, 22, 16, 0.35) !important;
   transform: translateY(-2px);
+}
+
+/* Hover state preserves shade background */
+.variant-shade-item:hover .variant-radio-card,
+.variant-radio-item:hover .variant-radio-card[data-shade-color],
+.variant-radio-item:hover .variant-radio-card[style*="background-color"],
+.variant-pill-label:hover .variant-pill-btn[data-shade-color],
+.variant-pill-label:hover .variant-pill-btn[style*="background-color"],
+.variant-shade-circular-label:hover .circular-shade-radio-btn {
+  background-color: var(--shade-bg, inherit) !important;
+  transform: translateY(-2px);
+  filter: brightness(1.05);
 }
 
 .variant-shade-item .variant-radio:checked + .variant-radio-card .custom-radio-circle,

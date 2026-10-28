@@ -592,10 +592,10 @@ function initQuickViewModal() {
                 ${opt.values.map((val, valIdx) => {
                   const valLower = String(val).toLowerCase();
                   let swatchBg = '';
-                  if (valLower.includes('#f5d6c1') || (isShadeOpt && (valLower.includes('01') || valLower === '1'))) swatchBg = '#F5D6C1';
-                  else if (valLower.includes('#dcae8b') || (isShadeOpt && (valLower.includes('02') || valLower === '2'))) swatchBg = '#DCAE8B';
-                  else if (valLower.includes('#e8c3a9') || (isShadeOpt && (valLower.includes('03') || valLower === '3'))) swatchBg = '#E8C3A9';
-                  else if (valLower.includes('#c68c5c') || (isShadeOpt && (valLower.includes('05') || valLower === '5'))) swatchBg = '#C68C5C';
+                  if (valLower.includes('f5d6c1') || valLower.includes('01') || valLower === '1' || valLower.includes('fair') || valLower.includes('ivory')) swatchBg = '#F5D6C1';
+                  else if (valLower.includes('dcae8b') || valLower.includes('02') || valLower === '2' || valLower.includes('natural') || valLower.includes('beige')) swatchBg = '#DCAE8B';
+                  else if (valLower.includes('e8c3a9') || valLower.includes('03') || valLower === '3' || valLower.includes('warm') || valLower.includes('honey') || valLower.includes('sand')) swatchBg = '#E8C3A9';
+                  else if (valLower.includes('c68c5c') || valLower.includes('05') || valLower === '5' || valLower.includes('caramel') || valLower.includes('tan') || valLower.includes('bronze') || valLower.includes('deep')) swatchBg = '#C68C5C';
                   else if (valLower.includes('#')) {
                     const match = val.match(/#[0-9A-Fa-f]{6}/);
                     if (match) swatchBg = match[0];
@@ -610,7 +610,7 @@ function initQuickViewModal() {
                   return `
                     <label class="qv-pill-label" style="cursor: pointer; display: inline-flex; position: relative;">
                       <input type="radio" name="qv-opt-${optIdx + 1}" value="${val}" ${valIdx === 0 ? 'checked' : ''} class="qv-variant-radio" data-opt-pos="${optIdx + 1}" style="position: absolute; opacity: 0; pointer-events: none;">
-                      <span class="qv-pill-btn ${valIdx === 0 ? 'active' : ''}" data-swatch="${swatchBg}" data-dark="${isDark}" style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 8px; border: 1.5px solid ${borderCol}; font-size: 0.76rem; font-weight: 700; background: ${bgColor}; color: ${textColor}; transition: all 0.2s ease; ${extraShadow}">
+                      <span class="qv-pill-btn ${valIdx === 0 ? 'active' : ''}" data-swatch="${swatchBg}" data-dark="${isDark}" style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 100% !important; border: 1.5px solid ${borderCol}; font-size: 0.76rem; font-weight: 700; background: ${bgColor}; color: ${textColor}; transition: all 0.2s ease; ${extraShadow}">
                         <span class="custom-radio-circle" style="width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid ${textColor}; display: inline-flex; align-items: center; justify-content: center; background: ${valIdx === 0 ? textColor : 'transparent'};">
                           <span style="width: 6px; height: 6px; border-radius: 50%; background: ${valIdx === 0 ? (isDark ? '#1F1610' : '#FFFFFF') : 'transparent'};"></span>
                         </span>
@@ -1124,11 +1124,66 @@ function initProductVariantSelector() {
         const selectedOptions = getSelectedOptions();
         const matched = findMatchingVariant(selectedOptions);
         updateVariantUI(matched);
+        enforceVariantShadeStyles();
       });
     });
 
-    // Bind hover effect to preview shade name on label
-    section.querySelectorAll('.variant-shade-circular-label').forEach(label => {
+    // Enforce Variant Shade Background Colors & 100% Border Radius
+    function enforceVariantShadeStyles() {
+      const shadeDefs = [
+        { regex: /f5d6c1|01\b|shade\s*01|fair|ivory/i, hex: '#F5D6C1', num: '01', dark: false },
+        { regex: /dcae8b|02\b|shade\s*02|natural|beige/i, hex: '#DCAE8B', num: '02', dark: false },
+        { regex: /e8c3a9|03\b|shade\s*03|warm|honey|sand/i, hex: '#E8C3A9', num: '03', dark: false },
+        { regex: /c68c5c|05\b|shade\s*05|caramel|tan|bronze|deep/i, hex: '#C68C5C', num: '05', dark: true }
+      ];
+
+      section.querySelectorAll('.variant-radio').forEach(radio => {
+        const rawVal = (radio.value || '').trim();
+        if (!rawVal) return;
+
+        let hex = null;
+        let isDark = false;
+        let num = '';
+
+        for (const item of shadeDefs) {
+          if (item.regex.test(rawVal)) {
+            hex = item.hex;
+            isDark = item.dark;
+            num = item.num;
+            break;
+          }
+        }
+
+        if (!hex) {
+          const hexMatch = rawVal.match(/#([0-9a-fA-F]{6})/);
+          if (hexMatch) {
+            hex = '#' + hexMatch[1];
+          }
+        }
+
+        if (hex) {
+          const btn = radio.nextElementSibling;
+          if (btn) {
+            btn.style.setProperty('background-color', hex, 'important');
+            btn.style.setProperty('--shade-bg', hex);
+            btn.style.setProperty('border-radius', '100%', 'important');
+            btn.setAttribute('data-shade-color', hex);
+            const textCol = isDark ? '#FFFFFF' : '#2A170A';
+            btn.style.setProperty('color', textCol, 'important');
+
+            const badge = btn.querySelector('.shade-num-badge');
+            if (badge) {
+              badge.style.setProperty('color', textCol, 'important');
+            }
+          }
+        }
+      });
+    }
+
+    enforceVariantShadeStyles();
+
+    // Bind hover effect to preview shade name on label across all variant buttons
+    section.querySelectorAll('.variant-shade-circular-label, .variant-radio-item').forEach(label => {
       const radio = label.querySelector('.variant-radio');
       if (!radio) return;
       const pos = radio.getAttribute('data-option-position');
@@ -1161,6 +1216,7 @@ function initProductVariantSelector() {
         const selectedOptions = getSelectedOptions();
         const matched = findMatchingVariant(selectedOptions);
         updateVariantUI(matched);
+        enforceVariantShadeStyles();
       });
     });
 
