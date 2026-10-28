@@ -5600,7 +5600,7 @@ h1, h2, h3, h4, .font-serif {
   letter-spacing: normal;
   background: #FAF7F2;
   padding: 2px 10px;
-  border-radius: 6px;
+  border-radius: 100% !important;
   border: 1px solid #EAE3DA;
   font-size: 0.85rem;
 }
@@ -5645,7 +5645,7 @@ h1, h2, h3, h4, .font-serif {
   gap: 9px;
   min-height: 42px;
   padding: 8px 16px;
-  border-radius: 10px;
+  border-radius: 100% !important;
   border: 1.5px solid #E0D7CB;
   background: #FFFFFF;
   color: #1F1610;
@@ -5666,7 +5666,7 @@ h1, h2, h3, h4, .font-serif {
 .custom-radio-circle {
   width: 18px;
   height: 18px;
-  border-radius: 50%;
+  border-radius: 100% !important;
   border: 2px solid #C4B5A5;
   background: #FFFFFF;
   display: inline-flex;
@@ -5679,7 +5679,7 @@ h1, h2, h3, h4, .font-serif {
 .custom-radio-dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 100% !important;
   background: transparent;
   transform: scale(0);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease;
@@ -5735,7 +5735,7 @@ h1, h2, h3, h4, .font-serif {
 .shade-dot {
   width: 14px;
   height: 14px;
-  border-radius: 50%;
+  border-radius: 100% !important;
   border: 2px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
   flex-shrink: 0;
