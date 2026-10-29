@@ -10,10 +10,16 @@
   <div class="page-width">
     <!-- Dedicated Brand Collection Hero Banner -->
     {%- if is_skin_cottage and collection.image == blank -%}
-      <div class="collection-brand-hero-banner banner-skin-cottage" style="background: linear-gradient(135deg, #11382C 0%, #1B4D3E 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #2D6A4F; box-shadow: 0 8px 24px rgba(17, 56, 44, 0.18);">
-        <div style="display:flex; justify-content:center; margin-bottom:12px;">
-          <img src="{{ 'skin-cottage-logo.svg' | asset_url }}" alt="Skin Cottage Luxury Body Care - Malaysia" style="max-height: 56px; max-width: 240px; width: auto; height: auto;" loading="eager">
-        </div>
+      <div class="collection-brand-hero-banner banner-skin-cottage" style="margin-bottom: 24px; border-radius: 16px; overflow: hidden; border: 1.5px solid #2D6A4F; box-shadow: 0 8px 24px rgba(17, 56, 44, 0.15);">
+        <img
+          src="{{ 'skin-cottage-collection-banner.jpg' | asset_url }}"
+          alt="Skin Cottage Luxury Botanical Body Care Collection - Lush Beauty Mart"
+          style="width: 100%; height: auto; display: block; object-fit: cover;"
+          loading="eager"
+          width="1200"
+          height="675"
+        >
+      </div>
         <p style="margin: 0 auto; font-size: 0.92rem; color: #D8F3DC; font-weight: 600; letter-spacing: 0.4px; max-width: 650px;">
           Malaysian Luxury Botanical Body Care · Enriched with Natural Fruit Extracts, Vitamin E & pH 5.5 Formula · 100% Authentic Stock
         </p>
@@ -75,9 +81,13 @@
         </div>
       {%- elsif is_skin_cottage -%}
         <div class="collection-brand-badge-wrap">
-          <div class="collection-brand-logo-card" style="padding: 8px 20px; border-radius: 12px; background: #11382C; border: 1.5px solid #2D6A4F;">
-            <img src="{{ 'skin-cottage-logo.svg' | asset_url }}" alt="Skin Cottage Malaysia" style="max-height: 38px; max-width: 150px; display: block;" loading="eager">
+          <div class="collection-brand-logo-card" style="padding: 6px 16px; border-radius: 12px; background: #11382C; border: 1.5px solid #2D6A4F;">
+            <img src="{{ 'skin-cottage-logo.png' | asset_url }}" alt="Skin Cottage Malaysia" style="max-height: 40px; max-width: 160px; display: block; object-fit: contain;" loading="eager">
           </div>
+          <span class="collection-verified-pill" style="color: #11382C; background: rgba(82, 183, 136, 0.15); border-color: rgba(82, 183, 136, 0.4);">
+            🌿 100% ORIGINAL & AUTHORIZED MALAYSIAN BOTANICAL CARE
+          </span>
+        </div>
           <span class="collection-verified-pill" style="color: #11382C; background: rgba(82, 183, 136, 0.15); border-color: rgba(82, 183, 136, 0.4);">
             🌿 100% ORIGINAL & AUTHORIZED MALAYSIAN BOTANICAL CARE
           </span>
