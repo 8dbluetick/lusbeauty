@@ -42,7 +42,20 @@
                     loading="lazy"
                   >
                 {%- else -%}
-                  <span class="brand-card-name">{{ block.settings.title }}</span>
+                  {%- assign brand_block_title_lower = block.settings.title | downcase -%}
+                  {%- if brand_block_title_lower contains 'skin cottage' -%}
+                    <img src="{{ 'skin-cottage-logo.png' | asset_url }}" alt="Skin Cottage" class="brand-card-logo" style="max-height: 48px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'syoss' -%}
+                    <img src="{{ 'syoss-logo.svg' | asset_url }}" alt="Syoss" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'rasasi' -%}
+                    {% render 'brand-logo', brand: 'rasasi', class: 'brand-card-logo' %}
+                  {%- elsif brand_block_title_lower contains 'possibility' -%}
+                    {% render 'brand-logo', brand: 'possibility', class: 'brand-card-logo' %}
+                  {%- elsif brand_block_title_lower contains 'gliss' -%}
+                    {% render 'brand-logo', brand: 'gliss', class: 'brand-card-logo' %}
+                  {%- else -%}
+                    <span class="brand-card-name">{{ block.settings.title }}</span>
+                  {%- endif -%}
                 {%- endif -%}
               </div>
 
