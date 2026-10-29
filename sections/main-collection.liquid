@@ -1,7 +1,20 @@
 <section class="lush-collection-section">
+  {%- assign is_syoss = false -%}
+  {%- if collection.handle == 'syoss' or collection.title contains 'Syoss' or collection.title contains 'syoss' or canonical_url contains 'syoss' or canonical_url contains 'Syoss' -%}
+    {%- assign is_syoss = true -%}
+  {%- endif -%}
   <div class="page-width">
     <!-- Dedicated Brand Collection Hero Banner -->
-    {%- if collection.image != blank -%}
+    {%- if is_syoss and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-syoss" style="background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #333333; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+        <div style="display:flex; justify-content:center; margin-bottom:12px;">
+          <img src="{{ 'syoss-logo.svg' | asset_url }}" alt="Syoss Professional Performance - Japan 1977" style="max-height: 56px; max-width: 220px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.92rem; color: #E5E5E5; font-weight: 600; letter-spacing: 0.4px; max-width: 650px;">
+          Japanese Salon Professional Performance Haircare · Est. Osaka, Japan 1977 · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif collection.image != blank -%}
       <div class="collection-brand-hero-banner">
         <img
           src="{{ collection.image | image_url: width: 1920 }}"
@@ -68,12 +81,14 @@
           </div>
           <span class="collection-verified-pill" style="color: #A4133C;">🍓 100% ORIGINAL LONDON GOURMET BATH CARE</span>
         </div>
-      {%- elsif collection.handle == 'syoss' or collection.title contains 'Syoss' or collection.title contains 'syoss' -%}
+      {%- elsif is_syoss -%}
         <div class="collection-brand-badge-wrap">
-          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #444444;">
-            {% render 'brand-logo', brand: 'syoss', class: 'collection-brand-logo-img' %}
+          <div class="collection-brand-logo-card" style="padding: 8px 20px; border-radius: 12px; background: #0A0A0A; border: 1.5px solid #333333;">
+            <img src="{{ 'syoss-logo.svg' | asset_url }}" alt="Syoss Japan" style="max-height: 38px; max-width: 140px; display: block;" loading="eager">
           </div>
-          <span class="collection-verified-pill" style="color: #1F1610;">✨ 100% GENUINE JAPANESE SALON PERFORMANCE</span>
+          <span class="collection-verified-pill" style="color: #1F1610; background: rgba(229, 9, 20, 0.1); border-color: rgba(229, 9, 20, 0.35);">
+            🇯🇵 100% GENUINE JAPANESE SALON PERFORMANCE
+          </span>
         </div>
       {%- elsif collection.handle == 'gliss' or collection.title contains 'Gliss' or collection.title contains 'gliss' -%}
         <div class="collection-brand-badge-wrap">
@@ -114,7 +129,22 @@
       <span class="collection-eyebrow">LUSH BEAUTY MART NAGPUR</span>
       <h1 class="collection-main-title">{{ collection.title | default: "All Products" }}</h1>
       {%- if collection.description != blank -%}
-        <p class="collection-desc">{{ collection.description | strip_html | truncate: 240 }}</p>
+        <div class="collection-desc">{{ collection.description }}</div>
+      {%- elsif is_syoss -%}
+        <div class="collection-syoss-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#E50914; background:#FFF0F0; border:1px solid rgba(229,9,20,0.2); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🇯🇵 Est. Osaka, Japan 1977</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#1F1610; background:#F8FAFC; border:1px solid #E2E8F0; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Professional Performance Haircare</span>
+          </div>
+          <p style="font-size: 0.9rem; color: #4A3B32; line-height: 1.65; margin: 0 0 14px;">
+            <strong>Syoss</strong> brings professional Japanese salon performance directly to your daily haircare routine. Co-developed and tested by master Japanese hairstylists and powered by Henkel hair science, Syoss combines traditional Asian botanicals (Black Rice, Violet Rice, Water Lily) with high-concentration <strong>Amino Complex</strong> and <strong>Kera-Lipid Technology</strong> to deeply rebuild damaged hair fibers, lock in brilliant color, and deliver salon-smooth hair at home.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🧬 Kera-Lipid Cellular Repair</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌾 Asian Rice Amino Infusions</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💈 100% Genuine Nagpur Stock</span>
+          </div>
+        </div>
       {%- endif -%}
       <div class="collection-meta-bar">
         <span class="collection-count-sub">Showing {{ collection.products_count }} authentic items available in-store and online</span>
