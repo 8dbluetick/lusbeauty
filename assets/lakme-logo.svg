@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#18181B"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#E11D48" stroke-width="1.5" stroke-opacity="0.4"/>
+  <text x="180" y="58" font-family="'Montserrat', 'Helvetica Neue', sans-serif" font-size="34" font-weight="800" letter-spacing="4.5" fill="#FFFFFF" text-anchor="middle">LAKMÉ</text>
+  <line x1="120" y1="70" x2="240" y2="70" stroke="#E11D48" stroke-width="1.5"/>
+  <text x="180" y="84" font-family="'Montserrat', 'Arial', sans-serif" font-size="7.5" font-weight="700" letter-spacing="3" fill="#E11D48" text-anchor="middle">REINVENT FASHION &amp; BEAUTY</text>
+</svg>

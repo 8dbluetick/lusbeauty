@@ -94,7 +94,35 @@
     {% render 'analytics-tracking' %}
 
 
-    </head>
+        <!-- Global Broken/Cracked Image Defense & Self-Healing Fallback -->
+    <style>
+      img[src=""], img:not([src]) { opacity: 0 !important; visibility: hidden !important; }
+      img.img-load-failed { opacity: 0.9; object-fit: contain; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+    </style>
+    <script>
+      (function() {
+        window.addEventListener('error', function(e) {
+          if (e.target && e.target.tagName === 'IMG') {
+            var img = e.target;
+            if (!img.dataset.hasHandledError) {
+              img.dataset.hasHandledError = 'true';
+              img.classList.add('img-load-failed');
+              if (img.classList.contains('brand-card-logo') || img.classList.contains('brand-logo-img') || img.closest('.brand-logo-area') || img.closest('.collection-card-logo-badge')) {
+                var alt = img.getAttribute('alt') || 'Brand';
+                var span = document.createElement('span');
+                span.className = 'brand-name-fallback';
+                span.style.cssText = 'display:inline-block;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;font-size:0.82rem;color:#1F1610;padding:6px 12px;background:#ffffff;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid #e2e8f0;';
+                span.textContent = alt;
+                if (img.parentNode) {
+                  img.parentNode.replaceChild(span, img);
+                }
+              }
+            }
+          }
+        }, true);
+      })();
+    </script>
+  </head>
 
   <body class="lush-theme-body template-{{ template.name | handle }}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">

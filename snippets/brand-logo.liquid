@@ -1,5 +1,6 @@
 {% comment %}
-  Lush Beauty Mart — Brand Logo Official Cloudinary CDN Snippet
+  Lush Beauty Mart — Official Brand Logo Snippet
+  Bulletproof local theme assets with instant SVG/PNG rendering and zero cracked images
   Usage: {% render 'brand-logo', brand: 'brand-handle', class: 'custom-class', loading: 'eager' %}
 {% endcomment %}
 {%- assign b_class = class | default: 'brand-logo-img' -%}
@@ -8,19 +9,19 @@
 
 {%- case b_handle -%}
   {%- when 'vgr' or 'vgr-india' or 'vgr-voyager' -%}
-    <img src="{{ 'vgr-logo.png' | asset_url }}" alt="VGR Professional" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'vgr-logo.png' | asset_url }}" alt="VGR Professional" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'vgr-logo.png' | asset_url }}';">
 
   {%- when 'skin1004' or 'centella' or 'madagascar-centella' or 'skin-1004' -%}
-    <img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004 Madagascar Centella" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004 Madagascar Centella" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'skin1004-centella-logo.png' | asset_url }}';">
 
-    {%- when 'skin-cottage' or 'skincottage' -%}
-    <img src="{{ 'skin-cottage-logo.png' | asset_url }}" alt="Skin Cottage Luxury Body Care" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+  {%- when 'skin-cottage' or 'skincottage' -%}
+    <img src="{{ 'skin-cottage-logo.png' | asset_url }}" alt="Skin Cottage Luxury Body Care" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'skin-cottage-logo.svg' | asset_url }}';">
 
   {%- when '3q' or '3q-beauty' or '3qbeauty' or 'three-q' or 'three-q-beauty' -%}
-    <img src="{{ '3q-beauty-logo.png' | asset_url }}" alt="3Q Beauty Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ '3q-beauty-logo.png' | asset_url }}" alt="3Q Beauty Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ '3q-beauty-logo.svg' | asset_url }}';">
 
   {%- when 'rasasi' or 'rasasi-perfumes' -%}
-    <img src="{{ 'rasasi-logo.png' | asset_url }}" alt="Rasasi Parfums Dubai" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'rasasi-logo.png' | asset_url }}" alt="Rasasi Parfums Dubai" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'rasasi-logo.svg' | asset_url }}';">
 
   {%- when 'possibility' or 'possibility-london' -%}
     <svg class="{{ b_class }}" viewBox="0 0 140 40" width="140" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,96 +35,96 @@
   {%- when 'syoss' or 'syoss-hair' -%}
     <img src="{{ 'syoss-logo.svg' | asset_url }}" alt="Syoss Professional Performance" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
 
-        {%- when 'versace' or 'versace-parfums' or 'versace-beauty' -%}
-    <img src="{{ 'versace-logo.png' | asset_url }}" alt="Versace Milano" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+  {%- when 'versace' or 'versace-parfums' or 'versace-beauty' -%}
+    <img src="{{ 'versace-logo.png' | asset_url }}" alt="Versace Milano" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'versace-logo.svg' | asset_url }}';">
 
   {%- when 'nivea' or 'nivea-creme' or 'nivea-india' -%}
-    <img src="{{ 'nivea-logo.png' | asset_url }}" alt="Nivea Dermatological Skincare" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'nivea-logo.png' | asset_url }}" alt="Nivea Dermatological Skincare" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'nivea-logo.svg' | asset_url }}';">
 
   {%- when 'himalaya' or 'himalaya-wellness' or 'himalaya-herbals' or 'himalaya-drug' -%}
-    <img src="{{ 'himalaya-logo.png' | asset_url }}" alt="Himalaya Wellness Since 1930" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'himalaya-logo.png' | asset_url }}" alt="Himalaya Wellness Since 1930" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'himalaya-logo.svg' | asset_url }}';">
 
   {%- when 'yardley' or 'yardley-london' or 'yardleylondon' -%}
-    <img src="{{ 'yardley-logo.png' | asset_url }}" alt="Yardley London Luxury Perfumery" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'yardley-logo.png' | asset_url }}" alt="Yardley London Luxury Perfumery" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'yardley-logo.svg' | asset_url }}';">
 
   {%- when 'boroplus' or 'boro-plus' or 'emami-boroplus' -%}
-    <img src="{{ 'boroplus-logo.png' | asset_url }}" alt="BoroPlus Ayurvedic Antiseptic Care" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'boroplus-logo.png' | asset_url }}" alt="BoroPlus Ayurvedic Antiseptic Care" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'boroplus-logo.svg' | asset_url }}';">
 
   {%- when 'cadbury' or 'cadbury-celebrations' or 'cadburys' -%}
-    <img src="{{ 'cadbury-logo.png' | asset_url }}" alt="Cadbury Celebrations Luxury Gifting" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'cadbury-logo.png' | asset_url }}" alt="Cadbury Celebrations Luxury Gifting" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'cadbury-logo.svg' | asset_url }}';">
 
   {%- when 'gissah' or 'gissah-perfumes' or 'gissahperfumes' -%}
-    <img src="{{ 'gissah-logo.png' | asset_url }}" alt="Gissah Parfums Kuwait" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'gissah-logo.png' | asset_url }}" alt="Gissah Parfums Kuwait" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'gissah-logo.svg' | asset_url }}';">
 
   {%- when 'marquis' or 'remy-marquis' or 'remymarquis' -%}
-    <img src="{{ 'marquis-logo.png' | asset_url }}" alt="Marquis Rémy Marquis Paris" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'marquis-logo.png' | asset_url }}" alt="Marquis Rémy Marquis Paris" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'marquis-logo.svg' | asset_url }}';">
 
   {%- when 'calvin-klein' or 'calvin-kelvin' or 'calvinklein' or 'ck' -%}
-    <img src="{{ 'calvin-klein-logo.png' | asset_url }}" alt="Calvin Klein New York" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'calvin-klein-logo.png' | asset_url }}" alt="Calvin Klein New York" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'calvin-klein-logo.svg' | asset_url }}';">
 
   {%- when 'guess' or 'guess-parfums' -%}
-    <img src="{{ 'guess-logo.png' | asset_url }}" alt="Guess Los Angeles" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'guess-logo.png' | asset_url }}" alt="Guess Los Angeles" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'guess-logo.svg' | asset_url }}';">
 
   {%- when 'royale' or 'royale-blue' or 'royale-parfums' -%}
-    <img src="{{ 'royale-logo.png' | asset_url }}" alt="Royale Blue Parfums" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'royale-logo.png' | asset_url }}" alt="Royale Blue Parfums" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'royale-logo.svg' | asset_url }}';">
 
   {%- when 'gucci' or 'gucci-beauty' or 'gucci-fragrance' or 'gucci-perfumes' or 'gucci-parfums' -%}
-    <img src="{{ 'gucci-logo.png' | asset_url }}" alt="Gucci Luxury Beauty & Fragrance" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'gucci-logo.png' | asset_url }}" alt="Gucci Luxury Beauty & Fragrance" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'gucci-logo.svg' | asset_url }}';">
 
   {%- when 'gliss' or 'gliss-kur' or 'schwarzkopf-gliss' -%}
-    <img src="{{ 'gliss-logo.png' | asset_url }}" alt="Schwarzkopf Gliss Hair Repair" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+    <img src="{{ 'gliss-logo.png' | asset_url }}" alt="Schwarzkopf Gliss Hair Repair" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'gliss-logo.svg' | asset_url }}';">
 
   {%- when 'dot-and-key' or 'dot-key' or 'dotandkey' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dot-and-key.png.jpg" alt="Dot & Key" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'dot-and-key-logo.png' | asset_url }}" alt="Dot & Key" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'dot-and-key-logo.svg' | asset_url }}';">
 
   {%- when 'kay-beauty' or 'kaybeauty' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/kay-beauty.png.png" alt="Kay Beauty" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'kay-beauty-logo.png' | asset_url }}" alt="Kay Beauty" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'kay-beauty-logo.svg' | asset_url }}';">
 
   {%- when 'lakme' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/lakme.png.jpg" alt="Lakmé" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'lakme-logo.png' | asset_url }}" alt="Lakmé" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'lakme-logo.svg' | asset_url }}';">
 
   {%- when 'loreal-professionnel' or 'loreal-pro' or 'l_oreal_professionnel' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/loreal-pro.png.jpg" alt="L'Oréal Professionnel" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'loreal-pro-logo.png' | asset_url }}" alt="L'Oréal Professionnel" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'loreal-pro-logo.svg' | asset_url }}';">
 
   {%- when 'minimalist' or 'be-minimalist' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/minimalist.webp" alt="Minimalist" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'minimalist-logo.png' | asset_url }}" alt="Minimalist" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'minimalist-logo.svg' | asset_url }}';">
 
   {%- when 'cetaphil' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/cetaphil.png.png" alt="Cetaphil" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'cetaphil-logo.png' | asset_url }}" alt="Cetaphil" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'cetaphil-logo.svg' | asset_url }}';">
 
   {%- when 'mac' or 'mac-cosmetics' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/mac.png.png" alt="M·A·C Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'mac-logo.png' | asset_url }}" alt="M·A·C Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'mac-logo.svg' | asset_url }}';">
 
   {%- when 'loreal-paris' or 'loreal' or 'l_oreal_paris' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/loreal-paris.png.jpg" alt="L'Oréal Paris" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'loreal-paris-logo.png' | asset_url }}" alt="L'Oréal Paris" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'loreal-paris-logo.svg' | asset_url }}';">
 
   {%- when 'elf' or 'elf-cosmetics' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/elf.png.png" alt="e.l.f. Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'elf-logo.png' | asset_url }}" alt="e.l.f. Cosmetics" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'elf-logo.svg' | asset_url }}';">
 
   {%- when 'the-ordinary' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566819/the-ordinary.png.jpg" alt="The Ordinary" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'the-ordinary-logo.png' | asset_url }}" alt="The Ordinary" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'the-ordinary-logo.svg' | asset_url }}';">
 
   {%- when 'laneige' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/laneige.png.png" alt="Laneige" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'laneige-logo.png' | asset_url }}" alt="Laneige" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'laneige-logo.svg' | asset_url }}';">
 
   {%- when 'charlotte-tilbury' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/charlotte-tilbury.png.jpg" alt="Charlotte Tilbury" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'charlotte-tilbury-logo.png' | asset_url }}" alt="Charlotte Tilbury" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'charlotte-tilbury-logo.svg' | asset_url }}';">
 
   {%- when 'dove' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dove.png.png" alt="Dove" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'dove-logo.png' | asset_url }}" alt="Dove" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'dove-logo.svg' | asset_url }}';">
 
   {%- when 'kerastase' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566822/kerastase.png.png" alt="Kérastase" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'kerastase-logo.png' | asset_url }}" alt="Kérastase" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'kerastase-logo.svg' | asset_url }}';">
 
   {%- when 'estee-lauder' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/estee-lauder.png.png" alt="Estée Lauder" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'estee-lauder-logo.png' | asset_url }}" alt="Estée Lauder" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'estee-lauder-logo.svg' | asset_url }}';">
 
   {%- when 'love-beauty-planet' or 'lbp' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/love-beauty-planet.png.png" alt="Love Beauty & Planet" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'love-beauty-planet-logo.png' | asset_url }}" alt="Love Beauty & Planet" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'love-beauty-planet-logo.svg' | asset_url }}';">
 
   {%- when 'bath-and-body-works' or 'bath-body-works' or 'bbw' -%}
-    <img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/bath-and-body-works.png" alt="Bath & Body Works" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40">
+    <img src="{{ 'bath-and-body-works-logo.png' | asset_url }}" alt="Bath & Body Works" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'bath-and-body-works-logo.svg' | asset_url }}';">
 
   {%- else -%}
-    <span class="{{ b_class }} brand-name-fallback">{{ brand | escape }}</span>
+    <span class="{{ b_class }} brand-name-fallback" style="display:inline-block; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; font-size:0.85rem; color:#1F1610;">{{ brand | escape }}</span>
 {%- endcase -%}

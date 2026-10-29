@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#FFFFFF"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#003580" stroke-width="1.5" stroke-opacity="0.3"/>
+  <path d="M120 44 C124 38, 134 38, 140 44 C134 46, 126 50, 120 44 Z" fill="#D4AF37"/>
+  <text x="195" y="58" font-family="'Playfair Display', 'Georgia', serif" font-size="34" font-weight="800" font-style="italic" fill="#003580" text-anchor="middle">Dove</text>
+  <text x="180" y="80" font-family="'Montserrat', 'Arial', sans-serif" font-size="7.5" font-weight="700" letter-spacing="2.5" fill="#003580" text-anchor="middle">1/4 MOISTURIZING CREAM CARE</text>
+</svg>

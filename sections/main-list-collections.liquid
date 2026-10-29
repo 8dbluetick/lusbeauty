@@ -432,6 +432,511 @@
         </div>
       {%- endif -%}
 
+      <!-- Dot & Key Brand Collection Card -->
+      {%- if collections['dot-and-key'] == blank and collections['dot-key'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #FBCFE8; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(230, 73, 128, 0.05);">
+          <a href="/collections/all?filter.p.vendor=Dot+%26+Key" style="display: block; position: relative; background: #FFF0F5; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-dot-and-key.jpg' | asset_url }}" alt="Dot &amp; Key" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'dot-and-key-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(230, 73, 128, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">🌸 Fruit Active Skincare</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #FDF2F8;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #E64980; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'dot-and-key-logo.png' | asset_url }}" alt="Dot &amp; Key" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Dot+%26+Key" style="color: #1F1610; text-decoration: none;">Dot &amp; Key</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Fruit-forward active skincare, Cica calming gels, Vitamin C glow serums &amp; SPF 50 sunscreens.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Dot+%26+Key" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #E64980; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Dot &amp; Key</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Kay Beauty Brand Collection Card -->
+      {%- if collections['kay-beauty'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=Kay+Beauty" style="display: block; position: relative; background: #1C1917; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-kay-beauty.png' | asset_url }}" alt="Kay Beauty" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'kay-beauty-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(28, 25, 23, 0.9); color: #D4A373; border: 1px solid rgba(212, 163, 115, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">✨ By Katrina Kaif</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #D4A373; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'kay-beauty-logo.png' | asset_url }}" alt="Kay Beauty" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Kay+Beauty" style="color: #1F1610; text-decoration: none;">Kay Beauty</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              High-performance, skincare-infused makeup designed to bridge high glamour with skin nourishment.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Kay+Beauty" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #1C1917; color: #D4A373; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Kay Beauty</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Lakme Brand Collection Card -->
+      {%- if collections['lakme'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=Lakme" style="display: block; position: relative; background: #18181B; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-lakme.jpg' | asset_url }}" alt="Lakmé" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'lakme-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(225, 29, 72, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">💄 Runway Cosmetics</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'lakme-logo.png' | asset_url }}" alt="Lakmé" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Lakme" style="color: #1F1610; text-decoration: none;">Lakmé</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              India's pioneer in runway glamour, Lumi Cream, Peach Milk moisturizers &amp; 9 to 5 matte lipsticks.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Lakme" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #18181B; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Lakmé</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- L'Oreal Professionnel Brand Collection Card -->
+      {%- if collections['loreal-professionnel'] == blank and collections['loreal-pro'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=L%27Oreal+Professionnel" style="display: block; position: relative; background: #09090B; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-loreal-pro.jpg' | asset_url }}" alt="L'Oréal Professionnel Paris" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'loreal-pro-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(9, 9, 11, 0.9); color: #C5A059; border: 1px solid rgba(197, 160, 89, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">💇 Salon Haircare Paris</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'loreal-pro-logo.png' | asset_url }}" alt="L'Oréal Professionnel" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=L%27Oreal+Professionnel" style="color: #1F1610; text-decoration: none;">L'Oréal Professionnel</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Parisian salon expert formulations, Absolut Repair Molecular, Serie Expert &amp; Mythic Oil therapies.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=L%27Oreal+Professionnel" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #09090B; color: #C5A059; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore L'Oréal Pro</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Minimalist Brand Collection Card -->
+      {%- if collections['minimalist'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=Minimalist" style="display: block; position: relative; background: #FAFAFA; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-minimalist.webp' | asset_url }}" alt="Minimalist" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'minimalist-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(24, 24, 27, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">🧬 Active Science Formulations</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'minimalist-logo.png' | asset_url }}" alt="Minimalist" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Minimalist" style="color: #1F1610; text-decoration: none;">Minimalist</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Transparent active skincare, Niacinamide 10%, Salicylic Acid cleanser &amp; SPF 50 fluid sunscreens.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Minimalist" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #18181B; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Minimalist</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Cetaphil Brand Collection Card -->
+      {%- if collections['cetaphil'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #BAE6FD; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(3, 105, 161, 0.05);">
+          <a href="/collections/all?filter.p.vendor=Cetaphil" style="display: block; position: relative; background: #F0F9FF; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'banner-cetaphil.jpg' | asset_url }}" alt="Cetaphil Skincare" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'cetaphil-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(2, 132, 199, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">💧 #1 Dermatologist Recommended</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #E0F2FE;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #0284C7; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'cetaphil-logo.png' | asset_url }}" alt="Cetaphil" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Cetaphil" style="color: #1F1610; text-decoration: none;">Cetaphil</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Gentle Skin Cleansers, Daily Advance Ultra Hydrating Lotions &amp; Restoraderm barrier skincare.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Cetaphil" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #0284C7; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Cetaphil</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- MAC Cosmetics Brand Collection Card -->
+      {%- if collections['mac'] == blank and collections['mac-cosmetics'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=MAC" style="display: block; position: relative; background: #0A0A0A; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-mac.png' | asset_url }}" alt="M·A·C Cosmetics" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'mac-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(10, 10, 10, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">🖤 Professional Artistry</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #1F1610; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'mac-logo.png' | asset_url }}" alt="M·A·C" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=MAC" style="color: #1F1610; text-decoration: none;">M·A·C Cosmetics</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Backstage trendsetters, Studio Fix Powder Plus Foundation, Prep + Prime &amp; Retro Matte lipsticks.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=MAC" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #0A0A0A; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore M·A·C</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- L'Oreal Paris Brand Collection Card -->
+      {%- if collections['loreal-paris'] == blank and collections['loreal'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=L%27Oreal+Paris" style="display: block; position: relative; background: #18181B; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-loreal-paris.jpg' | asset_url }}" alt="L'Oréal Paris" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'loreal-paris-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(24, 24, 27, 0.9); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">👑 Parisian Glamour</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #D4AF37; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'loreal-paris-logo.png' | asset_url }}" alt="L'Oréal Paris" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=L%27Oreal+Paris" style="color: #1F1610; text-decoration: none;">L'Oréal Paris</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Revitalift 1.5% Hyaluronic Acid, Glycolic Bright Day Creams &amp; Infallible 24H matte foundations.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=L%27Oreal+Paris" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #18181B; color: #D4AF37; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore L'Oréal Paris</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- e.l.f. Cosmetics Brand Collection Card -->
+      {%- if collections['elf'] == blank and collections['elf-cosmetics'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=e.l.f." style="display: block; position: relative; background: #18181B; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-elf.png' | asset_url }}" alt="e.l.f. Cosmetics" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'elf-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(24, 24, 27, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">✨ Clean Vegan Beauty</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'elf-logo.png' | asset_url }}" alt="e.l.f." style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=e.l.f." style="color: #1F1610; text-decoration: none;">e.l.f. Cosmetics</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Poreless Putty Primer, Halo Glow Liquid Filter &amp; Camo Concealer high-impact vegan essentials.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=e.l.f." style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #18181B; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore e.l.f.</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- The Ordinary Brand Collection Card -->
+      {%- if collections['the-ordinary'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=The+Ordinary" style="display: block; position: relative; background: #FAFAFA; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-the-ordinary.jpg' | asset_url }}" alt="The Ordinary" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'the-ordinary-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(24, 24, 27, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">🧪 Clinical Chemistry</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'the-ordinary-logo.png' | asset_url }}" alt="The Ordinary" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=The+Ordinary" style="color: #1F1610; text-decoration: none;">The Ordinary</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Niacinamide 10% + Zinc 1%, Hyaluronic Acid 2% + B5, Glycolic Acid 7% &amp; AHA 30% Peeling Solution.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=The+Ordinary" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #18181B; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore The Ordinary</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Laneige Brand Collection Card -->
+      {%- if collections['laneige'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #BAE6FD; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.05);">
+          <a href="/collections/all?filter.p.vendor=Laneige" style="display: block; position: relative; background: #F0FDF4; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-laneige.png' | asset_url }}" alt="Laneige" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'laneige-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(2, 132, 199, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">💧 Korean Water Science</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #E0F2FE;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #0284C7; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'laneige-logo.png' | asset_url }}" alt="Laneige" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Laneige" style="color: #1F1610; text-decoration: none;">Laneige</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              World-acclaimed Lip Sleeping Mask, Water Sleeping Mask &amp; Water Bank Blue Hyaluronic deep moisture.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Laneige" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #0284C7; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Laneige</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Charlotte Tilbury Brand Collection Card -->
+      {%- if collections['charlotte-tilbury'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=Charlotte+Tilbury" style="display: block; position: relative; background: #3D1A24; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-charlotte-tilbury.jpg' | asset_url }}" alt="Charlotte Tilbury" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'charlotte-tilbury-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(61, 26, 36, 0.9); color: #C5A059; border: 1px solid rgba(197, 160, 89, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">👑 Hollywood Luxury</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'charlotte-tilbury-logo.png' | asset_url }}" alt="Charlotte Tilbury" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Charlotte+Tilbury" style="color: #1F1610; text-decoration: none;">Charlotte Tilbury</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Pillow Talk cult phenomenon, Airbrush Flawless Finish, Magic Cream &amp; red-carpet glow elixirs.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Charlotte+Tilbury" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #3D1A24; color: #C5A059; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Charlotte Tilbury</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Dove Brand Collection Card -->
+      {%- if collections['dove'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=Dove" style="display: block; position: relative; background: #FFFFFF; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-dove.png' | asset_url }}" alt="Dove" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'dove-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(0, 53, 128, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">🕊️ 1/4 Moisturizing Cream</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #003580; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'dove-logo.png' | asset_url }}" alt="Dove" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Dove" style="color: #1F1610; text-decoration: none;">Dove</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Deeply nourishing body washes, beauty moisture bars, exfoliating body polishes &amp; hair repair.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Dove" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #003580; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Dove</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Kerastase Brand Collection Card -->
+      {%- if collections['kerastase'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=Kerastase" style="display: block; position: relative; background: #0F172A; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-kerastase.png' | asset_url }}" alt="Kérastase Paris" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'kerastase-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(15, 23, 42, 0.9); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">👑 Haute Coiffure Paris</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #D4AF37; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'kerastase-logo.png' | asset_url }}" alt="Kérastase" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Kerastase" style="color: #1F1610; text-decoration: none;">Kérastase</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Prestige hair ritual care, Elixir Ultime hair oils, Genesis anti-fall serums &amp; Nutritive masques.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Kerastase" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #0F172A; color: #D4AF37; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Kérastase</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Estee Lauder Brand Collection Card -->
+      {%- if collections['estee-lauder'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=Estee+Lauder" style="display: block; position: relative; background: #021B38; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-estee-lauder.png' | asset_url }}" alt="Estée Lauder" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'estee-lauder-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(2, 27, 56, 0.9); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">👑 Advanced Night Repair</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #D4AF37; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'estee-lauder-logo.png' | asset_url }}" alt="Estée Lauder" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Estee+Lauder" style="color: #1F1610; text-decoration: none;">Estée Lauder</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Advanced Night Repair synchronized multi-recovery complex &amp; Double Wear stay-in-place liquid makeup.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Estee+Lauder" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #021B38; color: #D4AF37; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Estée Lauder</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Love Beauty & Planet Brand Collection Card -->
+      {%- if collections['love-beauty-planet'] == blank and collections['love-beauty-and-planet'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #FECDD3; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(225, 29, 72, 0.05);">
+          <a href="/collections/all?filter.p.vendor=Love+Beauty+and+Planet" style="display: block; position: relative; background: #FDF4F5; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-love-beauty-planet.png' | asset_url }}" alt="Love Beauty and Planet" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'love-beauty-planet-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(225, 29, 72, 0.9); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">🌸 Eco-Conscious Botanicals</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #FFE4E6;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'love-beauty-planet-logo.png' | asset_url }}" alt="Love Beauty &amp; Planet" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Love+Beauty+and+Planet" style="color: #1F1610; text-decoration: none;">Love Beauty &amp; Planet</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Murumuru butter &amp; rose body washes, coconut water hydration shampoos &amp; ethical vegan formulas.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Love+Beauty+and+Planet" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #E11D48; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Love Beauty</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Bath & Body Works Brand Collection Card -->
+      {%- if collections['bath-and-body-works'] == blank and collections['bath-body-works'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #BFDBFE; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(0, 45, 98, 0.05);">
+          <a href="/collections/all?filter.p.vendor=Bath+and+Body+Works" style="display: block; position: relative; background: #002D62; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'brand-bath-and-body-works.png' | asset_url }}" alt="Bath &amp; Body Works" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'bath-and-body-works-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(0, 45, 98, 0.9); color: #93C5FD; border: 1px solid rgba(147, 197, 253, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">✨ Fine Fragrance Mists</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #DBEAFE;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #002D62; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'bath-and-body-works-logo.png' | asset_url }}" alt="Bath &amp; Body Works" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Bath+and+Body+Works" style="color: #1F1610; text-decoration: none;">Bath &amp; Body Works</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Signature Fine Fragrance Mists, Into The Night, Warm Vanilla Sugar &amp; 24-hour ultra shea body lotions.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Bath+and+Body+Works" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #002D62; color: #FFFFFF; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Bath &amp; Body Works</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- SKIN1004 Madagascar Centella Brand Collection Card -->
+      {%- if collections['skin1004'] == blank and collections['centella'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(31, 22, 16, 0.04);">
+          <a href="/collections/all?filter.p.vendor=SKIN1004" style="display: block; position: relative; background: #FDFCFA; aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'skin1004-centella-ampoule-100ml.png' | asset_url }}" alt="SKIN1004 Madagascar Centella" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease;" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='{{ 'skin1004-centella-logo.png' | asset_url }}';">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(31, 22, 16, 0.88); color: #C5A059; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">🌿 100% Raw Centella</span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #8C6D2D; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=SKIN1004" style="color: #1F1610; text-decoration: none;">SKIN1004 Centella</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #6E5E52; line-height: 1.4; margin: 0 0 14px;">
+              Untouched Madagascar Centella Asiatica ampoules, soothing Hyalu-Cica sun serums &amp; barrier creams.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=SKIN1004" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #1F1610; color: #C5A059; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore SKIN1004</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+
 
       <!-- Gissah Brand Collection Card -->
       {%- if collections['gissah'] == blank -%}
@@ -685,7 +1190,7 @@
                   height="300"
                 >
               {%- else -%}
-                <div style="font-size: 3rem;">🌸</div>
+                <div style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; min-height:160px; background: linear-gradient(135deg, #FAF7F2 0%, #F5EFEB 100%); border-radius:8px; color: #8B6F3E; font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; text-align:center; padding: 20px;">✨ {{ collection.title | escape }}</div>
               {%- endif -%}
 
               <!-- Item Count Badge -->
@@ -741,6 +1246,97 @@
                   <span style="font-size: 0.68rem; font-weight: 800; color: #2D1457; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
                   <img src="{{ 'cadbury-logo.png' | asset_url }}" alt="Cadbury" style="max-height: 22px; width: auto; object-fit: contain;">
                 </div>
+              {%- elsif collection.handle == 'dot-and-key' or col_title_lower contains 'dot & key' or col_title_lower contains 'dot and key' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #E64980; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'dot-and-key-logo.png' | asset_url }}" alt="Dot &amp; Key" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'kay-beauty' or col_title_lower contains 'kay beauty' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #D4A373; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'kay-beauty-logo.png' | asset_url }}" alt="Kay Beauty" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'lakme' or col_title_lower contains 'lakme' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'lakme-logo.png' | asset_url }}" alt="Lakmé" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'loreal-professionnel' or collection.handle == 'loreal-pro' or col_title_lower contains 'l\'oreal professionnel' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'loreal-pro-logo.png' | asset_url }}" alt="L'Oréal Professionnel" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'minimalist' or col_title_lower contains 'minimalist' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'minimalist-logo.png' | asset_url }}" alt="Minimalist" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'cetaphil' or col_title_lower contains 'cetaphil' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #0284C7; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'cetaphil-logo.png' | asset_url }}" alt="Cetaphil" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'mac' or collection.handle == 'mac-cosmetics' or col_title_lower contains 'mac' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'mac-logo.png' | asset_url }}" alt="M·A·C" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'loreal-paris' or col_title_lower contains 'l\'oreal paris' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #D4AF37; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'loreal-paris-logo.png' | asset_url }}" alt="L'Oréal Paris" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'elf' or collection.handle == 'elf-cosmetics' or col_title_lower contains 'elf' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'elf-logo.png' | asset_url }}" alt="e.l.f." style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'the-ordinary' or col_title_lower contains 'the ordinary' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'the-ordinary-logo.png' | asset_url }}" alt="The Ordinary" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'laneige' or col_title_lower contains 'laneige' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #0284C7; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'laneige-logo.png' | asset_url }}" alt="Laneige" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'charlotte-tilbury' or col_title_lower contains 'charlotte tilbury' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'charlotte-tilbury-logo.png' | asset_url }}" alt="Charlotte Tilbury" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'dove' or col_title_lower contains 'dove' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #003580; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'dove-logo.png' | asset_url }}" alt="Dove" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'kerastase' or col_title_lower contains 'kerastase' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #D4AF37; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'kerastase-logo.png' | asset_url }}" alt="Kérastase" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'estee-lauder' or col_title_lower contains 'estee lauder' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #D4AF37; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'estee-lauder-logo.png' | asset_url }}" alt="Estée Lauder" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'love-beauty-planet' or collection.handle == 'love-beauty-and-planet' or col_title_lower contains 'love beauty' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'love-beauty-planet-logo.png' | asset_url }}" alt="Love Beauty &amp; Planet" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'bath-and-body-works' or collection.handle == 'bath-body-works' or col_title_lower contains 'bath & body' or col_title_lower contains 'bath and body' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #002D62; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'bath-and-body-works-logo.png' | asset_url }}" alt="Bath &amp; Body Works" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'skin1004' or collection.handle == 'centella' or col_title_lower contains 'skin1004' or col_title_lower contains 'centella' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #8C6D2D; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+
 
               {%- elsif collection.handle == 'gissah' or col_title_lower contains 'gissah' -%}
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
