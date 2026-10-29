@@ -53,7 +53,11 @@
                     {% render 'brand-logo', brand: 'possibility', class: 'brand-card-logo' %}
                   {%- elsif brand_block_title_lower contains 'gliss' -%}
                     {% render 'brand-logo', brand: 'gliss', class: 'brand-card-logo' %}
-                                                      {%- elsif brand_block_title_lower contains 'gissah' -%}
+                                                                        {%- elsif brand_block_title_lower contains 'versace' -%}
+                    <img src="{{ 'versace-logo.png' | asset_url }}" alt="Versace" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'nivea' -%}
+                    <img src="{{ 'nivea-logo.png' | asset_url }}" alt="Nivea" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'gissah' -%}
                     <img src="{{ 'gissah-logo.png' | asset_url }}" alt="Gissah" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
                   {%- elsif brand_block_title_lower contains 'marquis' -%}
                     <img src="{{ 'marquis-logo.png' | asset_url }}" alt="Marquis" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">

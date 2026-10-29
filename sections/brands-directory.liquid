@@ -320,6 +320,26 @@
         </a>
       </div>
 
+            <!-- Nivea -->
+      <div class="brand-dir-card" data-brand-name="Nivea" data-brand-letter="N" data-brand-cat="German Dermatological Skincare" data-brand-products="nivea creme, nivea soft light moisturising cream, nivea body milk 48h deep moisture, nivea men deep impact, nivea sun protect">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'nivea', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Nivea</h3>
+        <span class="brand-dir-cat">German Dermatological Care</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">🇩🇪 World's #1 Moisture</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Nivea Crème Blue Tin">Nivea Crème</span><span class="brand-product-pill" title="Nivea Soft Light Moisturiser">Nivea Soft</span><span class="brand-product-pill" title="Nivea 48H Body Milk">Body Milk</span>
+          </div>
+        </div>
+        <a href="{% if collections['nivea'] != blank %}{{ collections['nivea'].url }}{% else %}/collections/all?filter.p.vendor=Nivea{% endif %}" class="btn-brand-explore">
+          <span>Shop Nivea</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
       <!-- 19. VGR Professional -->
       <div class="brand-dir-card" data-brand-name="VGR Professional Hair Care Appliances" data-brand-letter="V" data-brand-cat="Hair Appliances">
         <span class="brand-verified-tag">✓ AUTHORIZED</span>
@@ -330,6 +350,26 @@
         <span class="brand-dir-cat">Hair Styling &amp; Grooming Tools</span>
         <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="btn-brand-explore">
           <span>Shop VGR</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+                  <!-- Versace -->
+      <div class="brand-dir-card" data-brand-name="Versace" data-brand-letter="V" data-brand-cat="Italian Haute Couture Perfumery & Glamour" data-brand-products="versace eros eau de toilette, versace eros flame, versace bright crystal, versace dylan blue pour homme, versace crystal noir, versace yellow diamond">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'versace', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Versace</h3>
+        <span class="brand-dir-cat">Italian Haute Perfumery</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">👑 Italian Haute Couture</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Versace Eros Eau de Toilette">Versace Eros</span><span class="brand-product-pill" title="Versace Dylan Blue">Dylan Blue</span><span class="brand-product-pill" title="Versace Bright Crystal">Bright Crystal</span>
+          </div>
+        </div>
+        <a href="{% if collections['versace'] != blank %}{{ collections['versace'].url }}{% else %}/collections/all?filter.p.vendor=Versace{% endif %}" class="btn-brand-explore">
+          <span>Shop Versace</span>
           <span>&rarr;</span>
         </a>
       </div>

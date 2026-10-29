@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#002B7F"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.35"/>
+  <text x="180" y="24" font-family="'Montserrat', 'Arial', sans-serif" font-size="8.5" font-weight="800" letter-spacing="3.5" fill="#8BB8FF" text-anchor="middle">HAMBURG · EST. 1911</text>
+  <text x="180" y="65" font-family="'Arial Black', 'Helvetica Neue', sans-serif" font-size="38" font-weight="900" letter-spacing="3.5" fill="#FFFFFF" text-anchor="middle">NIVEA</text>
+  <line x1="120" y1="74" x2="240" y2="74" stroke="#8BB8FF" stroke-width="1.5"/>
+  <text x="180" y="88" font-family="'Montserrat', 'Arial', sans-serif" font-size="8" font-weight="700" letter-spacing="3" fill="#E3EFFF" text-anchor="middle">DERMATOLOGICAL SKINCARE</text>
+</svg>

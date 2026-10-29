@@ -261,6 +261,24 @@
             "offer_tag": "Royale Blue Cult Classic",
             "link": "/collections/all?filter.p.vendor=Royale"
           }
+        },
+        "brand_versace": {
+          "type": "brand_card",
+          "settings": {
+            "title": "VERSACE",
+            "brand_image": "",
+            "offer_tag": "Milano Haute Perfumery",
+            "link": "/collections/all?filter.p.vendor=Versace"
+          }
+        },
+        "brand_nivea": {
+          "type": "brand_card",
+          "settings": {
+            "title": "NIVEA",
+            "brand_image": "",
+            "offer_tag": "German Skincare Care",
+            "link": "/collections/all?filter.p.vendor=Nivea"
+          }
         }
       },
       "block_order": [
@@ -274,12 +292,14 @@
         "brand_marquis",
         "brand_calvin_klein",
         "brand_guess",
-        "brand_royale"
+        "brand_royale",
+        "brand_versace",
+        "brand_nivea"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",
         "title": "Shop by Authorized Brand",
-        "subtitle": "Explore authentic Skin Cottage, Rasasi, Gissah, Marquis, Calvin Klein, Guess, Royale & Gucci in-store and online."
+        "subtitle": "Explore authentic Skin Cottage, Rasasi, Versace, Nivea, Gissah, Marquis, Calvin Klein, Guess, Royale & Gucci in-store and online."
       }
     }
   },
