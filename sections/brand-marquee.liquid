@@ -1,6 +1,6 @@
 {% comment %}
   Lush Beauty Mart — Infinite Running Brand Logo Marquee
-  Smooth non-stop continuous loop of 100% genuine authorized brands (All 37 official brand houses)
+  Smooth continuous loop of 100% genuine authorized brands with BOTH visual logo and brand name
 {% endcomment %}
 
 <style>
@@ -54,14 +54,14 @@
   overflow: hidden;
   position: relative;
   padding: 8px 0;
-  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
 .brand-marquee-track {
   display: flex !important;
   width: max-content !important;
-  animation: brandMarqueeScroll {{ section.settings.speed | default: 35 }}s linear infinite !important;
+  animation: brandMarqueeScroll {{ section.settings.speed | default: 45 }}s linear infinite !important;
 }
 
 .brand-marquee-track:hover {
@@ -86,11 +86,12 @@
 }
 
 .brand-logo-card {
-  display: flex !important;
+  display: inline-flex !important;
+  flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 8px 20px !important;
-  height: 56px !important;
+  padding: 10px 16px !important;
+  height: 68px !important;
   min-width: 140px !important;
   background: #FFFFFF !important;
   border: 1.5px solid #EAE3DA !important;
@@ -101,18 +102,28 @@
   text-decoration: none !important;
   user-select: none !important;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+  gap: 6px !important;
 }
+
 .brand-logo-card:hover {
   transform: translateY(-2px) !important;
   border-color: #C5A059 !important;
   box-shadow: 0 6px 14px rgba(197, 160, 89, 0.18) !important;
 }
 
+.brand-card-logo-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 32px !important;
+  width: 100% !important;
+}
+
 .brand-marquee-logo-img,
-.brand-logo-card img,
-.brand-logo-card svg {
-  max-height: 38px !important;
-  max-width: 115px !important;
+.brand-card-logo-wrap img,
+.brand-card-logo-wrap svg {
+  max-height: 30px !important;
+  max-width: 110px !important;
   width: auto !important;
   height: auto !important;
   object-fit: contain !important;
@@ -120,25 +131,45 @@
   margin: 0 auto !important;
   filter: none !important;
   opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.brand-card-logo-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  color: #1F1610 !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
 }
 
 @media (max-width: 767px) {
   .lush-brand-marquee-section {
-    padding: 28px 0 34px;
+    padding: 22px 0 28px !important;
   }
   .brand-marquee-heading {
-    font-size: 1.35rem;
+    font-size: 1.35rem !important;
   }
   .brand-logo-card {
-    height: 48px !important;
-    padding: 6px 14px !important;
+    height: 56px !important;
+    padding: 6px 12px !important;
     min-width: 115px !important;
+    gap: 4px !important;
+  }
+  .brand-card-logo-wrap {
+    height: 26px !important;
   }
   .brand-marquee-logo-img,
-  .brand-logo-card img,
-  .brand-logo-card svg {
-    max-height: 30px !important;
-    max-width: 95px !important;
+  .brand-card-logo-wrap img,
+  .brand-card-logo-wrap svg {
+    max-height: 24px !important;
+    max-width: 90px !important;
+  }
+  .brand-card-logo-title {
+    font-size: 0.58rem !important;
+    letter-spacing: 0.5px !important;
   }
 }
 </style>
@@ -154,233 +185,455 @@
 
   <div class="brand-marquee-container">
     <div class="brand-marquee-track">
-      <!-- Group 1 (All 37 Authorized Brands) -->
+      <!-- Group 1 (All 37 Authorized Brands with Logo + Name) -->
       <div class="brand-marquee-content">
         <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella">
-          {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">SKIN1004</span>
         </a>
         <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="brand-logo-card" title="VGR Professional">
-          {% render 'brand-logo', brand: 'vgr', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'vgr', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">VGR</span>
         </a>
         <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="brand-logo-card" title="Skin Cottage">
-          {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">SKIN COTTAGE</span>
         </a>
         <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="brand-logo-card" title="Rasasi Dubai Perfumes">
-          {% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">RASASI</span>
         </a>
         <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="brand-logo-card" title="Possibility London">
-          {% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">POSSIBILITY</span>
         </a>
         <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="brand-logo-card" title="Syoss Professional">
-          {% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">SYOSS</span>
         </a>
         <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="brand-logo-card" title="Gliss Hair Repair">
-          {% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GLISS</span>
         </a>
         <a href="{% if collections['versace'] != blank %}{{ collections['versace'].url }}{% else %}/collections/all?filter.p.vendor=Versace{% endif %}" class="brand-logo-card" title="Versace Milano">
-          {% render 'brand-logo', brand: 'versace', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'versace', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">VERSACE</span>
         </a>
         <a href="{% if collections['gucci'] != blank %}{{ collections['gucci'].url }}{% else %}/collections/all?filter.p.vendor=Gucci{% endif %}" class="brand-logo-card" title="Gucci Beauty">
-          {% render 'brand-logo', brand: 'gucci', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'gucci', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GUCCI</span>
         </a>
         <a href="{% if collections['gissah'] != blank %}{{ collections['gissah'].url }}{% else %}/collections/all?filter.p.vendor=Gissah{% endif %}" class="brand-logo-card" title="Gissah Kuwait">
-          {% render 'brand-logo', brand: 'gissah', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'gissah', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GISSAH</span>
         </a>
         <a href="{% if collections['marquis'] != blank %}{{ collections['marquis'].url }}{% else %}/collections/all?filter.p.vendor=Marquis{% endif %}" class="brand-logo-card" title="Marquis Paris">
-          {% render 'brand-logo', brand: 'marquis', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'marquis', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">MARQUIS</span>
         </a>
         <a href="{% if collections['calvin-klein'] != blank %}{{ collections['calvin-klein'].url }}{% else %}/collections/all?filter.p.vendor=Calvin+Klein{% endif %}" class="brand-logo-card" title="Calvin Klein New York">
-          {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CALVIN KLEIN</span>
         </a>
         <a href="{% if collections['guess'] != blank %}{{ collections['guess'].url }}{% else %}/collections/all?filter.p.vendor=Guess{% endif %}" class="brand-logo-card" title="Guess California">
-          {% render 'brand-logo', brand: 'guess', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'guess', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GUESS</span>
         </a>
         <a href="{% if collections['royale'] != blank %}{{ collections['royale'].url }}{% else %}/collections/all?filter.p.vendor=Royale{% endif %}" class="brand-logo-card" title="Royale Parfums">
-          {% render 'brand-logo', brand: 'royale', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'royale', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">ROYALE</span>
         </a>
         <a href="{% if collections['nivea'] != blank %}{{ collections['nivea'].url }}{% else %}/collections/all?filter.p.vendor=Nivea{% endif %}" class="brand-logo-card" title="Nivea Skincare">
-          {% render 'brand-logo', brand: 'nivea', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'nivea', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">NIVEA</span>
         </a>
         <a href="{% if collections['himalaya'] != blank %}{{ collections['himalaya'].url }}{% else %}/collections/all?filter.p.vendor=Himalaya{% endif %}" class="brand-logo-card" title="Himalaya Wellness">
-          {% render 'brand-logo', brand: 'himalaya', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'himalaya', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">HIMALAYA</span>
         </a>
         <a href="{% if collections['yardley'] != blank %}{{ collections['yardley'].url }}{% else %}/collections/all?filter.p.vendor=Yardley{% endif %}" class="brand-logo-card" title="Yardley London">
-          {% render 'brand-logo', brand: 'yardley', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'yardley', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">YARDLEY LONDON</span>
         </a>
         <a href="{% if collections['boroplus'] != blank %}{{ collections['boroplus'].url }}{% else %}/collections/all?filter.p.vendor=BoroPlus{% endif %}" class="brand-logo-card" title="BoroPlus Antiseptic">
-          {% render 'brand-logo', brand: 'boroplus', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'boroplus', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">BOROPLUS</span>
         </a>
         <a href="{% if collections['cadbury'] != blank %}{{ collections['cadbury'].url }}{% else %}/collections/all?filter.p.vendor=Cadbury{% endif %}" class="brand-logo-card" title="Cadbury Celebrations">
-          {% render 'brand-logo', brand: 'cadbury', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'cadbury', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CADBURY</span>
         </a>
         <a href="{% if collections['dot-and-key'] != blank %}{{ collections['dot-and-key'].url }}{% else %}/collections/all?filter.p.vendor=Dot+%26+Key{% endif %}" class="brand-logo-card" title="Dot & Key">
-          {% render 'brand-logo', brand: 'dot-and-key', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'dot-and-key', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">DOT & KEY</span>
         </a>
         <a href="{% if collections['kay-beauty'] != blank %}{{ collections['kay-beauty'].url }}{% else %}/collections/all?filter.p.vendor=Kay+Beauty{% endif %}" class="brand-logo-card" title="Kay Beauty">
-          {% render 'brand-logo', brand: 'kay-beauty', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'kay-beauty', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">KAY BEAUTY</span>
         </a>
         <a href="{% if collections['lakme'] != blank %}{{ collections['lakme'].url }}{% else %}/collections/all?filter.p.vendor=Lakme{% endif %}" class="brand-logo-card" title="Lakmé">
-          {% render 'brand-logo', brand: 'lakme', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'lakme', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">LAKMÉ</span>
         </a>
         <a href="{% if collections['loreal-professionnel'] != blank %}{{ collections['loreal-professionnel'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Professionnel{% endif %}" class="brand-logo-card" title="L'Oréal Professionnel">
-          {% render 'brand-logo', brand: 'loreal-professionnel', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'loreal-professionnel', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">L'ORÉAL PRO</span>
         </a>
         <a href="{% if collections['minimalist'] != blank %}{{ collections['minimalist'].url }}{% else %}/collections/all?filter.p.vendor=Minimalist{% endif %}" class="brand-logo-card" title="Minimalist">
-          {% render 'brand-logo', brand: 'minimalist', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'minimalist', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">MINIMALIST</span>
         </a>
         <a href="{% if collections['cetaphil'] != blank %}{{ collections['cetaphil'].url }}{% else %}/collections/all?filter.p.vendor=Cetaphil{% endif %}" class="brand-logo-card" title="Cetaphil">
-          {% render 'brand-logo', brand: 'cetaphil', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'cetaphil', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CETAPHIL</span>
         </a>
         <a href="{% if collections['mac'] != blank %}{{ collections['mac'].url }}{% else %}/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C{% endif %}" class="brand-logo-card" title="M·A·C Cosmetics">
-          {% render 'brand-logo', brand: 'mac', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'mac', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">M·A·C</span>
         </a>
         <a href="{% if collections['loreal-paris'] != blank %}{{ collections['loreal-paris'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Paris{% endif %}" class="brand-logo-card" title="L'Oréal Paris">
-          {% render 'brand-logo', brand: 'loreal-paris', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'loreal-paris', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">L'ORÉAL PARIS</span>
         </a>
         <a href="{% if collections['elf'] != blank %}{{ collections['elf'].url }}{% else %}/collections/all?filter.p.vendor=e.l.f.{% endif %}" class="brand-logo-card" title="e.l.f. Cosmetics">
-          {% render 'brand-logo', brand: 'elf', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'elf', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">E.L.F.</span>
         </a>
         <a href="{% if collections['the-ordinary'] != blank %}{{ collections['the-ordinary'].url }}{% else %}/collections/all?filter.p.vendor=The+Ordinary{% endif %}" class="brand-logo-card" title="The Ordinary">
-          {% render 'brand-logo', brand: 'the-ordinary', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'the-ordinary', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">THE ORDINARY</span>
         </a>
         <a href="{% if collections['laneige'] != blank %}{{ collections['laneige'].url }}{% else %}/collections/all?filter.p.vendor=Laneige{% endif %}" class="brand-logo-card" title="Laneige K-Beauty">
-          {% render 'brand-logo', brand: 'laneige', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'laneige', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">LANEIGE</span>
         </a>
         <a href="{% if collections['charlotte-tilbury'] != blank %}{{ collections['charlotte-tilbury'].url }}{% else %}/collections/all?filter.p.vendor=Charlotte+Tilbury{% endif %}" class="brand-logo-card" title="Charlotte Tilbury">
-          {% render 'brand-logo', brand: 'charlotte-tilbury', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'charlotte-tilbury', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CHARLOTTE TILBURY</span>
         </a>
         <a href="{% if collections['dove'] != blank %}{{ collections['dove'].url }}{% else %}/collections/all?filter.p.vendor=Dove{% endif %}" class="brand-logo-card" title="Dove">
-          {% render 'brand-logo', brand: 'dove', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'dove', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">DOVE</span>
         </a>
         <a href="{% if collections['kerastase'] != blank %}{{ collections['kerastase'].url }}{% else %}/collections/all?filter.p.vendor=Kerastase{% endif %}" class="brand-logo-card" title="Kérastase Paris">
-          {% render 'brand-logo', brand: 'kerastase', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'kerastase', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">KÉRASTASE</span>
         </a>
         <a href="{% if collections['estee-lauder'] != blank %}{{ collections['estee-lauder'].url }}{% else %}/collections/all?filter.p.vendor=Estee+Lauder{% endif %}" class="brand-logo-card" title="Estée Lauder">
-          {% render 'brand-logo', brand: 'estee-lauder', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'estee-lauder', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">ESTÉE LAUDER</span>
         </a>
         <a href="{% if collections['love-beauty-planet'] != blank %}{{ collections['love-beauty-planet'].url }}{% else %}/collections/all?filter.p.vendor=Love+Beauty+%26+Planet{% endif %}" class="brand-logo-card" title="Love Beauty & Planet">
-          {% render 'brand-logo', brand: 'love-beauty-planet', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'love-beauty-planet', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">LOVE BEAUTY & PLANET</span>
         </a>
         <a href="{% if collections['bath-and-body-works'] != blank %}{{ collections['bath-and-body-works'].url }}{% else %}/collections/all?filter.p.vendor=Bath+%26+Body+Works{% endif %}" class="brand-logo-card" title="Bath & Body Works">
-          {% render 'brand-logo', brand: 'bath-and-body-works', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'bath-and-body-works', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">BATH & BODY WORKS</span>
         </a>
         <a href="{% if collections['3q-beauty'] != blank %}{{ collections['3q-beauty'].url }}{% else %}/collections/all?filter.p.vendor=3Q+Beauty{% endif %}" class="brand-logo-card" title="3Q Beauty">
-          {% render 'brand-logo', brand: '3q-beauty', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: '3q-beauty', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">3Q BEAUTY</span>
         </a>
       </div>
 
       <!-- Group 2 (Duplicate for Seamless Infinite Loop) -->
       <div class="brand-marquee-content" aria-hidden="true">
         <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella">
-          {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">SKIN1004</span>
         </a>
         <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="brand-logo-card" title="VGR Professional">
-          {% render 'brand-logo', brand: 'vgr', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'vgr', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">VGR</span>
         </a>
         <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="brand-logo-card" title="Skin Cottage">
-          {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">SKIN COTTAGE</span>
         </a>
         <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="brand-logo-card" title="Rasasi Dubai Perfumes">
-          {% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">RASASI</span>
         </a>
         <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="brand-logo-card" title="Possibility London">
-          {% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">POSSIBILITY</span>
         </a>
         <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="brand-logo-card" title="Syoss Professional">
-          {% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">SYOSS</span>
         </a>
         <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="brand-logo-card" title="Gliss Hair Repair">
-          {% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GLISS</span>
         </a>
         <a href="{% if collections['versace'] != blank %}{{ collections['versace'].url }}{% else %}/collections/all?filter.p.vendor=Versace{% endif %}" class="brand-logo-card" title="Versace Milano">
-          {% render 'brand-logo', brand: 'versace', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'versace', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">VERSACE</span>
         </a>
         <a href="{% if collections['gucci'] != blank %}{{ collections['gucci'].url }}{% else %}/collections/all?filter.p.vendor=Gucci{% endif %}" class="brand-logo-card" title="Gucci Beauty">
-          {% render 'brand-logo', brand: 'gucci', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'gucci', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GUCCI</span>
         </a>
         <a href="{% if collections['gissah'] != blank %}{{ collections['gissah'].url }}{% else %}/collections/all?filter.p.vendor=Gissah{% endif %}" class="brand-logo-card" title="Gissah Kuwait">
-          {% render 'brand-logo', brand: 'gissah', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'gissah', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GISSAH</span>
         </a>
         <a href="{% if collections['marquis'] != blank %}{{ collections['marquis'].url }}{% else %}/collections/all?filter.p.vendor=Marquis{% endif %}" class="brand-logo-card" title="Marquis Paris">
-          {% render 'brand-logo', brand: 'marquis', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'marquis', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">MARQUIS</span>
         </a>
         <a href="{% if collections['calvin-klein'] != blank %}{{ collections['calvin-klein'].url }}{% else %}/collections/all?filter.p.vendor=Calvin+Klein{% endif %}" class="brand-logo-card" title="Calvin Klein New York">
-          {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CALVIN KLEIN</span>
         </a>
         <a href="{% if collections['guess'] != blank %}{{ collections['guess'].url }}{% else %}/collections/all?filter.p.vendor=Guess{% endif %}" class="brand-logo-card" title="Guess California">
-          {% render 'brand-logo', brand: 'guess', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'guess', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">GUESS</span>
         </a>
         <a href="{% if collections['royale'] != blank %}{{ collections['royale'].url }}{% else %}/collections/all?filter.p.vendor=Royale{% endif %}" class="brand-logo-card" title="Royale Parfums">
-          {% render 'brand-logo', brand: 'royale', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'royale', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">ROYALE</span>
         </a>
         <a href="{% if collections['nivea'] != blank %}{{ collections['nivea'].url }}{% else %}/collections/all?filter.p.vendor=Nivea{% endif %}" class="brand-logo-card" title="Nivea Skincare">
-          {% render 'brand-logo', brand: 'nivea', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'nivea', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">NIVEA</span>
         </a>
         <a href="{% if collections['himalaya'] != blank %}{{ collections['himalaya'].url }}{% else %}/collections/all?filter.p.vendor=Himalaya{% endif %}" class="brand-logo-card" title="Himalaya Wellness">
-          {% render 'brand-logo', brand: 'himalaya', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'himalaya', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">HIMALAYA</span>
         </a>
         <a href="{% if collections['yardley'] != blank %}{{ collections['yardley'].url }}{% else %}/collections/all?filter.p.vendor=Yardley{% endif %}" class="brand-logo-card" title="Yardley London">
-          {% render 'brand-logo', brand: 'yardley', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'yardley', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">YARDLEY LONDON</span>
         </a>
         <a href="{% if collections['boroplus'] != blank %}{{ collections['boroplus'].url }}{% else %}/collections/all?filter.p.vendor=BoroPlus{% endif %}" class="brand-logo-card" title="BoroPlus Antiseptic">
-          {% render 'brand-logo', brand: 'boroplus', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'boroplus', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">BOROPLUS</span>
         </a>
         <a href="{% if collections['cadbury'] != blank %}{{ collections['cadbury'].url }}{% else %}/collections/all?filter.p.vendor=Cadbury{% endif %}" class="brand-logo-card" title="Cadbury Celebrations">
-          {% render 'brand-logo', brand: 'cadbury', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'cadbury', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CADBURY</span>
         </a>
         <a href="{% if collections['dot-and-key'] != blank %}{{ collections['dot-and-key'].url }}{% else %}/collections/all?filter.p.vendor=Dot+%26+Key{% endif %}" class="brand-logo-card" title="Dot & Key">
-          {% render 'brand-logo', brand: 'dot-and-key', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'dot-and-key', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">DOT & KEY</span>
         </a>
         <a href="{% if collections['kay-beauty'] != blank %}{{ collections['kay-beauty'].url }}{% else %}/collections/all?filter.p.vendor=Kay+Beauty{% endif %}" class="brand-logo-card" title="Kay Beauty">
-          {% render 'brand-logo', brand: 'kay-beauty', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'kay-beauty', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">KAY BEAUTY</span>
         </a>
         <a href="{% if collections['lakme'] != blank %}{{ collections['lakme'].url }}{% else %}/collections/all?filter.p.vendor=Lakme{% endif %}" class="brand-logo-card" title="Lakmé">
-          {% render 'brand-logo', brand: 'lakme', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'lakme', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">LAKMÉ</span>
         </a>
         <a href="{% if collections['loreal-professionnel'] != blank %}{{ collections['loreal-professionnel'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Professionnel{% endif %}" class="brand-logo-card" title="L'Oréal Professionnel">
-          {% render 'brand-logo', brand: 'loreal-professionnel', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'loreal-professionnel', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">L'ORÉAL PRO</span>
         </a>
         <a href="{% if collections['minimalist'] != blank %}{{ collections['minimalist'].url }}{% else %}/collections/all?filter.p.vendor=Minimalist{% endif %}" class="brand-logo-card" title="Minimalist">
-          {% render 'brand-logo', brand: 'minimalist', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'minimalist', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">MINIMALIST</span>
         </a>
         <a href="{% if collections['cetaphil'] != blank %}{{ collections['cetaphil'].url }}{% else %}/collections/all?filter.p.vendor=Cetaphil{% endif %}" class="brand-logo-card" title="Cetaphil">
-          {% render 'brand-logo', brand: 'cetaphil', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'cetaphil', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CETAPHIL</span>
         </a>
         <a href="{% if collections['mac'] != blank %}{{ collections['mac'].url }}{% else %}/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C{% endif %}" class="brand-logo-card" title="M·A·C Cosmetics">
-          {% render 'brand-logo', brand: 'mac', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'mac', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">M·A·C</span>
         </a>
         <a href="{% if collections['loreal-paris'] != blank %}{{ collections['loreal-paris'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Paris{% endif %}" class="brand-logo-card" title="L'Oréal Paris">
-          {% render 'brand-logo', brand: 'loreal-paris', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'loreal-paris', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">L'ORÉAL PARIS</span>
         </a>
         <a href="{% if collections['elf'] != blank %}{{ collections['elf'].url }}{% else %}/collections/all?filter.p.vendor=e.l.f.{% endif %}" class="brand-logo-card" title="e.l.f. Cosmetics">
-          {% render 'brand-logo', brand: 'elf', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'elf', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">E.L.F.</span>
         </a>
         <a href="{% if collections['the-ordinary'] != blank %}{{ collections['the-ordinary'].url }}{% else %}/collections/all?filter.p.vendor=The+Ordinary{% endif %}" class="brand-logo-card" title="The Ordinary">
-          {% render 'brand-logo', brand: 'the-ordinary', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'the-ordinary', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">THE ORDINARY</span>
         </a>
         <a href="{% if collections['laneige'] != blank %}{{ collections['laneige'].url }}{% else %}/collections/all?filter.p.vendor=Laneige{% endif %}" class="brand-logo-card" title="Laneige K-Beauty">
-          {% render 'brand-logo', brand: 'laneige', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'laneige', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">LANEIGE</span>
         </a>
         <a href="{% if collections['charlotte-tilbury'] != blank %}{{ collections['charlotte-tilbury'].url }}{% else %}/collections/all?filter.p.vendor=Charlotte+Tilbury{% endif %}" class="brand-logo-card" title="Charlotte Tilbury">
-          {% render 'brand-logo', brand: 'charlotte-tilbury', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'charlotte-tilbury', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">CHARLOTTE TILBURY</span>
         </a>
         <a href="{% if collections['dove'] != blank %}{{ collections['dove'].url }}{% else %}/collections/all?filter.p.vendor=Dove{% endif %}" class="brand-logo-card" title="Dove">
-          {% render 'brand-logo', brand: 'dove', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'dove', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">DOVE</span>
         </a>
         <a href="{% if collections['kerastase'] != blank %}{{ collections['kerastase'].url }}{% else %}/collections/all?filter.p.vendor=Kerastase{% endif %}" class="brand-logo-card" title="Kérastase Paris">
-          {% render 'brand-logo', brand: 'kerastase', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'kerastase', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">KÉRASTASE</span>
         </a>
         <a href="{% if collections['estee-lauder'] != blank %}{{ collections['estee-lauder'].url }}{% else %}/collections/all?filter.p.vendor=Estee+Lauder{% endif %}" class="brand-logo-card" title="Estée Lauder">
-          {% render 'brand-logo', brand: 'estee-lauder', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'estee-lauder', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">ESTÉE LAUDER</span>
         </a>
         <a href="{% if collections['love-beauty-planet'] != blank %}{{ collections['love-beauty-planet'].url }}{% else %}/collections/all?filter.p.vendor=Love+Beauty+%26+Planet{% endif %}" class="brand-logo-card" title="Love Beauty & Planet">
-          {% render 'brand-logo', brand: 'love-beauty-planet', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'love-beauty-planet', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">LOVE BEAUTY & PLANET</span>
         </a>
         <a href="{% if collections['bath-and-body-works'] != blank %}{{ collections['bath-and-body-works'].url }}{% else %}/collections/all?filter.p.vendor=Bath+%26+Body+Works{% endif %}" class="brand-logo-card" title="Bath & Body Works">
-          {% render 'brand-logo', brand: 'bath-and-body-works', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: 'bath-and-body-works', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">BATH & BODY WORKS</span>
         </a>
         <a href="{% if collections['3q-beauty'] != blank %}{{ collections['3q-beauty'].url }}{% else %}/collections/all?filter.p.vendor=3Q+Beauty{% endif %}" class="brand-logo-card" title="3Q Beauty">
-          {% render 'brand-logo', brand: '3q-beauty', class: 'brand-marquee-logo-img' %}
+          <div class="brand-card-logo-wrap">
+            {% render 'brand-logo', brand: '3q-beauty', class: 'brand-marquee-logo-img' %}
+          </div>
+          <span class="brand-card-logo-title">3Q BEAUTY</span>
         </a>
       </div>
     </div>
