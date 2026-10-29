@@ -1,11 +1,24 @@
 <section class="lush-collection-section">
+  {%- assign is_skin_cottage = false -%}
+  {%- if collection.handle == 'skin-cottage' or collection.title contains 'Skin Cottage' or collection.title contains 'skin cottage' or canonical_url contains 'skin-cottage' or canonical_url contains 'Skin+Cottage' or canonical_url contains 'Skin%20Cottage' -%}
+    {%- assign is_skin_cottage = true -%}
+  {%- endif -%}
   {%- assign is_syoss = false -%}
   {%- if collection.handle == 'syoss' or collection.title contains 'Syoss' or collection.title contains 'syoss' or canonical_url contains 'syoss' or canonical_url contains 'Syoss' -%}
     {%- assign is_syoss = true -%}
   {%- endif -%}
   <div class="page-width">
     <!-- Dedicated Brand Collection Hero Banner -->
-    {%- if is_syoss and collection.image == blank -%}
+    {%- if is_skin_cottage and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-skin-cottage" style="background: linear-gradient(135deg, #11382C 0%, #1B4D3E 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #2D6A4F; box-shadow: 0 8px 24px rgba(17, 56, 44, 0.18);">
+        <div style="display:flex; justify-content:center; margin-bottom:12px;">
+          <img src="{{ 'skin-cottage-logo.svg' | asset_url }}" alt="Skin Cottage Luxury Body Care - Malaysia" style="max-height: 56px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.92rem; color: #D8F3DC; font-weight: 600; letter-spacing: 0.4px; max-width: 650px;">
+          Malaysian Luxury Botanical Body Care · Enriched with Natural Fruit Extracts, Vitamin E & pH 5.5 Formula · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_syoss and collection.image == blank -%}
       <div class="collection-brand-hero-banner banner-syoss" style="background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #333333; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
         <div style="display:flex; justify-content:center; margin-bottom:12px;">
           <img src="{{ 'syoss-logo.svg' | asset_url }}" alt="Syoss Professional Performance - Japan 1977" style="max-height: 56px; max-width: 220px; width: auto; height: auto;" loading="eager">
@@ -60,12 +73,14 @@
           </div>
           <span class="collection-verified-pill">👑 100% ORIGINAL & AUTHORIZED BRAND PARTNER</span>
         </div>
-      {%- elsif collection.handle == 'skin-cottage' or collection.title contains 'Skin Cottage' or collection.title contains 'skin cottage' -%}
+      {%- elsif is_skin_cottage -%}
         <div class="collection-brand-badge-wrap">
-          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #A7D7C5;">
-            {% render 'brand-logo', brand: 'skin-cottage', class: 'collection-brand-logo-img' %}
+          <div class="collection-brand-logo-card" style="padding: 8px 20px; border-radius: 12px; background: #11382C; border: 1.5px solid #2D6A4F;">
+            <img src="{{ 'skin-cottage-logo.svg' | asset_url }}" alt="Skin Cottage Malaysia" style="max-height: 38px; max-width: 150px; display: block;" loading="eager">
           </div>
-          <span class="collection-verified-pill" style="color: #2D6A4F;">🌿 100% ORIGINAL & AUTHORIZED MALAYSIAN BOTANICAL CARE</span>
+          <span class="collection-verified-pill" style="color: #11382C; background: rgba(82, 183, 136, 0.15); border-color: rgba(82, 183, 136, 0.4);">
+            🌿 100% ORIGINAL & AUTHORIZED MALAYSIAN BOTANICAL CARE
+          </span>
         </div>
       {%- elsif collection.handle == 'rasasi' or collection.title contains 'Rasasi' or collection.title contains 'rasasi' -%}
         <div class="collection-brand-badge-wrap">
@@ -80,6 +95,22 @@
             {% render 'brand-logo', brand: 'possibility', class: 'collection-brand-logo-img' %}
           </div>
           <span class="collection-verified-pill" style="color: #A4133C;">🍓 100% ORIGINAL LONDON GOURMET BATH CARE</span>
+        </div>
+      {%- elsif is_skin_cottage -%}
+        <div class="collection-skin-cottage-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #A7D7C5; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(17,56,44,0.04);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#1B4332; background:#E8F5EE; border:1px solid rgba(82,183,136,0.3); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🇲🇾 Est. Malaysia</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#1B4332; background:#F4FBF7; border:1px solid #A7D7C5; padding:3px 10px; border-radius:999px; text-transform:uppercase;">🌿 Botanical Body Care & Scrubs</span>
+          </div>
+          <p style="font-size: 0.9rem; color: #2D3A34; line-height: 1.65; margin: 0 0 14px;">
+            <strong>Skin Cottage</strong> is a premier Malaysian bath and body care house celebrated for infusing natural botanical fruit extracts and restorative essences into everyday cleansing luxuries. Formulated with a gentle <strong>pH 5.5 balance</strong> and enriched with <strong>Vitamin E</strong> and botanical hydrators, each shower gel and exfoliating body scrub cleanses deeply, softens rough skin, and envelops your body in irresistible natural fragrance without stripping essential moisture.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🌿 pH 5.5 Skin-Friendly</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🍑 Natural Fruit Extracts</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🧼 Rich Cushion Lather</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">📍 100% Genuine Nagpur Stock</span>
+          </div>
         </div>
       {%- elsif is_syoss -%}
         <div class="collection-brand-badge-wrap">
