@@ -53,6 +53,8 @@
                     {% render 'brand-logo', brand: 'possibility', class: 'brand-card-logo' %}
                   {%- elsif brand_block_title_lower contains 'gliss' -%}
                     {% render 'brand-logo', brand: 'gliss', class: 'brand-card-logo' %}
+                  {%- elsif brand_block_title_lower contains '3q' -%}
+                    <img src="{{ '3q-beauty-logo.png' | asset_url }}" alt="3Q Beauty" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
                   {%- else -%}
                     <span class="brand-card-name">{{ block.settings.title }}</span>
                   {%- endif -%}
