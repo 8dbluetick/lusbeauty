@@ -216,6 +216,51 @@
             "offer_tag": "Italian Haute Perfumery",
             "link": "/collections/all?filter.p.vendor=Gucci"
           }
+        },
+        "brand_gissah": {
+          "type": "brand_card",
+          "settings": {
+            "title": "GISSAH",
+            "brand_image": "",
+            "offer_tag": "Kuwaiti Haute Parfumerie",
+            "link": "/collections/all?filter.p.vendor=Gissah"
+          }
+        },
+        "brand_marquis": {
+          "type": "brand_card",
+          "settings": {
+            "title": "MARQUIS",
+            "brand_image": "",
+            "offer_tag": "French Paris Classics",
+            "link": "/collections/all?filter.p.vendor=Marquis"
+          }
+        },
+        "brand_calvin_klein": {
+          "type": "brand_card",
+          "settings": {
+            "title": "CALVIN KLEIN",
+            "brand_image": "",
+            "offer_tag": "New York Designer Icons",
+            "link": "/collections/all?filter.p.vendor=Calvin+Klein"
+          }
+        },
+        "brand_guess": {
+          "type": "brand_card",
+          "settings": {
+            "title": "GUESS",
+            "brand_image": "",
+            "offer_tag": "California Glamour",
+            "link": "/collections/all?filter.p.vendor=Guess"
+          }
+        },
+        "brand_royale": {
+          "type": "brand_card",
+          "settings": {
+            "title": "ROYALE",
+            "brand_image": "",
+            "offer_tag": "Royale Blue Cult Classic",
+            "link": "/collections/all?filter.p.vendor=Royale"
+          }
         }
       },
       "block_order": [
@@ -224,12 +269,17 @@
         "brand_possibility",
         "brand_syoss",
         "brand_gliss",
-        "brand_gucci"
+        "brand_gucci",
+        "brand_gissah",
+        "brand_marquis",
+        "brand_calvin_klein",
+        "brand_guess",
+        "brand_royale"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",
         "title": "Shop by Authorized Brand",
-        "subtitle": "Explore authentic Skin Cottage, Rasasi, Possibility, Syoss, Gliss & Gucci in-store and online."
+        "subtitle": "Explore authentic Skin Cottage, Rasasi, Gissah, Marquis, Calvin Klein, Guess, Royale & Gucci in-store and online."
       }
     }
   },

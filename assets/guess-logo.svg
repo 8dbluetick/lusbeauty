@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#1C0A0E"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#D32F2F" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="180" y="24" font-family="'Montserrat', 'Arial', sans-serif" font-size="8.5" font-weight="800" letter-spacing="3.5" fill="#D32F2F" text-anchor="middle">LOS ANGELES · EST. 1981</text>
+  <text x="180" y="64" font-family="'Impact', 'Arial Black', sans-serif" font-size="38" font-weight="900" letter-spacing="4" fill="#FFFFFF" text-anchor="middle">GUESS</text>
+  <line x1="120" y1="73" x2="240" y2="73" stroke="#D32F2F" stroke-width="1.5"/>
+  <text x="180" y="87" font-family="'Montserrat', 'Arial', sans-serif" font-size="8" font-weight="700" letter-spacing="3" fill="#FFCDD2" text-anchor="middle">PARFUMS &amp; BEAUTY</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#181818"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.25"/>
+  <text x="180" y="25" font-family="'Helvetica Neue', 'Arial', sans-serif" font-size="8.5" font-weight="700" letter-spacing="3.5" fill="#B3B3B3" text-anchor="middle">NEW YORK · EST. 1968</text>
+  <text x="180" y="63" font-family="'Futura', 'Helvetica Neue', 'Arial', sans-serif" font-size="32" font-weight="800" letter-spacing="4" fill="#FFFFFF" text-anchor="middle">Calvin Klein</text>
+  <line x1="125" y1="73" x2="235" y2="73" stroke="#B3B3B3" stroke-width="1"/>
+  <text x="180" y="87" font-family="'Helvetica Neue', 'Arial', sans-serif" font-size="8" font-weight="700" letter-spacing="3" fill="#E0E0E0" text-anchor="middle">FRAGRANCES &amp; BEAUTY</text>
+</svg>

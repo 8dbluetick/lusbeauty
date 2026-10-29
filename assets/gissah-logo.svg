@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#140E0A"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#D4AF37" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="180" y="24" font-family="'Cinzel', 'Georgia', serif" font-size="8.5" font-weight="700" letter-spacing="4" fill="#D4AF37" text-anchor="middle">HAUTE PARFUMERIE · KUWAIT</text>
+  <text x="180" y="64" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="36" font-weight="800" letter-spacing="6" fill="#FFFFFF" text-anchor="middle">GISSAH</text>
+  <line x1="120" y1="73" x2="240" y2="73" stroke="#D4AF37" stroke-width="1.5"/>
+  <text x="180" y="87" font-family="'Montserrat', 'Arial', sans-serif" font-size="8" font-weight="700" letter-spacing="3" fill="#EAD8B1" text-anchor="middle">IMPERIAL PERFUMES</text>
+</svg>

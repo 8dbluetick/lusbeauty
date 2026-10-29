@@ -21,7 +21,32 @@
     {%- assign is_rasasi = true -%}
   {%- endif -%}
 
-    {%- assign is_gucci = false -%}
+      {%- assign is_gissah = false -%}
+  {%- if col_handle_down contains 'gissah' or col_title_down contains 'gissah' or canonical_url contains 'gissah' or canonical_url contains 'Gissah' or request.path contains 'gissah' or request.path contains 'Gissah' -%}
+    {%- assign is_gissah = true -%}
+  {%- endif -%}
+
+  {%- assign is_marquis = false -%}
+  {%- if col_handle_down contains 'marquis' or col_title_down contains 'marquis' or canonical_url contains 'marquis' or canonical_url contains 'Marquis' or request.path contains 'marquis' or request.path contains 'Marquis' -%}
+    {%- assign is_marquis = true -%}
+  {%- endif -%}
+
+  {%- assign is_calvin_klein = false -%}
+  {%- if col_handle_down contains 'calvin' or col_handle_down contains 'kelvin' or col_title_down contains 'calvin' or col_title_down contains 'kelvin' or canonical_url contains 'calvin' or canonical_url contains 'Calvin' or canonical_url contains 'kelvin' or canonical_url contains 'Kelvin' or request.path contains 'calvin' or request.path contains 'Calvin' -%}
+    {%- assign is_calvin_klein = true -%}
+  {%- endif -%}
+
+  {%- assign is_guess = false -%}
+  {%- if col_handle_down contains 'guess' or col_title_down contains 'guess' or canonical_url contains 'guess' or canonical_url contains 'Guess' or request.path contains 'guess' or request.path contains 'Guess' -%}
+    {%- assign is_guess = true -%}
+  {%- endif -%}
+
+  {%- assign is_royale = false -%}
+  {%- if col_handle_down contains 'royale' or col_title_down contains 'royale' or canonical_url contains 'royale' or canonical_url contains 'Royale' or request.path contains 'royale' or request.path contains 'Royale' -%}
+    {%- assign is_royale = true -%}
+  {%- endif -%}
+
+  {%- assign is_gucci = false -%}
   {%- if col_handle_down contains 'gucci' or col_title_down contains 'gucci' or canonical_url contains 'gucci' or canonical_url contains 'Gucci' or request.path contains 'gucci' or request.path contains 'Gucci' -%}
     {%- assign is_gucci = true -%}
   {%- endif -%}
@@ -69,7 +94,52 @@
           Dubai Luxury Fine Perfumery · Iconic Cult Classics (Hawas, Shuhrah, Daarej) · 100% Authentic Stock
         </p>
       </div>
-        {%- elsif is_gucci and collection.image == blank -%}
+            {%- elsif is_gissah and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-gissah" style="background: linear-gradient(135deg, #140E0A 0%, #261710 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #D4AF37; box-shadow: 0 8px 24px rgba(212, 175, 55, 0.18);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'gissah-logo.png' | asset_url }}" alt="Gissah Haute Parfumerie Kuwait" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #FAF0E4; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Arabian Haute Parfumerie Kuwait · Iconic Masterpieces (Sava, Imperial Valley, Hudson Valley) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_marquis and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-marquis" style="background: linear-gradient(135deg, #0B1320 0%, #172740 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #C5A059; box-shadow: 0 8px 24px rgba(197, 160, 89, 0.18);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'marquis-logo.png' | asset_url }}" alt="Parfums Rémy Marquis Paris" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #FAF0E4; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          French Luxury Haute Perfumery · Paris Cult Classics (Marquis Pour Homme &amp; Pour Femme) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_calvin_klein and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-calvin-klein" style="background: linear-gradient(135deg, #181818 0%, #2E2E2E 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #B3B3B3; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'calvin-klein-logo.png' | asset_url }}" alt="Calvin Klein Fragrances New York" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #F0F0F0; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Iconic New York Designer Fragrances · Cult Masterpieces (CK One, Eternity, Euphoria, Obsession) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_guess and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-guess" style="background: linear-gradient(135deg, #1C0A0E 0%, #3B121C 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #D32F2F; box-shadow: 0 8px 24px rgba(211, 47, 47, 0.2);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'guess-logo.png' | asset_url }}" alt="Guess Parfums Los Angeles" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #FFCDD2; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          California Glamour &amp; Sensual Perfumery · Iconic Scent Masterpieces (Guess Seductive, 1981, Bella Vita) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_royale and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-royale" style="background: linear-gradient(135deg, #0A1828 0%, #122C4A 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #00B4D8; box-shadow: 0 8px 24px rgba(0, 180, 216, 0.2);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'royale-logo.png' | asset_url }}" alt="Royale Blue Parfums" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #CAF0F8; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Regal French-Oriental Perfumery · World-Famous Cult Classic (Royale Blue Pour Homme &amp; Royale Pour Femme) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_gucci and collection.image == blank -%}
       <div class="collection-brand-hero-banner banner-gucci" style="background: linear-gradient(135deg, #0D120F 0%, #17241C 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #C5A059; box-shadow: 0 8px 24px rgba(197, 160, 89, 0.15);">
         <div style="display:flex; justify-content:center; margin-bottom:14px;">
           <img src="{{ 'gucci-logo.png' | asset_url }}" alt="Gucci Beauty &amp; Parfums Firenze 1921" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
@@ -194,7 +264,132 @@
             👑 100% AUTHENTIC DUBAI LUXURY PERFUMES
           </span>
         </div>
-            {%- elsif is_gucci -%}
+                  {%- elsif is_gissah -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #140E0A; border: 1.5px solid #D4AF37;">
+            <img src="{{ 'gissah-logo.png' | asset_url }}" alt="Gissah" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #D4AF37; background: rgba(212, 175, 55, 0.12); border-color: rgba(212, 175, 55, 0.4);">
+            👑 100% ORIGINAL KUWAITI HAUTE PARFUMERIE
+          </span>
+        </div>
+      {%- elsif is_marquis -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #0B1320; border: 1.5px solid #C5A059;">
+            <img src="{{ 'marquis-logo.png' | asset_url }}" alt="Marquis" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #C5A059; background: rgba(197, 160, 89, 0.12); border-color: rgba(197, 160, 89, 0.4);">
+            🇫🇷 100% ORIGINAL FRENCH LUXURY PERFUMES
+          </span>
+        </div>
+      {%- elsif is_calvin_klein -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #181818; border: 1.5px solid #B3B3B3;">
+            <img src="{{ 'calvin-klein-logo.png' | asset_url }}" alt="Calvin Klein" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #E0E0E0; background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3);">
+            🇺🇸 100% ORIGINAL NEW YORK DESIGNER FRAGRANCES
+          </span>
+        </div>
+      {%- elsif is_guess -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #1C0A0E; border: 1.5px solid #D32F2F;">
+            <img src="{{ 'guess-logo.png' | asset_url }}" alt="Guess" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #D32F2F; background: rgba(211, 47, 47, 0.12); border-color: rgba(211, 47, 47, 0.4);">
+            ✨ 100% ORIGINAL GUESS DESIGNER PERFUMES
+          </span>
+        </div>
+      {%- elsif is_royale -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #0A1828; border: 1.5px solid #00B4D8;">
+            <img src="{{ 'royale-logo.png' | asset_url }}" alt="Royale" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #00B4D8; background: rgba(0, 180, 216, 0.12); border-color: rgba(0, 180, 216, 0.4);">
+            👑 100% ORIGINAL REGAL LUXURY FRAGRANCES
+          </span>
+        </div>
+            {%- elsif is_gissah -%}
+        <div class="collection-gissah-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #D4AF37; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(212, 175, 55, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#A4821E; background:#FAF6E8; border:1px solid rgba(212,175,55,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 Arabian Niche Parfumerie</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#A4821E; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Kuwait Luxury Masterpieces</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            Born in Kuwait, <strong>Gissah</strong> represents the pinnacle of Arabian haute perfumery and modern niche luxury. Internationally celebrated for its intoxicating creations—such as <em>Sava</em>, <em>Imperial Valley</em>, <em>Hudson Valley</em>, <em>One &amp; Only</em>, and <em>Capri</em>—Gissah masterfully harmonizes noble aged agarwood oud, golden ambergris, rare Taif rose, and sparkling citrus to craft high-concentration fragrances with an imperial, long-lasting sillage.
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 Iconic Sava & Imperial Valley</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌿 Noble Aged Oud & Taif Rose</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💎 Extrait Sillage & 24hr Projection</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_marquis -%}
+        <div class="collection-marquis-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #C5A059; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(197, 160, 89, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#8C6D2D; background:#FBF6EE; border:1px solid rgba(197,160,89,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🇫🇷 French Haute Perfumery</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#8C6D2D; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Paris Cult Classics</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            Crafted in Paris, <strong>Marquis (Rémy Marquis)</strong> is a world-renowned French fragrance house celebrated for its timeless sophistication, regal bottle craftsmanship, and commanding sillage. The signature <em>Marquis Pour Homme</em> and <em>Marquis Pour Femme</em> unite rare oriental woods, warm amber, spicy cinnamon, fresh bergamot, and velvety jasmine blossoms into an unforgettable, seductive aura.
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🇫🇷 Genuine Paris Formulation</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌲 Sensual Oriental Woods & Amber</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 Cult Classics Pour Homme & Femme</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_calvin_klein -%}
+        <div class="collection-calvin-klein-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #B3B3B3; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#333333; background:#F5F5F5; border:1px solid rgba(0,0,0,0.15); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🇺🇸 New York Designer House</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#333333; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Iconic Fragrance Legends</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            Since 1968, <strong>Calvin Klein</strong> has defined modern luxury, bold minimalism, and groundbreaking fragrance design. From the pioneering unisex revolution of <em>CK One</em> and the timeless romantic devotion of <em>Eternity</em>, to the intoxicating sensuality of <em>Euphoria</em> and <em>Obsession</em>, Calvin Klein delivers pristine, evocative scents engineered for magnetic allure.
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🇺🇸 Iconic New York Heritage</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌿 Pioneering Unisex & Fresh Notes</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💎 Cult Icons CK One, Eternity & Euphoria</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_guess -%}
+        <div class="collection-guess-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #D32F2F; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(211, 47, 47, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#C62828; background:#FFEBEE; border:1px solid rgba(211,47,47,0.3); padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ California Glamour House</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#C62828; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">💖 Sensual Designer Perfumery</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            Founded in Los Angeles in 1981, <strong>Guess</strong> epitomizes youthful passion, effortless American glamour, and magnetic sensuality. The <strong>Guess Fragrance</strong> collection—spotlighted by <em>Guess Seductive</em>, <em>Guess 1981</em>, <em>Guess Bella Vita</em>, and <em>Guess Dare</em>—features mouthwatering gourmand fruits, intoxicating florals, and velvety woody musks that exude playful confidence and allure.
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">✨ Seductive Vanilla & Pear Nectar</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌸 Playful Feminine & Masculine Blends</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 Seductive, 1981 & Bella Vita</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_royale -%}
+        <div class="collection-royale-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #00B4D8; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(0, 180, 216, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#0077B6; background:#E0F7FA; border:1px solid rgba(0,180,216,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 Regal French-Oriental House</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#0077B6; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">🌊 Iconic Ocean Sillage</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            <strong>Royale</strong> (famed worldwide for the iconic <em>Royale Blue Pour Homme</em> and <em>Royale Pour Femme</em>) stands as one of the most beloved regal fragrance lines. Fusing crystalline sea notes, crisp lavender, and zesty melon with a deep, authoritative base of royal ambergris, oakmoss, and cedarwood, Royale embodies effortless charisma, fresh aquatic prestige, and commanding projection.
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌊 Ocean Aquatic & Crisp Melon</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌲 Rich Ambergris & Royal Woods</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 Legendary Cult Classic Royale Blue</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_gucci -%}
         <div class="collection-brand-badge-wrap">
           <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #121212; border: 1.5px solid #C5A059;">
             <img src="{{ 'gucci-logo.png' | asset_url }}" alt="Gucci" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">

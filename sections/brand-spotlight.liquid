@@ -53,7 +53,17 @@
                     {% render 'brand-logo', brand: 'possibility', class: 'brand-card-logo' %}
                   {%- elsif brand_block_title_lower contains 'gliss' -%}
                     {% render 'brand-logo', brand: 'gliss', class: 'brand-card-logo' %}
-                                    {%- elsif brand_block_title_lower contains 'gucci' -%}
+                                                      {%- elsif brand_block_title_lower contains 'gissah' -%}
+                    <img src="{{ 'gissah-logo.png' | asset_url }}" alt="Gissah" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'marquis' -%}
+                    <img src="{{ 'marquis-logo.png' | asset_url }}" alt="Marquis" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'calvin' or brand_block_title_lower contains 'kelvin' or brand_block_title_lower == 'ck' -%}
+                    <img src="{{ 'calvin-klein-logo.png' | asset_url }}" alt="Calvin Klein" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'guess' -%}
+                    <img src="{{ 'guess-logo.png' | asset_url }}" alt="Guess" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'royale' -%}
+                    <img src="{{ 'royale-logo.png' | asset_url }}" alt="Royale" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
+                  {%- elsif brand_block_title_lower contains 'gucci' -%}
                     <img src="{{ 'gucci-logo.png' | asset_url }}" alt="Gucci" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">
                   {%- elsif brand_block_title_lower contains '3q' -%}
                     <img src="{{ '3q-beauty-logo.png' | asset_url }}" alt="3Q Beauty" class="brand-card-logo" style="max-height: 44px; width: auto; object-fit: contain;">

@@ -113,6 +113,26 @@
       </div>
 
       <!-- 6. Cetaphil -->
+            <!-- Calvin Klein -->
+      <div class="brand-dir-card" data-brand-name="Calvin Klein" data-brand-letter="C" data-brand-cat="New York Designer Fragrances" data-brand-products="calvin klein ck one eau de toilette, calvin klein eternity pour homme, calvin klein euphoria eau de parfum, calvin klein obsession, calvin klein defy">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Calvin Klein</h3>
+        <span class="brand-dir-cat">New York Designer Fragrances</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">🇺🇸 Designer Legends</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="CK One Eau de Toilette">CK One EDT</span><span class="brand-product-pill" title="Eternity Eau de Parfum">Eternity EDP</span><span class="brand-product-pill" title="Euphoria & Obsession">Euphoria</span>
+          </div>
+        </div>
+        <a href="{% if collections['calvin-klein'] != blank %}{{ collections['calvin-klein'].url }}{% else %}/collections/all?filter.p.vendor=Calvin+Klein{% endif %}" class="btn-brand-explore">
+          <span>Shop Calvin Klein</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
       <div class="brand-dir-card" data-brand-name="Cetaphil" data-brand-letter="C" data-brand-cat="Skincare">
         <span class="brand-verified-tag">✓ AUTHORIZED</span>
         <div class="brand-dir-logo-wrap">
@@ -127,6 +147,26 @@
       </div>
 
       <!-- 7. MAC Cosmetics -->
+            <!-- Marquis -->
+      <div class="brand-dir-card" data-brand-name="Marquis" data-brand-letter="M" data-brand-cat="French Luxury Haute Perfumery" data-brand-products="remy marquis marquis pour homme eau de toilette, remy marquis marquis pour femme, remy marquis shalis, remy">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'marquis', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Marquis</h3>
+        <span class="brand-dir-cat">French Luxury Perfumery</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">🇫🇷 Paris Cult Masterpiece</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Marquis Pour Homme Eau de Toilette">Marquis Pour Homme</span><span class="brand-product-pill" title="Marquis Pour Femme">Marquis Pour Femme</span><span class="brand-product-pill" title="Shalis Paris">Shalis</span>
+          </div>
+        </div>
+        <a href="{% if collections['marquis'] != blank %}{{ collections['marquis'].url }}{% else %}/collections/all?filter.p.vendor=Marquis{% endif %}" class="btn-brand-explore">
+          <span>Shop Marquis</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
       <div class="brand-dir-card" data-brand-name="MAC Cosmetics" data-brand-letter="M" data-brand-cat="Makeup">
         <span class="brand-verified-tag">✓ AUTHORIZED</span>
         <div class="brand-dir-logo-wrap">
@@ -340,7 +380,27 @@
         </a>
       </div>
 
-            <!-- Possibility -->
+                  <!-- Royale -->
+      <div class="brand-dir-card" data-brand-name="Royale" data-brand-letter="R" data-brand-cat="Regal French-Oriental Luxury Perfumes" data-brand-products="rasasi royale blue pour homme eau de parfum, rasasi royale pour femme, royale amber, royale oud">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'royale', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Royale</h3>
+        <span class="brand-dir-cat">Regal French-Oriental Perfumery</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">👑 Royale Blue Cult Classic</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Royale Blue Pour Homme">Royale Blue</span><span class="brand-product-pill" title="Royale Pour Femme">Royale Femme</span><span class="brand-product-pill" title="Royale Amber & Oud">Royale Amber</span>
+          </div>
+        </div>
+        <a href="{% if collections['royale'] != blank %}{{ collections['royale'].url }}{% else %}/collections/all?filter.p.vendor=Royale{% endif %}" class="btn-brand-explore">
+          <span>Shop Royale</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Possibility -->
       <div class="brand-dir-card" data-brand-name="Possibility" data-brand-letter="P" data-brand-cat="Gourmet 3-in-1 Ultra-Rich Bath Crèmes" data-brand-products="possibility blueberry pancakes ultra rich 3-in-1 shower gel & bubble bath (525ml), possibility gin & bramble tonic ultra rich 3-in-1 shower gel & bubble bath (525ml), possibility peppermint ice cream ultra rich 3-in-1 shower gel & bubble bath (525ml), possibility pink champagne sorbet ultra rich 3-in-1 shower gel & bubble bath (525ml)">
         <span class="brand-verified-tag">✓ AUTHORIZED</span>
         <div class="brand-dir-logo-wrap">
@@ -427,6 +487,46 @@
 
         <a href="{% if collections['gucci'] != blank %}{{ collections['gucci'].url }}{% else %}/collections/all?filter.p.vendor=Gucci{% endif %}" class="btn-brand-explore">
           <span>Shop Gucci</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Gissah -->
+      <div class="brand-dir-card" data-brand-name="Gissah" data-brand-letter="G" data-brand-cat="Arabian Haute Parfumerie & Niche Luxury" data-brand-products="gissah sava eau de parfum, gissah imperial valley, gissah hudson valley, gissah one and only, gissah capri">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'gissah', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Gissah</h3>
+        <span class="brand-dir-cat">Kuwaiti Haute Parfumerie</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">👑 Arabian Niche House</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Gissah Sava Eau de Parfum">Gissah Sava EDP</span><span class="brand-product-pill" title="Gissah Imperial Valley">Imperial Valley</span><span class="brand-product-pill" title="Gissah Hudson Valley">Hudson Valley</span>
+          </div>
+        </div>
+        <a href="{% if collections['gissah'] != blank %}{{ collections['gissah'].url }}{% else %}/collections/all?filter.p.vendor=Gissah{% endif %}" class="btn-brand-explore">
+          <span>Shop Gissah</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Guess -->
+      <div class="brand-dir-card" data-brand-name="Guess" data-brand-letter="G" data-brand-cat="California Glamour & Sensual Perfumery" data-brand-products="guess seductive eau de toilette, guess 1981 pour femme, guess bella vita, guess dare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'guess', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Guess</h3>
+        <span class="brand-dir-cat">California Glamour Perfumes</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">✨ Seductive Fragrances</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Guess Seductive Eau de Toilette">Guess Seductive</span><span class="brand-product-pill" title="Guess 1981 Pour Femme">Guess 1981</span><span class="brand-product-pill" title="Guess Bella Vita">Bella Vita</span>
+          </div>
+        </div>
+        <a href="{% if collections['guess'] != blank %}{{ collections['guess'].url }}{% else %}/collections/all?filter.p.vendor=Guess{% endif %}" class="btn-brand-explore">
+          <span>Shop Guess</span>
           <span>&rarr;</span>
         </a>
       </div>
