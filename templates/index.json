@@ -315,6 +315,186 @@
             "offer_tag": "Celebrations & Luxury Gifting",
             "link": "/collections/all?filter.p.vendor=Cadbury"
           }
+        },
+        "brand_dot_and_key": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Dot & Key",
+            "brand_image": "",
+            "offer_tag": "Up to 20% OFF · Fruit Actives",
+            "link": "/collections/all?filter.p.vendor=Dot+%26+Key"
+          }
+        },
+        "brand_kay_beauty": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Kay Beauty",
+            "brand_image": "",
+            "offer_tag": "Katrina's High Glamour",
+            "link": "/collections/all?filter.p.vendor=Kay+Beauty"
+          }
+        },
+        "brand_lakme": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Lakme",
+            "brand_image": "",
+            "offer_tag": "Indian Iconic Runway Beauty",
+            "link": "/collections/all?filter.p.vendor=Lakme"
+          }
+        },
+        "brand_loreal_pro": {
+          "type": "brand_card",
+          "settings": {
+            "title": "L'Oreal Professionnel",
+            "brand_image": "",
+            "offer_tag": "Salon Exclusive Hair Care",
+            "link": "/collections/all?filter.p.vendor=L%27Oreal+Professionnel"
+          }
+        },
+        "brand_minimalist": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Minimalist",
+            "brand_image": "",
+            "offer_tag": "Clean Active Science",
+            "link": "/collections/all?filter.p.vendor=Minimalist"
+          }
+        },
+        "brand_cetaphil": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Cetaphil",
+            "brand_image": "",
+            "offer_tag": "#1 Dermatologist Recommended",
+            "link": "/collections/all?filter.p.vendor=Cetaphil"
+          }
+        },
+        "brand_mac": {
+          "type": "brand_card",
+          "settings": {
+            "title": "M·A·C",
+            "brand_image": "",
+            "offer_tag": "All Ages, All Races, All Sexes",
+            "link": "/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C"
+          }
+        },
+        "brand_loreal_paris": {
+          "type": "brand_card",
+          "settings": {
+            "title": "L'Oreal Paris",
+            "brand_image": "",
+            "offer_tag": "Because You're Worth It",
+            "link": "/collections/all?filter.p.vendor=L%27Oreal+Paris"
+          }
+        },
+        "brand_elf": {
+          "type": "brand_card",
+          "settings": {
+            "title": "e.l.f.",
+            "brand_image": "",
+            "offer_tag": "100% Vegan & Cruelty Free",
+            "link": "/collections/all?filter.p.vendor=e.l.f."
+          }
+        },
+        "brand_the_ordinary": {
+          "type": "brand_card",
+          "settings": {
+            "title": "The Ordinary",
+            "brand_image": "",
+            "offer_tag": "Clinical Formulations",
+            "link": "/collections/all?filter.p.vendor=The+Ordinary"
+          }
+        },
+        "brand_laneige": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Laneige",
+            "brand_image": "",
+            "offer_tag": "Sleeping Mask & Lip Glow",
+            "link": "/collections/all?filter.p.vendor=Laneige"
+          }
+        },
+        "brand_charlotte_tilbury": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Charlotte Tilbury",
+            "brand_image": "",
+            "offer_tag": "Hollywood Flawless Glow",
+            "link": "/collections/all?filter.p.vendor=Charlotte+Tilbury"
+          }
+        },
+        "brand_dove": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Dove",
+            "brand_image": "",
+            "offer_tag": "1/4 Moisturizing Cream",
+            "link": "/collections/all?filter.p.vendor=Dove"
+          }
+        },
+        "brand_kerastase": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Kerastase",
+            "brand_image": "",
+            "offer_tag": "Luxury Parisian Haircare",
+            "link": "/collections/all?filter.p.vendor=Kerastase"
+          }
+        },
+        "brand_estee_lauder": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Estee Lauder",
+            "brand_image": "",
+            "offer_tag": "Advanced Night Repair",
+            "link": "/collections/all?filter.p.vendor=Estee+Lauder"
+          }
+        },
+        "brand_love_beauty_planet": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Love Beauty & Planet",
+            "brand_image": "",
+            "offer_tag": "Eco-Ethical Pure Beauty",
+            "link": "/collections/all?filter.p.vendor=Love+Beauty+%26+Planet"
+          }
+        },
+        "brand_bath_and_body_works": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Bath & Body Works",
+            "brand_image": "",
+            "offer_tag": "Signature Mists & Lotions",
+            "link": "/collections/all?filter.p.vendor=Bath+%26+Body+Works"
+          }
+        },
+        "brand_skin1004": {
+          "type": "brand_card",
+          "settings": {
+            "title": "SKIN1004 Centella",
+            "brand_image": "",
+            "offer_tag": "Flat 20% OFF · K-Beauty",
+            "link": "/collections/all?filter.p.vendor=SKIN1004"
+          }
+        },
+        "brand_three_q": {
+          "type": "brand_card",
+          "settings": {
+            "title": "3Q Beauty",
+            "brand_image": "",
+            "offer_tag": "Vibrant Colors & Palettes",
+            "link": "/collections/all?filter.p.vendor=3Q+Beauty"
+          }
+        },
+        "brand_vgr": {
+          "type": "brand_card",
+          "settings": {
+            "title": "VGR",
+            "brand_image": "",
+            "offer_tag": "Precision Salon Grooming",
+            "link": "/collections/all?filter.p.vendor=VGR"
+          }
         }
       },
       "block_order": [
@@ -334,7 +514,27 @@
         "brand_himalaya",
         "brand_yardley",
         "brand_boroplus",
-        "brand_cadbury"
+        "brand_cadbury",
+        "brand_dot_and_key",
+        "brand_kay_beauty",
+        "brand_lakme",
+        "brand_loreal_pro",
+        "brand_minimalist",
+        "brand_cetaphil",
+        "brand_mac",
+        "brand_loreal_paris",
+        "brand_elf",
+        "brand_the_ordinary",
+        "brand_laneige",
+        "brand_charlotte_tilbury",
+        "brand_dove",
+        "brand_kerastase",
+        "brand_estee_lauder",
+        "brand_love_beauty_planet",
+        "brand_bath_and_body_works",
+        "brand_skin1004",
+        "brand_three_q",
+        "brand_vgr"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",

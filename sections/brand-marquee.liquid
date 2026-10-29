@@ -1,6 +1,6 @@
 {% comment %}
   Lush Beauty Mart — Infinite Running Brand Logo Marquee
-  Smooth non-stop continuous loop of 100% genuine authorized brands
+  Smooth non-stop continuous loop of 100% genuine authorized brands (All 37 official brand houses)
 {% endcomment %}
 
 <style>
@@ -64,6 +64,10 @@
   animation: brandMarqueeScroll {{ section.settings.speed | default: 35 }}s linear infinite !important;
 }
 
+.brand-marquee-track:hover {
+  animation-play-state: paused !important;
+}
+
 @keyframes brandMarqueeScroll {
   0% {
     transform: translateX(0);
@@ -87,7 +91,7 @@
   justify-content: center !important;
   padding: 8px 20px !important;
   height: 56px !important;
-  min-width: 135px !important;
+  min-width: 140px !important;
   background: #FFFFFF !important;
   border: 1.5px solid #EAE3DA !important;
   border-radius: 12px !important;
@@ -104,13 +108,18 @@
   box-shadow: 0 6px 14px rgba(197, 160, 89, 0.18) !important;
 }
 
-.brand-marquee-logo-img {
+.brand-marquee-logo-img,
+.brand-logo-card img,
+.brand-logo-card svg {
   max-height: 38px !important;
   max-width: 115px !important;
   width: auto !important;
   height: auto !important;
   object-fit: contain !important;
   display: block !important;
+  margin: 0 auto !important;
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 @media (max-width: 767px) {
@@ -123,9 +132,11 @@
   .brand-logo-card {
     height: 48px !important;
     padding: 6px 14px !important;
-    min-width: 105px !important;
+    min-width: 115px !important;
   }
-  .brand-marquee-logo-img {
+  .brand-marquee-logo-img,
+  .brand-logo-card img,
+  .brand-logo-card svg {
     max-height: 30px !important;
     max-width: 95px !important;
   }
@@ -143,62 +154,234 @@
 
   <div class="brand-marquee-container">
     <div class="brand-marquee-track">
-      <!-- Group 1 -->
+      <!-- Group 1 (All 37 Authorized Brands) -->
       <div class="brand-marquee-content">
-        <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% elsif collections['centella'] != blank %}{{ collections['centella'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella"><img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004 Centella" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></a>
-        <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="brand-logo-card" title="VGR Professional"><img src="{{ 'vgr-logo.png' | asset_url }}" alt="VGR Professional" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></a>
-        <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="brand-logo-card" title="Skin Cottage">{% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="brand-logo-card" title="Rasasi">{% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="brand-logo-card" title="Possibility">{% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="brand-logo-card" title="Syoss">{% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="brand-logo-card" title="Gliss">{% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}</a>
-
-        <div class="brand-logo-card" title="Dot & Key"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dot-and-key.png.jpg" alt="Dot & Key" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Kay Beauty"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/kay-beauty.png.png" alt="Kay Beauty" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Lakmé"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/lakme.png.jpg" alt="Lakmé" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="L'Oréal Professionnel"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/loreal-pro.png.jpg" alt="L'Oréal Professionnel" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Minimalist"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/minimalist.webp" alt="Minimalist" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Cetaphil"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/cetaphil.png.png" alt="Cetaphil" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="M·A·C Cosmetics"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/mac.png.png" alt="M·A·C Cosmetics" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="L'Oréal Paris"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/loreal-paris.png.jpg" alt="L'Oréal Paris" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="e.l.f. Cosmetics"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/elf.png.png" alt="e.l.f. Cosmetics" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="The Ordinary"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566819/the-ordinary.png.jpg" alt="The Ordinary" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Laneige"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/laneige.png.png" alt="Laneige" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Charlotte Tilbury"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/charlotte-tilbury.png.jpg" alt="Charlotte Tilbury" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Dove"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dove.png.png" alt="Dove" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Kérastase"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566822/kerastase.png.png" alt="Kérastase" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Estée Lauder"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/estee-lauder.png.png" alt="Estée Lauder" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Love Beauty & Planet"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/love-beauty-planet.png.png" alt="Love Beauty & Planet" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Bath & Body Works"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/bath-and-body-works.png" alt="Bath & Body Works" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
+        <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella">
+          {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="brand-logo-card" title="VGR Professional">
+          {% render 'brand-logo', brand: 'vgr', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="brand-logo-card" title="Skin Cottage">
+          {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="brand-logo-card" title="Rasasi Dubai Perfumes">
+          {% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="brand-logo-card" title="Possibility London">
+          {% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="brand-logo-card" title="Syoss Professional">
+          {% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="brand-logo-card" title="Gliss Hair Repair">
+          {% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['versace'] != blank %}{{ collections['versace'].url }}{% else %}/collections/all?filter.p.vendor=Versace{% endif %}" class="brand-logo-card" title="Versace Milano">
+          {% render 'brand-logo', brand: 'versace', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['gucci'] != blank %}{{ collections['gucci'].url }}{% else %}/collections/all?filter.p.vendor=Gucci{% endif %}" class="brand-logo-card" title="Gucci Beauty">
+          {% render 'brand-logo', brand: 'gucci', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['gissah'] != blank %}{{ collections['gissah'].url }}{% else %}/collections/all?filter.p.vendor=Gissah{% endif %}" class="brand-logo-card" title="Gissah Kuwait">
+          {% render 'brand-logo', brand: 'gissah', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['marquis'] != blank %}{{ collections['marquis'].url }}{% else %}/collections/all?filter.p.vendor=Marquis{% endif %}" class="brand-logo-card" title="Marquis Paris">
+          {% render 'brand-logo', brand: 'marquis', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['calvin-klein'] != blank %}{{ collections['calvin-klein'].url }}{% else %}/collections/all?filter.p.vendor=Calvin+Klein{% endif %}" class="brand-logo-card" title="Calvin Klein New York">
+          {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['guess'] != blank %}{{ collections['guess'].url }}{% else %}/collections/all?filter.p.vendor=Guess{% endif %}" class="brand-logo-card" title="Guess California">
+          {% render 'brand-logo', brand: 'guess', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['royale'] != blank %}{{ collections['royale'].url }}{% else %}/collections/all?filter.p.vendor=Royale{% endif %}" class="brand-logo-card" title="Royale Parfums">
+          {% render 'brand-logo', brand: 'royale', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['nivea'] != blank %}{{ collections['nivea'].url }}{% else %}/collections/all?filter.p.vendor=Nivea{% endif %}" class="brand-logo-card" title="Nivea Skincare">
+          {% render 'brand-logo', brand: 'nivea', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['himalaya'] != blank %}{{ collections['himalaya'].url }}{% else %}/collections/all?filter.p.vendor=Himalaya{% endif %}" class="brand-logo-card" title="Himalaya Wellness">
+          {% render 'brand-logo', brand: 'himalaya', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['yardley'] != blank %}{{ collections['yardley'].url }}{% else %}/collections/all?filter.p.vendor=Yardley{% endif %}" class="brand-logo-card" title="Yardley London">
+          {% render 'brand-logo', brand: 'yardley', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['boroplus'] != blank %}{{ collections['boroplus'].url }}{% else %}/collections/all?filter.p.vendor=BoroPlus{% endif %}" class="brand-logo-card" title="BoroPlus Antiseptic">
+          {% render 'brand-logo', brand: 'boroplus', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['cadbury'] != blank %}{{ collections['cadbury'].url }}{% else %}/collections/all?filter.p.vendor=Cadbury{% endif %}" class="brand-logo-card" title="Cadbury Celebrations">
+          {% render 'brand-logo', brand: 'cadbury', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['dot-and-key'] != blank %}{{ collections['dot-and-key'].url }}{% else %}/collections/all?filter.p.vendor=Dot+%26+Key{% endif %}" class="brand-logo-card" title="Dot & Key">
+          {% render 'brand-logo', brand: 'dot-and-key', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['kay-beauty'] != blank %}{{ collections['kay-beauty'].url }}{% else %}/collections/all?filter.p.vendor=Kay+Beauty{% endif %}" class="brand-logo-card" title="Kay Beauty">
+          {% render 'brand-logo', brand: 'kay-beauty', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['lakme'] != blank %}{{ collections['lakme'].url }}{% else %}/collections/all?filter.p.vendor=Lakme{% endif %}" class="brand-logo-card" title="Lakmé">
+          {% render 'brand-logo', brand: 'lakme', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['loreal-professionnel'] != blank %}{{ collections['loreal-professionnel'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Professionnel{% endif %}" class="brand-logo-card" title="L'Oréal Professionnel">
+          {% render 'brand-logo', brand: 'loreal-professionnel', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['minimalist'] != blank %}{{ collections['minimalist'].url }}{% else %}/collections/all?filter.p.vendor=Minimalist{% endif %}" class="brand-logo-card" title="Minimalist">
+          {% render 'brand-logo', brand: 'minimalist', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['cetaphil'] != blank %}{{ collections['cetaphil'].url }}{% else %}/collections/all?filter.p.vendor=Cetaphil{% endif %}" class="brand-logo-card" title="Cetaphil">
+          {% render 'brand-logo', brand: 'cetaphil', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['mac'] != blank %}{{ collections['mac'].url }}{% else %}/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C{% endif %}" class="brand-logo-card" title="M·A·C Cosmetics">
+          {% render 'brand-logo', brand: 'mac', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['loreal-paris'] != blank %}{{ collections['loreal-paris'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Paris{% endif %}" class="brand-logo-card" title="L'Oréal Paris">
+          {% render 'brand-logo', brand: 'loreal-paris', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['elf'] != blank %}{{ collections['elf'].url }}{% else %}/collections/all?filter.p.vendor=e.l.f.{% endif %}" class="brand-logo-card" title="e.l.f. Cosmetics">
+          {% render 'brand-logo', brand: 'elf', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['the-ordinary'] != blank %}{{ collections['the-ordinary'].url }}{% else %}/collections/all?filter.p.vendor=The+Ordinary{% endif %}" class="brand-logo-card" title="The Ordinary">
+          {% render 'brand-logo', brand: 'the-ordinary', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['laneige'] != blank %}{{ collections['laneige'].url }}{% else %}/collections/all?filter.p.vendor=Laneige{% endif %}" class="brand-logo-card" title="Laneige K-Beauty">
+          {% render 'brand-logo', brand: 'laneige', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['charlotte-tilbury'] != blank %}{{ collections['charlotte-tilbury'].url }}{% else %}/collections/all?filter.p.vendor=Charlotte+Tilbury{% endif %}" class="brand-logo-card" title="Charlotte Tilbury">
+          {% render 'brand-logo', brand: 'charlotte-tilbury', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['dove'] != blank %}{{ collections['dove'].url }}{% else %}/collections/all?filter.p.vendor=Dove{% endif %}" class="brand-logo-card" title="Dove">
+          {% render 'brand-logo', brand: 'dove', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['kerastase'] != blank %}{{ collections['kerastase'].url }}{% else %}/collections/all?filter.p.vendor=Kerastase{% endif %}" class="brand-logo-card" title="Kérastase Paris">
+          {% render 'brand-logo', brand: 'kerastase', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['estee-lauder'] != blank %}{{ collections['estee-lauder'].url }}{% else %}/collections/all?filter.p.vendor=Estee+Lauder{% endif %}" class="brand-logo-card" title="Estée Lauder">
+          {% render 'brand-logo', brand: 'estee-lauder', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['love-beauty-planet'] != blank %}{{ collections['love-beauty-planet'].url }}{% else %}/collections/all?filter.p.vendor=Love+Beauty+%26+Planet{% endif %}" class="brand-logo-card" title="Love Beauty & Planet">
+          {% render 'brand-logo', brand: 'love-beauty-planet', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['bath-and-body-works'] != blank %}{{ collections['bath-and-body-works'].url }}{% else %}/collections/all?filter.p.vendor=Bath+%26+Body+Works{% endif %}" class="brand-logo-card" title="Bath & Body Works">
+          {% render 'brand-logo', brand: 'bath-and-body-works', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['3q-beauty'] != blank %}{{ collections['3q-beauty'].url }}{% else %}/collections/all?filter.p.vendor=3Q+Beauty{% endif %}" class="brand-logo-card" title="3Q Beauty">
+          {% render 'brand-logo', brand: '3q-beauty', class: 'brand-marquee-logo-img' %}
+        </a>
       </div>
 
-      <!-- Group 2 (Duplicate for Seamless Infinite Marquee Loop) -->
+      <!-- Group 2 (Duplicate for Seamless Infinite Loop) -->
       <div class="brand-marquee-content" aria-hidden="true">
-        <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% elsif collections['centella'] != blank %}{{ collections['centella'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella"><img src="{{ 'skin1004-centella-logo.png' | asset_url }}" alt="SKIN1004 Centella" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></a>
-        <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="brand-logo-card" title="VGR Professional"><img src="{{ 'vgr-logo.png' | asset_url }}" alt="VGR Professional" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></a>
-        <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="brand-logo-card" title="Skin Cottage">{% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="brand-logo-card" title="Rasasi">{% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="brand-logo-card" title="Possibility">{% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="brand-logo-card" title="Syoss">{% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}</a>
-        <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="brand-logo-card" title="Gliss">{% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}</a>
-
-        <div class="brand-logo-card" title="Dot & Key"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dot-and-key.png.jpg" alt="Dot & Key" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Kay Beauty"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/kay-beauty.png.png" alt="Kay Beauty" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Lakmé"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/lakme.png.jpg" alt="Lakmé" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="L'Oréal Professionnel"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/loreal-pro.png.jpg" alt="L'Oréal Professionnel" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Minimalist"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/minimalist.webp" alt="Minimalist" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Cetaphil"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/cetaphil.png.png" alt="Cetaphil" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="M·A·C Cosmetics"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/mac.png.png" alt="M·A·C Cosmetics" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="L'Oréal Paris"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/loreal-paris.png.jpg" alt="L'Oréal Paris" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="e.l.f. Cosmetics"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/elf.png.png" alt="e.l.f. Cosmetics" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="The Ordinary"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566819/the-ordinary.png.jpg" alt="The Ordinary" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Laneige"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566820/laneige.png.png" alt="Laneige" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Charlotte Tilbury"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/charlotte-tilbury.png.jpg" alt="Charlotte Tilbury" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Dove"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/dove.png.png" alt="Dove" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Kérastase"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566822/kerastase.png.png" alt="Kérastase" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Estée Lauder"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/estee-lauder.png.png" alt="Estée Lauder" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Love Beauty & Planet"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/love-beauty-planet.png.png" alt="Love Beauty & Planet" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
-        <div class="brand-logo-card" title="Bath & Body Works"><img src="https://res.cloudinary.com/hsg3gdjc/image/upload/v1792566821/bath-and-body-works.png" alt="Bath & Body Works" class="brand-marquee-logo-img" width="140" height="40" loading="eager"></div>
+        <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella">
+          {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="brand-logo-card" title="VGR Professional">
+          {% render 'brand-logo', brand: 'vgr', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="brand-logo-card" title="Skin Cottage">
+          {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="brand-logo-card" title="Rasasi Dubai Perfumes">
+          {% render 'brand-logo', brand: 'rasasi', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="brand-logo-card" title="Possibility London">
+          {% render 'brand-logo', brand: 'possibility', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="brand-logo-card" title="Syoss Professional">
+          {% render 'brand-logo', brand: 'syoss', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="brand-logo-card" title="Gliss Hair Repair">
+          {% render 'brand-logo', brand: 'gliss', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['versace'] != blank %}{{ collections['versace'].url }}{% else %}/collections/all?filter.p.vendor=Versace{% endif %}" class="brand-logo-card" title="Versace Milano">
+          {% render 'brand-logo', brand: 'versace', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['gucci'] != blank %}{{ collections['gucci'].url }}{% else %}/collections/all?filter.p.vendor=Gucci{% endif %}" class="brand-logo-card" title="Gucci Beauty">
+          {% render 'brand-logo', brand: 'gucci', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['gissah'] != blank %}{{ collections['gissah'].url }}{% else %}/collections/all?filter.p.vendor=Gissah{% endif %}" class="brand-logo-card" title="Gissah Kuwait">
+          {% render 'brand-logo', brand: 'gissah', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['marquis'] != blank %}{{ collections['marquis'].url }}{% else %}/collections/all?filter.p.vendor=Marquis{% endif %}" class="brand-logo-card" title="Marquis Paris">
+          {% render 'brand-logo', brand: 'marquis', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['calvin-klein'] != blank %}{{ collections['calvin-klein'].url }}{% else %}/collections/all?filter.p.vendor=Calvin+Klein{% endif %}" class="brand-logo-card" title="Calvin Klein New York">
+          {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['guess'] != blank %}{{ collections['guess'].url }}{% else %}/collections/all?filter.p.vendor=Guess{% endif %}" class="brand-logo-card" title="Guess California">
+          {% render 'brand-logo', brand: 'guess', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['royale'] != blank %}{{ collections['royale'].url }}{% else %}/collections/all?filter.p.vendor=Royale{% endif %}" class="brand-logo-card" title="Royale Parfums">
+          {% render 'brand-logo', brand: 'royale', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['nivea'] != blank %}{{ collections['nivea'].url }}{% else %}/collections/all?filter.p.vendor=Nivea{% endif %}" class="brand-logo-card" title="Nivea Skincare">
+          {% render 'brand-logo', brand: 'nivea', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['himalaya'] != blank %}{{ collections['himalaya'].url }}{% else %}/collections/all?filter.p.vendor=Himalaya{% endif %}" class="brand-logo-card" title="Himalaya Wellness">
+          {% render 'brand-logo', brand: 'himalaya', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['yardley'] != blank %}{{ collections['yardley'].url }}{% else %}/collections/all?filter.p.vendor=Yardley{% endif %}" class="brand-logo-card" title="Yardley London">
+          {% render 'brand-logo', brand: 'yardley', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['boroplus'] != blank %}{{ collections['boroplus'].url }}{% else %}/collections/all?filter.p.vendor=BoroPlus{% endif %}" class="brand-logo-card" title="BoroPlus Antiseptic">
+          {% render 'brand-logo', brand: 'boroplus', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['cadbury'] != blank %}{{ collections['cadbury'].url }}{% else %}/collections/all?filter.p.vendor=Cadbury{% endif %}" class="brand-logo-card" title="Cadbury Celebrations">
+          {% render 'brand-logo', brand: 'cadbury', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['dot-and-key'] != blank %}{{ collections['dot-and-key'].url }}{% else %}/collections/all?filter.p.vendor=Dot+%26+Key{% endif %}" class="brand-logo-card" title="Dot & Key">
+          {% render 'brand-logo', brand: 'dot-and-key', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['kay-beauty'] != blank %}{{ collections['kay-beauty'].url }}{% else %}/collections/all?filter.p.vendor=Kay+Beauty{% endif %}" class="brand-logo-card" title="Kay Beauty">
+          {% render 'brand-logo', brand: 'kay-beauty', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['lakme'] != blank %}{{ collections['lakme'].url }}{% else %}/collections/all?filter.p.vendor=Lakme{% endif %}" class="brand-logo-card" title="Lakmé">
+          {% render 'brand-logo', brand: 'lakme', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['loreal-professionnel'] != blank %}{{ collections['loreal-professionnel'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Professionnel{% endif %}" class="brand-logo-card" title="L'Oréal Professionnel">
+          {% render 'brand-logo', brand: 'loreal-professionnel', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['minimalist'] != blank %}{{ collections['minimalist'].url }}{% else %}/collections/all?filter.p.vendor=Minimalist{% endif %}" class="brand-logo-card" title="Minimalist">
+          {% render 'brand-logo', brand: 'minimalist', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['cetaphil'] != blank %}{{ collections['cetaphil'].url }}{% else %}/collections/all?filter.p.vendor=Cetaphil{% endif %}" class="brand-logo-card" title="Cetaphil">
+          {% render 'brand-logo', brand: 'cetaphil', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['mac'] != blank %}{{ collections['mac'].url }}{% else %}/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C{% endif %}" class="brand-logo-card" title="M·A·C Cosmetics">
+          {% render 'brand-logo', brand: 'mac', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['loreal-paris'] != blank %}{{ collections['loreal-paris'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Paris{% endif %}" class="brand-logo-card" title="L'Oréal Paris">
+          {% render 'brand-logo', brand: 'loreal-paris', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['elf'] != blank %}{{ collections['elf'].url }}{% else %}/collections/all?filter.p.vendor=e.l.f.{% endif %}" class="brand-logo-card" title="e.l.f. Cosmetics">
+          {% render 'brand-logo', brand: 'elf', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['the-ordinary'] != blank %}{{ collections['the-ordinary'].url }}{% else %}/collections/all?filter.p.vendor=The+Ordinary{% endif %}" class="brand-logo-card" title="The Ordinary">
+          {% render 'brand-logo', brand: 'the-ordinary', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['laneige'] != blank %}{{ collections['laneige'].url }}{% else %}/collections/all?filter.p.vendor=Laneige{% endif %}" class="brand-logo-card" title="Laneige K-Beauty">
+          {% render 'brand-logo', brand: 'laneige', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['charlotte-tilbury'] != blank %}{{ collections['charlotte-tilbury'].url }}{% else %}/collections/all?filter.p.vendor=Charlotte+Tilbury{% endif %}" class="brand-logo-card" title="Charlotte Tilbury">
+          {% render 'brand-logo', brand: 'charlotte-tilbury', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['dove'] != blank %}{{ collections['dove'].url }}{% else %}/collections/all?filter.p.vendor=Dove{% endif %}" class="brand-logo-card" title="Dove">
+          {% render 'brand-logo', brand: 'dove', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['kerastase'] != blank %}{{ collections['kerastase'].url }}{% else %}/collections/all?filter.p.vendor=Kerastase{% endif %}" class="brand-logo-card" title="Kérastase Paris">
+          {% render 'brand-logo', brand: 'kerastase', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['estee-lauder'] != blank %}{{ collections['estee-lauder'].url }}{% else %}/collections/all?filter.p.vendor=Estee+Lauder{% endif %}" class="brand-logo-card" title="Estée Lauder">
+          {% render 'brand-logo', brand: 'estee-lauder', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['love-beauty-planet'] != blank %}{{ collections['love-beauty-planet'].url }}{% else %}/collections/all?filter.p.vendor=Love+Beauty+%26+Planet{% endif %}" class="brand-logo-card" title="Love Beauty & Planet">
+          {% render 'brand-logo', brand: 'love-beauty-planet', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['bath-and-body-works'] != blank %}{{ collections['bath-and-body-works'].url }}{% else %}/collections/all?filter.p.vendor=Bath+%26+Body+Works{% endif %}" class="brand-logo-card" title="Bath & Body Works">
+          {% render 'brand-logo', brand: 'bath-and-body-works', class: 'brand-marquee-logo-img' %}
+        </a>
+        <a href="{% if collections['3q-beauty'] != blank %}{{ collections['3q-beauty'].url }}{% else %}/collections/all?filter.p.vendor=3Q+Beauty{% endif %}" class="brand-logo-card" title="3Q Beauty">
+          {% render 'brand-logo', brand: '3q-beauty', class: 'brand-marquee-logo-img' %}
+        </a>
       </div>
     </div>
   </div>
@@ -224,11 +407,11 @@
       "type": "range",
       "id": "speed",
       "min": 15,
-      "max": 60,
+      "max": 80,
       "step": 5,
       "unit": "s",
       "label": "Marquee Scroll Speed",
-      "default": 35
+      "default": 45
     },
     {
       "type": "color",

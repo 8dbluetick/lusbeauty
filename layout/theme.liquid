@@ -97,26 +97,33 @@
         <!-- Global Broken/Cracked Image Defense & Self-Healing Fallback -->
     <style>
       img[src=""], img:not([src]) { opacity: 0 !important; visibility: hidden !important; }
-      img.img-load-failed { opacity: 0.9; object-fit: contain; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+      .brand-card-logo,
+      .brand-marquee-logo-img,
+      .brand-logo-img {
+        max-height: 44px !important;
+        max-width: 130px !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 auto !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
     </style>
     <script>
       (function() {
         window.addEventListener('error', function(e) {
           if (e.target && e.target.tagName === 'IMG') {
             var img = e.target;
+            // Allow element-level onerror to attempt fallback first
+            if (img.getAttribute('onerror') && !img.dataset.triedFallback) {
+              img.dataset.triedFallback = 'true';
+              return;
+            }
             if (!img.dataset.hasHandledError) {
               img.dataset.hasHandledError = 'true';
               img.classList.add('img-load-failed');
-              if (img.classList.contains('brand-card-logo') || img.classList.contains('brand-logo-img') || img.closest('.brand-logo-area') || img.closest('.collection-card-logo-badge')) {
-                var alt = img.getAttribute('alt') || 'Brand';
-                var span = document.createElement('span');
-                span.className = 'brand-name-fallback';
-                span.style.cssText = 'display:inline-block;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;font-size:0.82rem;color:#1F1610;padding:6px 12px;background:#ffffff;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid #e2e8f0;';
-                span.textContent = alt;
-                if (img.parentNode) {
-                  img.parentNode.replaceChild(span, img);
-                }
-              }
             }
           }
         }, true);

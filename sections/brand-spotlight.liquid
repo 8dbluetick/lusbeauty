@@ -1,7 +1,33 @@
 {% comment %}
   Lush Beauty Mart — Nykaa Luxe Style "Brand Spotlight Carousel" Section
-  Showcases top authorized brand partners (Minimalist, The Derma Co, L'Oreal, Maybelline, Plum, Swiss Beauty)
+  Showcases top authorized brand partners with guaranteed authentic local vector/PNG logos
 {% endcomment %}
+
+<style>
+.brand-card-logo,
+.brand-logo-area img,
+.brand-logo-area svg {
+  max-height: 46px !important;
+  max-width: 130px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.brand-logo-area {
+  margin: 10px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 50px !important;
+  width: 100% !important;
+}
+</style>
 
 <section class="lush-brands-section" id="BrandSpotlightSection">
   <div class="page-width brands-container">
@@ -33,15 +59,34 @@
 
               <div class="brand-logo-area">
                 {%- if block.settings.brand_image != blank -%}
-                  <img
-                    src="{{ block.settings.brand_image }}"
-                    alt="{{ block.settings.title | escape }}"
-                    class="brand-card-logo"
-                    width="140"
-                    height="60"
-                    loading="lazy"
-                    onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'brand-card-name\'>{{ block.settings.title | escape }}</span>';"
-                  >
+                  {%- if block.settings.brand_image.src -%}
+                    <img
+                      src="{{ block.settings.brand_image | image_url: width: 280 }}"
+                      alt="{{ block.settings.title | escape }}"
+                      class="brand-card-logo"
+                      width="140"
+                      height="60"
+                      loading="lazy"
+                    >
+                  {%- elsif block.settings.brand_image contains '/' -%}
+                    <img
+                      src="{{ block.settings.brand_image }}"
+                      alt="{{ block.settings.title | escape }}"
+                      class="brand-card-logo"
+                      width="140"
+                      height="60"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <img
+                      src="{{ block.settings.brand_image | asset_url }}"
+                      alt="{{ block.settings.title | escape }}"
+                      class="brand-card-logo"
+                      width="140"
+                      height="60"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
                 {%- else -%}
                   {% render 'brand-logo', brand: block.settings.title, class: 'brand-card-logo' %}
                 {%- endif -%}
@@ -58,54 +103,302 @@
             </a>
           {%- endfor -%}
         {%- else -%}
-          <!-- Default Top Brands -->
-          <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% elsif collections['centella'] != blank %}{{ collections['centella'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-card-item">
+          <!-- Default Top Brands with Authentic Visual Logos -->
+          <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
-            <div class="brand-logo-area"><span class="brand-card-name">SKIN1004 CENTELLA</span></div>
-            <div class="brand-offer-tag"><span>Flat 20% OFF • K-Beauty</span></div>
-            <span class="brand-explore-btn"><span>Shop Brand</span><span>→</span></span>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'skin1004', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Flat 20% OFF · K-Beauty</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
           </a>
-
-          <a href="/collections/all" class="brand-card-item">
+          <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
-            <div class="brand-logo-area"><span class="brand-card-name">MINIMALIST</span></div>
-            <div class="brand-offer-tag"><span>Up to 15% OFF • Serums</span></div>
-            <span class="brand-explore-btn"><span>Shop Brand</span><span>→</span></span>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Flat 15% OFF · Body Care</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
           </a>
-
-          <a href="/collections/all" class="brand-card-item">
+          <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
-            <div class="brand-logo-area"><span class="brand-card-name">THE DERMA CO</span></div>
-            <div class="brand-offer-tag"><span>Buy 2 Get 10% OFF</span></div>
-            <span class="brand-explore-btn"><span>Shop Brand</span><span>→</span></span>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'rasasi', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Dubai Luxury Fragrances</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
           </a>
-
-          <a href="/collections/all" class="brand-card-item">
+          <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
-            <div class="brand-logo-area"><span class="brand-card-name">L'ORÉAL PARIS</span></div>
-            <div class="brand-offer-tag"><span>Up to 30% OFF • Hair & Face</span></div>
-            <span class="brand-explore-btn"><span>Shop Brand</span><span>→</span></span>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'possibility', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Gourmet 3-in-1 Crème</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
           </a>
-
-          <a href="/collections/all" class="brand-card-item">
+          <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
-            <div class="brand-logo-area"><span class="brand-card-name">MAYBELLINE NY</span></div>
-            <div class="brand-offer-tag"><span>Flat 20% OFF • Lipsticks</span></div>
-            <span class="brand-explore-btn"><span>Shop Brand</span><span>→</span></span>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'syoss', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Japanese Salon Keratin</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
           </a>
-
-          <a href="/collections/all" class="brand-card-item">
+          <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
-            <div class="brand-logo-area"><span class="brand-card-name">PLUM GOODNESS</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'gliss', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Schwarzkopf Hair Repair</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['gucci'] != blank %}{{ collections['gucci'].url }}{% else %}/collections/all?filter.p.vendor=Gucci{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'gucci', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Italian Haute Perfumery</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['gissah'] != blank %}{{ collections['gissah'].url }}{% else %}/collections/all?filter.p.vendor=Gissah{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'gissah', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Kuwaiti Parfumerie</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['marquis'] != blank %}{{ collections['marquis'].url }}{% else %}/collections/all?filter.p.vendor=Marquis{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'marquis', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>French Paris Classics</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['calvin-klein'] != blank %}{{ collections['calvin-klein'].url }}{% else %}/collections/all?filter.p.vendor=Calvin+Klein{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'calvin-klein', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>New York Designer Icons</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['guess'] != blank %}{{ collections['guess'].url }}{% else %}/collections/all?filter.p.vendor=Guess{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'guess', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>California Glamour</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['royale'] != blank %}{{ collections['royale'].url }}{% else %}/collections/all?filter.p.vendor=Royale{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'royale', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Cult Classic Perfumes</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['versace'] != blank %}{{ collections['versace'].url }}{% else %}/collections/all?filter.p.vendor=Versace{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'versace', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Milano Haute Perfumery</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['nivea'] != blank %}{{ collections['nivea'].url }}{% else %}/collections/all?filter.p.vendor=Nivea{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'nivea', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>German Skincare Care</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['himalaya'] != blank %}{{ collections['himalaya'].url }}{% else %}/collections/all?filter.p.vendor=Himalaya{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'himalaya', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Since 1930 Herbal Care</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['yardley'] != blank %}{{ collections['yardley'].url }}{% else %}/collections/all?filter.p.vendor=Yardley{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'yardley', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>British Royal Perfumery</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['boroplus'] != blank %}{{ collections['boroplus'].url }}{% else %}/collections/all?filter.p.vendor=BoroPlus{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'boroplus', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>India's #1 Antiseptic Care</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['cadbury'] != blank %}{{ collections['cadbury'].url }}{% else %}/collections/all?filter.p.vendor=Cadbury{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'cadbury', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Celebrations & Gifting</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['dot-and-key'] != blank %}{{ collections['dot-and-key'].url }}{% else %}/collections/all?filter.p.vendor=Dot+%26+Key{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'dot-and-key', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Up to 20% OFF · Fruit Actives</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['kay-beauty'] != blank %}{{ collections['kay-beauty'].url }}{% else %}/collections/all?filter.p.vendor=Kay+Beauty{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'kay-beauty', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Katrina's High Glamour</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['lakme'] != blank %}{{ collections['lakme'].url }}{% else %}/collections/all?filter.p.vendor=Lakme{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'lakme', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Indian Iconic Runway Beauty</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['loreal-professionnel'] != blank %}{{ collections['loreal-professionnel'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Professionnel{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'loreal-professionnel', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Salon Exclusive Hair Care</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['minimalist'] != blank %}{{ collections['minimalist'].url }}{% else %}/collections/all?filter.p.vendor=Minimalist{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'minimalist', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Clean Active Science</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['cetaphil'] != blank %}{{ collections['cetaphil'].url }}{% else %}/collections/all?filter.p.vendor=Cetaphil{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'cetaphil', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>#1 Dermatologist Recommended</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['mac'] != blank %}{{ collections['mac'].url }}{% else %}/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'mac', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>All Ages, All Races, All Sexes</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['loreal-paris'] != blank %}{{ collections['loreal-paris'].url }}{% else %}/collections/all?filter.p.vendor=L'Oreal+Paris{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'loreal-paris', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Because You're Worth It</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['elf'] != blank %}{{ collections['elf'].url }}{% else %}/collections/all?filter.p.vendor=e.l.f.{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'elf', class: 'brand-card-logo' %}
+            </div>
             <div class="brand-offer-tag"><span>100% Vegan & Cruelty Free</span></div>
-            <span class="brand-explore-btn"><span>Shop Brand</span><span>→</span></span>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
           </a>
-
-          <a href="/collections/all" class="brand-card-item">
+          <a href="{% if collections['the-ordinary'] != blank %}{{ collections['the-ordinary'].url }}{% else %}/collections/all?filter.p.vendor=The+Ordinary{% endif %}" class="brand-card-item">
             <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
-            <div class="brand-logo-area"><span class="brand-card-name">SWISS BEAUTY</span></div>
-            <div class="brand-offer-tag"><span>Starting at just ₹199</span></div>
-            <span class="brand-explore-btn"><span>Shop Brand</span><span>→</span></span>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'the-ordinary', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Clinical Formulations</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['laneige'] != blank %}{{ collections['laneige'].url }}{% else %}/collections/all?filter.p.vendor=Laneige{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'laneige', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Sleeping Mask & Lip Glow</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['charlotte-tilbury'] != blank %}{{ collections['charlotte-tilbury'].url }}{% else %}/collections/all?filter.p.vendor=Charlotte+Tilbury{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'charlotte-tilbury', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Hollywood Flawless Glow</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['dove'] != blank %}{{ collections['dove'].url }}{% else %}/collections/all?filter.p.vendor=Dove{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'dove', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>1/4 Moisturizing Cream</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['kerastase'] != blank %}{{ collections['kerastase'].url }}{% else %}/collections/all?filter.p.vendor=Kerastase{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'kerastase', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Luxury Parisian Haircare</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['estee-lauder'] != blank %}{{ collections['estee-lauder'].url }}{% else %}/collections/all?filter.p.vendor=Estee+Lauder{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'estee-lauder', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Advanced Night Repair</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['love-beauty-planet'] != blank %}{{ collections['love-beauty-planet'].url }}{% else %}/collections/all?filter.p.vendor=Love+Beauty+%26+Planet{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'love-beauty-planet', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Eco-Ethical Pure Beauty</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['bath-and-body-works'] != blank %}{{ collections['bath-and-body-works'].url }}{% else %}/collections/all?filter.p.vendor=Bath+%26+Body+Works{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'bath-and-body-works', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Signature Mists & Lotions</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['3q-beauty'] != blank %}{{ collections['3q-beauty'].url }}{% else %}/collections/all?filter.p.vendor=3Q+Beauty{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: '3q-beauty', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Vibrant Colors & Palettes</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
+          </a>
+          <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="brand-card-item">
+            <div class="brand-verified-pill"><span class="verified-check">✓</span><span>AUTHORIZED</span></div>
+            <div class="brand-logo-area">
+              {% render 'brand-logo', brand: 'vgr', class: 'brand-card-logo' %}
+            </div>
+            <div class="brand-offer-tag"><span>Precision Salon Grooming</span></div>
+            <span class="brand-explore-btn"><span>Shop Collection</span><span>→</span></span>
           </a>
         {%- endif -%}
       </div>
@@ -153,7 +446,7 @@
           "type": "text",
           "id": "title",
           "label": "Brand Name",
-          "default": "Minimalist"
+          "default": "Skin Cottage"
         },
         {
           "type": "text",
@@ -181,49 +474,65 @@
         {
           "type": "brand_card",
           "settings": {
-            "title": "MINIMALIST",
-            "offer_tag": "Up to 15% OFF • Serums",
-            "link": "/collections/all"
+            "title": "Skin Cottage",
+            "offer_tag": "Flat 15% OFF · Body Care",
+            "link": "/collections/skin-cottage"
           }
         },
         {
           "type": "brand_card",
           "settings": {
-            "title": "THE DERMA CO",
-            "offer_tag": "Buy 2 Get 10% OFF",
-            "link": "/collections/all"
+            "title": "Versace",
+            "offer_tag": "Milano Haute Perfumery",
+            "link": "/collections/versace"
           }
         },
         {
           "type": "brand_card",
           "settings": {
-            "title": "L'ORÉAL PARIS",
-            "offer_tag": "Up to 30% OFF",
-            "link": "/collections/all"
+            "title": "Gucci",
+            "offer_tag": "Italian Haute Perfumery",
+            "link": "/collections/gucci"
           }
         },
         {
           "type": "brand_card",
           "settings": {
-            "title": "MAYBELLINE NY",
-            "offer_tag": "Flat 20% OFF • Lipsticks",
-            "link": "/collections/all"
+            "title": "Nivea",
+            "offer_tag": "German Skincare Care",
+            "link": "/collections/nivea"
           }
         },
         {
           "type": "brand_card",
           "settings": {
-            "title": "PLUM GOODNESS",
-            "offer_tag": "100% Vegan & Cruelty Free",
-            "link": "/collections/all"
+            "title": "Himalaya",
+            "offer_tag": "Since 1930 Herbal Care",
+            "link": "/collections/himalaya"
           }
         },
         {
           "type": "brand_card",
           "settings": {
-            "title": "SWISS BEAUTY",
-            "offer_tag": "Starting at just ₹199",
-            "link": "/collections/all"
+            "title": "Yardley London",
+            "offer_tag": "British Royal Perfumery",
+            "link": "/collections/yardley"
+          }
+        },
+        {
+          "type": "brand_card",
+          "settings": {
+            "title": "BoroPlus",
+            "offer_tag": "India's #1 Antiseptic Care",
+            "link": "/collections/boroplus"
+          }
+        },
+        {
+          "type": "brand_card",
+          "settings": {
+            "title": "Cadbury",
+            "offer_tag": "Celebrations & Luxury Gifting",
+            "link": "/collections/cadbury"
           }
         }
       ]
