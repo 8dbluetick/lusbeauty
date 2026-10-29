@@ -12,15 +12,13 @@
   <div class="page-width">
     <!-- Dedicated Brand Collection Hero Banner -->
     {%- if is_skin_cottage and collection.image == blank -%}
-      <div class="collection-brand-hero-banner banner-skin-cottage" style="margin-bottom: 24px; border-radius: 16px; overflow: hidden; border: 1.5px solid #2D6A4F; box-shadow: 0 8px 24px rgba(17, 56, 44, 0.15);">
-        <img
-          src="{{ 'skin-cottage-collection-banner.jpg' | asset_url }}"
-          alt="Skin Cottage Luxury Botanical Body Care Collection - Lush Beauty Mart"
-          style="width: 100%; height: auto; display: block; object-fit: cover;"
-          loading="eager"
-          width="1200"
-          height="675"
-        >
+      <div class="collection-brand-hero-banner banner-skin-cottage" style="background: linear-gradient(135deg, #11382C 0%, #1B4D3E 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #2D6A4F; box-shadow: 0 8px 24px rgba(17, 56, 44, 0.18);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'skin-cottage-logo.png' | asset_url }}" alt="Skin Cottage Luxury Botanical Care - Malaysia" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #D8F3DC; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Malaysian Luxury Botanical Body Care · Enriched with Natural Fruit Extracts, Vitamin E &amp; pH 5.5 Formula · 100% Authentic Stock
+        </p>
       </div>
     {%- elsif is_syoss and collection.image == blank -%}
       <div class="collection-brand-hero-banner banner-syoss" style="background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #333333; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
