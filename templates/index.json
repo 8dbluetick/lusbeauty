@@ -279,6 +279,15 @@
             "offer_tag": "German Skincare Care",
             "link": "/collections/all?filter.p.vendor=Nivea"
           }
+        },
+        "brand_himalaya": {
+          "type": "brand_card",
+          "settings": {
+            "title": "HIMALAYA",
+            "brand_image": "",
+            "offer_tag": "Since 1930 Herbal Science",
+            "link": "/collections/all?filter.p.vendor=Himalaya"
+          }
         }
       },
       "block_order": [
@@ -294,12 +303,13 @@
         "brand_guess",
         "brand_royale",
         "brand_versace",
-        "brand_nivea"
+        "brand_nivea",
+        "brand_himalaya"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",
         "title": "Shop by Authorized Brand",
-        "subtitle": "Explore authentic Skin Cottage, Rasasi, Versace, Nivea, Gissah, Marquis, Calvin Klein, Guess, Royale & Gucci in-store and online."
+        "subtitle": "Explore authentic Skin Cottage, Rasasi, Versace, Nivea, Himalaya, Gissah, Marquis, Calvin Klein, Guess, Royale & Gucci in-store and online."
       }
     }
   },

@@ -29,9 +29,11 @@
         <button type="button" class="letter-btn" data-letter="D">D</button>
         <button type="button" class="letter-btn" data-letter="E">E</button>
         <button type="button" class="letter-btn" data-letter="G">G</button>
+        <button type="button" class="letter-btn" data-letter="H">H</button>
         <button type="button" class="letter-btn" data-letter="K">K</button>
         <button type="button" class="letter-btn" data-letter="L">L</button>
         <button type="button" class="letter-btn" data-letter="M">M</button>
+        <button type="button" class="letter-btn" data-letter="N">N</button>
         <button type="button" class="letter-btn" data-letter="P">P</button>
         <button type="button" class="letter-btn" data-letter="R">R</button>
         <button type="button" class="letter-btn" data-letter="S">S</button>
@@ -567,6 +569,26 @@
         </div>
         <a href="{% if collections['guess'] != blank %}{{ collections['guess'].url }}{% else %}/collections/all?filter.p.vendor=Guess{% endif %}" class="btn-brand-explore">
           <span>Shop Guess</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Himalaya -->
+      <div class="brand-dir-card" data-brand-name="Himalaya" data-brand-letter="H" data-brand-cat="Ayurvedic Wellness & Herbal Skincare" data-brand-products="himalaya purifying neem face wash, himalaya nourishing skin cream, himalaya cocoa butter intensive body lotion, himalaya lip balm, himalaya gentle baby care, himalaya liv.52">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'himalaya', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Himalaya</h3>
+        <span class="brand-dir-cat">Ayurvedic Wellness &amp; Skincare</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">🌿 Since 1930 Herbal Science</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Purifying Neem Face Wash">Neem Face Wash</span><span class="brand-product-pill" title="Nourishing Skin Cream">Nourishing Cream</span><span class="brand-product-pill" title="Cocoa Butter & Lip Care">Herbal Care</span>
+          </div>
+        </div>
+        <a href="{% if collections['himalaya'] != blank %}{{ collections['himalaya'].url }}{% else %}/collections/all?filter.p.vendor=Himalaya{% endif %}" class="btn-brand-explore">
+          <span>Shop Himalaya</span>
           <span>&rarr;</span>
         </a>
       </div>

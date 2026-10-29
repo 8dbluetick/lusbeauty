@@ -31,6 +31,11 @@
     {%- assign is_nivea = true -%}
   {%- endif -%}
 
+  {%- assign is_himalaya = false -%}
+  {%- if col_handle_down contains 'himalaya' or col_title_down contains 'himalaya' or canonical_url contains 'himalaya' or canonical_url contains 'Himalaya' or request.path contains 'himalaya' or request.path contains 'Himalaya' -%}
+    {%- assign is_himalaya = true -%}
+  {%- endif -%}
+
   {%- assign is_gissah = false -%}
   {%- if col_handle_down contains 'gissah' or col_title_down contains 'gissah' or canonical_url contains 'gissah' or canonical_url contains 'Gissah' or request.path contains 'gissah' or request.path contains 'Gissah' -%}
     {%- assign is_gissah = true -%}
@@ -120,6 +125,15 @@
         </div>
         <p style="margin: 0 auto; font-size: 0.95rem; color: #E3EFFF; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
           World's #1 Trusted Dermatological Skincare · Iconic Deep Moisture Care (Nivea Crème, Nivea Soft, Body Milk) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_himalaya and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-himalaya" style="background: linear-gradient(135deg, #0A3622 0%, #1B4D3E 50%, #2D6A4F 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #52B788; box-shadow: 0 8px 24px rgba(10, 54, 34, 0.25);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'himalaya-logo.png' | asset_url }}" alt="Himalaya Wellness Since 1930" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #D8F3DC; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Since 1930 · Pioneering Ayurvedic Science &amp; Herbal Wellness · Purifying Neem &amp; Herbal Care · 100% Authentic Stock
         </p>
       </div>
     {%- elsif is_gissah and collection.image == blank -%}
@@ -310,37 +324,14 @@
             🇩🇪 100% ORIGINAL NIVEA GERMAN DERMATOLOGICAL CARE
           </span>
         </div>
-            {%- elsif is_versace -%}
-        <div class="collection-versace-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #D4AF37; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(212, 175, 55, 0.08);">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
-            <span style="font-size:0.72rem; font-weight:800; color:#A4821E; background:#FAF6E8; border:1px solid rgba(212,175,55,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 Italian Haute Couture House</span>
-            <span style="font-size:0.72rem; font-weight:800; color:#A4821E; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Medusa Mythological Glamour</span>
+      {%- elsif is_himalaya -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #0A3622; border: 1.5px solid #52B788;">
+            <img src="{{ 'himalaya-logo.png' | asset_url }}" alt="Himalaya" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
           </div>
-          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
-            Founded in Milan in 1978 by Gianni Versace, <strong>Versace</strong> reigns as the epitome of unapologetic Italian glamour, mythical Medusa power, and passionate artistry. The <strong>Versace Parfums</strong> collection represents an iconic portfolio of magnetic master perfumery—spotlighted by the intoxicating mint and vanilla warmth of <em>Versace Eros</em>, the luminous Mediterranean aquatic aura of <em>Dylan Blue</em>, the ethereal floral radiance of <em>Bright Crystal</em>, and the dark, seductive velvety mystery of <em>Crystal Noir</em>.
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 Iconic Eros & Dylan Blue</span>
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌸 Bright Crystal & Crystal Noir</span>
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💎 Haute Parfumerie Projection & Sillage</span>
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
-          </div>
-        </div>
-      {%- elsif is_nivea -%}
-        <div class="collection-nivea-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #002B7F; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(0, 43, 127, 0.08);">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
-            <span style="font-size:0.72rem; font-weight:800; color:#002B7F; background:#EBF2FF; border:1px solid rgba(0,43,127,0.3); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🇩🇪 German Dermatological Heritage</span>
-            <span style="font-size:0.72rem; font-weight:800; color:#002B7F; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">💧 48H Deep Moisture Care</span>
-          </div>
-          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
-            Born in Hamburg in 1911, <strong>Nivea</strong> is the world’s most trusted skincare pioneer, renowned for its legendary blue tin and patented <em>Eucerit®</em> moisture technology. From the timeless barrier-protecting richness of original <em>Nivea Crème</em> and the weightless quick-absorbing hydration of <em>Nivea Soft</em>, to intensive 48-hour nourishing body lotions and high-performance <em>Nivea Men</em> grooming care, Nivea delivers pure, gentle, dermatologically proven care for all skin types.
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🇩🇪 Iconic Nivea Crème Blue Tin</span>
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💧 Nivea Soft Vitamin E & Jojoba</span>
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🛡️ 48-Hour Deep Moisture Body Care</span>
-            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
-          </div>
+          <span class="collection-verified-pill" style="color: #52B788; background: rgba(82, 183, 136, 0.15); border-color: rgba(82, 183, 136, 0.4);">
+            🌿 100% ORIGINAL HIMALAYA AYURVEDIC &amp; HERBAL WELLNESS
+          </span>
         </div>
       {%- elsif is_gissah -%}
         <div class="collection-brand-badge-wrap">
@@ -656,6 +647,61 @@
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🛡️ All-Day Moisture &amp; Perspiration Defense</span>
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💎 French Floral Chastity Perfume Notes</span>
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Genuine Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_versace -%}
+        <div class="collection-versace-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #D4AF37; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(212, 175, 55, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#A4821E; background:#FAF6E8; border:1px solid rgba(212,175,55,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 Italian Haute Couture House</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#A4821E; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Medusa Mythological Glamour</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            Founded in Milan in 1978 by Gianni Versace, <strong>Versace</strong> reigns as the epitome of unapologetic Italian glamour, mythical Medusa power, and passionate artistry. The <strong>Versace Parfums</strong> collection represents an iconic portfolio of magnetic master perfumery—spotlighted by the intoxicating mint and vanilla warmth of <em>Versace Eros</em>, the luminous Mediterranean aquatic aura of <em>Dylan Blue</em>, the ethereal floral radiance of <em>Bright Crystal</em>, and the dark, seductive velvety mystery of <em>Crystal Noir</em>.
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 Iconic Eros &amp; Dylan Blue</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌸 Bright Crystal &amp; Crystal Noir</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💎 Haute Parfumerie Projection &amp; Sillage</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_nivea -%}
+        <div class="collection-nivea-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #002B7F; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(0, 43, 127, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#002B7F; background:#EBF2FF; border:1px solid rgba(0,43,127,0.3); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🇩🇪 German Dermatological Heritage</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#002B7F; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">💧 48H Deep Moisture Care</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            Born in Hamburg in 1911, <strong>Nivea</strong> is the world’s most trusted skincare pioneer, renowned for its legendary blue tin and patented <em>Eucerit®</em> moisture technology. From the timeless barrier-protecting richness of original <em>Nivea Crème</em> and the weightless quick-absorbing hydration of <em>Nivea Soft</em>, to intensive 48-hour nourishing body lotions and high-performance <em>Nivea Men</em> grooming care, Nivea delivers pure, gentle, dermatologically proven care for all skin types.
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🇩🇪 Iconic Nivea Crème Blue Tin</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💧 Nivea Soft Vitamin E &amp; Jojoba</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🛡️ 48-Hour Deep Moisture Body Care</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_himalaya -%}
+        <div class="collection-himalaya-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #52B788; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(10,54,34,0.06);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#1B4332; background:#E8F5EE; border:1px solid rgba(82,183,136,0.3); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🌿 Ayurvedic Science Since 1930</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#1B4332; background:#F4FBF7; border:1px solid #A7D7C5; padding:3px 10px; border-radius:999px; text-transform:uppercase;">🍃 Soap-Free Gentle Herbal Actives</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D3A34; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                Founded in 1930, <strong>Himalaya Wellness</strong> (Himalaya Herbals) is the global pioneer of contemporary herbal healthcare and Ayurvedic science. Uniting ancient Ayurvedic wisdom with 90+ years of modern clinical research, Himalaya formulates gentle, safe, and efficacious personal care icons—including the legendary <em>Purifying Neem Face Wash</em>, intensive <em>Nourishing Skin Cream</em>, <em>Cocoa Butter Intensive Body Lotion</em>, and herbal dental and lip care essentials.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🌿 Purifying Neem &amp; Turmeric Face Wash</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🍃 Nourishing Skin Cream (Aloe Vera &amp; Winter Cherry)</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">💧 Cocoa Butter &amp; Wheat Germ Deep Hydration</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🛡️ 100% Herbal Actives &amp; Dermatologically Tested</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">📍 100% Original Nagpur Flagship Stock</span>
           </div>
         </div>
       {%- elsif collection.description != blank -%}

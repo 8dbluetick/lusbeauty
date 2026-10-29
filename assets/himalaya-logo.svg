@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#0A3622"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#52B788" stroke-width="1.5" stroke-opacity="0.45"/>
+  <text x="180" y="24" font-family="'Montserrat', 'Arial', sans-serif" font-size="8.5" font-weight="800" letter-spacing="3.5" fill="#E85D04" text-anchor="middle">SINCE 1930 · AYURVEDIC SCIENCE</text>
+  <!-- Himalaya Logo Typography -->
+  <g transform="translate(68, 38)">
+    <!-- H with iconic leaf crossbar -->
+    <text font-family="'Montserrat', 'Helvetica Neue', 'Arial', sans-serif" font-size="34" font-weight="800" letter-spacing="1.5" fill="#FFFFFF">
+      <tspan fill="#52B788">H</tspan><tspan fill="#FFFFFF">imalaya</tspan>
+    </text>
+    <!-- Herbal Leaf Motif -->
+    <path d="M22 6 C28 2, 34 8, 30 14 C26 12, 23 9, 22 6 Z" fill="#E85D04"/>
+  </g>
+  <line x1="90" y1="74" x2="270" y2="74" stroke="#52B788" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="180" y="88" font-family="'Montserrat', 'Arial', sans-serif" font-size="7.5" font-weight="700" letter-spacing="2.8" fill="#D8F3DC" text-anchor="middle">HERBAL HEALTHCARE &amp; PERSONAL WELLNESS</text>
+</svg>
