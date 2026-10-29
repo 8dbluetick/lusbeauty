@@ -227,9 +227,12 @@
             </span>
           </a>
           <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
-            <span style="font-size: 0.68rem; font-weight: 800; color: #E5A93C; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
-              LUSH BRAND COLLECTION
-            </span>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #E5A93C; text-transform: uppercase; letter-spacing: 0.05em;">
+                LUSH BRAND COLLECTION
+              </span>
+              <img src="{{ 'gliss-logo.png' | asset_url }}" alt="Schwarzkopf Gliss" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
             <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
               <a href="/collections/all?filter.p.vendor=Gliss" style="color: #1F1610; text-decoration: none;">Gliss Hair Repair</a>
             </h3>
@@ -281,9 +284,33 @@
 
             <!-- Content Area -->
             <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F3EDE7;">
-              <span style="font-size: 0.68rem; font-weight: 800; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
-                LUSH COLLECTION
-              </span>
+              {%- assign col_title_lower = collection.title | downcase -%}
+              {%- if collection.handle == 'gliss' or col_title_lower contains 'gliss' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #E5A93C; text-transform: uppercase; letter-spacing: 0.05em;">
+                    LUSH BRAND COLLECTION
+                  </span>
+                  <img src="{{ 'gliss-logo.png' | asset_url }}" alt="Schwarzkopf Gliss" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'skin-cottage' or col_title_lower contains 'skin cottage' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #2D6A4F; text-transform: uppercase; letter-spacing: 0.05em;">
+                    LUSH BRAND COLLECTION
+                  </span>
+                  <img src="{{ 'skin-cottage-logo.png' | asset_url }}" alt="Skin Cottage" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'syoss' or col_title_lower contains 'syoss' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #1F1610; text-transform: uppercase; letter-spacing: 0.05em;">
+                    LUSH BRAND COLLECTION
+                  </span>
+                  <img src="{{ 'syoss-logo.svg' | asset_url }}" alt="Syoss" style="max-height: 20px; width: auto; object-fit: contain;">
+                </div>
+              {%- else -%}
+                <span style="font-size: 0.68rem; font-weight: 800; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
+                  LUSH COLLECTION
+                </span>
+              {%- endif -%}
               <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #1F1610; margin: 0 0 6px; line-height: 1.3;">
                 <a href="{{ collection.url }}" style="color: #1F1610; text-decoration: none;">{{ collection.title }}</a>
               </h3>
