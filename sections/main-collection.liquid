@@ -33,44 +33,54 @@
           loading="eager"
         >
       </div>
-    {%- elsif collection.handle == 'vgr' or collection.title contains 'VGR' or collection.title contains 'vgr' -%}
-      <div class="collection-brand-hero-banner banner-vgr" style="background:#FAF7F2; padding:32px 20px; border-radius:16px; margin-bottom:24px; text-align:center; border:1px solid #EAE3DA;">
-        <img
-          src="{{ 'vgr-logo.png' | asset_url }}"
-          alt="VGR Professional - Lush Beauty Mart"
-          class="collection-hero-img"
-          style="max-height:75px; width:auto; margin:0 auto; display:block;"
-          loading="eager"
-        >
-      </div>
-    {%- elsif collection.handle == 'body-wash-shower-gel' or collection.handle == 'body-wash' or collection.handle == 'body-washes' or collection.title contains 'Body Wash' -%}
-      <div class="collection-brand-hero-banner banner-bodywash">
-        <img
-          src="{{ 'banner-bodywash.jpg' | asset_url }}"
-          alt="Body Wash & Shower Gel Luxury Collection - Lush Beauty Mart"
-          class="collection-hero-img collection-hero-img-bodywash"
-          width="1600"
-          height="500"
-          loading="eager"
-        >
-      </div>
-    {%- endif -%}
-
-    <!-- Luxury Collection Page Header -->
-    <div class="collection-header-wrap">
-      {%- if collection.image != blank -%}
+          {%- elsif collection.handle == 'vgr' or collection.title contains 'VGR' or collection.title contains 'vgr' -%}
         <div class="collection-brand-badge-wrap">
           <div class="collection-brand-logo-card">
             <img
-              src="{{ collection.image | image_url: width: 320 }}"
-              alt="{{ collection.title | escape }}"
+              src="{{ 'vgr-logo.png' | asset_url }}"
+              alt="VGR Professional"
               class="collection-brand-logo-img"
               width="150"
               height="60"
               loading="eager"
             >
           </div>
-          <span class="collection-verified-pill">🌟 100% ORIGINAL & AUTHORIZED BRAND PARTNER</span>
+          <span class="collection-verified-pill">👑 100% ORIGINAL & AUTHORIZED BRAND PARTNER</span>
+        </div>
+      {%- elsif collection.handle == 'skin-cottage' or collection.title contains 'Skin Cottage' or collection.title contains 'skin cottage' -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #A7D7C5;">
+            {% render 'brand-logo', brand: 'skin-cottage', class: 'collection-brand-logo-img' %}
+          </div>
+          <span class="collection-verified-pill" style="color: #2D6A4F;">🌿 100% ORIGINAL & AUTHORIZED MALAYSIAN BOTANICAL CARE</span>
+        </div>
+      {%- elsif collection.handle == 'rasasi' or collection.title contains 'Rasasi' or collection.title contains 'rasasi' -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #C5A059;">
+            {% render 'brand-logo', brand: 'rasasi', class: 'collection-brand-logo-img' %}
+          </div>
+          <span class="collection-verified-pill" style="color: #C5A059;">👑 100% AUTHENTIC DUBAI LUXURY PERFUMES</span>
+        </div>
+      {%- elsif collection.handle == 'possibility' or collection.title contains 'Possibility' or collection.title contains 'possibility' -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #FFCCD5;">
+            {% render 'brand-logo', brand: 'possibility', class: 'collection-brand-logo-img' %}
+          </div>
+          <span class="collection-verified-pill" style="color: #A4133C;">🍓 100% ORIGINAL LONDON GOURMET BATH CARE</span>
+        </div>
+      {%- elsif collection.handle == 'syoss' or collection.title contains 'Syoss' or collection.title contains 'syoss' -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #444444;">
+            {% render 'brand-logo', brand: 'syoss', class: 'collection-brand-logo-img' %}
+          </div>
+          <span class="collection-verified-pill" style="color: #1F1610;">✨ 100% GENUINE JAPANESE SALON PERFORMANCE</span>
+        </div>
+      {%- elsif collection.handle == 'gliss' or collection.title contains 'Gliss' or collection.title contains 'gliss' -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #E5A93C;">
+            {% render 'brand-logo', brand: 'gliss', class: 'collection-brand-logo-img' %}
+          </div>
+          <span class="collection-verified-pill" style="color: #C5A059;">🌟 100% ORIGINAL SCHWARZKOPF LIQUID KERATIN</span>
         </div>
       {%- elsif collection.handle == 'skin1004' or collection.handle == 'centella' or collection.title contains 'SKIN1004' or collection.title contains 'Centella' -%}
         <div class="collection-brand-badge-wrap">

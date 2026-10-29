@@ -14363,3 +14363,67 @@ body.lush-theme-body {
 .variant-radio:checked + .circular-shade-radio-btn .shade-radio-inner-dot {
   transform: translate(-50%, -50%) scale(1);
 }
+
+/* ==========================================================================
+   Brand Directory Related Products Preview & Badges
+   ========================================================================== */
+
+.brand-products-preview {
+  width: 100%;
+  margin: 10px 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.brand-products-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  background: #FAF7F2;
+  border: 1px solid #EAE3DA;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #8B6F3E;
+  letter-spacing: 0.3px;
+}
+
+.brand-products-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  width: 100%;
+}
+
+.brand-product-pill {
+  display: inline-block;
+  padding: 3px 8px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  font-size: 0.66rem;
+  color: #475569;
+  font-weight: 600;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.brand-product-pill:hover {
+  background: #E2E8F0;
+  color: #1E293B;
+  border-color: #CBD5E1;
+}
+
+.brand-pill-more {
+  background: #FFFBEB;
+  border-color: #FDE68A;
+  color: #B45309;
+  font-weight: 700;
+}
