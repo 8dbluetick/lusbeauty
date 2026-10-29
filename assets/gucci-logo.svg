@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <!-- Luxurious Noir Background with Subtle Rounded Border -->
+  <rect width="360" height="100" rx="8" fill="#121212"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#C5A059" stroke-width="1.5" stroke-opacity="0.4"/>
+  
+  <!-- Subtle Crest / Top Eyebrow -->
+  <text x="180" y="25" font-family="'Cinzel', 'Times New Roman', serif" font-size="9" font-weight="700" letter-spacing="4.5" fill="#C5A059" text-anchor="middle">FIRENZE 1921</text>
+  
+  <!-- Main Iconic Serif Wordmark GUCCI -->
+  <text x="180" y="65" font-family="'Cinzel', 'Playfair Display', 'Georgia', 'Times New Roman', serif" font-size="38" font-weight="700" letter-spacing="8" fill="#FFFFFF" text-anchor="middle">GUCCI</text>
+  
+  <!-- Accent Line -->
+  <line x1="120" y1="74" x2="240" y2="74" stroke="#C5A059" stroke-width="1.5"/>
+  
+  <!-- Bottom Subtitle -->
+  <text x="180" y="88" font-family="'Montserrat', 'Arial', sans-serif" font-size="8.5" font-weight="700" letter-spacing="3.5" fill="#EAE3DA" text-anchor="middle">BEAUTY &amp; PARFUM</text>
+</svg>

@@ -207,6 +207,15 @@
             "offer_tag": "Schwarzkopf Hair Repair",
             "link": "/collections/all?filter.p.vendor=Gliss"
           }
+        },
+        "brand_gucci": {
+          "type": "brand_card",
+          "settings": {
+            "title": "GUCCI",
+            "brand_image": "",
+            "offer_tag": "Italian Haute Perfumery",
+            "link": "/collections/all?filter.p.vendor=Gucci"
+          }
         }
       },
       "block_order": [
@@ -214,12 +223,13 @@
         "brand_rasasi",
         "brand_possibility",
         "brand_syoss",
-        "brand_gliss"
+        "brand_gliss",
+        "brand_gucci"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",
         "title": "Shop by Authorized Brand",
-        "subtitle": "Explore authentic Skin Cottage, Rasasi, Possibility, Syoss & Gliss in-store and online."
+        "subtitle": "Explore authentic Skin Cottage, Rasasi, Possibility, Syoss, Gliss & Gucci in-store and online."
       }
     }
   },

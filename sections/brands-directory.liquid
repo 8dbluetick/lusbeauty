@@ -409,6 +409,28 @@
         </a>
       </div>
 
+      <!-- Gucci -->
+      <div class="brand-dir-card" data-brand-name="Gucci" data-brand-letter="G" data-brand-cat="Italian Haute Perfumery & Luxury Beauty" data-brand-products="gucci bloom eau de parfum, gucci flora gorgeous gardenia, gucci guilty pour homme, gucci guilty pour femme, gucci rouge a levres">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'gucci', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Gucci</h3>
+        <span class="brand-dir-cat">Italian Haute Perfumery &amp; Beauty</span>
+        
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">👑 Italian Luxury House</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Gucci Bloom Eau de Parfum">Gucci Bloom EDP</span><span class="brand-product-pill" title="Gucci Flora Gorgeous Gardenia">Flora Gorgeous Gardenia</span><span class="brand-product-pill" title="Gucci Guilty Pour Homme & Pour Femme">Gucci Guilty</span>
+          </div>
+        </div>
+
+        <a href="{% if collections['gucci'] != blank %}{{ collections['gucci'].url }}{% else %}/collections/all?filter.p.vendor=Gucci{% endif %}" class="btn-brand-explore">
+          <span>Shop Gucci</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
       <!-- 18. SKIN1004 Madagascar Centella -->
       <div class="brand-dir-card" data-brand-name="Centella SKIN1004 Madagascar Centella" data-brand-letter="C" data-brand-letter-alt="S" data-brand-cat="Korean Skincare">
         <span class="brand-verified-tag">✓ AUTHORIZED</span>

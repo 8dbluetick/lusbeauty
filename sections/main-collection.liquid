@@ -21,6 +21,11 @@
     {%- assign is_rasasi = true -%}
   {%- endif -%}
 
+    {%- assign is_gucci = false -%}
+  {%- if col_handle_down contains 'gucci' or col_title_down contains 'gucci' or canonical_url contains 'gucci' or canonical_url contains 'Gucci' or request.path contains 'gucci' or request.path contains 'Gucci' -%}
+    {%- assign is_gucci = true -%}
+  {%- endif -%}
+
   {%- assign is_3q_beauty = false -%}
   {%- if col_handle_down contains '3q' or col_title_down contains '3q' or canonical_url contains '3q' or canonical_url contains '3Q' or request.path contains '3q' or request.path contains '3Q' -%}
     {%- assign is_3q_beauty = true -%}
@@ -62,6 +67,15 @@
         </div>
         <p style="margin: 0 auto; font-size: 0.95rem; color: #F5E8D0; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
           Dubai Luxury Fine Perfumery · Iconic Cult Classics (Hawas, Shuhrah, Daarej) · 100% Authentic Stock
+        </p>
+      </div>
+        {%- elsif is_gucci and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-gucci" style="background: linear-gradient(135deg, #0D120F 0%, #17241C 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #C5A059; box-shadow: 0 8px 24px rgba(197, 160, 89, 0.15);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'gucci-logo.png' | asset_url }}" alt="Gucci Beauty &amp; Parfums Firenze 1921" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #FAF0E4; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Italian Haute Parfumerie &amp; Luxury Beauty · Iconic Masterpieces (Gucci Bloom, Flora, Guilty) · 100% Authentic Stock
         </p>
       </div>
     {%- elsif is_3q_beauty and collection.image == blank -%}
@@ -179,6 +193,37 @@
           <span class="collection-verified-pill" style="color: #C5A059; background: rgba(197, 160, 89, 0.12); border-color: rgba(197, 160, 89, 0.4);">
             👑 100% AUTHENTIC DUBAI LUXURY PERFUMES
           </span>
+        </div>
+            {%- elsif is_gucci -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #121212; border: 1.5px solid #C5A059;">
+            <img src="{{ 'gucci-logo.png' | asset_url }}" alt="Gucci" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #C5A059; background: rgba(197, 160, 89, 0.12); border-color: rgba(197, 160, 89, 0.4);">
+            👑 100% ORIGINAL &amp; CERTIFIED GUCCI LUXURY IMPORTS
+          </span>
+        </div>
+            {%- elsif is_gucci -%}
+        <div class="collection-gucci-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #C5A059; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(197, 160, 89, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#8C6D2D; background:#FBF6EE; border:1px solid rgba(197,160,89,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 Italian Haute Couture House</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#8C6D2D; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">🌸 Luxury Haute Parfumerie &amp; Cosmetics</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                Founded in Florence in 1921, <strong>Gucci</strong> stands at the pinnacle of Italian craftsmanship, bold contemporary luxury, and visionary artistic beauty. The <strong>Gucci Beauty &amp; Fragrance</strong> collection represents an intoxicating voyage through masterfully orchestrated scents—from the lush floral tapestry of <em>Gucci Bloom</em> and the vibrant, euphoric aura of <em>Flora Gorgeous Gardenia</em>, to the rebellious allure of <em>Gucci Guilty</em> and haute couture lip luxuries. Each creation is an unforgettable olfactory portrait of individuality, passion, and timeless Italian elegance.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🇮🇹 Iconic Florence 1921 Heritage</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌸 Rare Tuberose, Rangoon Creeper &amp; Gardenia</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💎 Haute Parfumerie Long-Lasting Sillage</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Genuine Nagpur Stock</span>
+          </div>
         </div>
       {%- elsif is_3q_beauty -%}
         <div class="collection-brand-badge-wrap">
