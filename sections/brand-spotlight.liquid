@@ -58,7 +58,16 @@
               </div>
 
               <div class="brand-logo-area">
-                {%- if block.settings.brand_image != blank -%}
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 280 }}"
+                    alt="{{ block.settings.title | escape }}"
+                    class="brand-card-logo"
+                    width="140"
+                    height="60"
+                    loading="lazy"
+                  >
+                {%- elsif block.settings.brand_image != blank -%}
                   {%- if block.settings.brand_image.src -%}
                     <img
                       src="{{ block.settings.brand_image | image_url: width: 280 }}"
@@ -416,7 +425,7 @@
 
 {% schema %}
 {
-  "name": "Brand Spotlight",
+  "name": "Logo Carousel / Spotlight",
   "settings": [
     {
       "type": "text",
@@ -440,8 +449,13 @@
   "blocks": [
     {
       "type": "brand_card",
-      "name": "Brand Card",
+      "name": "Brand Logo Card",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Brand Logo Image (Upload/Select)"
+        },
         {
           "type": "text",
           "id": "title",

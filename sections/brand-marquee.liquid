@@ -1,6 +1,6 @@
 {% comment %}
-  Lush Beauty Mart — Infinite Running Brand Logo Marquee
-  Smooth continuous loop of 100% genuine authorized brands with BOTH visual logo and brand name
+  Lush Beauty Mart — Logo Carousel / Scrolling Logos (Infinite Running Marquee)
+  Supports full customizable blocks in the Shopify Theme Customizer left sidebar with image upload & automatic authentic fallback
 {% endcomment %}
 
 <style>
@@ -185,8 +185,40 @@
 
   <div class="brand-marquee-container">
     <div class="brand-marquee-track">
-      <!-- Group 1 (All 37 Authorized Brands with Logo + Name) -->
+      <!-- Group 1 -->
       <div class="brand-marquee-content">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign b_title = block.settings.title | default: 'Brand' -%}
+            {%- assign b_link = block.settings.link | default: '/collections/all' -%}
+            <a href="{{ b_link }}" class="brand-logo-card" title="{{ b_title | escape }}" {{ block.shopify_attributes }}>
+              <div class="brand-card-logo-wrap">
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 240 }}"
+                    alt="{{ b_title | escape }}"
+                    class="brand-marquee-logo-img"
+                    width="120"
+                    height="32"
+                    loading="lazy"
+                  >
+                {%- elsif block.settings.brand_image != blank -%}
+                  <img
+                    src="{{ block.settings.brand_image }}"
+                    alt="{{ b_title | escape }}"
+                    class="brand-marquee-logo-img"
+                    width="120"
+                    height="32"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  {% render 'brand-logo', brand: b_title, class: 'brand-marquee-logo-img' %}
+                {%- endif -%}
+              </div>
+              <span class="brand-card-logo-title">{{ b_title }}</span>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
         <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella">
           <div class="brand-card-logo-wrap">
             {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
@@ -409,10 +441,43 @@
           </div>
           <span class="brand-card-logo-title">3Q BEAUTY</span>
         </a>
+        {%- endif -%}
       </div>
 
       <!-- Group 2 (Duplicate for Seamless Infinite Loop) -->
       <div class="brand-marquee-content" aria-hidden="true">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign b_title = block.settings.title | default: 'Brand' -%}
+            {%- assign b_link = block.settings.link | default: '/collections/all' -%}
+            <a href="{{ b_link }}" class="brand-logo-card" title="{{ b_title | escape }}" tabindex="-1">
+              <div class="brand-card-logo-wrap">
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 240 }}"
+                    alt="{{ b_title | escape }}"
+                    class="brand-marquee-logo-img"
+                    width="120"
+                    height="32"
+                    loading="lazy"
+                  >
+                {%- elsif block.settings.brand_image != blank -%}
+                  <img
+                    src="{{ block.settings.brand_image }}"
+                    alt="{{ b_title | escape }}"
+                    class="brand-marquee-logo-img"
+                    width="120"
+                    height="32"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  {% render 'brand-logo', brand: b_title, class: 'brand-marquee-logo-img' %}
+                {%- endif -%}
+              </div>
+              <span class="brand-card-logo-title">{{ b_title }}</span>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
         <a href="{% if collections['skin1004'] != blank %}{{ collections['skin1004'].url }}{% else %}/collections/all?filter.p.vendor=SKIN1004{% endif %}" class="brand-logo-card" title="SKIN1004 Madagascar Centella">
           <div class="brand-card-logo-wrap">
             {% render 'brand-logo', brand: 'skin1004', class: 'brand-marquee-logo-img' %}
@@ -635,6 +700,7 @@
           </div>
           <span class="brand-card-logo-title">3Q BEAUTY</span>
         </a>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -642,7 +708,7 @@
 
 {% schema %}
 {
-  "name": "Brand Logo Marquee",
+  "name": "Logo Carousel / Scrolling",
   "settings": [
     {
       "type": "text",
@@ -673,9 +739,38 @@
       "default": "#FAF7F2"
     }
   ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Brand Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Brand Logo Image (Upload/Select)"
+        },
+        {
+          "type": "text",
+          "id": "brand_image",
+          "label": "Brand Logo Image URL (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Brand Name",
+          "default": "Skin Cottage"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Brand Collection Link"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Brand Logo Marquee"
+      "name": "Logo Carousel / Scrolling Logos"
     }
   ]
 }
