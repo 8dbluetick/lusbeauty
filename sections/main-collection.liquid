@@ -36,6 +36,22 @@
     {%- assign is_himalaya = true -%}
   {%- endif -%}
 
+  {%- assign is_yardley = false -%}
+  {%- if col_handle_down contains 'yardley' or col_title_down contains 'yardley' or canonical_url contains 'yardley' or canonical_url contains 'Yardley' or request.path contains 'yardley' or request.path contains 'Yardley' -%}
+    {%- assign is_yardley = true -%}
+  {%- endif -%}
+
+  {%- assign is_boroplus = false -%}
+  {%- if col_handle_down contains 'boroplus' or col_title_down contains 'boroplus' or canonical_url contains 'boroplus' or canonical_url contains 'BoroPlus' or request.path contains 'boroplus' or request.path contains 'BoroPlus' -%}
+    {%- assign is_boroplus = true -%}
+  {%- endif -%}
+
+  {%- assign is_cadbury = false -%}
+  {%- if col_handle_down contains 'cadbury' or col_title_down contains 'cadbury' or canonical_url contains 'cadbury' or canonical_url contains 'Cadbury' or request.path contains 'cadbury' or request.path contains 'Cadbury' -%}
+    {%- assign is_cadbury = true -%}
+  {%- endif -%}
+
+
   {%- assign is_gissah = false -%}
   {%- if col_handle_down contains 'gissah' or col_title_down contains 'gissah' or canonical_url contains 'gissah' or canonical_url contains 'Gissah' or request.path contains 'gissah' or request.path contains 'Gissah' -%}
     {%- assign is_gissah = true -%}
@@ -132,6 +148,35 @@
         <div style="display:flex; justify-content:center; margin-bottom:14px;">
           <img src="{{ 'himalaya-logo.png' | asset_url }}" alt="Himalaya Wellness Since 1930" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
         </div>
+
+    {%- elsif is_yardley and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-yardley" style="background: linear-gradient(135deg, #0D1B2A 0%, #1B263B 50%, #415A77 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #D4AF37; box-shadow: 0 8px 24px rgba(13, 27, 42, 0.25);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'yardley-logo.png' | asset_url }}" alt="Yardley London Luxury Perfumery" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #FAF0E4; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Est. 1770 London · Royal Warrant Perfumery · Iconic English Lavender, Rose &amp; Gentleman Colognes · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_boroplus and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-boroplus" style="background: linear-gradient(135deg, #0E3B24 0%, #175334 50%, #28724D 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #E09F3E; box-shadow: 0 8px 24px rgba(14, 59, 36, 0.25);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'boroplus-logo.png' | asset_url }}" alt="BoroPlus Ayurvedic Antiseptic Care" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #D8F3DC; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          India's #1 Ayurvedic Antiseptic Brand · Nature's Shield 24H Protection · Doodh Kesar &amp; Aloe Vera Care · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_cadbury and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-cadbury" style="background: linear-gradient(135deg, #2D1457 0%, #3F1575 50%, #571C9C 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #D4AF37; box-shadow: 0 8px 24px rgba(45, 20, 87, 0.25);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'cadbury-logo.png' | asset_url }}" alt="Cadbury Celebrations Luxury Gifting" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #FAF0E4; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Est. 1824 Bournville · Iconic Cadbury Celebrations Hampers &amp; Dairy Milk Silk · The Gold Standard of Festive Luxury Gifting
+        </p>
+      </div>
+
         <p style="margin: 0 auto; font-size: 0.95rem; color: #D8F3DC; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
           Since 1930 · Pioneering Ayurvedic Science &amp; Herbal Wellness · Purifying Neem &amp; Herbal Care · 100% Authentic Stock
         </p>
@@ -333,6 +378,35 @@
             🌿 100% ORIGINAL HIMALAYA AYURVEDIC &amp; HERBAL WELLNESS
           </span>
         </div>
+
+      {%- elsif is_yardley -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #0D1B2A; border: 1.5px solid #D4AF37;">
+            <img src="{{ 'yardley-logo.png' | asset_url }}" alt="Yardley London" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #D4AF37; background: rgba(212, 175, 55, 0.12); border-color: rgba(212, 175, 55, 0.4);">
+            👑 100% ORIGINAL YARDLEY LONDON ROYAL PERFUMERY
+          </span>
+        </div>
+      {%- elsif is_boroplus -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #0E3B24; border: 1.5px solid #E09F3E;">
+            <img src="{{ 'boroplus-logo.png' | asset_url }}" alt="BoroPlus" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #E09F3E; background: rgba(224, 159, 62, 0.15); border-color: rgba(224, 159, 62, 0.4);">
+            🌿 100% ORIGINAL BOROPLUS AYURVEDIC ANTISEPTIC CARE
+          </span>
+        </div>
+      {%- elsif is_cadbury -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #2D1457; border: 1.5px solid #D4AF37;">
+            <img src="{{ 'cadbury-logo.png' | asset_url }}" alt="Cadbury" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #D4AF37; background: rgba(212, 175, 55, 0.12); border-color: rgba(212, 175, 55, 0.4);">
+            🍫 100% ORIGINAL CADBURY CELEBRATIONS &amp; LUXURY GIFTING
+          </span>
+        </div>
+
       {%- elsif is_gissah -%}
         <div class="collection-brand-badge-wrap">
           <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #140E0A; border: 1.5px solid #D4AF37;">
@@ -704,7 +778,74 @@
             <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">📍 100% Original Nagpur Flagship Stock</span>
           </div>
         </div>
-      {%- elsif collection.description != blank -%}
+      
+      {%- elsif is_yardley -%}
+        <div class="collection-yardley-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #D4AF37; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(13,27,42,0.06);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#8C6D2D; background:#FAF6E8; border:1px solid rgba(212,175,55,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 British Royal Warrant Holder</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#8C6D2D; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">🌸 Pure English Lavender &amp; Fine Florals</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                Established in London in 1770, <strong>Yardley London</strong> is one of the world's oldest and most prestigious fragrance houses, holding multiple British Royal Warrants. Celebrated for quintessential English botanical fragrances—most famously the iconic <em>English Lavender</em>, romantic <em>English Rose</em>, and distinguished <em>Gentleman Elite</em> colognes—Yardley crafts silky perfumed talcs, fine eau de toilettes, and gentle luxury body care that embody royal refinement and all-day crisp freshness.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 English Lavender Eau de Toilette</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌸 English Rose &amp; Imperial Sandalwood Talcs</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💎 Gentleman Elite Colognes</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Genuine Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_boroplus -%}
+        <div class="collection-boroplus-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #E09F3E; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(14,59,36,0.06);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#1B4332; background:#E8F5EE; border:1px solid rgba(82,183,136,0.3); padding:3px 10px; border-radius:999px; text-transform:uppercase;">🌿 India's #1 Antiseptic Care</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#1B4332; background:#F4FBF7; border:1px solid #A7D7C5; padding:3px 10px; border-radius:999px; text-transform:uppercase;">🍃 Nature's Shield 24H Protection</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D3A34; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                As India's undisputed benchmark in herbal healing and skin protection, <strong>BoroPlus</strong> delivers trusted Ayurvedic skincare powered by <em>Nature's Shield</em>—a proprietary formula of 10 therapeutic herbs including Neem, Tulsi, Aloe Vera, Turmeric, and Sandalwood. From legendary <em>BoroPlus Antiseptic Cream</em> and 24-hour deep-nourishing <em>Doodh Kesar Body Lotion</em> to pure organic <em>Aloe Vera Gel</em>, BoroPlus provides all-weather protection and radiant skin wellness.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🌿 Iconic Antiseptic Cream Green Tube</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🥛 Doodh Kesar 24-Hour Intensive Lotion</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1B4332;">🌱 100% Pure Organic Aloe Vera Gel</span>
+            <span style="font-size: 0.75rem; background: #F4FBF7; border: 1px solid #A7D7C5; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_cadbury -%}
+        <div class="collection-cadbury-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #D4AF37; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(45,20,87,0.06);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#2D1457; background:#F3E8FF; border:1px solid rgba(212,175,55,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 200 Years Heritage Chocolatier</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#2D1457; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">🍫 Pure Cadbury Dairy Milk Silk Gifting</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                Founded in Birmingham in 1824, <strong>Cadbury</strong> is the gold standard of sweet celebration and confectionary mastery. Curated specially for festive gifting and luxurious self-care pairings at Lush Beauty Mart, our Cadbury collection features iconic <em>Cadbury Celebrations Gift Hampers</em>, rich <em>Dairy Milk Silk</em> bars, and celebratory chocolate selections that turn every occasion into a memorable celebration.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🍫 Dairy Milk Silk Classic, Almond &amp; Fruit &amp; Nut</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🎁 Celebrations Gift Boxes &amp; Hampers</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">✨ Perfect Fragrance &amp; Beauty Gifting Pairings</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Genuine Sealed Nagpur Stock</span>
+          </div>
+        </div>
+{%- elsif collection.description != blank -%}
         <div class="collection-desc">{{ collection.description }}</div>
       {%- endif -%}
 

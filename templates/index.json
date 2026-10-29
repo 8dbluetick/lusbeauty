@@ -288,6 +288,33 @@
             "offer_tag": "Since 1930 Herbal Science",
             "link": "/collections/all?filter.p.vendor=Himalaya"
           }
+        },
+        "brand_yardley": {
+          "type": "brand_card",
+          "settings": {
+            "title": "YARDLEY LONDON",
+            "brand_image": "",
+            "offer_tag": "British Royal Perfumery",
+            "link": "/collections/all?filter.p.vendor=Yardley"
+          }
+        },
+        "brand_boroplus": {
+          "type": "brand_card",
+          "settings": {
+            "title": "BOROPLUS",
+            "brand_image": "",
+            "offer_tag": "India's #1 Antiseptic Care",
+            "link": "/collections/all?filter.p.vendor=BoroPlus"
+          }
+        },
+        "brand_cadbury": {
+          "type": "brand_card",
+          "settings": {
+            "title": "CADBURY",
+            "brand_image": "",
+            "offer_tag": "Celebrations & Luxury Gifting",
+            "link": "/collections/all?filter.p.vendor=Cadbury"
+          }
         }
       },
       "block_order": [
@@ -304,12 +331,15 @@
         "brand_royale",
         "brand_versace",
         "brand_nivea",
-        "brand_himalaya"
+        "brand_himalaya",
+        "brand_yardley",
+        "brand_boroplus",
+        "brand_cadbury"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",
         "title": "Shop by Authorized Brand",
-        "subtitle": "Explore authentic Skin Cottage, Rasasi, Versace, Nivea, Himalaya, Gissah, Marquis, Calvin Klein, Guess, Royale & Gucci in-store and online."
+        "subtitle": "Explore authentic Skin Cottage, Yardley, BoroPlus, Cadbury, Versace, Nivea, Himalaya, Rasasi, Gucci & more in-store and online."
       }
     }
   },

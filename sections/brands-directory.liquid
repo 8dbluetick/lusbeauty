@@ -39,6 +39,7 @@
         <button type="button" class="letter-btn" data-letter="S">S</button>
         <button type="button" class="letter-btn" data-letter="T">T</button>
         <button type="button" class="letter-btn" data-letter="V">V</button>
+        <button type="button" class="letter-btn" data-letter="Y">Y</button>
       </div>
     </div>
 
@@ -147,6 +148,27 @@
           <span>→</span>
         </a>
       </div>
+
+      <!-- Cadbury -->
+      <div class="brand-dir-card" data-brand-name="Cadbury" data-brand-letter="C" data-brand-cat="Luxury Celebrations & Gifting" data-brand-products="cadbury celebrations gift box, cadbury dairy milk silk, cadbury silk roast almond, cadbury celebrations rich dry fruit, cadbury oreo">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'cadbury', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Cadbury</h3>
+        <span class="brand-dir-cat">Celebrations &amp; Luxury Gifting</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">🍫 200 Years Sweet Luxury</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Dairy Milk Silk">Silk Bars</span><span class="brand-product-pill" title="Celebrations Gift Box">Celebrations</span><span class="brand-product-pill" title="Festive Luxury Hampers">Gift Hampers</span>
+          </div>
+        </div>
+        <a href="{% if collections['cadbury'] != blank %}{{ collections['cadbury'].url }}{% else %}/collections/all?filter.p.vendor=Cadbury{% endif %}" class="btn-brand-explore">
+          <span>Shop Cadbury</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
 
       <!-- 7. MAC Cosmetics -->
             <!-- Marquis -->
@@ -321,6 +343,27 @@
           <span>→</span>
         </a>
       </div>
+
+      <!-- BoroPlus -->
+      <div class="brand-dir-card" data-brand-name="BoroPlus" data-brand-letter="B" data-brand-cat="Ayurvedic Antiseptic Care" data-brand-products="boroplus antiseptic cream, boroplus doodh kesar body lotion, boroplus aloe vera gel, boroplus hygiene, boroplus neem face wash">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'boroplus', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">BoroPlus</h3>
+        <span class="brand-dir-cat">Ayurvedic Antiseptic Skincare</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">🌿 India's #1 Antiseptic</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Antiseptic Cream Green Tube">Antiseptic Cream</span><span class="brand-product-pill" title="Doodh Kesar Body Lotion">Doodh Kesar</span><span class="brand-product-pill" title="Aloe Vera Gel">Aloe Vera Gel</span>
+          </div>
+        </div>
+        <a href="{% if collections['boroplus'] != blank %}{{ collections['boroplus'].url }}{% else %}/collections/all?filter.p.vendor=BoroPlus{% endif %}" class="btn-brand-explore">
+          <span>Shop BoroPlus</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
 
             <!-- Nivea -->
       <div class="brand-dir-card" data-brand-name="Nivea" data-brand-letter="N" data-brand-cat="German Dermatological Skincare" data-brand-products="nivea creme, nivea soft light moisturising cream, nivea body milk 48h deep moisture, nivea men deep impact, nivea sun protect">
@@ -606,6 +649,27 @@
           <span>→</span>
         </a>
       </div>
+
+      <!-- Yardley London -->
+      <div class="brand-dir-card" data-brand-name="Yardley London" data-brand-letter="Y" data-brand-cat="British Royal Luxury Perfumery" data-brand-products="yardley english lavender eau de toilette, yardley english rose perfumed talc, yardley gentleman elite cologne, yardley royal bouquet, yardley luxury soaps">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'yardley', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Yardley London</h3>
+        <span class="brand-dir-cat">British Royal Luxury Perfumery</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">👑 Royal Warrant Holder</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="English Lavender EDT">English Lavender</span><span class="brand-product-pill" title="English Rose Perfumed Talc">English Rose</span><span class="brand-product-pill" title="Gentleman Elite Cologne">Gentleman Cologne</span>
+          </div>
+        </div>
+        <a href="{% if collections['yardley'] != blank %}{{ collections['yardley'].url }}{% elsif collections['yardley-london'] != blank %}{{ collections['yardley-london'].url }}{% else %}/collections/all?filter.p.vendor=Yardley{% endif %}" class="btn-brand-explore">
+          <span>Shop Yardley</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
     </div>
   </div>
 </section>

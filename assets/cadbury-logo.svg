@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#2D1457"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#D4AF37" stroke-width="1.5" stroke-opacity="0.45"/>
+  <text x="180" y="24" font-family="'Montserrat', 'Arial', sans-serif" font-size="8.5" font-weight="800" letter-spacing="3.5" fill="#D4AF37" text-anchor="middle">EST. 1824 · BOURNVILLE ENGLAND</text>
+  <text x="180" y="65" font-family="'Brush Script MT', 'Dancing Script', 'Playfair Display', cursive, serif" font-size="44" font-weight="700" font-style="italic" letter-spacing="2" fill="#FFFFFF" text-anchor="middle">Cadbury</text>
+  <line x1="90" y1="74" x2="270" y2="74" stroke="#D4AF37" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="180" y="88" font-family="'Montserrat', 'Arial', sans-serif" font-size="7.5" font-weight="700" letter-spacing="2.8" fill="#F3E8FF" text-anchor="middle">DAIRY MILK &amp; CELEBRATIONS LUXURY GIFTING</text>
+</svg>
