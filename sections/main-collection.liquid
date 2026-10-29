@@ -16,6 +16,11 @@
     {%- assign is_gliss = true -%}
   {%- endif -%}
 
+  {%- assign is_rasasi = false -%}
+  {%- if col_handle_down contains 'rasasi' or col_title_down contains 'rasasi' or canonical_url contains 'rasasi' or canonical_url contains 'Rasasi' or request.path contains 'rasasi' -%}
+    {%- assign is_rasasi = true -%}
+  {%- endif -%}
+
   <div class="page-width">
     <!-- Dedicated Brand Collection Hero Banner -->
     {%- if is_skin_cottage and collection.image == blank -%}
@@ -43,6 +48,15 @@
         </div>
         <p style="margin: 0 auto; font-size: 0.95rem; color: #F5EBE0; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
           Schwarzkopf Hair Repair · Powered by Liquid Keratin &amp; Deep Cellular Hair Science · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_rasasi and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-rasasi" style="background: linear-gradient(135deg, #120E0A 0%, #291F12 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #C5A059; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'rasasi-logo.png' | asset_url }}" alt="Rasasi Parfums Dubai - Luxury Fragrances" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <p style="margin: 0 auto; font-size: 0.95rem; color: #F5E8D0; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
+          Dubai Luxury Fine Perfumery · Iconic Cult Classics (Hawas, Shuhrah, Daarej) · 100% Authentic Stock
         </p>
       </div>
     {%- elsif collection.image != blank -%}
@@ -143,12 +157,14 @@
           </div>
           <span class="collection-verified-pill">👑 100% ORIGINAL &amp; AUTHORIZED BRAND PARTNER</span>
         </div>
-      {%- elsif collection.handle == 'rasasi' or collection.title contains 'Rasasi' or collection.title contains 'rasasi' -%}
+      {%- elsif is_rasasi -%}
         <div class="collection-brand-badge-wrap">
-          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #C5A059;">
-            {% render 'brand-logo', brand: 'rasasi', class: 'collection-brand-logo-img' %}
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #14110E; border: 1.5px solid #C5A059;">
+            <img src="{{ 'rasasi-logo.png' | asset_url }}" alt="Rasasi Dubai" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
           </div>
-          <span class="collection-verified-pill" style="color: #C5A059;">👑 100% AUTHENTIC DUBAI LUXURY PERFUMES</span>
+          <span class="collection-verified-pill" style="color: #C5A059; background: rgba(197, 160, 89, 0.12); border-color: rgba(197, 160, 89, 0.4);">
+            👑 100% AUTHENTIC DUBAI LUXURY PERFUMES
+          </span>
         </div>
       {%- elsif collection.handle == 'possibility' or collection.title contains 'Possibility' or collection.title contains 'possibility' -%}
         <div class="collection-brand-badge-wrap">
@@ -257,6 +273,30 @@
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Genuine Nagpur Stock</span>
           </div>
         </div>
+      {%- elsif is_rasasi -%}
+        <div class="collection-rasasi-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #C5A059; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(197,160,89,0.06);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#8B6F3E; background:#FFF8EB; border:1px solid rgba(197,160,89,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 Dubai, UAE · Est. 1979</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#8B6F3E; background:#FAF7F2; border:1px solid #EAE3DA; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Elite Oriental &amp; French Fine Perfumes</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D241E; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                <strong>Rasasi Perfumes</strong> is one of the Middle East's most celebrated luxury fragrance houses, established in Dubai in 1979 by Abdul Razzak Kalsekar. Renowned globally for mastering the delicate harmony between opulent Oriental perfumery (pure oud, warm amber, spicy saffron) and refined French olfactory elegance, Rasasi creates iconic, beastmode fragrances that project timeless charisma and prestige.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌊 Hawas &amp; Shuhrah Cult Classics</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">⏳ 12+ Hour Beastmode Longevity</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">✨ Original Dubai Imports with Batch Codes</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Genuine Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif collection.description != blank -%}
+        <div class="collection-desc">{{ collection.description }}</div>
       {%- endif -%}
 
       <div class="collection-meta-bar">
