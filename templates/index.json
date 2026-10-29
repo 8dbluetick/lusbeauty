@@ -150,10 +150,83 @@
         "whatsapp_number": "919119595951",
         "bg_color": "#0C1E35"
       }
+    },
+    "brand_marquee": {
+      "type": "brand-marquee",
+      "settings": {
+        "heading": "100% Genuine Authorized Brands",
+        "subheading": "Fresh stocks of Skin Cottage, Rasasi, Possibility, Syoss, Gliss & top global beauty houses in our Nagpur Showroom.",
+        "speed": 35,
+        "bg_color": "#FAF7F2"
+      }
+    },
+    "brand_spotlight": {
+      "type": "brand-spotlight",
+      "blocks": {
+        "brand_skin_cottage": {
+          "type": "brand_card",
+          "settings": {
+            "title": "SKIN COTTAGE",
+            "brand_image": "",
+            "offer_tag": "Flat 11% OFF · 9 Products",
+            "link": "/collections/all?filter.p.vendor=Skin+Cottage"
+          }
+        },
+        "brand_rasasi": {
+          "type": "brand_card",
+          "settings": {
+            "title": "RASASI PERFUMES",
+            "brand_image": "",
+            "offer_tag": "Dubai Luxury Fragrances",
+            "link": "/collections/all?filter.p.vendor=Rasasi"
+          }
+        },
+        "brand_possibility": {
+          "type": "brand_card",
+          "settings": {
+            "title": "POSSIBILITY",
+            "brand_image": "",
+            "offer_tag": "Gourmet 3-in-1 Crème",
+            "link": "/collections/all?filter.p.vendor=Possibility"
+          }
+        },
+        "brand_syoss": {
+          "type": "brand_card",
+          "settings": {
+            "title": "SYOSS",
+            "brand_image": "",
+            "offer_tag": "Japanese Salon Keratin",
+            "link": "/collections/all?filter.p.vendor=Syoss"
+          }
+        },
+        "brand_gliss": {
+          "type": "brand_card",
+          "settings": {
+            "title": "GLISS",
+            "brand_image": "",
+            "offer_tag": "Schwarzkopf Hair Repair",
+            "link": "/collections/all?filter.p.vendor=Gliss"
+          }
+        }
+      },
+      "block_order": [
+        "brand_skin_cottage",
+        "brand_rasasi",
+        "brand_possibility",
+        "brand_syoss",
+        "brand_gliss"
+      ],
+      "settings": {
+        "badge": "👑 OFFICIAL BRAND COLLECTIONS",
+        "title": "Shop by Authorized Brand",
+        "subtitle": "Explore authentic Skin Cottage, Rasasi, Possibility, Syoss & Gliss in-store and online."
+      }
     }
   },
   "order": [
     "hero_banner",
+    "brand_marquee",
+    "brand_spotlight",
     "trending_products",
     "instagram_feed",
     "partner_ventures",
