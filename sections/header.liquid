@@ -185,6 +185,11 @@
               <li><a href="/collections/hair-oils" class="header-dropdown-link">Hair Oils (2)</a></li>
               <li><a href="/collections/hair-growth-anti-hair-fall" class="header-dropdown-link">Hair Growth & Anti-Fall (4)</a></li>
               <li><a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="header-dropdown-link text-gold font-bold">✨ Hair Styling Appliances (VGR)</a></li>
+              <li><a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="header-dropdown-link font-bold" style="color: #2D6A4F;">✨ Skin Cottage</a></li>
+              <li><a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="header-dropdown-link font-bold" style="color: #9C7A28;">✨ Rasasi Perfumes</a></li>
+              <li><a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="header-dropdown-link font-bold" style="color: #A4133C;">✨ Possibility</a></li>
+              <li><a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="header-dropdown-link font-bold" style="color: #B33939;">✨ Syoss Haircare</a></li>
+              <li><a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="header-dropdown-link font-bold" style="color: #C5A059;">✨ Gliss Hair Repair</a></li>
             </ul>
           </li>
 
@@ -327,6 +332,11 @@
             </div>
             <ul class="mobile-sublinks" style="display: none;">
               <li><a href="/collections/skincare" class="mobile-sublink font-bold text-gold">✨ View All Skincare</a></li>
+              <li><a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="mobile-sublink font-bold" style="color: #2D6A4F;">✨ Skin Cottage</a></li>
+              <li><a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="mobile-sublink font-bold" style="color: #9C7A28;">✨ Rasasi Perfumes</a></li>
+              <li><a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="mobile-sublink font-bold" style="color: #A4133C;">✨ Possibility</a></li>
+              <li><a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="mobile-sublink font-bold" style="color: #B33939;">✨ Syoss Haircare</a></li>
+              <li><a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="mobile-sublink font-bold" style="color: #C5A059;">✨ Gliss Hair Repair</a></li>
               <li><a href="/collections/face-wash-cleansers" class="mobile-sublink">Face Wash & Cleansers (53)</a></li>
               <li><a href="/collections/face-serums" class="mobile-sublink">Face Serums (38)</a></li>
               <li><a href="/collections/moisturizers-face-creams" class="mobile-sublink">Moisturizers & Creams (28)</a></li>

@@ -18,7 +18,7 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
         <input type="text" id="BrandSearchInput" class="brands-search-input" placeholder="Search brand by name (e.g. Minimalist, MAC, Dot & Key, L'Oreal)..." autocomplete="off">
-        <span class="brands-count-pill" id="BrandCountPill">19 Brands</span>
+        <span class="brands-count-pill" id="BrandCountPill">24 Brands</span>
       </div>
 
       <!-- Alphabet Letter Filter Bar -->
@@ -28,9 +28,12 @@
         <button type="button" class="letter-btn" data-letter="C">C</button>
         <button type="button" class="letter-btn" data-letter="D">D</button>
         <button type="button" class="letter-btn" data-letter="E">E</button>
+        <button type="button" class="letter-btn" data-letter="G">G</button>
         <button type="button" class="letter-btn" data-letter="K">K</button>
         <button type="button" class="letter-btn" data-letter="L">L</button>
         <button type="button" class="letter-btn" data-letter="M">M</button>
+        <button type="button" class="letter-btn" data-letter="P">P</button>
+        <button type="button" class="letter-btn" data-letter="R">R</button>
         <button type="button" class="letter-btn" data-letter="S">S</button>
         <button type="button" class="letter-btn" data-letter="T">T</button>
         <button type="button" class="letter-btn" data-letter="V">V</button>
@@ -287,6 +290,76 @@
         <span class="brand-dir-cat">Hair Styling &amp; Grooming Tools</span>
         <a href="{% if collections['vgr'] != blank %}{{ collections['vgr'].url }}{% else %}/collections/all?filter.p.vendor=VGR{% endif %}" class="btn-brand-explore">
           <span>Shop VGR</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- 20. Skin Cottage -->
+      <div class="brand-dir-card" data-brand-name="Skin Cottage" data-brand-letter="S" data-brand-cat="Body Care">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'skin-cottage', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Skin Cottage</h3>
+        <span class="brand-dir-cat">Luxury Botanical Body Care &amp; Scrubs</span>
+        <a href="{% if collections['skin-cottage'] != blank %}{{ collections['skin-cottage'].url }}{% else %}/collections/all?filter.p.vendor=Skin+Cottage{% endif %}" class="btn-brand-explore">
+          <span>Shop Skin Cottage</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- 21. Rasasi -->
+      <div class="brand-dir-card" data-brand-name="Rasasi" data-brand-letter="R" data-brand-cat="Fragrance">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'rasasi', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Rasasi</h3>
+        <span class="brand-dir-cat">Elite Middle Eastern &amp; French Perfumes</span>
+        <a href="{% if collections['rasasi'] != blank %}{{ collections['rasasi'].url }}{% else %}/collections/all?filter.p.vendor=Rasasi{% endif %}" class="btn-brand-explore">
+          <span>Shop Rasasi</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- 22. Possibility -->
+      <div class="brand-dir-card" data-brand-name="Possibility" data-brand-letter="P" data-brand-cat="Body Care">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'possibility', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Possibility</h3>
+        <span class="brand-dir-cat">Gourmet 3-in-1 Ultra-Rich Bath Crèmes</span>
+        <a href="{% if collections['possibility'] != blank %}{{ collections['possibility'].url }}{% else %}/collections/all?filter.p.vendor=Possibility{% endif %}" class="btn-brand-explore">
+          <span>Shop Possibility</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- 23. Syoss -->
+      <div class="brand-dir-card" data-brand-name="Syoss" data-brand-letter="S" data-brand-cat="Haircare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'syoss', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Syoss</h3>
+        <span class="brand-dir-cat">Professional Japanese Performance Haircare</span>
+        <a href="{% if collections['syoss'] != blank %}{{ collections['syoss'].url }}{% else %}/collections/all?filter.p.vendor=Syoss{% endif %}" class="btn-brand-explore">
+          <span>Shop Syoss</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- 24. Gliss -->
+      <div class="brand-dir-card" data-brand-name="Gliss" data-brand-letter="G" data-brand-cat="Haircare">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'gliss', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Gliss</h3>
+        <span class="brand-dir-cat">Liquid Keratin Hair Repair Therapy</span>
+        <a href="{% if collections['gliss'] != blank %}{{ collections['gliss'].url }}{% else %}/collections/all?filter.p.vendor=Gliss{% endif %}" class="btn-brand-explore">
+          <span>Shop Gliss</span>
           <span>&rarr;</span>
         </a>
       </div>
