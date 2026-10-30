@@ -203,14 +203,25 @@
                     loading="lazy"
                   >
                 {%- elsif block.settings.brand_image != blank -%}
-                  <img
-                    src="{{ block.settings.brand_image }}"
-                    alt="{{ b_title | escape }}"
-                    class="brand-marquee-logo-img"
-                    width="120"
-                    height="32"
-                    loading="lazy"
-                  >
+                  {%- if block.settings.brand_image contains '/' -%}
+                    <img
+                      src="{{ block.settings.brand_image }}"
+                      alt="{{ b_title | escape }}"
+                      class="brand-marquee-logo-img"
+                      width="120"
+                      height="32"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <img
+                      src="{{ block.settings.brand_image | asset_url }}"
+                      alt="{{ b_title | escape }}"
+                      class="brand-marquee-logo-img"
+                      width="120"
+                      height="32"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
                 {%- else -%}
                   {% render 'brand-logo', brand: b_title, class: 'brand-marquee-logo-img' %}
                 {%- endif -%}
@@ -462,14 +473,25 @@
                     loading="lazy"
                   >
                 {%- elsif block.settings.brand_image != blank -%}
-                  <img
-                    src="{{ block.settings.brand_image }}"
-                    alt="{{ b_title | escape }}"
-                    class="brand-marquee-logo-img"
-                    width="120"
-                    height="32"
-                    loading="lazy"
-                  >
+                  {%- if block.settings.brand_image contains '/' -%}
+                    <img
+                      src="{{ block.settings.brand_image }}"
+                      alt="{{ b_title | escape }}"
+                      class="brand-marquee-logo-img"
+                      width="120"
+                      height="32"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <img
+                      src="{{ block.settings.brand_image | asset_url }}"
+                      alt="{{ b_title | escape }}"
+                      class="brand-marquee-logo-img"
+                      width="120"
+                      height="32"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
                 {%- else -%}
                   {% render 'brand-logo', brand: b_title, class: 'brand-marquee-logo-img' %}
                 {%- endif -%}
