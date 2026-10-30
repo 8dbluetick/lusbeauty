@@ -159,7 +159,8 @@
           "settings": {
             "title": "SKIN1004 Centella",
             "link": "/collections/all?filter.p.vendor=SKIN1004",
-            "brand_image": "skin1004-centella-logo.png"
+            "brand_image": "skin1004-centella-logo.png",
+            "image": "shopify://shop_images/skin1004-centella-logo.png"
           }
         },
         "logo_vgr": {
@@ -167,7 +168,8 @@
           "settings": {
             "title": "VGR",
             "link": "/collections/all?filter.p.vendor=VGR",
-            "brand_image": "vgr-logo.png"
+            "brand_image": "vgr-logo.png",
+            "image": "shopify://shop_images/vgr-logo.png"
           }
         },
         "logo_skin_cottage": {
@@ -175,7 +177,8 @@
           "settings": {
             "title": "Skin Cottage",
             "link": "/collections/all?filter.p.vendor=Skin+Cottage",
-            "brand_image": "skin-cottage-logo.png"
+            "brand_image": "skin-cottage-logo.png",
+            "image": "shopify://shop_images/skin-cottage-logo.png"
           }
         },
         "logo_rasasi": {
@@ -183,7 +186,8 @@
           "settings": {
             "title": "Rasasi",
             "link": "/collections/all?filter.p.vendor=Rasasi",
-            "brand_image": "rasasi-logo.png"
+            "brand_image": "rasasi-logo.png",
+            "image": "shopify://shop_images/rasasi-logo.png"
           }
         },
         "logo_possibility": {
@@ -191,7 +195,8 @@
           "settings": {
             "title": "Possibility",
             "link": "/collections/all?filter.p.vendor=Possibility",
-            "brand_image": "possibility-logo.svg"
+            "brand_image": "possibility-logo.svg",
+            "image": "shopify://shop_images/possibility-logo.svg"
           }
         },
         "logo_syoss": {
@@ -199,7 +204,8 @@
           "settings": {
             "title": "Syoss",
             "link": "/collections/all?filter.p.vendor=Syoss",
-            "brand_image": "syoss-logo.svg"
+            "brand_image": "syoss-logo.svg",
+            "image": "shopify://shop_images/syoss-logo.svg"
           }
         },
         "logo_gliss": {
@@ -207,7 +213,8 @@
           "settings": {
             "title": "Gliss",
             "link": "/collections/all?filter.p.vendor=Gliss",
-            "brand_image": "gliss-logo.png"
+            "brand_image": "gliss-logo.png",
+            "image": "shopify://shop_images/gliss-logo.png"
           }
         },
         "logo_gucci": {
@@ -215,7 +222,8 @@
           "settings": {
             "title": "Gucci",
             "link": "/collections/all?filter.p.vendor=Gucci",
-            "brand_image": "gucci-logo.png"
+            "brand_image": "gucci-logo.png",
+            "image": "shopify://shop_images/gucci-logo.png"
           }
         },
         "logo_gissah": {
@@ -223,7 +231,8 @@
           "settings": {
             "title": "Gissah",
             "link": "/collections/all?filter.p.vendor=Gissah",
-            "brand_image": "gissah-logo.png"
+            "brand_image": "gissah-logo.png",
+            "image": "shopify://shop_images/gissah-logo.png"
           }
         },
         "logo_marquis": {
@@ -231,7 +240,8 @@
           "settings": {
             "title": "Marquis",
             "link": "/collections/all?filter.p.vendor=Marquis",
-            "brand_image": "marquis-logo.png"
+            "brand_image": "marquis-logo.png",
+            "image": "shopify://shop_images/marquis-logo.png"
           }
         },
         "logo_calvin_klein": {
@@ -239,7 +249,8 @@
           "settings": {
             "title": "Calvin Klein",
             "link": "/collections/all?filter.p.vendor=Calvin+Klein",
-            "brand_image": "calvin-klein-logo.png"
+            "brand_image": "calvin-klein-logo.png",
+            "image": "shopify://shop_images/calvin-klein-logo.png"
           }
         },
         "logo_guess": {
@@ -247,7 +258,8 @@
           "settings": {
             "title": "Guess",
             "link": "/collections/all?filter.p.vendor=Guess",
-            "brand_image": "guess-logo.png"
+            "brand_image": "guess-logo.png",
+            "image": "shopify://shop_images/guess-logo.png"
           }
         },
         "logo_royale": {
@@ -255,7 +267,8 @@
           "settings": {
             "title": "Royale",
             "link": "/collections/all?filter.p.vendor=Royale",
-            "brand_image": "royale-logo.png"
+            "brand_image": "royale-logo.png",
+            "image": "shopify://shop_images/royale-logo.png"
           }
         },
         "logo_versace": {
@@ -263,7 +276,8 @@
           "settings": {
             "title": "Versace",
             "link": "/collections/all?filter.p.vendor=Versace",
-            "brand_image": "versace-logo.png"
+            "brand_image": "versace-logo.png",
+            "image": "shopify://shop_images/versace-logo.png"
           }
         },
         "logo_nivea": {
@@ -271,7 +285,8 @@
           "settings": {
             "title": "Nivea",
             "link": "/collections/all?filter.p.vendor=Nivea",
-            "brand_image": "nivea-logo.png"
+            "brand_image": "nivea-logo.png",
+            "image": "shopify://shop_images/nivea-logo.png"
           }
         },
         "logo_himalaya": {
@@ -279,7 +294,8 @@
           "settings": {
             "title": "Himalaya",
             "link": "/collections/all?filter.p.vendor=Himalaya",
-            "brand_image": "himalaya-logo.png"
+            "brand_image": "himalaya-logo.png",
+            "image": "shopify://shop_images/himalaya-logo.png"
           }
         },
         "logo_yardley": {
@@ -287,7 +303,8 @@
           "settings": {
             "title": "Yardley London",
             "link": "/collections/all?filter.p.vendor=Yardley",
-            "brand_image": "yardley-logo.png"
+            "brand_image": "yardley-logo.png",
+            "image": "shopify://shop_images/yardley-logo.png"
           }
         },
         "logo_boroplus": {
@@ -295,7 +312,8 @@
           "settings": {
             "title": "BoroPlus",
             "link": "/collections/all?filter.p.vendor=BoroPlus",
-            "brand_image": "boroplus-logo.png"
+            "brand_image": "boroplus-logo.png",
+            "image": "shopify://shop_images/boroplus-logo.png"
           }
         },
         "logo_cadbury": {
@@ -303,7 +321,8 @@
           "settings": {
             "title": "Cadbury",
             "link": "/collections/all?filter.p.vendor=Cadbury",
-            "brand_image": "cadbury-logo.png"
+            "brand_image": "cadbury-logo.png",
+            "image": "shopify://shop_images/cadbury-logo.png"
           }
         },
         "logo_dot_and_key": {
@@ -311,7 +330,8 @@
           "settings": {
             "title": "Dot & Key",
             "link": "/collections/all?filter.p.vendor=Dot+%26+Key",
-            "brand_image": "dot-and-key-logo.png"
+            "brand_image": "dot-and-key-logo.png",
+            "image": "shopify://shop_images/dot-and-key-logo.png"
           }
         },
         "logo_kay_beauty": {
@@ -319,7 +339,8 @@
           "settings": {
             "title": "Kay Beauty",
             "link": "/collections/all?filter.p.vendor=Kay+Beauty",
-            "brand_image": "kay-beauty-logo.png"
+            "brand_image": "kay-beauty-logo.png",
+            "image": "shopify://shop_images/kay-beauty-logo.png"
           }
         },
         "logo_lakme": {
@@ -327,7 +348,8 @@
           "settings": {
             "title": "Lakme",
             "link": "/collections/all?filter.p.vendor=Lakme",
-            "brand_image": "lakme-logo.png"
+            "brand_image": "lakme-logo.png",
+            "image": "shopify://shop_images/lakme-logo.png"
           }
         },
         "logo_loreal_pro": {
@@ -335,7 +357,8 @@
           "settings": {
             "title": "L'Oreal Professionnel",
             "link": "/collections/all?filter.p.vendor=L%27Oreal+Professionnel",
-            "brand_image": "loreal-pro-logo.png"
+            "brand_image": "loreal-pro-logo.png",
+            "image": "shopify://shop_images/loreal-pro-logo.png"
           }
         },
         "logo_minimalist": {
@@ -343,7 +366,8 @@
           "settings": {
             "title": "Minimalist",
             "link": "/collections/all?filter.p.vendor=Minimalist",
-            "brand_image": "minimalist-logo.png"
+            "brand_image": "minimalist-logo.png",
+            "image": "shopify://shop_images/minimalist-logo.png"
           }
         },
         "logo_cetaphil": {
@@ -351,7 +375,8 @@
           "settings": {
             "title": "Cetaphil",
             "link": "/collections/all?filter.p.vendor=Cetaphil",
-            "brand_image": "cetaphil-logo.png"
+            "brand_image": "cetaphil-logo.png",
+            "image": "shopify://shop_images/cetaphil-logo.png"
           }
         },
         "logo_mac": {
@@ -359,7 +384,8 @@
           "settings": {
             "title": "M·A·C",
             "link": "/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C",
-            "brand_image": "mac-logo.png"
+            "brand_image": "mac-logo.png",
+            "image": "shopify://shop_images/mac-logo.png"
           }
         },
         "logo_loreal_paris": {
@@ -367,7 +393,8 @@
           "settings": {
             "title": "L'Oreal Paris",
             "link": "/collections/all?filter.p.vendor=L%27Oreal+Paris",
-            "brand_image": "loreal-paris-logo.png"
+            "brand_image": "loreal-paris-logo.png",
+            "image": "shopify://shop_images/loreal-paris-logo.png"
           }
         },
         "logo_elf": {
@@ -375,7 +402,8 @@
           "settings": {
             "title": "e.l.f.",
             "link": "/collections/all?filter.p.vendor=e.l.f.",
-            "brand_image": "elf-logo.png"
+            "brand_image": "elf-logo.png",
+            "image": "shopify://shop_images/elf-logo.png"
           }
         },
         "logo_the_ordinary": {
@@ -383,7 +411,8 @@
           "settings": {
             "title": "The Ordinary",
             "link": "/collections/all?filter.p.vendor=The+Ordinary",
-            "brand_image": "the-ordinary-logo.png"
+            "brand_image": "the-ordinary-logo.png",
+            "image": "shopify://shop_images/the-ordinary-logo.png"
           }
         },
         "logo_laneige": {
@@ -391,7 +420,8 @@
           "settings": {
             "title": "Laneige",
             "link": "/collections/all?filter.p.vendor=Laneige",
-            "brand_image": "laneige-logo.png"
+            "brand_image": "laneige-logo.png",
+            "image": "shopify://shop_images/laneige-logo.png"
           }
         },
         "logo_charlotte_tilbury": {
@@ -399,7 +429,8 @@
           "settings": {
             "title": "Charlotte Tilbury",
             "link": "/collections/all?filter.p.vendor=Charlotte+Tilbury",
-            "brand_image": "charlotte-tilbury-logo.png"
+            "brand_image": "charlotte-tilbury-logo.png",
+            "image": "shopify://shop_images/charlotte-tilbury-logo.png"
           }
         },
         "logo_dove": {
@@ -407,7 +438,8 @@
           "settings": {
             "title": "Dove",
             "link": "/collections/all?filter.p.vendor=Dove",
-            "brand_image": "dove-logo.png"
+            "brand_image": "dove-logo.png",
+            "image": "shopify://shop_images/dove-logo.png"
           }
         },
         "logo_kerastase": {
@@ -415,7 +447,8 @@
           "settings": {
             "title": "Kerastase",
             "link": "/collections/all?filter.p.vendor=Kerastase",
-            "brand_image": "kerastase-logo.png"
+            "brand_image": "kerastase-logo.png",
+            "image": "shopify://shop_images/kerastase-logo.png"
           }
         },
         "logo_estee_lauder": {
@@ -423,7 +456,8 @@
           "settings": {
             "title": "Estee Lauder",
             "link": "/collections/all?filter.p.vendor=Estee+Lauder",
-            "brand_image": "estee-lauder-logo.png"
+            "brand_image": "estee-lauder-logo.png",
+            "image": "shopify://shop_images/estee-lauder-logo.png"
           }
         },
         "logo_love_beauty_planet": {
@@ -431,7 +465,8 @@
           "settings": {
             "title": "Love Beauty & Planet",
             "link": "/collections/all?filter.p.vendor=Love+Beauty+%26+Planet",
-            "brand_image": "love-beauty-planet-logo.png"
+            "brand_image": "love-beauty-planet-logo.png",
+            "image": "shopify://shop_images/love-beauty-planet-logo.png"
           }
         },
         "logo_bath_and_body_works": {
@@ -439,7 +474,8 @@
           "settings": {
             "title": "Bath & Body Works",
             "link": "/collections/all?filter.p.vendor=Bath+%26+Body+Works",
-            "brand_image": "bath-and-body-works-logo.png"
+            "brand_image": "bath-and-body-works-logo.png",
+            "image": "shopify://shop_images/bath-and-body-works-logo.png"
           }
         },
         "logo_three_q": {
@@ -447,7 +483,8 @@
           "settings": {
             "title": "3Q Beauty",
             "link": "/collections/all?filter.p.vendor=3Q+Beauty",
-            "brand_image": "3q-beauty-logo.png"
+            "brand_image": "3q-beauty-logo.png",
+            "image": "shopify://shop_images/3q-beauty-logo.png"
           }
         }
       },
@@ -506,7 +543,8 @@
             "title": "SKIN1004 Centella",
             "offer_tag": "Flat 20% OFF · K-Beauty",
             "link": "/collections/all?filter.p.vendor=SKIN1004",
-            "brand_image": "skin1004-centella-logo.png"
+            "brand_image": "skin1004-centella-logo.png",
+            "image": "shopify://shop_images/skin1004-centella-logo.png"
           }
         },
         "brand_vgr": {
@@ -515,7 +553,8 @@
             "title": "VGR",
             "offer_tag": "Precision Salon Grooming",
             "link": "/collections/all?filter.p.vendor=VGR",
-            "brand_image": "vgr-logo.png"
+            "brand_image": "vgr-logo.png",
+            "image": "shopify://shop_images/vgr-logo.png"
           }
         },
         "brand_skin_cottage": {
@@ -524,7 +563,8 @@
             "title": "Skin Cottage",
             "offer_tag": "Flat 15% OFF · 17 Products",
             "link": "/collections/all?filter.p.vendor=Skin+Cottage",
-            "brand_image": "skin-cottage-logo.png"
+            "brand_image": "skin-cottage-logo.png",
+            "image": "shopify://shop_images/skin-cottage-logo.png"
           }
         },
         "brand_rasasi": {
@@ -533,7 +573,8 @@
             "title": "Rasasi",
             "offer_tag": "Dubai Luxury Fragrances",
             "link": "/collections/all?filter.p.vendor=Rasasi",
-            "brand_image": "rasasi-logo.png"
+            "brand_image": "rasasi-logo.png",
+            "image": "shopify://shop_images/rasasi-logo.png"
           }
         },
         "brand_possibility": {
@@ -542,7 +583,8 @@
             "title": "Possibility",
             "offer_tag": "Gourmet 3-in-1 Crème",
             "link": "/collections/all?filter.p.vendor=Possibility",
-            "brand_image": "possibility-logo.svg"
+            "brand_image": "possibility-logo.svg",
+            "image": "shopify://shop_images/possibility-logo.svg"
           }
         },
         "brand_syoss": {
@@ -551,7 +593,8 @@
             "title": "Syoss",
             "offer_tag": "Japanese Salon Keratin",
             "link": "/collections/all?filter.p.vendor=Syoss",
-            "brand_image": "syoss-logo.svg"
+            "brand_image": "syoss-logo.svg",
+            "image": "shopify://shop_images/syoss-logo.svg"
           }
         },
         "brand_gliss": {
@@ -560,7 +603,8 @@
             "title": "Gliss",
             "offer_tag": "Schwarzkopf Hair Repair",
             "link": "/collections/all?filter.p.vendor=Gliss",
-            "brand_image": "gliss-logo.png"
+            "brand_image": "gliss-logo.png",
+            "image": "shopify://shop_images/gliss-logo.png"
           }
         },
         "brand_gucci": {
@@ -569,7 +613,8 @@
             "title": "Gucci",
             "offer_tag": "Italian Haute Perfumery",
             "link": "/collections/all?filter.p.vendor=Gucci",
-            "brand_image": "gucci-logo.png"
+            "brand_image": "gucci-logo.png",
+            "image": "shopify://shop_images/gucci-logo.png"
           }
         },
         "brand_gissah": {
@@ -578,7 +623,8 @@
             "title": "Gissah",
             "offer_tag": "Kuwaiti Haute Parfumerie",
             "link": "/collections/all?filter.p.vendor=Gissah",
-            "brand_image": "gissah-logo.png"
+            "brand_image": "gissah-logo.png",
+            "image": "shopify://shop_images/gissah-logo.png"
           }
         },
         "brand_marquis": {
@@ -587,7 +633,8 @@
             "title": "Marquis",
             "offer_tag": "French Paris Classics",
             "link": "/collections/all?filter.p.vendor=Marquis",
-            "brand_image": "marquis-logo.png"
+            "brand_image": "marquis-logo.png",
+            "image": "shopify://shop_images/marquis-logo.png"
           }
         },
         "brand_calvin_klein": {
@@ -596,7 +643,8 @@
             "title": "Calvin Klein",
             "offer_tag": "New York Designer Icons",
             "link": "/collections/all?filter.p.vendor=Calvin+Klein",
-            "brand_image": "calvin-klein-logo.png"
+            "brand_image": "calvin-klein-logo.png",
+            "image": "shopify://shop_images/calvin-klein-logo.png"
           }
         },
         "brand_guess": {
@@ -605,7 +653,8 @@
             "title": "Guess",
             "offer_tag": "California Glamour",
             "link": "/collections/all?filter.p.vendor=Guess",
-            "brand_image": "guess-logo.png"
+            "brand_image": "guess-logo.png",
+            "image": "shopify://shop_images/guess-logo.png"
           }
         },
         "brand_royale": {
@@ -614,7 +663,8 @@
             "title": "Royale",
             "offer_tag": "Royale Blue Cult Classic",
             "link": "/collections/all?filter.p.vendor=Royale",
-            "brand_image": "royale-logo.png"
+            "brand_image": "royale-logo.png",
+            "image": "shopify://shop_images/royale-logo.png"
           }
         },
         "brand_versace": {
@@ -623,7 +673,8 @@
             "title": "Versace",
             "offer_tag": "Milano Haute Perfumery",
             "link": "/collections/all?filter.p.vendor=Versace",
-            "brand_image": "versace-logo.png"
+            "brand_image": "versace-logo.png",
+            "image": "shopify://shop_images/versace-logo.png"
           }
         },
         "brand_nivea": {
@@ -632,7 +683,8 @@
             "title": "Nivea",
             "offer_tag": "German Skincare Care",
             "link": "/collections/all?filter.p.vendor=Nivea",
-            "brand_image": "nivea-logo.png"
+            "brand_image": "nivea-logo.png",
+            "image": "shopify://shop_images/nivea-logo.png"
           }
         },
         "brand_himalaya": {
@@ -641,7 +693,8 @@
             "title": "Himalaya",
             "offer_tag": "Since 1930 Herbal Science",
             "link": "/collections/all?filter.p.vendor=Himalaya",
-            "brand_image": "himalaya-logo.png"
+            "brand_image": "himalaya-logo.png",
+            "image": "shopify://shop_images/himalaya-logo.png"
           }
         },
         "brand_yardley": {
@@ -650,7 +703,8 @@
             "title": "Yardley London",
             "offer_tag": "British Royal Perfumery",
             "link": "/collections/all?filter.p.vendor=Yardley",
-            "brand_image": "yardley-logo.png"
+            "brand_image": "yardley-logo.png",
+            "image": "shopify://shop_images/yardley-logo.png"
           }
         },
         "brand_boroplus": {
@@ -659,7 +713,8 @@
             "title": "BoroPlus",
             "offer_tag": "India's #1 Antiseptic Care",
             "link": "/collections/all?filter.p.vendor=BoroPlus",
-            "brand_image": "boroplus-logo.png"
+            "brand_image": "boroplus-logo.png",
+            "image": "shopify://shop_images/boroplus-logo.png"
           }
         },
         "brand_cadbury": {
@@ -668,7 +723,8 @@
             "title": "Cadbury",
             "offer_tag": "Celebrations & Luxury Gifting",
             "link": "/collections/all?filter.p.vendor=Cadbury",
-            "brand_image": "cadbury-logo.png"
+            "brand_image": "cadbury-logo.png",
+            "image": "shopify://shop_images/cadbury-logo.png"
           }
         },
         "brand_dot_and_key": {
@@ -677,7 +733,8 @@
             "title": "Dot & Key",
             "offer_tag": "Up to 20% OFF · Fruit Actives",
             "link": "/collections/all?filter.p.vendor=Dot+%26+Key",
-            "brand_image": "dot-and-key-logo.png"
+            "brand_image": "dot-and-key-logo.png",
+            "image": "shopify://shop_images/dot-and-key-logo.png"
           }
         },
         "brand_kay_beauty": {
@@ -686,7 +743,8 @@
             "title": "Kay Beauty",
             "offer_tag": "Katrina's High Glamour",
             "link": "/collections/all?filter.p.vendor=Kay+Beauty",
-            "brand_image": "kay-beauty-logo.png"
+            "brand_image": "kay-beauty-logo.png",
+            "image": "shopify://shop_images/kay-beauty-logo.png"
           }
         },
         "brand_lakme": {
@@ -695,7 +753,8 @@
             "title": "Lakme",
             "offer_tag": "Indian Iconic Runway Beauty",
             "link": "/collections/all?filter.p.vendor=Lakme",
-            "brand_image": "lakme-logo.png"
+            "brand_image": "lakme-logo.png",
+            "image": "shopify://shop_images/lakme-logo.png"
           }
         },
         "brand_loreal_pro": {
@@ -704,7 +763,8 @@
             "title": "L'Oreal Professionnel",
             "offer_tag": "Salon Exclusive Hair Care",
             "link": "/collections/all?filter.p.vendor=L%27Oreal+Professionnel",
-            "brand_image": "loreal-pro-logo.png"
+            "brand_image": "loreal-pro-logo.png",
+            "image": "shopify://shop_images/loreal-pro-logo.png"
           }
         },
         "brand_minimalist": {
@@ -713,7 +773,8 @@
             "title": "Minimalist",
             "offer_tag": "Clean Active Science",
             "link": "/collections/all?filter.p.vendor=Minimalist",
-            "brand_image": "minimalist-logo.png"
+            "brand_image": "minimalist-logo.png",
+            "image": "shopify://shop_images/minimalist-logo.png"
           }
         },
         "brand_cetaphil": {
@@ -722,7 +783,8 @@
             "title": "Cetaphil",
             "offer_tag": "#1 Dermatologist Recommended",
             "link": "/collections/all?filter.p.vendor=Cetaphil",
-            "brand_image": "cetaphil-logo.png"
+            "brand_image": "cetaphil-logo.png",
+            "image": "shopify://shop_images/cetaphil-logo.png"
           }
         },
         "brand_mac": {
@@ -731,7 +793,8 @@
             "title": "M·A·C",
             "offer_tag": "All Ages, All Races, All Sexes",
             "link": "/collections/all?filter.p.vendor=M%C2%B7A%C2%B7C",
-            "brand_image": "mac-logo.png"
+            "brand_image": "mac-logo.png",
+            "image": "shopify://shop_images/mac-logo.png"
           }
         },
         "brand_loreal_paris": {
@@ -740,7 +803,8 @@
             "title": "L'Oreal Paris",
             "offer_tag": "Because You're Worth It",
             "link": "/collections/all?filter.p.vendor=L%27Oreal+Paris",
-            "brand_image": "loreal-paris-logo.png"
+            "brand_image": "loreal-paris-logo.png",
+            "image": "shopify://shop_images/loreal-paris-logo.png"
           }
         },
         "brand_elf": {
@@ -749,7 +813,8 @@
             "title": "e.l.f.",
             "offer_tag": "100% Vegan & Cruelty Free",
             "link": "/collections/all?filter.p.vendor=e.l.f.",
-            "brand_image": "elf-logo.png"
+            "brand_image": "elf-logo.png",
+            "image": "shopify://shop_images/elf-logo.png"
           }
         },
         "brand_the_ordinary": {
@@ -758,7 +823,8 @@
             "title": "The Ordinary",
             "offer_tag": "Clinical Formulations",
             "link": "/collections/all?filter.p.vendor=The+Ordinary",
-            "brand_image": "the-ordinary-logo.png"
+            "brand_image": "the-ordinary-logo.png",
+            "image": "shopify://shop_images/the-ordinary-logo.png"
           }
         },
         "brand_laneige": {
@@ -767,7 +833,8 @@
             "title": "Laneige",
             "offer_tag": "Sleeping Mask & Lip Glow",
             "link": "/collections/all?filter.p.vendor=Laneige",
-            "brand_image": "laneige-logo.png"
+            "brand_image": "laneige-logo.png",
+            "image": "shopify://shop_images/laneige-logo.png"
           }
         },
         "brand_charlotte_tilbury": {
@@ -776,7 +843,8 @@
             "title": "Charlotte Tilbury",
             "offer_tag": "Hollywood Flawless Glow",
             "link": "/collections/all?filter.p.vendor=Charlotte+Tilbury",
-            "brand_image": "charlotte-tilbury-logo.png"
+            "brand_image": "charlotte-tilbury-logo.png",
+            "image": "shopify://shop_images/charlotte-tilbury-logo.png"
           }
         },
         "brand_dove": {
@@ -785,7 +853,8 @@
             "title": "Dove",
             "offer_tag": "1/4 Moisturizing Cream",
             "link": "/collections/all?filter.p.vendor=Dove",
-            "brand_image": "dove-logo.png"
+            "brand_image": "dove-logo.png",
+            "image": "shopify://shop_images/dove-logo.png"
           }
         },
         "brand_kerastase": {
@@ -794,7 +863,8 @@
             "title": "Kerastase",
             "offer_tag": "Luxury Parisian Haircare",
             "link": "/collections/all?filter.p.vendor=Kerastase",
-            "brand_image": "kerastase-logo.png"
+            "brand_image": "kerastase-logo.png",
+            "image": "shopify://shop_images/kerastase-logo.png"
           }
         },
         "brand_estee_lauder": {
@@ -803,7 +873,8 @@
             "title": "Estee Lauder",
             "offer_tag": "Advanced Night Repair",
             "link": "/collections/all?filter.p.vendor=Estee+Lauder",
-            "brand_image": "estee-lauder-logo.png"
+            "brand_image": "estee-lauder-logo.png",
+            "image": "shopify://shop_images/estee-lauder-logo.png"
           }
         },
         "brand_love_beauty_planet": {
@@ -812,7 +883,8 @@
             "title": "Love Beauty & Planet",
             "offer_tag": "Eco-Ethical Pure Beauty",
             "link": "/collections/all?filter.p.vendor=Love+Beauty+%26+Planet",
-            "brand_image": "love-beauty-planet-logo.png"
+            "brand_image": "love-beauty-planet-logo.png",
+            "image": "shopify://shop_images/love-beauty-planet-logo.png"
           }
         },
         "brand_bath_and_body_works": {
@@ -821,7 +893,8 @@
             "title": "Bath & Body Works",
             "offer_tag": "Signature Mists & Lotions",
             "link": "/collections/all?filter.p.vendor=Bath+%26+Body+Works",
-            "brand_image": "bath-and-body-works-logo.png"
+            "brand_image": "bath-and-body-works-logo.png",
+            "image": "shopify://shop_images/bath-and-body-works-logo.png"
           }
         },
         "brand_three_q": {
@@ -830,7 +903,8 @@
             "title": "3Q Beauty",
             "offer_tag": "Vibrant Colors & Palettes",
             "link": "/collections/all?filter.p.vendor=3Q+Beauty",
-            "brand_image": "3q-beauty-logo.png"
+            "brand_image": "3q-beauty-logo.png",
+            "image": "shopify://shop_images/3q-beauty-logo.png"
           }
         }
       },
