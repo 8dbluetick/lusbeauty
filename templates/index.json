@@ -486,6 +486,15 @@
             "brand_image": "3q-beauty-logo.png",
             "image": "shopify://shop_images/3q-beauty-logo.png"
           }
+        },
+        "logo_hamidi": {
+          "type": "logo",
+          "settings": {
+            "title": "Hamidi",
+            "link": "/collections/all?filter.p.vendor=Hamidi",
+            "brand_image": "hamidi-logo.svg",
+            "image": "shopify://shop_images/hamidi-logo.svg"
+          }
         }
       },
       "block_order": [
@@ -525,7 +534,8 @@
         "logo_estee_lauder",
         "logo_love_beauty_planet",
         "logo_bath_and_body_works",
-        "logo_three_q"
+        "logo_three_q",
+        "logo_hamidi"
       ],
       "settings": {
         "heading": "100% Genuine Authorized Brands",
@@ -906,6 +916,16 @@
             "brand_image": "3q-beauty-logo.png",
             "image": "shopify://shop_images/3q-beauty-logo.png"
           }
+        },
+        "brand_hamidi": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Hamidi",
+            "offer_tag": "Dubai Luxury Oud & Musk",
+            "link": "/collections/all?filter.p.vendor=Hamidi",
+            "brand_image": "hamidi-logo.svg",
+            "image": "shopify://shop_images/hamidi-logo.svg"
+          }
         }
       },
       "block_order": [
@@ -945,7 +965,8 @@
         "brand_estee_lauder",
         "brand_love_beauty_planet",
         "brand_bath_and_body_works",
-        "brand_three_q"
+        "brand_three_q",
+        "brand_hamidi"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",

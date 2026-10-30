@@ -8,6 +8,10 @@
 {%- assign b_handle = brand | downcase | replace: ' ', '-' | replace: '&', 'and' | replace: '·', '' | replace: '.', '' | replace: "'", '' | replace: 'é', 'e' | replace: 'ē', 'e' -%}
 
 {%- case b_handle -%}
+  {%- when 'hamidi' or 'hamidi-luxury' or 'hamidi-oud' or 'hamidi-perfumes' or 'armaf' or 'armaf-hamidi' -%}
+    <img src="{{ 'hamidi-logo.svg' | asset_url }}" alt="Hamidi Luxury Oud" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;">
+
+
   {%- when 'vgr' or 'vgr-india' or 'vgr-voyager' -%}
     <img src="{{ 'vgr-logo.png' | asset_url }}" alt="VGR Professional" class="{{ b_class }}" loading="{{ b_loading }}" width="140" height="40" style="object-fit: contain;" onerror="this.onerror=null; this.src='{{ 'vgr-logo.png' | asset_url }}';">
 
