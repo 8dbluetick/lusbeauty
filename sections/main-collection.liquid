@@ -31,6 +31,11 @@
     {%- assign is_nivea = true -%}
   {%- endif -%}
 
+  {%- assign is_hamidi = false -%}
+  {%- if col_handle_down contains 'hamidi' or col_title_down contains 'hamidi' or canonical_url contains 'hamidi' or canonical_url contains 'Hamidi' or request.path contains 'hamidi' or request.path contains 'Hamidi' or col_handle_down contains 'armaf' or col_title_down contains 'armaf' -%}
+    {%- assign is_hamidi = true -%}
+  {%- endif -%}
+
   {%- assign is_himalaya = false -%}
   {%- if col_handle_down contains 'himalaya' or col_title_down contains 'himalaya' or canonical_url contains 'himalaya' or canonical_url contains 'Himalaya' or request.path contains 'himalaya' or request.path contains 'Himalaya' -%}
     {%- assign is_himalaya = true -%}
@@ -141,6 +146,19 @@
         </div>
         <p style="margin: 0 auto; font-size: 0.95rem; color: #E3EFFF; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
           World's #1 Trusted Dermatological Skincare · Iconic Deep Moisture Care (Nivea Crème, Nivea Soft, Body Milk) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_hamidi and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-hamidi" style="background: linear-gradient(135deg, #1A120B 0%, #3C2A21 50%, #201610 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #D4AF37; box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'hamidi-logo.svg' | asset_url }}" alt="Hamidi Luxury Oud &amp; Perfumes by Armaf" style="max-height: 60px; max-width: 240px; width: auto; height: auto;" loading="eager">
+        </div>
+        <span class="collection-brand-badge" style="background: rgba(26, 18, 11, 0.9); border: 1px solid #D4AF37; color: #F5D061;">
+          👑 DUBAI LUXURY OUD &amp; ORIENTAL PERFUMERY BY ARMAF
+        </span>
+        <h1 class="collection-brand-title" style="color: #FFFFFF; margin-top: 10px;">{{ collection.title }}</h1>
+        <p class="collection-brand-tagline" style="color: #FAF0E4; max-width: 650px; margin: 8px auto 0; font-size: 0.95rem;">
+          Regal agarwood accords, velvety white musk body care, alcohol-free Arabian attars &amp; long-lasting oriental sillage.
         </p>
       </div>
     {%- elsif is_himalaya and collection.image == blank -%}
@@ -367,6 +385,15 @@
           </div>
           <span class="collection-verified-pill" style="color: #8BB8FF; background: rgba(0, 43, 127, 0.15); border-color: rgba(139, 184, 255, 0.4);">
             🇩🇪 100% ORIGINAL NIVEA GERMAN DERMATOLOGICAL CARE
+          </span>
+        </div>
+      {%- elsif is_hamidi -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #1A120B; border: 1.5px solid #D4AF37;">
+            <img src="{{ 'hamidi-logo.svg' | asset_url }}" alt="Hamidi" style="max-height: 38px; max-width: 150px; display: block; object-fit: contain;" loading="eager">
+          </div>
+          <span class="collection-verified-pill" style="color: #D4AF37; background: rgba(26, 18, 11, 0.9); border-color: rgba(212, 175, 55, 0.5);">
+            👑 100% ORIGINAL HAMIDI LUXURY PERFUMES &amp; BODY CARE (ARMAF)
           </span>
         </div>
       {%- elsif is_himalaya -%}
@@ -753,6 +780,29 @@
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💧 Nivea Soft Vitamin E &amp; Jojoba</span>
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🛡️ 48-Hour Deep Moisture Body Care</span>
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_hamidi -%}
+        <div class="collection-hamidi-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #D4AF37; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(212,175,55,0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#8B6F3E; background:#FAF7F2; border:1px solid rgba(212,175,55,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">👑 Dubai Luxury Oud by Armaf</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#8B6F3E; background:#FAF7F2; border:1px solid rgba(212,175,55,0.4); padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ Alcohol-Free Oriental Formulation</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #2D3A34; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                Crafted under the prestigious house of <strong>Armaf</strong>, <strong>Hamidi Luxury</strong> represents the epitome of authentic Arabian perfumery and royal body rituals. Fusing aged agarwood (Oud), sensual white musk, and pure amber with modern skin nourishment, Hamidi creations deliver intensive 24-hour hydration and a lingering, intoxicating sillage.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">👑 Luxury Oud &amp; Musk Body Lotion (500ml)</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🌿 Enriched with Antioxidant Vitamin E</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💧 24h Non-Greasy Deep Moisture Emulsion</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🇦🇪 100% Original UAE Import by Armaf</span>
+            <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 Fresh Stock in Nagpur Showroom</span>
           </div>
         </div>
       {%- elsif is_himalaya -%}
