@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#FFF1F2"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#F43F5E" stroke-width="1.5" stroke-opacity="0.35"/>
+  <text x="180" y="55" font-family="'Century Gothic', 'Montserrat', 'Arial', sans-serif" font-size="34" font-weight="900" letter-spacing="1.5" fill="#E11D48" text-anchor="middle">sanfe</text>
+  <text x="180" y="78" font-family="'Montserrat', 'Arial', sans-serif" font-size="7.5" font-weight="800" letter-spacing="2" fill="#BE123C" text-anchor="middle">BODY &amp; INTIMATE WELLNESS</text>
+</svg>

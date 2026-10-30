@@ -504,6 +504,15 @@
             "brand_image": "neutrogena-logo.svg",
             "image": "shopify://shop_images/neutrogena-logo.svg"
           }
+        },
+        "logo_sanfe": {
+          "type": "logo",
+          "settings": {
+            "title": "Sanfe",
+            "link": "/collections/all?filter.p.vendor=Sanfe",
+            "brand_image": "sanfe-logo.png",
+            "image": "shopify://shop_images/sanfe-logo.png"
+          }
         }
       },
       "block_order": [
@@ -545,7 +554,8 @@
         "logo_bath_and_body_works",
         "logo_three_q",
         "logo_hamidi",
-        "logo_neutrogena"
+        "logo_neutrogena",
+        "logo_sanfe"
       ],
       "settings": {
         "heading": "100% Genuine Authorized Brands",
@@ -946,6 +956,16 @@
             "brand_image": "neutrogena-logo.svg",
             "image": "shopify://shop_images/neutrogena-logo.svg"
           }
+        },
+        "brand_sanfe": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Sanfe",
+            "offer_tag": "Body De-Tan & Intimate Care",
+            "link": "/collections/all?filter.p.vendor=Sanfe",
+            "brand_image": "sanfe-logo.png",
+            "image": "shopify://shop_images/sanfe-logo.png"
+          }
         }
       },
       "block_order": [
@@ -987,7 +1007,8 @@
         "brand_bath_and_body_works",
         "brand_three_q",
         "brand_hamidi",
-        "brand_neutrogena"
+        "brand_neutrogena",
+        "brand_sanfe"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",

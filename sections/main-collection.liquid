@@ -31,6 +31,11 @@
     {%- assign is_nivea = true -%}
   {%- endif -%}
 
+  {%- assign is_sanfe = false -%}
+  {%- if col_handle_down contains 'sanfe' or col_title_down contains 'sanfe' or canonical_url contains 'sanfe' or canonical_url contains 'Sanfe' or request.path contains 'sanfe' or request.path contains 'Sanfe' -%}
+    {%- assign is_sanfe = true -%}
+  {%- endif -%}
+
   {%- assign is_neutrogena = false -%}
   {%- if col_handle_down contains 'neutrogena' or col_title_down contains 'neutrogena' or canonical_url contains 'neutrogena' or canonical_url contains 'Neutrogena' or request.path contains 'neutrogena' or request.path contains 'Neutrogena' or col_handle_down contains 'nuetrogena' or col_title_down contains 'nuetrogena' -%}
     {%- assign is_neutrogena = true -%}
@@ -151,6 +156,19 @@
         </div>
         <p style="margin: 0 auto; font-size: 0.95rem; color: #E3EFFF; font-weight: 600; letter-spacing: 0.4px; max-width: 680px;">
           World's #1 Trusted Dermatological Skincare · Iconic Deep Moisture Care (Nivea Crème, Nivea Soft, Body Milk) · 100% Authentic Stock
+        </p>
+      </div>
+    {%- elsif is_sanfe and collection.image == blank -%}
+      <div class="collection-brand-hero-banner banner-sanfe" style="background: linear-gradient(135deg, #4A0E2E 0%, #7B1E4E 50%, #2B071B 100%); padding: 36px 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; border: 1.5px solid #F472B6; box-shadow: 0 8px 24px rgba(244, 114, 182, 0.25);">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+          <img src="{{ 'sanfe-logo.png' | asset_url }}" alt="Sanfe Body Care &amp; Intimate Wellness" style="max-height: 55px; max-width: 220px; width: auto; height: auto; background: #FFFFFF; padding: 6px 16px; border-radius: 8px;" loading="eager" onerror="this.onerror=null; this.src='{{ 'sanfe-logo.svg' | asset_url }}';">
+        </div>
+        <span class="collection-brand-badge" style="background: rgba(74, 14, 46, 0.9); border: 1px solid #F472B6; color: #FCE7F3;">
+          ✨ REVOLUTIONARY BODY DE-TAN &amp; INTIMATE WELLNESS
+        </span>
+        <h1 class="collection-brand-title" style="color: #FFFFFF; margin-top: 10px;">{{ collection.title }}</h1>
+        <p class="collection-brand-tagline" style="color: #FDF2F8; max-width: 650px; margin: 8px auto 0; font-size: 0.95rem;">
+          DailyLite Glycolic Acid de-tan body lotions, Instalite instant tan removal creams &amp; targeted intimate skincare.
         </p>
       </div>
     {%- elsif is_neutrogena and collection.image == blank -%}
@@ -403,6 +421,15 @@
           </div>
           <span class="collection-verified-pill" style="color: #8BB8FF; background: rgba(0, 43, 127, 0.15); border-color: rgba(139, 184, 255, 0.4);">
             🇩🇪 100% ORIGINAL NIVEA GERMAN DERMATOLOGICAL CARE
+          </span>
+        </div>
+      {%- elsif is_sanfe -%}
+        <div class="collection-brand-badge-wrap">
+          <div class="collection-brand-logo-card" style="padding: 6px 18px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #F472B6; box-shadow: 0 4px 14px rgba(244, 114, 182, 0.15);">
+            <img src="{{ 'sanfe-logo.png' | asset_url }}" alt="Sanfe" style="max-height: 34px; max-width: 140px; display: block; object-fit: contain;" loading="eager" onerror="this.onerror=null; this.src='{{ 'sanfe-logo.svg' | asset_url }}';">
+          </div>
+          <span class="collection-verified-pill" style="color: #BE123C; background: #FFF1F2; border-color: #FDA4AF;">
+            🌸 100% ORIGINAL SANFE BODY &amp; INTIMATE WELLNESS
           </span>
         </div>
       {%- elsif is_neutrogena -%}
@@ -807,6 +834,29 @@
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">💧 Nivea Soft Vitamin E &amp; Jojoba</span>
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">🛡️ 48-Hour Deep Moisture Body Care</span>
             <span style="font-size: 0.75rem; background: #FAF7F2; border: 1px solid #EAE3DA; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #1F1610;">📍 100% Original Nagpur Stock</span>
+          </div>
+        </div>
+      {%- elsif is_sanfe -%}
+        <div class="collection-sanfe-description" style="max-width: 860px; margin: 12px auto 20px; text-align: left; background: #FFFFFF; border: 1.5px solid #F472B6; border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 14px rgba(244, 114, 182, 0.08);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:800; color:#BE123C; background:#FFF1F2; border:1px solid #FDA4AF; padding:3px 10px; border-radius:999px; text-transform:uppercase;">✨ AHA Glycolic Acid &amp; Niacinamide</span>
+            <span style="font-size:0.72rem; font-weight:800; color:#BE123C; background:#FFF1F2; border:1px solid #FDA4AF; padding:3px 10px; border-radius:999px; text-transform:uppercase;">☀️ SPF 30 Sun Protection</span>
+          </div>
+          <div class="collection-desc" style="font-size: 0.9rem; color: #4A0E2E; line-height: 1.65; margin: 0 0 14px;">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p style="margin: 0;">
+                Empowering modern skincare, <strong>Sanfe</strong> specializes in targeted body treatments formulated with proven dermatological actives. From bestselling <em>DailyLite Tan Removal Lotions</em> enriched with Glycolic Acid and broad-spectrum SPF 30, to <em>Instalite</em> body de-tan creams and gentle intimate brightening solutions, Sanfe delivers visible, confidence-restoring results.
+              </p>
+            {%- endif -%}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.75rem; background: #FFF1F2; border: 1px solid #FBCFE8; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #9F1239;">✨ DailyLite Tan Removal Lotion (SPF 30)</span>
+            <span style="font-size: 0.75rem; background: #FFF1F2; border: 1px solid #FBCFE8; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #9F1239;">⚡ Glycolic Acid &amp; Niacinamide Complex</span>
+            <span style="font-size: 0.75rem; background: #FFF1F2; border: 1px solid #FBCFE8; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #9F1239;">🌿 Safe, Non-Irritating &amp; Gentle Formulas</span>
+            <span style="font-size: 0.75rem; background: #FFF1F2; border: 1px solid #FBCFE8; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #9F1239;">💧 Non-Sticky 24H Velvet Hydration</span>
+            <span style="font-size: 0.75rem; background: #FFF1F2; border: 1px solid #FBCFE8; padding: 4px 12px; border-radius: 8px; font-weight: 700; color: #9F1239;">📍 100% Original Nagpur Flagship Stock</span>
           </div>
         </div>
       {%- elsif is_neutrogena -%}
