@@ -385,6 +385,26 @@
         </a>
       </div>
 
+      <!-- Neutrogena -->
+      <div class="brand-dir-card" data-brand-name="Neutrogena Dermatological Skincare" data-brand-letter="N" data-brand-cat="Dermatological Skincare & Sun Protection" data-brand-products="neutrogena ultra gentle daily moisturizer, neutrogena hydro boost water gel, neutrogena deep clean facial cleanser, neutrogena ultra sheer dry touch sunblock spf 50+, neutrogena oil free acne wash">
+        <span class="brand-verified-tag">✓ AUTHORIZED</span>
+        <div class="brand-dir-logo-wrap">
+          {% render 'brand-logo', brand: 'neutrogena', class: 'brand-dir-logo-img' %}
+        </div>
+        <h3 class="brand-dir-name">Neutrogena</h3>
+        <span class="brand-dir-cat">Dermatologist Recommended Care</span>
+        <div class="brand-products-preview">
+          <span class="brand-products-count-badge">🔬 #1 Dermatologist Recommended</span>
+          <div class="brand-products-tags-row">
+            <span class="brand-product-pill" title="Ultra Gentle Daily Moisturizer">Ultra Gentle</span><span class="brand-product-pill" title="Hydro Boost Water Gel">Hydro Boost</span><span class="brand-product-pill" title="Ultra Sheer Dry-Touch SPF">Dry-Touch SPF</span>
+          </div>
+        </div>
+        <a href="{% if collections['neutrogena'] != blank %}{{ collections['neutrogena'].url }}{% else %}/collections/all?filter.p.vendor=Neutrogena{% endif %}" class="btn-brand-explore">
+          <span>Shop Neutrogena</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
       <!-- 19. VGR Professional -->
       <div class="brand-dir-card" data-brand-name="VGR Professional Hair Care Appliances" data-brand-letter="V" data-brand-cat="Hair Appliances">
         <span class="brand-verified-tag">✓ AUTHORIZED</span>

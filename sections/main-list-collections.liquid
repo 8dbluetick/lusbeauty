@@ -312,6 +312,36 @@
         </div>
       {%- endif -%}
 
+      <!-- Neutrogena Brand Collection Card -->
+      {%- if collections['neutrogena'] == blank -%}
+        <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #BAE6FD; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.08);">
+          <a href="/collections/all?filter.p.vendor=Neutrogena" style="display: block; position: relative; background: linear-gradient(135deg, #0A192F 0%, #1E3A8A 50%, #0F172A 100%); aspect-ratio: 4/3; overflow: hidden; padding: 16px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="{{ 'neutrogena-logo.svg' | asset_url }}" alt="Neutrogena Dermatological Skincare" style="max-width: 85%; max-height: 75%; width: auto; height: auto; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));" loading="lazy" width="400" height="300">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(15, 23, 42, 0.92); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.5); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; backdrop-filter: blur(4px);">
+              🔬 #1 Dermatologist Recommended
+            </span>
+          </a>
+          <div style="padding: 18px 16px 20px; display: flex; flex-direction: column; flex: 1; border-top: 1px solid #F0F9FF;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.68rem; font-weight: 800; color: #0284C7; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+              <img src="{{ 'neutrogena-logo.svg' | asset_url }}" alt="Neutrogena" style="max-height: 22px; width: auto; object-fit: contain;">
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: #0F172A; margin: 0 0 6px; line-height: 1.3;">
+              <a href="/collections/all?filter.p.vendor=Neutrogena" style="color: #0F172A; text-decoration: none;">Neutrogena</a>
+            </h3>
+            <p style="font-size: 0.78rem; color: #475569; line-height: 1.4; margin: 0 0 14px;">
+              Clinical skincare formulated with dermatologists — Hydro Boost, Ultra Gentle Moisturizers &amp; Dry-Touch SPF 50+.
+            </p>
+            <div style="margin-top: auto;">
+              <a href="/collections/all?filter.p.vendor=Neutrogena" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px; background: #0F172A; color: #60A5FA; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 8px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+                <span>Explore Neutrogena</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
       <!-- Hamidi Brand Collection Card -->
       {%- if collections['hamidi'] == blank -%}
         <div class="collection-luxury-card" style="background: #FFFFFF; border: 1.5px solid #EAE3DA; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.08);">
@@ -1255,6 +1285,11 @@
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
                   <span style="font-size: 0.68rem; font-weight: 800; color: #002B7F; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
                   <img src="{{ 'nivea-logo.png' | asset_url }}" alt="Nivea" style="max-height: 22px; width: auto; object-fit: contain;">
+                </div>
+              {%- elsif collection.handle == 'neutrogena' or col_title_lower contains 'neutrogena' or col_title_lower contains 'nuetrogena' -%}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 0.68rem; font-weight: 800; color: #0284C7; text-transform: uppercase; letter-spacing: 0.05em;">LUSH BRAND COLLECTION</span>
+                  <img src="{{ 'neutrogena-logo.svg' | asset_url }}" alt="Neutrogena" style="max-height: 22px; width: auto; object-fit: contain;">
                 </div>
               {%- elsif collection.handle == 'hamidi' or col_title_lower contains 'hamidi' -%}
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">

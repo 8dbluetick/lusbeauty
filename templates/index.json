@@ -495,6 +495,15 @@
             "brand_image": "hamidi-logo.svg",
             "image": "shopify://shop_images/hamidi-logo.svg"
           }
+        },
+        "logo_neutrogena": {
+          "type": "logo",
+          "settings": {
+            "title": "Neutrogena",
+            "link": "/collections/all?filter.p.vendor=Neutrogena",
+            "brand_image": "neutrogena-logo.svg",
+            "image": "shopify://shop_images/neutrogena-logo.svg"
+          }
         }
       },
       "block_order": [
@@ -535,7 +544,8 @@
         "logo_love_beauty_planet",
         "logo_bath_and_body_works",
         "logo_three_q",
-        "logo_hamidi"
+        "logo_hamidi",
+        "logo_neutrogena"
       ],
       "settings": {
         "heading": "100% Genuine Authorized Brands",
@@ -926,6 +936,16 @@
             "brand_image": "hamidi-logo.svg",
             "image": "shopify://shop_images/hamidi-logo.svg"
           }
+        },
+        "brand_neutrogena": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Neutrogena",
+            "offer_tag": "Dermatologist Recommended",
+            "link": "/collections/all?filter.p.vendor=Neutrogena",
+            "brand_image": "neutrogena-logo.svg",
+            "image": "shopify://shop_images/neutrogena-logo.svg"
+          }
         }
       },
       "block_order": [
@@ -966,7 +986,8 @@
         "brand_love_beauty_planet",
         "brand_bath_and_body_works",
         "brand_three_q",
-        "brand_hamidi"
+        "brand_hamidi",
+        "brand_neutrogena"
       ],
       "settings": {
         "badge": "👑 OFFICIAL BRAND COLLECTIONS",

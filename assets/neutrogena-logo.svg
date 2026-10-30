@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" fill="none">
+  <rect width="360" height="100" rx="8" fill="#FFFFFF"/>
+  <rect x="2" y="2" width="356" height="96" rx="6" stroke="#0284C7" stroke-width="1.5" stroke-opacity="0.35"/>
+  <text x="180" y="54" font-family="'Times New Roman', 'Baskerville', 'Georgia', serif" font-size="34" font-weight="800" letter-spacing="0.5" fill="#0F172A" text-anchor="middle">Neutrogena<tspan font-size="16" dy="-14" font-family="sans-serif" font-weight="700">®</tspan></text>
+  <text x="180" y="78" font-family="'Montserrat', 'Arial', sans-serif" font-size="7.5" font-weight="800" letter-spacing="2" fill="#0284C7" text-anchor="middle">#1 DERMATOLOGIST RECOMMENDED</text>
+</svg>
