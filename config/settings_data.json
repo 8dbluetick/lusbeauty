@@ -87,7 +87,9 @@
   },
   "platform_customizations": {
     "custom_css": [
-      "/* Fixes layout cracking and squishing inside scrolling marquees */.marquee__slider-item img, .scrolling-logos__image img {width: auto !important; max-height: 50px !important; /* Adjust height to match your desired logo size */ object-fit: contain !important; image-rendering: -webkit-optimize-contrast; /* Keeps logos sharp */}"
+      "/* Fixes layout cracking and squishing inside scrolling marquees */.marquee__slider-item img,.scrolling-logos__image img {width: auto !important; max-height: 50px !important; /* Adjust height to match your desired logo size */ object-fit: contain !important; image-rendering: -webkit-optimize-contrast; /* Keeps logos sharp */}",
+      ".product-form__input label {border-radius: 20px !important; color: #222 !important; background: transparent !important;}",
+      ".product-form__input label::before,.product-form__input label::after {display: none !important;}"
     ]
   }
 }
